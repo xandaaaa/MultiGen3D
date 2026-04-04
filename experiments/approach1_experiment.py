@@ -257,7 +257,7 @@ def sample_slat_with_projection(
 
 def compute_mesh_normalization(sq_params: List[Dict]) -> Tuple[np.ndarray, float]:
     """Reproduce the center/scale normalization from gui_text_image.py's generate()."""
-    sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'gui'))
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'gui'))
     from gui_text_image import add_superquadric_compact_rot_mat
 
     all_vertices = []
@@ -311,7 +311,7 @@ def run_experiment(
 
     # --- Build SQ mesh and save for the pipeline ---
     import open3d as o3d
-    sys.path.insert(0, os.path.join(os.path.dirname(__file__), 'gui'))
+    sys.path.insert(0, os.path.join(os.path.dirname(__file__), '..', 'gui'))
     from gui_text_image import add_superquadric_compact_rot_mat
     from gui.utils import merge_meshes
 
