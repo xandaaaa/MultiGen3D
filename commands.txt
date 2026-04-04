@@ -1,0 +1,10 @@
+Student Cluster
+
+srun -p jobs -A 3dv --gpus=1 -t 120 --pty bash --login
+module load cuda/12.8
+eval "$(/work/courses/3dv/team4/env_root/miniconda3/bin/conda shell.bash hook)"
+conda activate spacecontrol
+python -c "import torch; print(torch.cuda.is_available()); import spconv; print('spconv OK')"
+python experiments/approach2_experiment.py \
+    --sq-path gui/superquadrics/chair_sq.npz \
+    --prompt "a wooden chair"
