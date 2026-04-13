@@ -1,0 +1,7 @@
+
+CondaError: Run 'conda init' before 'conda activate'
+
+Traceback (most recent call last):
+  File "/cluster/scratch/xanyap/MultiGen3D/experiments/approach1_experiment.py", line 27, in <module>
+    import matplotlib
+ModuleNotFoundError: No module named 'matplotlib'
