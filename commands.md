@@ -1,37 +1,40 @@
-================================================================================
- MultiGen3D — directory structure, install, and run commands
-================================================================================
+# Directory structure, install, and run commands
 
---------------------------------------------------------------------------------
- 1. Directory structure
---------------------------------------------------------------------------------
+## 1. Directory structure
 
+```
 MultiGen3D/
-├── README.md                 # project overview + per-experiment summaries
+├── README.md                     # project overview + per-experiment summaries
 ├── LICENSE
-├── commands.txt              # this file: setup + run commands
-├── experiments/              # superquadric-aware TRELLIS generation experiments
-│   ├── approach1_experiment.py   # constrained denoising via SQ projection
+├── commands.md                   # this file: setup + run commands
+├── experiments/                  # superquadric-aware TRELLIS generation experiments
+│   ├── approach1_experiment.py   # part-level appearance transplant (hard SQ assignment)
 │   ├── approach2_experiment.py   # P-noise initialization + projection
 │   ├── approach3_experiment.py   # velocity consistency (Schemes A/B/C)
-│   └── approach4_experiment.py   # soft residual guidance
-├── approach2_results/        # rendered outputs (per approach, created on first run)
+│   ├── approach4_experiment.py   # soft residual guidance
+│   ├── approach5_experiment.py   # semantic group routing (Top/Mid/Bottom prompts)
+│   └── approach6_experiment.py   # per-superquadric prompt routing (extreme composition)
+├── approach1_results/            # rendered outputs (per approach, created on first run)
+├── approach2_results/
 ├── approach3_results/
 ├── approach4_results/
-├── trellis/                  # TRELLIS core: pipelines, models, modules, utils
-├── extensions/vox2seq/       # sparse voxel -> sequence CUDA extension
-├── gui/                      # SpaceControl GUI + SQ authoring utilities
+├── approach5_results/
+├── approach6_results/
+├── trellis/                      # TRELLIS core: pipelines, models, modules, utils
+├── extensions/vox2seq/           # sparse voxel → sequence CUDA extension
+├── gui/                          # SpaceControl GUI + SQ authoring utilities
 │   ├── gui_text_image.py
 │   ├── pipeline.json
 │   ├── utils.py
-│   └── superquadrics/        # example .npz SQ layouts (e.g. chair_sq.npz)
-└── merged_mesh_voxelized.ply # sample cached SQ mesh
+│   └── superquadrics/            # example .npz SQ layouts (e.g. chair_sq.npz)
+└── merged_mesh_voxelized.ply     # sample cached SQ mesh
+```
 
+## 2. Install
 
---------------------------------------------------------------------------------
- 2. Install  (tested on CUDA 12.8, NVIDIA 3090, torch 2.8.0+cu128)
---------------------------------------------------------------------------------
+Tested on **CUDA 12.8**, NVIDIA 3090, `torch 2.8.0+cu128`.
 
+```sh
 # Check your CUDA toolkit
 nvcc --version
 
@@ -69,13 +72,13 @@ pip install /tmp/extensions/mip-splatting/submodules/diff-gaussian-rasterization
 
 cp -r extensions/vox2seq /tmp/extensions/vox2seq
 pip install /tmp/extensions/vox2seq --no-build-isolation
+```
 
+## 3. Run
 
---------------------------------------------------------------------------------
- 3. Run
---------------------------------------------------------------------------------
+### Student cluster boilerplate
 
-# --- Student cluster boilerplate ---
+```sh
 srun -p jobs -A 3dv --gpus=1 -t 120 --pty bash --login
 module load cuda/12.8
 eval "$(/work/courses/3dv/team4/env_root/miniconda3/bin/conda shell.bash hook)"
@@ -83,36 +86,74 @@ conda activate spacecontrol
 
 # Sanity check: CUDA + spconv
 python -c "import torch; print(torch.cuda.is_available()); import spconv; print('spconv OK')"
+```
 
-# --- Experiment runs (from the MultiGen3D/ directory) ---
+All commands below assume you are in the `MultiGen3D/` directory.
 
-# Approach 1 (revised) — part-level appearance transplant between two styles.
-# Generates SLAT_A and SLAT_B on shared coords, hard-assigns voxels to the
-# containing SQ, and renders every per-SQ A↔B transplant in one grid.
+### Approach 1 — Part-level appearance transplant
+
+Generates SLAT_A and SLAT_B on shared coords, hard-assigns voxels to the containing SQ, and renders every per-SQ A↔B transplant in one grid.
+
+```sh
 python experiments/approach1_experiment.py \
     --sq-path gui/superquadrics/chair_sq.npz \
     --prompt-a "a wooden chair" \
     --prompt-b "a blue metal chair" \
     --steps 12
+```
 
-# Approach 2 — P-noise initialization with projection
+### Approach 2 — P-noise initialization with projection
+
+```sh
 python experiments/approach2_experiment.py \
     --sq-path gui/superquadrics/chair_sq.npz \
     --prompt "a wooden chair"
+```
 
-# Approach 3 — velocity consistency (Schemes A/B/C).  --exp-name is required.
+### Approach 3 — Velocity consistency (Schemes A/B/C)
+
+`--exp-name` is required.
+
+```sh
 python experiments/approach3_experiment.py \
     --sq-path gui/superquadrics/chair_sq.npz \
     --prompt "a wooden chair" \
     --exp-name "my_test_v1" \
     --steps 12
+```
 
-# Approach 4 — soft residual guidance.  --exp-name is required.
+### Approach 4 — Soft residual guidance
+
+`--exp-name` is required.
+
+```sh
 python experiments/approach4_experiment.py \
     --sq-path gui/superquadrics/chair_sq.npz \
     --prompt "A geometric Bauhaus style chair, strictly color-blocked design, solid red seat, solid blue backrest, and bright yellow legs" \
     --exp-name "test3" \
     --steps 12
+```
 
-# SpaceControl GUI (upstream, still usable for authoring SQ layouts / demos)
+### Approach 5 — Semantic group routing (Top / Mid / Bottom)
+
+No CLI args. Prompts and SQ path are hardcoded in `run_experiment()` inside [experiments/approach5_experiment.py](experiments/approach5_experiment.py) — edit `global_prompt` and `local_prompts_text` there to change the scene.
+
+```sh
+python experiments/approach5_experiment.py
+```
+
+### Approach 6 — Per-superquadric prompt routing (extreme composition)
+
+No CLI args. Prompts are hardcoded per SQ index in `run_experiment()` inside [experiments/approach6_experiment.py](experiments/approach6_experiment.py) — edit `local_prompts_text` (keyed by SQ index) and `global_structure_prompt` to change the scene. SQ indices without an entry fall back to a neutral default.
+
+```sh
+python experiments/approach6_experiment.py
+```
+
+### SpaceControl GUI
+
+Upstream GUI, still usable for authoring SQ layouts / demos.
+
+```sh
 python gui/gui_text_image.py
+```

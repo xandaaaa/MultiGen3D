@@ -2,9 +2,9 @@
 
 We explore how to inject **superquadric (SQ) primitive identity directly into the voxel / structured-latent (SLAT) features** of [TRELLIS](https://github.com/microsoft/TRELLIS). A user authors a coarse layout as a small set of superquadrics; the goal is to generate a textured 3D asset whose voxel latents respect that primitive structure — i.e., voxels that fall inside the same superquadric share coherent appearance and geometry features.
 
-This codebase is built on top of TRELLIS and the [SpaceControl](https://spacecontrol3d.github.io) reference implementation. SpaceControl also conditions TRELLIS on superquadrics, but it does so by biasing the **sparse-structure** stage with a rendered control mesh. We go one step further: we modify the **SLAT denoising** stage so the voxels themselves carry superquadric information — whether by projection, reinitialization, or velocity consistency. The four experiments in [experiments/](experiments/) are different answers to the question *"how should SQ identity enter the voxel latents?"*
+This codebase is built on top of TRELLIS and the [SpaceControl](https://spacecontrol3d.github.io) reference implementation. SpaceControl also conditions TRELLIS on superquadrics, but it does so by biasing the **sparse-structure** stage with a rendered control mesh. We go one step further: we modify the **SLAT denoising** stage so the voxels themselves carry superquadric information — whether by projection, reinitialization, velocity consistency, or per-primitive text conditioning. The six experiments in [experiments/](experiments/) are different answers to the question *"how should SQ identity enter the voxel latents?"*
 
-See [commands.txt](commands.txt) for the directory layout, install steps, and run commands.
+See [commands.md](commands.md) for the directory layout, install steps, and run commands.
 
 ## Common setup: SQ → voxel mapping
 
@@ -58,3 +58,19 @@ Compared configs: `baseline`, `hard_consist` (α=1), `blend_alpha_03` (soft), `l
 [experiments/approach4_experiment.py](experiments/approach4_experiment.py) — `sample_slat_refined`
 
 A refinement of Approach 3 that addresses observed failure modes (geometry collapse, neon coloring). Keeps **independent per-voxel noise** to preserve TRELLIS's geometric detail, and only applies a soft velocity lerp `torch.lerp(v_model, v_avg, guidance_strength)` after `start_frac` of steps — enough to align color within a primitive without forcing per-voxel geometry to collapse onto the SQ subspace. Default run compares baseline vs. strength=0.15.
+
+### Approach 5 — Local semantic guidance via spatial masks
+[experiments/approach5_experiment.py](experiments/approach5_experiment.py) — `sample_slat_compositional`
+
+Addresses **attribute bleeding**: a single global prompt like *"a wooden chair with a red seat and black legs"* often smears colors across the whole object because TRELLIS text conditioning is global. Approach 5 routes different prompts to different spatial regions by:
+
+1. Grouping the P superquadrics into a small number of **semantic groups** via `group_sqs_by_height(sq_params, mesh_center)` — Bottom (legs), Middle (seat), Top (backrest) — using the vertical extent of the SQ cloud.
+2. Collapsing the hard SQ assignment `W ∈ R^{N×P}` into a per-group mask `W_semantic ∈ R^{N×G}`.
+3. At each denoising step, running the flow model **once per group** with that group's local prompt, then **spatially fusing** the per-group velocities using the group masks — each voxel's update is taken from the prompt associated with its region.
+
+This localizes color/material conditioning to the correct spatial part without touching geometry. Default run compares a single-global-prompt baseline against the 3-prompt compositional variant (legs / seat / backrest).
+
+### Approach 6 — Extreme composition (per-superquadric semantic routing)
+[experiments/approach6_experiment.py](experiments/approach6_experiment.py) — `sample_slat_extreme`
+
+A stress test of Approach 5: instead of G=3 semantic groups, assign **a unique text prompt to every single superquadric** (G = P). At each step the flow model is evaluated once per SQ, and the resulting velocities are fused via the hard W mask so that each voxel follows only the prompt attached to its own SQ. Missing SQ prompts fall back to a neutral default. This probes how far per-primitive conditioning can be pushed before the decoder can no longer reconcile the fragmented guidance into a coherent object — i.e., the limit of localized geometry/material generation.
