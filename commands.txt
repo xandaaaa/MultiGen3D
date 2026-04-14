@@ -1,10 +1,118 @@
-Student Cluster
+================================================================================
+ MultiGen3D — directory structure, install, and run commands
+================================================================================
 
+--------------------------------------------------------------------------------
+ 1. Directory structure
+--------------------------------------------------------------------------------
+
+MultiGen3D/
+├── README.md                 # project overview + per-experiment summaries
+├── LICENSE
+├── commands.txt              # this file: setup + run commands
+├── experiments/              # superquadric-aware TRELLIS generation experiments
+│   ├── approach1_experiment.py   # constrained denoising via SQ projection
+│   ├── approach2_experiment.py   # P-noise initialization + projection
+│   ├── approach3_experiment.py   # velocity consistency (Schemes A/B/C)
+│   └── approach4_experiment.py   # soft residual guidance
+├── approach2_results/        # rendered outputs (per approach, created on first run)
+├── approach3_results/
+├── approach4_results/
+├── trellis/                  # TRELLIS core: pipelines, models, modules, utils
+├── extensions/vox2seq/       # sparse voxel -> sequence CUDA extension
+├── gui/                      # SpaceControl GUI + SQ authoring utilities
+│   ├── gui_text_image.py
+│   ├── pipeline.json
+│   ├── utils.py
+│   └── superquadrics/        # example .npz SQ layouts (e.g. chair_sq.npz)
+└── merged_mesh_voxelized.ply # sample cached SQ mesh
+
+
+--------------------------------------------------------------------------------
+ 2. Install  (tested on CUDA 12.8, NVIDIA 3090, torch 2.8.0+cu128)
+--------------------------------------------------------------------------------
+
+# Check your CUDA toolkit
+nvcc --version
+
+# Create the environment
+conda create -n spacecontrol python=3.10 -y
+conda activate spacecontrol
+
+# PyTorch (see https://pytorch.org/get-started/locally/ for your setup)
+pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0 \
+    --index-url https://download.pytorch.org/whl/cu128
+
+# Core Python dependencies
+pip install pillow imageio imageio-ffmpeg tqdm easydict opencv-python-headless \
+    scipy ninja rembg onnxruntime trimesh open3d xatlas pyvista pymeshfix igraph \
+    transformers psutil viser tensorboard pandas lpips
+pip install git+https://github.com/EasternJournalist/utils3d.git@9a4eb15e4021b67b12c460c7057d642626897ec8
+
+# Attention + sparse kernels
+pip install xformers==0.0.32.post1 --index-url https://download.pytorch.org/whl/cu128
+pip install flash-attn --no-build-isolation
+pip install kaolin -f https://nvidia-kaolin.s3.us-east-2.amazonaws.com/torch-2.8.0_cu128.html
+pip install spconv-cu120
+
+# Rendering extensions
+mkdir -p /tmp/extensions
+
+git clone https://github.com/NVlabs/nvdiffrast.git /tmp/extensions/nvdiffrast
+pip install /tmp/extensions/nvdiffrast --no-build-isolation
+
+git clone --recurse-submodules https://github.com/JeffreyXiang/diffoctreerast.git /tmp/extensions/diffoctreerast
+pip install /tmp/extensions/diffoctreerast --no-build-isolation
+
+git clone https://github.com/autonomousvision/mip-splatting.git /tmp/extensions/mip-splatting
+pip install /tmp/extensions/mip-splatting/submodules/diff-gaussian-rasterization/ --no-build-isolation
+
+cp -r extensions/vox2seq /tmp/extensions/vox2seq
+pip install /tmp/extensions/vox2seq --no-build-isolation
+
+
+--------------------------------------------------------------------------------
+ 3. Run
+--------------------------------------------------------------------------------
+
+# --- Student cluster boilerplate ---
 srun -p jobs -A 3dv --gpus=1 -t 120 --pty bash --login
 module load cuda/12.8
 eval "$(/work/courses/3dv/team4/env_root/miniconda3/bin/conda shell.bash hook)"
 conda activate spacecontrol
+
+# Sanity check: CUDA + spconv
 python -c "import torch; print(torch.cuda.is_available()); import spconv; print('spconv OK')"
+
+# --- Experiment runs (from the MultiGen3D/ directory) ---
+
+# Approach 1 (revised) — part-level appearance transplant between two styles.
+# Generates SLAT_A and SLAT_B on shared coords, hard-assigns voxels to the
+# containing SQ, and renders every per-SQ A↔B transplant in one grid.
+python experiments/approach1_experiment.py \
+    --sq-path gui/superquadrics/chair_sq.npz \
+    --prompt-a "a wooden chair" \
+    --prompt-b "a blue metal chair" \
+    --steps 12
+
+# Approach 2 — P-noise initialization with projection
 python experiments/approach2_experiment.py \
     --sq-path gui/superquadrics/chair_sq.npz \
     --prompt "a wooden chair"
+
+# Approach 3 — velocity consistency (Schemes A/B/C).  --exp-name is required.
+python experiments/approach3_experiment.py \
+    --sq-path gui/superquadrics/chair_sq.npz \
+    --prompt "a wooden chair" \
+    --exp-name "my_test_v1" \
+    --steps 12
+
+# Approach 4 — soft residual guidance.  --exp-name is required.
+python experiments/approach4_experiment.py \
+    --sq-path gui/superquadrics/chair_sq.npz \
+    --prompt "a blue plastic chair" \
+    --exp-name "test2" \
+    --steps 12
+
+# SpaceControl GUI (upstream, still usable for authoring SQ layouts / demos)
+python gui/gui_text_image.py

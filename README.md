@@ -1,90 +1,60 @@
-<h1 align="center">SpaceControl<br>Introducing Test-Time Spatial Control to 3D Generative Modeling</h1>
+<h1 align="center">Superquadric-Guided TRELLIS Generation</h1>
 
-<p align="center">
-              <a href="https://elisabettafedele.github.io/">Elisabetta Fedele</a><sup>1,2*</sup>,</span>
-              <a href="https://francisengelmann.github.io/">Francis Engelmann</a><sup>2*</sup>
-              <a href="https://ianhuang.ai">Ian Huang</a><sup>2</sup>,</span>
-              <a href="https://orlitany.github.io">Or Litany</a><sup>3,4</sup>,</span>
-              <a href="https://people.inf.ethz.ch/pomarc">Marc Pollefeys</a><sup>1</sup>,
-              <a href="https://geometry.stanford.edu/?member=guibas">Leonidas Guibas</a><sup>2</sup>
-<br>
-<sup>1</sup>ETH Zurich,
-<sup>2</sup>Stanford University,
-<sup>3</sup>Technion, 
-<sup>4</sup>NVIDIA <br>
-</p>
+We explore how to inject **superquadric (SQ) primitive identity directly into the voxel / structured-latent (SLAT) features** of [TRELLIS](https://github.com/microsoft/TRELLIS). A user authors a coarse layout as a small set of superquadrics; the goal is to generate a textured 3D asset whose voxel latents respect that primitive structure — i.e., voxels that fall inside the same superquadric share coherent appearance and geometry features.
 
-<h3 align="center"><a href="https://github.com/spacecontrol3d/spacecontrol">Code</a> | <a href="https://arxiv.org/abs/2512.05343">Paper</a> | <a href="https://spacecontrol3d.github.io">Project Page</a> </h3>
-<div align="center"></div>
-</p>
-<p align="center">
-<a href="">
-<img src="https://spacecontrol3d.github.io/images/teaser.png" alt="Logo" width="100%">
-</a>
-</p>
+This codebase is built on top of TRELLIS and the [SpaceControl](https://spacecontrol3d.github.io) reference implementation. SpaceControl also conditions TRELLIS on superquadrics, but it does so by biasing the **sparse-structure** stage with a rendered control mesh. We go one step further: we modify the **SLAT denoising** stage so the voxels themselves carry superquadric information — whether by projection, reinitialization, or velocity consistency. The four experiments in [experiments/](experiments/) are different answers to the question *"how should SQ identity enter the voxel latents?"*
 
-Generative methods for 3D assets have recently achieved remarkable progress, yet providing intuitive and precise control over the object geometry remains a key challenge. Existing approaches predominantly rely on text or image prompts, which often fall short in geometric specificity: language can be ambiguous, and images are cumbersome to edit. In this work, we introduce <span style="font-size: 16px; font-weight: 600;">S</span><span style="font-size: 12px; font-weight: 700;">PACE</span><span style="font-size: 16px; font-weight: 600;">C</span><span style="font-size: 12px; font-weight: 700;">ONTROL</span>, a training-free test-time method for explicit spatial control of 3D generation. Our approach accepts a wide range of geometric inputs, from coarse primitives to detailed meshes, and integrates seamlessly with modern pre-trained generative models without requiring any additional training. A controllable parameter lets users trade off between geometric fidelity and output realism. Extensive quantitative evaluation and user studies demonstrate that <span style="font-size: 16px; font-weight: 600;">S</span><span style="font-size: 12px; font-weight: 700;">PACE</span><span style="font-size: 16px; font-weight: 600;">C</span><span style="font-size: 12px; font-weight: 700;">ONTROL</span> outperforms both training-based and optimization-based baselines in geometric faithfulness while preserving high visual quality. Finally, we present an interactive user interface that enables online editing of superquadrics for direct conversion into textured 3D assets, facilitating practical deployment in creative workflows.
+See [commands.txt](commands.txt) for the directory layout, install steps, and run commands.
 
-***Check out our [Project Page](https://spacecontrol3d.github.io/) for more videos and interactive demos!***
+## Common setup: SQ → voxel mapping
 
+All experiments share the utilities defined in [experiments/approach1_experiment.py](experiments/approach1_experiment.py):
 
-## 📦 Installation
+- `load_sq_params(npz)` — loads P superquadrics (`scale`, `shape`, `rotation`, `translation`).
+- `compute_mesh_normalization(sq_params)` — AABB-normalizes the SQ cloud into TRELLIS's `[-0.5, 0.5]` voxel space.
+- `coords_to_world_positions(coords)` — maps sparse voxel grid coords to world positions.
+- `superquadric_radial_distance(x_local, semi_axes, eps)` — standard SQ radial distance.
+- A weight matrix `W ∈ R^{N×P}` that assigns each of the N sparse voxels to the P superquadrics. Approaches 1–2 use a **soft** kernel `exp(-d_r / τ)`; approaches 3–4 use a **hard** one-hot argmin over radial distance.
+- `project_onto_sq_subspace(z, W)` — the key operation: a ridge-regularized least-squares projection `s* = (WᵀW)⁻¹ Wᵀ z`, with `z̄ = W s*`. Applying this to voxel latents forces voxels belonging to the same SQ to share features.
 
-1. Clone the repository:
-  ```sh
-  git clone git@github.com:spacecontrol3d/spacecontrol.git
-  cd spacecontrol
-  ```
-2. Setup the environment:
-  The code has been test with **CUDA 12.8** (see `nvcc --version`) on an NVIDIA 3090 with `torch 2.8.0+cu128`
+Given this shared scaffold, each experiment differs in **where** and **how** SQ structure is enforced during the TRELLIS SLAT flow.
 
-  ```sh
-  conda create -n spacecontrol python=3.10 -y
-  conda activate spacecontrol
-  
-  # instructions for your setup: https://pytorch.org/get-started/locally/
-  pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0 --index-url https://download.pytorch.org/whl/cu128
+## Experiments
 
-  pip install pillow imageio imageio-ffmpeg tqdm easydict opencv-python-headless scipy ninja rembg onnxruntime trimesh open3d xatlas pyvista pymeshfix igraph transformers psutil viser tensorboard pandas lpips
-  pip install git+https://github.com/EasternJournalist/utils3d.git@9a4eb15e4021b67b12c460c7057d642626897ec8
+### Approach 1 (original) — Constrained denoising via projection
+Original formulation — `sample_slat_with_projection`.
 
-  pip install xformers==0.0.32.post1 --index-url https://download.pytorch.org/whl/cu128
-  pip install flash-attn --no-build-isolation
-  pip install kaolin -f https://nvidia-kaolin.s3.us-east-2.amazonaws.com/torch-2.8.0_cu128.html
-  pip install spconv-cu120
+Runs the pretrained TRELLIS SLAT flow unchanged, but **interleaves a projection onto the superquadric subspace between Euler steps**. Tunables: `blend_alpha` (0 = vanilla TRELLIS, 1 = hard project), `project_every` k steps, `project_after_frac` (only start projecting after a fraction of steps has elapsed), and an optional final hard projection. Configs compared include baseline, α ∈ {0.1, 0.3, 0.5}, α=1 on the last 50% only, and final-projection-only.
 
-  mkdir -p /tmp/extensions
-  git clone https://github.com/NVlabs/nvdiffrast.git /tmp/extensions/nvdiffrast
-  pip install /tmp/extensions/nvdiffrast --no-build-isolation
+### Approach 1 (revised) — Part-level appearance transplant via hard SQ assignment
+[experiments/approach1_experiment.py](experiments/approach1_experiment.py) — `hard_assign_voxels` + `transplant_features`
 
-  git clone --recurse-submodules https://github.com/JeffreyXiang/diffoctreerast.git /tmp/extensions/diffoctreerast
-  pip install /tmp/extensions/diffoctreerast --no-build-isolation
+The revised Approach 1 takes a different route to the same question: instead of projecting voxel latents during denoising, it **tests whether SLAT features are already spatially decomposable along superquadric boundaries**. The recipe:
 
-  git clone https://github.com/autonomousvision/mip-splatting.git /tmp/extensions/mip-splatting
-  pip install /tmp/extensions/mip-splatting/submodules/diff-gaussian-rasterization/ --no-build-isolation
+1. Sample one sparse structure under SpaceControl spatial control (voxel coords are shared across styles).
+2. Sample two full SLATs on those coords with two different prompts — `prompt_a` (style A, e.g. "a wooden chair") and `prompt_b` (style B, e.g. "a blue metal chair").
+3. **Hard-assign** every active voxel to the superquadric it is "most inside" — `argmin` of the superquadric inside-outside function `F(x)` across all P superquadrics (see `sq_inside_outside` and `hard_assign_voxels`). Unlike the soft/exponential weight matrix `W` used elsewhere, this gives a single integer SQ label per voxel.
+4. For each superquadric `i`, build a mixed SLAT via `transplant_features(slat_a, slat_b, assignment, sq_idx=i)` — voxels assigned to SQ `i` carry style-B features, all other voxels keep style-A features.
+5. Decode all variants (A baseline, B baseline, and every per-SQ transplant) into Gaussians, render, and compare in a single grid.
 
-  cp -r extensions/vox2seq /tmp/extensions/vox2seq
-  pip install /tmp/extensions/vox2seq --no-build-isolation
-  ```
+The diagnostic: if the SQ-`i` transplant shows style B localized to the spatial region of SQ `i` while the rest of the chair retains style A, the SLAT is spatially decomposable and part-level appearance editing is feasible — a strong signal that voxel latents *already* carry enough primitive-localized information for SQ-aware editing without any flow-level intervention.
 
-## 💡 Usage
-To start the web-based interactive demo:
-```sh
-python gui/gui_text_image.py
-```
+### Approach 2 — P-noise initialization
+[experiments/approach2_experiment.py](experiments/approach2_experiment.py) — `sample_slat_p_noise`
 
-## 🙏 Acknowledgments
-We thank the authors of [TRELLIS](https://github.com/microsoft/TRELLIS) for their excellent work and for making their code publicly available. We also gratefully acknowledge NVIDIA for their academic compute grant, which enabled the development of this method; these contributions were instrumental to the project.
+Instead of sampling N independent voxel noise vectors, sample only **P noise vectors** (one per superquadric) and broadcast them to voxels via `z = W s`, optionally rescaling to unit variance. The pretrained flow then denoises this low-rank initialization, with projection back onto the P-dim subspace at each step. This bakes SQ identity into the latents *by construction*, rather than projecting a posteriori.
 
-## 📜 Citation
+### Approach 3 — Velocity consistency (Schemes A / B / C)
+[experiments/approach3_experiment.py](experiments/approach3_experiment.py) — `sample_slat_optimized`
 
-If you find this work helpful, please consider citing our paper:
+Uses hard W and projects the **velocity** rather than the state. At each step, the per-voxel velocity is averaged within each SQ (`v_consistent = W @ ((Wᵀ v) / counts)`) and blended back. Three schemes:
+- **A — `blend_alpha`**: mix consistent vs. original velocity.
+- **B — `project_after_frac`**: only enforce consistency in later denoising stages.
+- **C — `rescale_noise`**: normalize the broadcast initial latent to unit variance to suppress over-saturated ("neon") color artifacts.
 
-```bibtex
-@article{fedele2025spacecontrol,
-  title   = {{SpaceControl: Introducing Test-Time Spatial Control to 3D Generative Modeling}},
-  author  = {Elisabetta Fedele, Francis Engelmann, Ian Huang, Or Litany, Marc Pollefeys, Leonidas Guibas},
-  journal = {International Conference on Learning Representations (ICLR)},
-  year    = {2026}
-}
-```
+Compared configs: `baseline`, `hard_consist` (α=1), `blend_alpha_03` (soft), `late_consist` (α=1 on the second half).
+
+### Approach 4 — Soft residual guidance
+[experiments/approach4_experiment.py](experiments/approach4_experiment.py) — `sample_slat_refined`
+
+A refinement of Approach 3 that addresses observed failure modes (geometry collapse, neon coloring). Keeps **independent per-voxel noise** to preserve TRELLIS's geometric detail, and only applies a soft velocity lerp `torch.lerp(v_model, v_avg, guidance_strength)` after `start_frac` of steps — enough to align color within a primitive without forcing per-voxel geometry to collapse onto the SQ subspace. Default run compares baseline vs. strength=0.15.
