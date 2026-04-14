@@ -110,8 +110,8 @@ python experiments/approach3_experiment.py \
 # Approach 4 — soft residual guidance.  --exp-name is required.
 python experiments/approach4_experiment.py \
     --sq-path gui/superquadrics/chair_sq.npz \
-    --prompt "a blue plastic chair" \
-    --exp-name "test2" \
+    --prompt "A geometric Bauhaus style chair, strictly color-blocked design, solid red seat, solid blue backrest, and bright yellow legs" \
+    --exp-name "test3" \
     --steps 12
 
 # SpaceControl GUI (upstream, still usable for authoring SQ layouts / demos)

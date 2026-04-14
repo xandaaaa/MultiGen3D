@@ -27,7 +27,7 @@ from trellis.utils import render_utils
 
 # Reusing validated utilities from approach1_experiment.py
 from approach1_experiment import (
-    coords_to_world_positions,
+    coords_to_world,
     compute_mesh_normalization,
     load_sq_params,
 )
@@ -145,7 +145,7 @@ def run_experiment(args):
     torch.manual_seed(args.seed)
     coords = pipeline.sample_sparse_structure(cond, num_samples=1, sampler_params={"steps": args.steps})
     
-    W = compute_hard_W(coords_to_world_positions(coords), sq_params, mesh_center, mesh_scale)
+    W = compute_hard_W(coords_to_world(coords), sq_params, mesh_center, mesh_scale)
 
     configs = [
         {"name": "1_Baseline",    "strength": 0.0},
