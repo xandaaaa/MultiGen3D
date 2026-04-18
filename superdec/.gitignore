@@ -1,0 +1,27 @@
+.venv*
+outputs*
+wandb*
+*.egg-info*
+*__pycache__*
+outdict*
+random*
+*local.yaml
+*ply
+*.so
+*.o
+superdec/fast_sampler/_sampler.cpp
+render*
+*.mp4
+build*
+tmp*
+*.pt
+checkpoints*
+
+# --- data/ handling: scope narrowly so dataset_20 + candidates.json stay tracked ---
+# Ignore all raw pointclouds and candidate outputs (regeneratable), but keep the
+# final 20-shape benchmark dataset under version control.
+data/ShapeNet/*/
+data/ShapeNet_candidates/
+data/output_npz/
+data/scannetpp/
+!data/ShapeNet/candidates.json

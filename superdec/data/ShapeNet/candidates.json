@@ -1,0 +1,116 @@
+{
+  "cats": {
+    "03001627": "chair",
+    "04379243": "table",
+    "04256520": "sofa",
+    "03636649": "lamp",
+    "02933112": "cabinet",
+    "02828884": "bench",
+    "02691156": "airplane",
+    "02958343": "car",
+    "04530566": "watercraft",
+    "04090263": "rifle"
+  },
+  "chosen": {
+    "03001627": [
+      "cbc47018135fc1b1462977c6d3c24550",
+      "d15543efce9acacc8687ff9b0b4e4ac",
+      "d7307a92178e74e055c774cb358c4539",
+      "dfeb8d914d8b28ab5bb58f1e92d30bf7",
+      "e63546037077f0847dee16617fd6925f",
+      "eb23621d7ac1094398e0d1738edd4f19",
+      "f1f670ac53799c18492d9da2668ec34c",
+      "fa89a0401873e5a6bbc7a6acbd8f058b"
+    ],
+    "04379243": [
+      "cd4e8748514e028642d23b95defe1ce5",
+      "d3a55d20bb9c93985a7746683ad193f0",
+      "da8ec638b64227066d767b6d0313d349",
+      "e0b849b1545d35dab04cb542e2c50eb4",
+      "e7058b820e66c9249cd431573238602d",
+      "ece7f04700c5767a4cbf9a02e3342127",
+      "f3b8c91c5dd1cb6b8722573b29f0d6d8",
+      "f99ebf0f053140525a0e5699b3040a35"
+    ],
+    "04256520": [
+      "cc7b690e4d86b471397aad305ec14786",
+      "d334047dcbb37017f5f004a628d601ce",
+      "d9ae4cecb8203838f652f706160dc96d",
+      "df7cced6f0e5e65c26e55d59015dabc6",
+      "e68c603dc62dbbe5a1281b4d4bd889d7",
+      "ed394e35b999f69edb039d8689a74349",
+      "f4370eb6449a1e8e191682d3b3321017",
+      "fb1bcd50b847a99d7948cb8e1d9ee487"
+    ],
+    "03636649": [
+      "d153ae6d65b31e00fcb8d8c6d4df8143",
+      "d682bfc447413fd167a9bb855340227f",
+      "dc6c499e71d04971d22730b0728b2fc9",
+      "e20889cbe2d917787d616ef0c11d6a7f",
+      "e78c5337a56dca56bd6e55f88e701c4",
+      "ec449d7c89e84657cf66a9e192dbe265",
+      "f228f6cd86162beb659dda512294c744",
+      "f97506704760741b460fa882e24b7e4a"
+    ],
+    "02933112": [
+      "b06b351b939e279bc5ff6d1af2135fc9",
+      "b56505eeac0de779289f8cbfc8541c14",
+      "bbbd4de3e7ab25ad80d6227ff9b21190",
+      "c18a4772bcfbb98e85bc264270ae0601",
+      "c8631f63ec5899a4a84a884e8267301c",
+      "ce85ce0eb106d409b8a453d61eaf046c",
+      "d69d9de0c79ac6a9c59350d819542ec7",
+      "df55c6665781293cbe53b3b9f1274310"
+    ],
+    "02828884": [
+      "c83b3192c338527a2056b4bd5d870b47",
+      "ced678ceab87f6b6f4fb4dee5181bee",
+      "d6075b23895c7d0880e85c92fa2351f7",
+      "dd97603ce7538c15be5bbc844e6db7e",
+      "e5af69132cc95133f155d75bbf62b80",
+      "ebf5b387f119c51cad5067eac75a07f7",
+      "f21333a7141e7fbdad5067eac75a07f7",
+      "f8aa82e7e4c58ce29d31c5ce17cce95d"
+    ],
+    "02691156": [
+      "d18592d9615b01bbbc0909d98a1ff2b4",
+      "d6b4ad58a49bb80cd13ef00338ba8c52",
+      "dc8d9003cde43b66c8727b27ee96a4b7",
+      "e17a696c47d4292393db03f6b4e68f17",
+      "e75ce21b914ba565b4c6d1a32dc4f554",
+      "ed738ba28cd73714bb0f4bdf8821663a",
+      "f44c0e1e55a3469494f3355d9c061b5a",
+      "fae6ae6ef62cfa107b164268a44f7712"
+    ],
+    "02958343": [
+      "cbc946b4f4c022305e524bb779a94481",
+      "d287b02b4679c70ab7902335d9dd94a2",
+      "d846d023b9ec987cd6044b3fbda1cb40",
+      "df00eb409d4e8fcec07224da8e53476",
+      "e60598d4462b852411fae996ae9899df",
+      "ec07cd8db8f2bea851f021b9ed69c58",
+      "f378404d31ce9db1afe1d4530f4c6e24",
+      "f9cad36ae25540a0bb20fd1bc4860856"
+    ],
+    "04530566": [
+      "cd67f7d1ba943b162f84cb7932f866fd",
+      "d3043fff20dad5c41dc762869682f4f",
+      "d95c49195e51912056f316a86bec8b19",
+      "df8fdfbda6e15f38fc740ecd0dc695a2",
+      "e5c3835b9f3ae3634a27b0b4657ac8b5",
+      "eba55caf770565989c063286c702ba92",
+      "f2db3a2fa09b459a91001ec6a6afb362",
+      "fa18c9283443b67388fb22c0c1b2b173"
+    ],
+    "04090263": [
+      "ca2bafb1ba4b97a1683e3750b53385d5",
+      "d0f3ee45d483cd659f433921788191f3",
+      "d88c106c00384130fb5c1b0f759e2bc1",
+      "dea853cf0b776f7dbc6e84bc30e573cd",
+      "e574eb37ea6ee685e1f2a1daf140ac9f",
+      "ebd426ae34b743f4a50ef3fc203c6ba0",
+      "f30464cf9aef3abea7f9996575f1f5f7",
+      "faa1fb485ddd6c9c8bfbe54b5d01550"
+    ]
+  }
+}

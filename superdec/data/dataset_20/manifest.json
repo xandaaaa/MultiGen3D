@@ -1,0 +1,42 @@
+{
+  "airplane": [
+    "f44c0e1e55a3469494f3355d9c061b5a",
+    "d18592d9615b01bbbc0909d98a1ff2b4"
+  ],
+  "bench": [
+    "f8aa82e7e4c58ce29d31c5ce17cce95d",
+    "dd97603ce7538c15be5bbc844e6db7e"
+  ],
+  "cabinet": [
+    "bbbd4de3e7ab25ad80d6227ff9b21190",
+    "df55c6665781293cbe53b3b9f1274310"
+  ],
+  "car": [
+    "d287b02b4679c70ab7902335d9dd94a2",
+    "f9cad36ae25540a0bb20fd1bc4860856"
+  ],
+  "chair": [
+    "dfeb8d914d8b28ab5bb58f1e92d30bf7",
+    "f1f670ac53799c18492d9da2668ec34c"
+  ],
+  "lamp": [
+    "dc6c499e71d04971d22730b0728b2fc9",
+    "f228f6cd86162beb659dda512294c744"
+  ],
+  "rifle": [
+    "faa1fb485ddd6c9c8bfbe54b5d01550",
+    "d88c106c00384130fb5c1b0f759e2bc1"
+  ],
+  "sofa": [
+    "ed394e35b999f69edb039d8689a74349",
+    "d9ae4cecb8203838f652f706160dc96d"
+  ],
+  "table": [
+    "f3b8c91c5dd1cb6b8722573b29f0d6d8",
+    "d3a55d20bb9c93985a7746683ad193f0"
+  ],
+  "watercraft": [
+    "d95c49195e51912056f316a86bec8b19",
+    "d3043fff20dad5c41dc762869682f4f"
+  ]
+}
