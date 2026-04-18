@@ -1,0 +1,75 @@
+=== patterns: Patterns & textures spanning multiple voxels ===
+Global: a chair with striped black and white legs, silver crossbars, a plaid fabric seat, and a polka dot backrest
+  Legs:
+    A1: a chair with black and white vertically striped legs
+    A6: black and white vertically striped chair legs
+  Crossbars:
+    A1: a chair with silver metallic crossbars
+    A6: silver metallic crossbars
+  Seat:
+    A1: a chair with a red and black plaid fabric seat
+    A6: a red and black plaid fabric seat cushion
+  Backrest:
+    A1: a chair with a white and blue polka dot backrest
+    A6: a white and blue polka dot backrest
+
+=== reflective: View-dependent / reflective materials ===
+Global: a chair with chrome metallic legs, gold crossbars, a transparent glass seat, and a mirror-finish backrest
+  Legs:
+    A1: a chair with shiny chrome metallic legs
+    A6: shiny chrome metallic chair legs
+  Crossbars:
+    A1: a chair with gold metallic crossbars
+    A6: gold metallic crossbars
+  Seat:
+    A1: a chair with a transparent glass seat
+    A6: a transparent glass seat
+  Backrest:
+    A1: a chair with a mirror-finish reflective backrest
+    A6: a mirror-finish reflective backrest
+
+=== geometric_clash: Conflicting geometric styles per region ===
+Global: a chair with rough jagged stone legs, thin iron crossbars, a smooth organic curved seat, and an ornate carved wooden backrest
+  Legs:
+    A1: a chair with rough jagged stone legs
+    A6: rough jagged stone chair legs
+  Crossbars:
+    A1: a chair with thin wrought iron crossbars
+    A6: thin wrought iron crossbars
+  Seat:
+    A1: a chair with a smooth organic curved cushioned seat
+    A6: a smooth organic curved cushioned seat
+  Backrest:
+    A1: a chair with an ornate carved wooden backrest with intricate details
+    A6: an ornate carved wooden backrest with intricate details
+
+=== semantic_context: Prompts that imply cross-boundary phenomena ===
+Global: a chair with legs covered in green ivy vines, rusty metal crossbars, a mossy old stone seat, and a backrest made of twisted tree branches
+  Legs:
+    A1: a chair with legs covered in green ivy vines growing upward
+    A6: chair legs covered in green ivy vines growing upward
+  Crossbars:
+    A1: a chair with rusty corroded metal crossbars
+    A6: rusty corroded metal crossbars
+  Seat:
+    A1: a chair with a mossy old stone seat with cracks
+    A6: a mossy old stone seat with cracks
+  Backrest:
+    A1: a chair with a backrest made of twisted living tree branches
+    A6: a backrest made of twisted living tree branches
+
+=== lighting_conflict: Conflicting lighting / emission assumptions ===
+Global: a chair with bright neon glowing pink legs, dark carbon fiber crossbars, a dark matte black rubber seat, and a translucent glowing blue backrest
+  Legs:
+    A1: a chair with bright neon glowing pink legs
+    A6: bright neon glowing pink chair legs
+  Crossbars:
+    A1: a chair with dark carbon fiber crossbars
+    A6: dark carbon fiber crossbars
+  Seat:
+    A1: a chair with a dark matte black rubber seat
+    A6: a dark matte black rubber seat
+  Backrest:
+    A1: a chair with a translucent glowing blue backrest
+    A6: a translucent glowing blue backrest
+
