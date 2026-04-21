@@ -1,0 +1,3 @@
+Global description: A fighter jet
+SQ0: The fuselage of the plane, including the main body and the tail section
+SQ1: The wings of the plane, representing both the left and right wings as a single component.

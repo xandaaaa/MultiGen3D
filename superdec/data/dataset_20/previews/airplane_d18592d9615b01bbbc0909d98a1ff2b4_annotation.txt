@@ -1,0 +1,5 @@
+Global description: A passenger plane
+SQ0: Left wing of the plane
+SQ1: Empennage of the plane
+SQ2: Right wing of the plane
+SQ3: Fuselage of the plane

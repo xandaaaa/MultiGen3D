@@ -74,3 +74,57 @@ This localizes color/material conditioning to the correct spatial part without t
 [experiments/approach6_experiment.py](experiments/approach6_experiment.py) — `sample_slat_extreme`
 
 A stress test of Approach 5: instead of G=3 semantic groups, assign **a unique text prompt to every single superquadric** (G = P). At each step the flow model is evaluated once per SQ, and the resulting velocities are fused via the hard W mask so that each voxel follows only the prompt attached to its own SQ. Missing SQ prompts fall back to a neutral default. This probes how far per-primitive conditioning can be pushed before the decoder can no longer reconcile the fragmented guidance into a coherent object — i.e., the limit of localized geometry/material generation.
+
+## Benchmark dataset: 20 superquadric shapes
+
+To evaluate the six approaches under a consistent input distribution, we built a small **20-shape superquadric benchmark** under [superdec/data/dataset_20/](superdec/data/dataset_20/). Each shape is a per-object `.npz` in the 4-field SuperDec format (`scales`, `shapes`, `rotations`, `translations`) consumed directly by the experiments.
+
+### How it was curated
+
+1. **Source.** We reuse the ShapeNet subset that [SuperDec](https://super-dec.github.io) was trained on — `dataset_small_v1.1.zip` from the Occupancy Networks AWS bucket. The full zip is 73 GB, so we stream it with `remotezip` (S3 range requests) and pull only the files we need.
+2. **Categories — 10 picked.** airplane, bench, cabinet, car, chair, lamp, rifle, sofa, table, watercraft (synset IDs in [superdec/SETUP.md](superdec/SETUP.md)).
+3. **Candidates — 8 per category.** Evenly-spaced indices into each category's `test.lst` give 80 candidate point clouds (~92 MB total).
+4. **SuperDec decomposition.** [superdec/scripts/run_candidates.py](superdec/scripts/run_candidates.py) runs the `shapenet` checkpoint on all 80 candidates (batched, ~5 min on one GPU), saves per-object `.npz` + a 4×2 `contact_sheet.png` per category.
+5. **Final pick — 2 per category.** We inspect each category's contact sheet and pick two model IDs whose shapes are visually most different. Picks are hard-coded in [superdec/scripts/finalize_dataset.py](superdec/scripts/finalize_dataset.py), which materializes the final 20 shapes into [superdec/data/dataset_20/](superdec/data/dataset_20/).
+
+Full pipeline, environment setup, and quota notes: [superdec/SETUP.md](superdec/SETUP.md).
+
+### Editing the superquadrics: `sq_editor.py`
+
+SuperDec's output is often close but not perfect — a backrest may be split into two primitives, a leg may be missing, etc. [superdec/scripts/sq_editor.py](superdec/scripts/sq_editor.py) is a standalone [viser](https://viser.studio)-based web editor for hand-correcting the 20-shape dataset. No TRELLIS, no GPU — it only edits the 4-field `.npz`.
+
+Features:
+- Floating 3D labels (`SQ 0`, `SQ 1`, …) pinned to each primitive's centroid, so the color ↔ index mapping is always visible in-scene.
+- Click a SQ in the 3D view to select it; its gizmo and sliders appear in the **"Selected SQ"** panel at the top of the sidebar.
+- Duplicate / Delete / Add new SQ; drag the gizmo to rotate and translate; sliders for the two shape exponents and three scale axes.
+- Save writes `<stem>_edited.npz` next to the original (or tick **Overwrite** to replace it).
+
+**Running the editor:**
+
+```sh
+# 1. On your laptop — open an SSH tunnel (forward port 8080)
+ssh -L 8080:localhost:8080 $USER@student-cluster.inf.ethz.ch
+
+# 2. On the cluster (login node is fine; no GPU needed)
+eval "$(/work/courses/3dv/team4/env_root/miniconda3/bin/conda shell.bash hook)"
+conda activate spacecontrol
+cd /work/courses/3dv/team4/MultiGen3D
+python superdec/scripts/sq_editor.py
+
+# 3. In your browser
+# open http://localhost:8080
+```
+
+### Per-shape annotations
+
+With the edited superquadrics in hand, we author per-SQ prompts in the format used by [experiments/approach6_experiment.py](experiments/approach6_experiment.py). Each shape has an annotation file under [superdec/data/dataset_20/previews/](superdec/data/dataset_20/previews/) named `<category>_<model_id>_annotation.txt`:
+
+```
+Global description: A passenger plane
+SQ0: Left wing of the plane
+SQ1: Empennage of the plane
+SQ2: Right wing of the plane
+SQ3: Fuselage of the plane
+```
+
+See [superdec/data/dataset_20/previews/airplane_d18592d9615b01bbbc0909d98a1ff2b4_annotation.txt](superdec/data/dataset_20/previews/airplane_d18592d9615b01bbbc0909d98a1ff2b4_annotation.txt) for the canonical example. The SQ indices match the labels rendered by `sq_editor.py` and `preview_sqs.py`, so what you see in the editor is what you write in the annotation.

@@ -1,0 +1,5 @@
+Global description: A long, narrow rectangular bench, such as a park bench, consisting of a flat seating surface supported by two legs
+SQ0: Left leg of the bench
+SQ1: Left rim of the bench
+SQ2: Right leg of the bench
+SQ3: Left rim of the bench
