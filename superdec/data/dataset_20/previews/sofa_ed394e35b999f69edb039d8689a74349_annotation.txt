@@ -1,0 +1,6 @@
+Global description: A sectional, L-shaped sofa or couch with a main seating area and an extended chaise section
+SQ0: The extended seat cushion (the chaise lounge section forming the 'L')
+SQ1: The left armrest
+SQ2: The main seat cushion (the longer section of the sofa)
+SQ3: The right armrest
+SQ4: The backrest

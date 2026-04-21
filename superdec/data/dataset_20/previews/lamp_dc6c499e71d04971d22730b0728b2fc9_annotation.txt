@@ -1,0 +1,6 @@
+Global description: An adjustable desk lamp, often referred to as an architect or swing-arm lamp
+SQ0: The base of the lamp
+SQ1: The lamp shade or head assembly where the bulb is housed
+SQ2: The upper part of the arm or segment of the stand, connected to the head
+SQ3: The middle part of the arm
+SQ4: The lower part of arm or segment of the stand, connected to the base

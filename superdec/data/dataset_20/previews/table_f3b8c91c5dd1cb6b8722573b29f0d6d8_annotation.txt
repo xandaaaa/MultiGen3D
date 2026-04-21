@@ -1,0 +1,12 @@
+Global description: A rectangular table featuring a main surface, four legs, reinforcing lower crossbars
+SQ0: A horizontal lower crossbar (stretcher) connecting the pairs of legs near the base for added stability
+SQ1: A vertical supporting leg at a corner
+SQ2: An apron (or structural rim) running horizontally just beneath the edge of the tabletop to support the surface
+SQ3: An apron (or structural rim) running horizontally just beneath the edge of the tabletop to support the surface
+SQ4: A vertical supporting leg at a corner
+SQ5: A horizontal lower crossbar (stretcher) connecting the pairs of legs near the base for added stability
+SQ6: A vertical supporting leg at a corner
+SQ7: An apron (or structural rim) running horizontally just beneath the edge of the tabletop to support the surface
+SQ8: The main flat tabletop surface
+SQ9: A vertical supporting leg at a corner
+SQ10: An apron (or structural rim) running horizontally just beneath the edge of the tabletop to support the surface

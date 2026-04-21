@@ -1,0 +1,4 @@
+Global description: A semi-automatic hand pistol
+SQ0: The trigger guard and lower frame area just in front of the grip
+SQ1: The grip (handle)
+SQ2: The slide and barrel assembly (the top part of the firearm)

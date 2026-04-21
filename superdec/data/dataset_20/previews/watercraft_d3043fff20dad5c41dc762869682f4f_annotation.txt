@@ -1,0 +1,4 @@
+Global description: A watercraft
+SQ0: The cabin or superstructure situated on top of the deck
+SQ1: The hull
+

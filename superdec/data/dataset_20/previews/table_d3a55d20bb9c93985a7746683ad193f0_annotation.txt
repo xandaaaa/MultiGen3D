@@ -1,0 +1,7 @@
+Global description: A ping-pong table featuring a flat rectangular playing surface, four supporting legs, and a central dividing net
+SQ0: One of the supporting legs
+SQ1: One of the supporting legs
+SQ2: The net spanning across the middle of the table
+SQ3: One of the supporting legs
+SQ4: One of the supporting legs
+SQ5: The main playing surface (tabletop)

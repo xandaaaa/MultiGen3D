@@ -1,0 +1,11 @@
+Global description: A swivel office chair with a backrest, seat cushion, and a five-wheel caster base
+SQ0: The pedestal or gas-lift support column
+SQ1: A wheel (caster)
+SQ2: A wheel (caster)
+SQ3: Left armrest
+SQ4: A wheel (caster)
+SQ5: A wheel (caster)
+SQ6: The seat
+SQ7: Right armrest
+SQ8: The backrest
+SQ9: A wheel (caster)

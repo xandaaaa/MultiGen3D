@@ -3,3 +3,4 @@ SQ0: Left leg of the bench
 SQ1: Left rim of the bench
 SQ2: Right leg of the bench
 SQ3: Left rim of the bench
+SQ4: Seat of the bench

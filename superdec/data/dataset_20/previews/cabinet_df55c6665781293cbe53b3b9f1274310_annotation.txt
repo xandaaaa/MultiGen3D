@@ -1,0 +1,3 @@
+Global description: A tall, rectangular storage cabinet or locker
+SQ0: The main body/storage compartment
+SQ1: The top panel or lid

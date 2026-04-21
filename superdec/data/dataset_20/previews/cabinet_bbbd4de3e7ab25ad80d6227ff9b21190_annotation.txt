@@ -1,0 +1,6 @@
+Global description: A tall, slender storage cabinet or locker.
+SQ0: The left side panel
+SQ1: The front panel (representing the door(s)/drawer(s))
+SQ2: The right side panel
+SQ3: The top panel (lid/roof of the cabinet)
+SQ4: The back panel of the cabinet

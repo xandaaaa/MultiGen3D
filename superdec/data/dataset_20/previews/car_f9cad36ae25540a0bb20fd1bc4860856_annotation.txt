@@ -1,0 +1,7 @@
+Global description: A four-door sedan
+SQ0: Rear-left wheel
+SQ1: Front-left wheel
+SQ2: The hood and front engine compartment
+SQ3: Front-right wheel
+SQ4: Rear-right wheel
+SQ5: The main cabin (roof and passenger compartment)

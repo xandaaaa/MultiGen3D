@@ -1,0 +1,11 @@
+Global description: A classic desk lamp featuring a large cone-shaped (empire) shade supported by a multi-leg stand on a flat base
+SQ0: The base of the lamp
+SQ1: A segment of the cone-shaped shade
+SQ2: One of the stand legs
+SQ3: A segment of the cone-shaped shade
+SQ4: One of the stand legs
+SQ5: One of the stand legs
+SQ6: The central housing (socket area) where the bulb is placed
+SQ7: A segment of the cone-shaped shade
+SQ8: A segment of the cone-shaped shade
+SQ9: One of the stand legs

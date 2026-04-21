@@ -1,0 +1,4 @@
+Global description: A sailboat
+SQ0: The hull
+SQ1: The jib or headsail
+SQ2: The mainsail

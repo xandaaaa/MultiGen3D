@@ -1,0 +1,11 @@
+Global description: A pickup truck with a standard cabin and an open cargo bed
+SQ0: The cabin (passenger compartment)
+SQ1: The left side wall (fender) of the truck bed
+SQ2: Front-left wheel
+SQ3: The hood and front engine compartment
+SQ4: Front-right wheel
+SQ5: The right side wall (fender) of the truck bed
+SQ6: The tailgate
+SQ7: Rear-right wheel
+SQ8: Rear-left wheel
+SQ9: Floor panel of the truck bed

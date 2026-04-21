@@ -1,0 +1,5 @@
+Global description: A long-range bolt-action rifle
+SQ0: The main body of the rifle
+SQ1: The front stand (bipod)
+SQ2: The buttstock
+SQ3: The shoulder rest (buttpad or stock extension) attached to the very rear of the buttstock

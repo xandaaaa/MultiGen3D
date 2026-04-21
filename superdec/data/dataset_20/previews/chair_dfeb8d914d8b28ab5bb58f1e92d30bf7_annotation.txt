@@ -1,0 +1,9 @@
+Global description: A rounded chair with armrests and four splayed legs
+SQ0: Rear-left leg
+SQ1: Front-left leg
+SQ2: The left armrest/side support
+SQ3: Front-right leg
+SQ4: Rear-right leg
+SQ5: The seat
+SQ6: The right armrest/side support
+SQ7: The backrest

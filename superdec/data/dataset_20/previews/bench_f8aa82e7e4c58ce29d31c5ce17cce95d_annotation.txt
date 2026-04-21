@@ -1,0 +1,10 @@
+Global description: A park or garden bench featuring a seat, a high backrest, armrests, and a four-leg support structure
+SQ0: The bottom part of the left leg 
+SQ1: The left armrest 
+SQ2: The middle armrest 
+SQ3: The seat
+SQ4: The right armrest 
+SQ5: The backrest 
+SQ6: The upper part of the left leg 
+SQ7: The bottom part of the right leg 
+SQ8: The upper part of the right leg 

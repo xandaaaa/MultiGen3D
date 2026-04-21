@@ -1,0 +1,9 @@
+Global description: A multi-seater couch or sofa
+SQ0: The left armrest/side support
+SQ1: The left front leg
+SQ2: The front support panel
+SQ3: The right front leg
+SQ4: The back support panel
+SQ5: The seat cushion
+SQ6: The right armrest/side support
+SQ7: The backrest
