@@ -1,0 +1,24 @@
+Style 1 - Easy / Clean Everyday
+Global description: A watercraft with clean marine finishes, painted hull surfaces, and restrained navy detailing
+SQ0: The cabin or superstructure situated on top of the deck finished in smooth white marine composite with navy trim
+SQ1: The hull finished in smooth white marine composite with a deep navy lower band
+
+Style 2 - Moderate / Material Contrast
+Global description: A watercraft with a classic nautical palette of polished wood, cream surfaces, and brass highlights
+SQ0: The cabin or superstructure situated on top of the deck finished in cream enamel with polished teak accents
+SQ1: The hull finished in cream enamel with polished teak and brass detailing
+
+Style 3 - Medium / Premium Custom
+Global description: A watercraft as a premium racing craft with carbon composite, metallic paint, and crisp accent lines
+SQ0: The cabin or superstructure situated on top of the deck finished in graphite composite with metallic silver framing
+SQ1: The hull finished in graphite composite with metallic silver reinforcement lines
+
+Style 4 - Hard / Ornate Statement
+Global description: A watercraft as a ceremonial showpiece with mahogany, hand-brushed metal, and fine pinstriping
+SQ0: The cabin or superstructure situated on top of the deck finished in lacquered mahogany with brushed brass trim
+SQ1: The hull finished in lacquered mahogany with hand-brushed bronze detailing and fine striping
+
+Style 5 - Extreme / Futuristic Concept
+Global description: A watercraft as a futuristic vessel with iridescent composite surfaces, translucent sails or panels, and glowing cyan channels
+SQ0: The cabin or superstructure situated on top of the deck finished in iridescent composite with smoked translucent windows and cyan edge lighting
+SQ1: The hull finished in iridescent composite with smoked translucent inserts and glowing cyan channels

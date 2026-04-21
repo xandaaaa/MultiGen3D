@@ -1,0 +1,24 @@
+Style 1 - Easy / Clean Everyday
+Global description: A fighter jet in matte white painted aluminum with navy trim and understated airline graphics
+SQ0: The fuselage of the plane, including the main body and the tail section finished in matte white painted aluminum with a navy tail fin accent
+SQ1: The wings of the plane, representing both the left and right wings as a single component finished in matte white painted aluminum with a thin navy stripe near the tip
+
+Style 2 - Moderate / Material Contrast
+Global description: A fighter jet in polished aluminum with cream panels, teal striping, and a vintage aviation livery
+SQ0: The fuselage of the plane, including the main body and the tail section finished in polished aluminum with cream panels and a teal tail flash
+SQ1: The wings of the plane, representing both the left and right wings as a single component finished in polished aluminum with cream upper panels and teal tip markings
+
+Style 3 - Medium / Premium Custom
+Global description: A fighter jet in graphite carbon composite with metallic silver sections and electric blue accent lines
+SQ0: The fuselage of the plane, including the main body and the tail section finished in graphite carbon composite with a metallic silver rudder and electric blue trim
+SQ1: The wings of the plane, representing both the left and right wings as a single component finished in graphite carbon composite with metallic silver leading edges and electric blue trim
+
+Style 4 - Hard / Ornate Statement
+Global description: A fighter jet in hand-brushed copper alloy, deep navy enamel, and fine ivory pinstriping
+SQ0: The fuselage of the plane, including the main body and the tail section finished in brushed copper alloy with a deep navy fin and ivory striping
+SQ1: The wings of the plane, representing both the left and right wings as a single component finished in brushed copper alloy with deep navy enamel undersides and ivory pinstriping
+
+Style 5 - Extreme / Futuristic Concept
+Global description: A fighter jet in iridescent ceramic-metal composite with smoked translucent panels and luminous cyan edge lighting
+SQ0: The fuselage of the plane, including the main body and the tail section finished in iridescent composite with a translucent fin edge and luminous cyan highlights
+SQ1: The wings of the plane, representing both the left and right wings as a single component finished in iridescent composite with translucent trailing edges and glowing cyan navigation lines

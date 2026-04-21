@@ -1,0 +1,44 @@
+Style 1 - Easy / Clean Everyday
+Global description: A four-door sedan with clean painted body panels, satin metallic trim, and standard black tires
+SQ0: Rear-left wheel with a black rubber tire and a satin silver wheel hub
+SQ1: Front-left wheel with a black rubber tire and a satin silver wheel hub
+SQ2: The hood and front engine compartment finished in smooth factory paint with a restrained satin metallic sheen
+SQ3: Front-right wheel with a black rubber tire and a satin silver wheel hub
+SQ4: Rear-right wheel with a black rubber tire and a satin silver wheel hub
+SQ5: The main cabin (roof and passenger compartment) finished in smooth factory paint with satin metallic trim
+
+Style 2 - Moderate / Material Contrast
+Global description: A four-door sedan with a vintage two-tone palette, polished metal accents, and warm heritage detailing
+SQ0: Rear-left wheel with a blackwall tire and a polished chrome hub
+SQ1: Front-left wheel with a blackwall tire and a polished chrome hub
+SQ2: The hood and front engine compartment finished in cream-over-color two-tone paint with polished trim
+SQ3: Front-right wheel with a blackwall tire and a polished chrome hub
+SQ4: Rear-right wheel with a blackwall tire and a polished chrome hub
+SQ5: The main cabin (roof and passenger compartment) finished in a two-tone vintage palette with polished chrome accents
+
+Style 3 - Medium / Premium Custom
+Global description: A four-door sedan as a premium performance build with carbon fiber surfaces, metallic paint, and sharp accent lines
+SQ0: Rear-left wheel with a low-profile black tire and a forged graphite performance rim
+SQ1: Front-left wheel with a low-profile black tire and a forged graphite performance rim
+SQ2: The hood and front engine compartment finished in exposed carbon fiber under metallic clearcoat with electric blue accents
+SQ3: Front-right wheel with a low-profile black tire and a forged graphite performance rim
+SQ4: Rear-right wheel with a low-profile black tire and a forged graphite performance rim
+SQ5: The main cabin (roof and passenger compartment) finished in metallic paint over carbon fiber with sharp electric blue detailing
+
+Style 4 - Hard / Ornate Statement
+Global description: A four-door sedan as a ceremonial coachbuilt vehicle with hand-brushed metal, deep enamel color, and fine pinstriping
+SQ0: Rear-left wheel with a black tire and a brushed bronze wheel with ivory pinstriped detailing
+SQ1: Front-left wheel with a black tire and a brushed bronze wheel with ivory pinstriped detailing
+SQ2: The hood and front engine compartment finished in hand-brushed copper alloy with deep enamel striping
+SQ3: Front-right wheel with a black tire and a brushed bronze wheel with ivory pinstriped detailing
+SQ4: Rear-right wheel with a black tire and a brushed bronze wheel with ivory pinstriped detailing
+SQ5: The main cabin (roof and passenger compartment) finished in hand-brushed copper alloy with deep enamel panels and ivory pinstriping
+
+Style 5 - Extreme / Futuristic Concept
+Global description: A four-door sedan as a futuristic concept vehicle with iridescent composite panels, smoked translucent inserts, and glowing light channels
+SQ0: Rear-left wheel with a black adaptive tire and an iridescent aero rim with a faint cyan glow ring
+SQ1: Front-left wheel with a black adaptive tire and an iridescent aero rim with a faint cyan glow ring
+SQ2: The hood and front engine compartment finished in iridescent composite with smoked translucent vents and glowing seam lines
+SQ3: Front-right wheel with a black adaptive tire and an iridescent aero rim with a faint cyan glow ring
+SQ4: Rear-right wheel with a black adaptive tire and an iridescent aero rim with a faint cyan glow ring
+SQ5: The main cabin (roof and passenger compartment) finished in iridescent composite with smoked translucent inserts and glowing cyan seams

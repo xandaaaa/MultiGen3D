@@ -1,0 +1,39 @@
+Style 1 - Easy / Clean Everyday
+Global description: A sectional, L-shaped sofa or couch with a main seating area and an extended chaise section styled with oatmeal upholstery, pale wood accents, and a calm neutral palette
+SQ0: The extended seat cushion (the chaise lounge section forming the 'L') upholstered in soft oatmeal fabric
+SQ1: The left armrest upholstered in soft oatmeal fabric
+SQ2: The main seat cushion (the longer section of the sofa) upholstered in soft oatmeal fabric
+SQ3: The right armrest upholstered in soft oatmeal fabric
+SQ4: The backrest upholstered in soft oatmeal fabric
+
+Style 2 - Moderate / Material Contrast
+Global description: A sectional, L-shaped sofa or couch with a main seating area and an extended chaise section styled with saddle leather, walnut structure, and blackened metal support details
+SQ0: The extended seat cushion (the chaise lounge section forming the 'L') upholstered in supple saddle leather
+SQ1: The left armrest upholstered in supple saddle leather
+SQ2: The main seat cushion (the longer section of the sofa) upholstered in supple saddle leather
+SQ3: The right armrest upholstered in supple saddle leather
+SQ4: The backrest upholstered in supple saddle leather
+
+Style 3 - Medium / Premium Custom
+Global description: A sectional, L-shaped sofa or couch with a main seating area and an extended chaise section styled as a premium designer sofa with jewel-toned velvet, dark walnut, and brushed brass accents
+SQ0: The extended seat cushion (the chaise lounge section forming the 'L') upholstered in deep emerald velvet with tailored seams
+SQ1: The left armrest upholstered in deep emerald velvet with tailored seams
+SQ2: The main seat cushion (the longer section of the sofa) upholstered in deep emerald velvet with tailored seams
+SQ3: The right armrest upholstered in deep emerald velvet with tailored seams
+SQ4: The backrest upholstered in deep emerald velvet with tailored seams
+
+Style 4 - Hard / Ornate Statement
+Global description: A sectional, L-shaped sofa or couch with a main seating area and an extended chaise section styled as an ornate sofa with cream boucle, lacquered dark framing, and brass inlay
+SQ0: The extended seat cushion (the chaise lounge section forming the 'L') upholstered in cream boucle with brass-edged channeling
+SQ1: The left armrest upholstered in cream boucle with brass-edged channeling
+SQ2: The main seat cushion (the longer section of the sofa) upholstered in cream boucle with brass-edged channeling
+SQ3: The right armrest upholstered in cream boucle with brass-edged channeling
+SQ4: The backrest upholstered in cream boucle with brass-edged channeling
+
+Style 5 - Extreme / Futuristic Concept
+Global description: A sectional, L-shaped sofa or couch with a main seating area and an extended chaise section styled as a futuristic sofa with iridescent performance fabric, satin titanium, and subtle cyan seam lighting
+SQ0: The extended seat cushion (the chaise lounge section forming the 'L') upholstered in iridescent performance fabric with softly glowing seam lines
+SQ1: The left armrest upholstered in iridescent performance fabric with softly glowing seam lines
+SQ2: The main seat cushion (the longer section of the sofa) upholstered in iridescent performance fabric with softly glowing seam lines
+SQ3: The right armrest upholstered in iridescent performance fabric with softly glowing seam lines
+SQ4: The backrest upholstered in iridescent performance fabric with softly glowing seam lines

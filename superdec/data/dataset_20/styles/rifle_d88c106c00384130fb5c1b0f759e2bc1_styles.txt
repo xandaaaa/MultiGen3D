@@ -1,0 +1,29 @@
+Style 1 - Easy / Clean Everyday
+Global description: A semi-automatic hand pistol rendered with a straightforward utilitarian finish in matte black steel and textured polymer
+SQ0: The trigger guard and lower frame area just in front of the grip finished in textured charcoal polymer
+SQ1: The grip (handle) finished in textured charcoal polymer
+SQ2: The slide and barrel assembly (the top part of the firearm) finished in matte black parkerized steel
+
+Style 2 - Moderate / Material Contrast
+Global description: A semi-automatic hand pistol rendered with classic materials including blued steel and oiled walnut
+SQ0: The trigger guard and lower frame area just in front of the grip finished in oiled walnut with a smooth hand-worn sheen
+SQ1: The grip (handle) finished in oiled walnut with a smooth hand-worn sheen
+SQ2: The slide and barrel assembly (the top part of the firearm) finished in blued steel with subtle polished edges
+
+Style 3 - Medium / Premium Custom
+Global description: A semi-automatic hand pistol rendered as a premium custom build with brushed stainless steel, carbon fiber, and precision-machined accents
+SQ0: The trigger guard and lower frame area just in front of the grip finished in layered carbon fiber with machined metal accents
+SQ1: The grip (handle) finished in layered carbon fiber with machined metal accents
+SQ2: The slide and barrel assembly (the top part of the firearm) finished in brushed stainless steel with carbon fiber accents
+
+Style 4 - Hard / Ornate Statement
+Global description: A semi-automatic hand pistol rendered as a ceremonial display piece with engraved steel, dark rosewood, and brass filigree
+SQ0: The trigger guard and lower frame area just in front of the grip finished in dark rosewood with engraved brass edge detailing
+SQ1: The grip (handle) finished in dark rosewood with engraved brass edge detailing
+SQ2: The slide and barrel assembly (the top part of the firearm) finished in engraved steel with brass filigree details
+
+Style 5 - Extreme / Futuristic Concept
+Global description: A semi-automatic hand pistol rendered as a futuristic concept prop with iridescent alloy plating, translucent grips, and glowing energy channels
+SQ0: The trigger guard and lower frame area just in front of the grip finished in smoked translucent composite with faintly glowing internal channels
+SQ1: The grip (handle) finished in smoked translucent composite with faintly glowing internal channels
+SQ2: The slide and barrel assembly (the top part of the firearm) finished in iridescent alloy plating with narrow glowing energy channels

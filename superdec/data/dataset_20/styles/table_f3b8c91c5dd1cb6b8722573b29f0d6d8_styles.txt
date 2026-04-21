@@ -1,0 +1,69 @@
+Style 1 - Easy / Clean Everyday
+Global description: A rectangular table featuring a main surface, four legs, reinforcing lower crossbars styled as a clean everyday table in pale wood and matte white supports
+SQ0: A horizontal lower crossbar (stretcher) connecting the pairs of legs near the base for added stability finished in pale ash wood with a satin seal
+SQ1: A vertical supporting leg at a corner finished in pale ash wood with a satin seal
+SQ2: An apron (or structural rim) running horizontally just beneath the edge of the tabletop to support the surface finished in pale ash wood with a satin seal
+SQ3: An apron (or structural rim) running horizontally just beneath the edge of the tabletop to support the surface finished in pale ash wood with a satin seal
+SQ4: A vertical supporting leg at a corner finished in pale ash wood with a satin seal
+SQ5: A horizontal lower crossbar (stretcher) connecting the pairs of legs near the base for added stability finished in pale ash wood with a satin seal
+SQ6: A vertical supporting leg at a corner finished in pale ash wood with a satin seal
+SQ7: An apron (or structural rim) running horizontally just beneath the edge of the tabletop to support the surface finished in pale ash wood with a satin seal
+SQ8: The main flat tabletop surface finished in pale ash wood with a smooth satin tabletop finish
+SQ9: A vertical supporting leg at a corner finished in pale ash wood with a satin seal
+SQ10: An apron (or structural rim) running horizontally just beneath the edge of the tabletop to support the surface finished in pale ash wood with a satin seal
+
+Style 2 - Moderate / Material Contrast
+Global description: A rectangular table featuring a main surface, four legs, reinforcing lower crossbars styled as a warm mixed-material table in walnut and blackened steel
+SQ0: A horizontal lower crossbar (stretcher) connecting the pairs of legs near the base for added stability finished in walnut with blackened steel reinforcement
+SQ1: A vertical supporting leg at a corner finished in walnut with blackened steel reinforcement
+SQ2: An apron (or structural rim) running horizontally just beneath the edge of the tabletop to support the surface finished in walnut with blackened steel reinforcement
+SQ3: An apron (or structural rim) running horizontally just beneath the edge of the tabletop to support the surface finished in walnut with blackened steel reinforcement
+SQ4: A vertical supporting leg at a corner finished in walnut with blackened steel reinforcement
+SQ5: A horizontal lower crossbar (stretcher) connecting the pairs of legs near the base for added stability finished in walnut with blackened steel reinforcement
+SQ6: A vertical supporting leg at a corner finished in walnut with blackened steel reinforcement
+SQ7: An apron (or structural rim) running horizontally just beneath the edge of the tabletop to support the surface finished in walnut with blackened steel reinforcement
+SQ8: The main flat tabletop surface finished in richly grained walnut with a hand-rubbed oil sheen
+SQ9: A vertical supporting leg at a corner finished in walnut with blackened steel reinforcement
+SQ10: An apron (or structural rim) running horizontally just beneath the edge of the tabletop to support the surface finished in walnut with blackened steel reinforcement
+
+Style 3 - Medium / Premium Custom
+Global description: A rectangular table featuring a main surface, four legs, reinforcing lower crossbars styled as a premium table in dark walnut, stone-like surfaces, and brushed brass
+SQ0: A horizontal lower crossbar (stretcher) connecting the pairs of legs near the base for added stability finished in dark walnut with brushed brass caps
+SQ1: A vertical supporting leg at a corner finished in dark walnut with brushed brass caps
+SQ2: An apron (or structural rim) running horizontally just beneath the edge of the tabletop to support the surface finished in dark walnut with brushed brass caps
+SQ3: An apron (or structural rim) running horizontally just beneath the edge of the tabletop to support the surface finished in dark walnut with brushed brass caps
+SQ4: A vertical supporting leg at a corner finished in dark walnut with brushed brass caps
+SQ5: A horizontal lower crossbar (stretcher) connecting the pairs of legs near the base for added stability finished in dark walnut with brushed brass caps
+SQ6: A vertical supporting leg at a corner finished in dark walnut with brushed brass caps
+SQ7: An apron (or structural rim) running horizontally just beneath the edge of the tabletop to support the surface finished in dark walnut with brushed brass caps
+SQ8: The main flat tabletop surface finished in dark walnut with a polished stone-like top surface
+SQ9: A vertical supporting leg at a corner finished in dark walnut with brushed brass caps
+SQ10: An apron (or structural rim) running horizontally just beneath the edge of the tabletop to support the surface finished in dark walnut with brushed brass caps
+
+Style 4 - Hard / Ornate Statement
+Global description: A rectangular table featuring a main surface, four legs, reinforcing lower crossbars styled as an ornate table in ebony lacquer with brass striping and sculpted detailing
+SQ0: A horizontal lower crossbar (stretcher) connecting the pairs of legs near the base for added stability finished in lacquered ebony with brass inlay
+SQ1: A vertical supporting leg at a corner finished in lacquered ebony with brass inlay
+SQ2: An apron (or structural rim) running horizontally just beneath the edge of the tabletop to support the surface finished in lacquered ebony with brass inlay
+SQ3: An apron (or structural rim) running horizontally just beneath the edge of the tabletop to support the surface finished in lacquered ebony with brass inlay
+SQ4: A vertical supporting leg at a corner finished in lacquered ebony with brass inlay
+SQ5: A horizontal lower crossbar (stretcher) connecting the pairs of legs near the base for added stability finished in lacquered ebony with brass inlay
+SQ6: A vertical supporting leg at a corner finished in lacquered ebony with brass inlay
+SQ7: An apron (or structural rim) running horizontally just beneath the edge of the tabletop to support the surface finished in lacquered ebony with brass inlay
+SQ8: The main flat tabletop surface finished in glossy ebony lacquer with inset brass bands
+SQ9: A vertical supporting leg at a corner finished in lacquered ebony with brass inlay
+SQ10: An apron (or structural rim) running horizontally just beneath the edge of the tabletop to support the surface finished in lacquered ebony with brass inlay
+
+Style 5 - Extreme / Futuristic Concept
+Global description: A rectangular table featuring a main surface, four legs, reinforcing lower crossbars styled as a futuristic table in translucent resin, satin titanium, and glowing edge lines
+SQ0: A horizontal lower crossbar (stretcher) connecting the pairs of legs near the base for added stability finished in satin titanium with translucent footing caps
+SQ1: A vertical supporting leg at a corner finished in satin titanium with translucent footing caps
+SQ2: An apron (or structural rim) running horizontally just beneath the edge of the tabletop to support the surface finished in satin titanium with translucent footing caps
+SQ3: An apron (or structural rim) running horizontally just beneath the edge of the tabletop to support the surface finished in satin titanium with translucent footing caps
+SQ4: A vertical supporting leg at a corner finished in satin titanium with translucent footing caps
+SQ5: A horizontal lower crossbar (stretcher) connecting the pairs of legs near the base for added stability finished in satin titanium with translucent footing caps
+SQ6: A vertical supporting leg at a corner finished in satin titanium with translucent footing caps
+SQ7: An apron (or structural rim) running horizontally just beneath the edge of the tabletop to support the surface finished in satin titanium with translucent footing caps
+SQ8: The main flat tabletop surface finished in translucent resin over a satin titanium frame with glowing edge lines
+SQ9: A vertical supporting leg at a corner finished in satin titanium with translucent footing caps
+SQ10: An apron (or structural rim) running horizontally just beneath the edge of the tabletop to support the surface finished in satin titanium with translucent footing caps

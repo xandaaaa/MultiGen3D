@@ -1,0 +1,64 @@
+Style 1 - Easy / Clean Everyday
+Global description: A pickup truck with a standard cabin and an open cargo bed with clean painted body panels, satin metallic trim, and standard black tires
+SQ0: The cabin (passenger compartment) finished in smooth factory paint with satin metallic trim
+SQ1: The left side wall (fender) of the truck bed finished in durable painted steel with clean satin trim
+SQ2: Front-left wheel with a black rubber tire and a satin silver wheel hub
+SQ3: The hood and front engine compartment finished in smooth factory paint with a restrained satin metallic sheen
+SQ4: Front-right wheel with a black rubber tire and a satin silver wheel hub
+SQ5: The right side wall (fender) of the truck bed finished in durable painted steel with clean satin trim
+SQ6: The tailgate finished in durable painted steel with clean satin trim
+SQ7: Rear-right wheel with a black rubber tire and a satin silver wheel hub
+SQ8: Rear-left wheel with a black rubber tire and a satin silver wheel hub
+SQ9: Floor panel of the truck bed finished in durable painted steel with clean satin trim
+
+Style 2 - Moderate / Material Contrast
+Global description: A pickup truck with a standard cabin and an open cargo bed with a vintage two-tone palette, polished metal accents, and warm heritage detailing
+SQ0: The cabin (passenger compartment) finished in a two-tone vintage palette with polished chrome accents
+SQ1: The left side wall (fender) of the truck bed finished in polished metal with cream accents and chrome edging
+SQ2: Front-left wheel with a blackwall tire and a polished chrome hub
+SQ3: The hood and front engine compartment finished in cream-over-color two-tone paint with polished trim
+SQ4: Front-right wheel with a blackwall tire and a polished chrome hub
+SQ5: The right side wall (fender) of the truck bed finished in polished metal with cream accents and chrome edging
+SQ6: The tailgate finished in polished metal with cream accents and chrome edging
+SQ7: Rear-right wheel with a blackwall tire and a polished chrome hub
+SQ8: Rear-left wheel with a blackwall tire and a polished chrome hub
+SQ9: Floor panel of the truck bed finished in polished metal with cream accents and chrome edging
+
+Style 3 - Medium / Premium Custom
+Global description: A pickup truck with a standard cabin and an open cargo bed as a premium performance build with carbon fiber surfaces, metallic paint, and sharp accent lines
+SQ0: The cabin (passenger compartment) finished in metallic paint over carbon fiber with sharp electric blue detailing
+SQ1: The left side wall (fender) of the truck bed finished in graphite composite with metallic reinforcement ribs
+SQ2: Front-left wheel with a low-profile black tire and a forged graphite performance rim
+SQ3: The hood and front engine compartment finished in exposed carbon fiber under metallic clearcoat with electric blue accents
+SQ4: Front-right wheel with a low-profile black tire and a forged graphite performance rim
+SQ5: The right side wall (fender) of the truck bed finished in graphite composite with metallic reinforcement ribs
+SQ6: The tailgate finished in graphite composite with metallic reinforcement ribs
+SQ7: Rear-right wheel with a low-profile black tire and a forged graphite performance rim
+SQ8: Rear-left wheel with a low-profile black tire and a forged graphite performance rim
+SQ9: Floor panel of the truck bed finished in graphite composite with metallic reinforcement ribs
+
+Style 4 - Hard / Ornate Statement
+Global description: A pickup truck with a standard cabin and an open cargo bed as a ceremonial coachbuilt vehicle with hand-brushed metal, deep enamel color, and fine pinstriping
+SQ0: The cabin (passenger compartment) finished in hand-brushed copper alloy with deep enamel panels and ivory pinstriping
+SQ1: The left side wall (fender) of the truck bed finished in hand-brushed metal with deep enamel panels and fine pinstriping
+SQ2: Front-left wheel with a black tire and a brushed bronze wheel with ivory pinstriped detailing
+SQ3: The hood and front engine compartment finished in hand-brushed copper alloy with deep enamel striping
+SQ4: Front-right wheel with a black tire and a brushed bronze wheel with ivory pinstriped detailing
+SQ5: The right side wall (fender) of the truck bed finished in hand-brushed metal with deep enamel panels and fine pinstriping
+SQ6: The tailgate finished in hand-brushed metal with deep enamel panels and fine pinstriping
+SQ7: Rear-right wheel with a black tire and a brushed bronze wheel with ivory pinstriped detailing
+SQ8: Rear-left wheel with a black tire and a brushed bronze wheel with ivory pinstriped detailing
+SQ9: Floor panel of the truck bed finished in hand-brushed metal with deep enamel panels and fine pinstriping
+
+Style 5 - Extreme / Futuristic Concept
+Global description: A pickup truck with a standard cabin and an open cargo bed as a futuristic concept vehicle with iridescent composite panels, smoked translucent inserts, and glowing light channels
+SQ0: The cabin (passenger compartment) finished in iridescent composite with smoked translucent inserts and glowing cyan seams
+SQ1: The left side wall (fender) of the truck bed finished in iridescent composite with translucent structural accents and cyan light channels
+SQ2: Front-left wheel with a black adaptive tire and an iridescent aero rim with a faint cyan glow ring
+SQ3: The hood and front engine compartment finished in iridescent composite with smoked translucent vents and glowing seam lines
+SQ4: Front-right wheel with a black adaptive tire and an iridescent aero rim with a faint cyan glow ring
+SQ5: The right side wall (fender) of the truck bed finished in iridescent composite with translucent structural accents and cyan light channels
+SQ6: The tailgate finished in iridescent composite with translucent structural accents and cyan light channels
+SQ7: Rear-right wheel with a black adaptive tire and an iridescent aero rim with a faint cyan glow ring
+SQ8: Rear-left wheel with a black adaptive tire and an iridescent aero rim with a faint cyan glow ring
+SQ9: Floor panel of the truck bed finished in iridescent composite with translucent structural accents and cyan light channels

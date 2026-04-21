@@ -1,0 +1,29 @@
+Style 1 - Easy / Clean Everyday
+Global description: A sailboat with clean marine finishes, painted hull surfaces, and restrained navy detailing
+SQ0: The hull finished in smooth white marine composite with a deep navy lower band
+SQ1: The jib or headsail cut from crisp white sailcloth with a navy edge band
+SQ2: The mainsail cut from crisp white sailcloth with a navy edge band
+
+Style 2 - Moderate / Material Contrast
+Global description: A sailboat with a classic nautical palette of polished wood, cream surfaces, and brass highlights
+SQ0: The hull finished in cream enamel with polished teak and brass detailing
+SQ1: The jib or headsail cut from cream sailcloth with brass-colored hardware detailing
+SQ2: The mainsail cut from cream sailcloth with brass-colored hardware detailing
+
+Style 3 - Medium / Premium Custom
+Global description: A sailboat as a premium racing craft with carbon composite, metallic paint, and crisp accent lines
+SQ0: The hull finished in graphite composite with metallic silver reinforcement lines
+SQ1: The jib or headsail cut from technical graphite racing fabric with silver seam tape
+SQ2: The mainsail cut from technical graphite racing fabric with silver seam tape
+
+Style 4 - Hard / Ornate Statement
+Global description: A sailboat as a ceremonial showpiece with mahogany, hand-brushed metal, and fine pinstriping
+SQ0: The hull finished in lacquered mahogany with hand-brushed bronze detailing and fine striping
+SQ1: The jib or headsail cut from ivory sailcloth with fine gold striping
+SQ2: The mainsail cut from ivory sailcloth with fine gold striping
+
+Style 5 - Extreme / Futuristic Concept
+Global description: A sailboat as a futuristic vessel with iridescent composite surfaces, translucent sails or panels, and glowing cyan channels
+SQ0: The hull finished in iridescent composite with smoked translucent inserts and glowing cyan channels
+SQ1: The jib or headsail formed from translucent membrane material with faint cyan glow lines
+SQ2: The mainsail formed from translucent membrane material with faint cyan glow lines

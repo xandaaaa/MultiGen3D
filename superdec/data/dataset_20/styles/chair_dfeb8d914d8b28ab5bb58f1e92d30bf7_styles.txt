@@ -1,0 +1,54 @@
+Style 1 - Easy / Clean Everyday
+Global description: A rounded chair with armrests and four splayed legs styled with clean everyday materials and a restrained neutral palette
+SQ0: Rear-left leg finished in matte white or charcoal powder-coated steel
+SQ1: Front-left leg finished in matte white or charcoal powder-coated steel
+SQ2: The left armrest/side support finished in pale ash wood with a smooth satin seal
+SQ3: Front-right leg finished in matte white or charcoal powder-coated steel
+SQ4: Rear-right leg finished in matte white or charcoal powder-coated steel
+SQ5: The seat upholstered in soft light gray woven fabric
+SQ6: The right armrest/side support finished in pale ash wood with a smooth satin seal
+SQ7: The backrest upholstered in soft light gray woven fabric
+
+Style 2 - Moderate / Material Contrast
+Global description: A rounded chair with armrests and four splayed legs styled with warm material contrast between walnut, black metal, and leather
+SQ0: Rear-left leg finished in blackened steel with walnut accents
+SQ1: Front-left leg finished in blackened steel with walnut accents
+SQ2: The left armrest/side support finished in walnut with a warm leather-wrapped top edge
+SQ3: Front-right leg finished in blackened steel with walnut accents
+SQ4: Rear-right leg finished in blackened steel with walnut accents
+SQ5: The seat upholstered in warm tan leather with subtle natural creasing
+SQ6: The right armrest/side support finished in walnut with a warm leather-wrapped top edge
+SQ7: The backrest upholstered in warm tan leather with subtle natural creasing
+
+Style 3 - Medium / Premium Custom
+Global description: A rounded chair with armrests and four splayed legs styled as a premium designer chair with jewel-tone upholstery and brushed brass details
+SQ0: Rear-left leg finished in satin black metal with brushed brass detailing
+SQ1: Front-left leg finished in satin black metal with brushed brass detailing
+SQ2: The left armrest/side support finished in dark walnut with brushed brass accents
+SQ3: Front-right leg finished in satin black metal with brushed brass detailing
+SQ4: Rear-right leg finished in satin black metal with brushed brass detailing
+SQ5: The seat upholstered in deep jewel-toned velvet with crisp tailored seams
+SQ6: The right armrest/side support finished in dark walnut with brushed brass accents
+SQ7: The backrest upholstered in deep jewel-toned velvet with crisp tailored seams
+
+Style 4 - Hard / Ornate Statement
+Global description: A rounded chair with armrests and four splayed legs styled as an ornate statement chair with lacquered dark wood, cream boucle, and brass inlay
+SQ0: Rear-left leg finished in bronze-toned metal with engraved edge lines
+SQ1: Front-left leg finished in bronze-toned metal with engraved edge lines
+SQ2: The left armrest/side support finished in lacquered ebony with brass inlay
+SQ3: Front-right leg finished in bronze-toned metal with engraved edge lines
+SQ4: Rear-right leg finished in bronze-toned metal with engraved edge lines
+SQ5: The seat upholstered in cream boucle with brass-edged trim and geometric channeling
+SQ6: The right armrest/side support finished in lacquered ebony with brass inlay
+SQ7: The backrest upholstered in cream boucle with brass-edged trim and geometric channeling
+
+Style 5 - Extreme / Futuristic Concept
+Global description: A rounded chair with armrests and four splayed legs styled as a futuristic chair with translucent structural parts, satin titanium, and subtle cyan glow accents
+SQ0: Rear-left leg finished in satin titanium with translucent structural highlights
+SQ1: Front-left leg finished in satin titanium with translucent structural highlights
+SQ2: The left armrest/side support finished in satin titanium with translucent acrylic caps
+SQ3: Front-right leg finished in satin titanium with translucent structural highlights
+SQ4: Rear-right leg finished in satin titanium with translucent structural highlights
+SQ5: The seat upholstered in iridescent performance fabric with softly glowing seam lines
+SQ6: The right armrest/side support finished in satin titanium with translucent acrylic caps
+SQ7: The backrest upholstered in iridescent performance fabric with softly glowing seam lines

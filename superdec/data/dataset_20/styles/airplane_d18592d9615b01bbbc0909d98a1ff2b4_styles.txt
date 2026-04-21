@@ -1,0 +1,34 @@
+Style 1 - Easy / Clean Everyday
+Global description: A standard commercial airliner in matte white painted aluminum with navy trim and understated airline graphics
+SQ0: Left wing of the plane finished in matte white painted aluminum with a thin navy stripe near the tip
+SQ1: Empennage of the plane finished in matte white painted aluminum with a navy tail fin accent
+SQ2: Right wing of the plane finished in matte white painted aluminum with a thin navy stripe near the tip
+SQ3: Fuselage of the plane finished in matte white painted aluminum with a soft silver belly and navy trim
+
+Style 2 - Moderate / Material Contrast
+Global description: A standard commercial airliner in polished aluminum with cream panels, teal striping, and a vintage aviation livery
+SQ0: Left wing of the plane finished in polished aluminum with cream upper panels and teal tip markings
+SQ1: Empennage of the plane finished in polished aluminum with cream panels and a teal tail flash
+SQ2: Right wing of the plane finished in polished aluminum with cream upper panels and teal tip markings
+SQ3: Fuselage of the plane finished in polished aluminum with cream upper panels, teal striping, and chrome-like highlights
+
+Style 3 - Medium / Premium Custom
+Global description: A standard commercial airliner in graphite carbon composite with metallic silver sections and electric blue accent lines
+SQ0: Left wing of the plane finished in graphite carbon composite with metallic silver leading edges and electric blue trim
+SQ1: Empennage of the plane finished in graphite carbon composite with a metallic silver rudder and electric blue trim
+SQ2: Right wing of the plane finished in graphite carbon composite with metallic silver leading edges and electric blue trim
+SQ3: Fuselage of the plane finished in graphite carbon composite with metallic silver paneling and electric blue accent lines
+
+Style 4 - Hard / Ornate Statement
+Global description: A standard commercial airliner in hand-brushed copper alloy, deep navy enamel, and fine ivory pinstriping
+SQ0: Left wing of the plane finished in brushed copper alloy with deep navy enamel undersides and ivory pinstriping
+SQ1: Empennage of the plane finished in brushed copper alloy with a deep navy fin and ivory striping
+SQ2: Right wing of the plane finished in brushed copper alloy with deep navy enamel undersides and ivory pinstriping
+SQ3: Fuselage of the plane finished in hand-brushed copper alloy with deep navy enamel panels and ivory pinstriping
+
+Style 5 - Extreme / Futuristic Concept
+Global description: A standard commercial airliner in iridescent ceramic-metal composite with smoked translucent panels and luminous cyan edge lighting
+SQ0: Left wing of the plane finished in iridescent composite with translucent trailing edges and glowing cyan navigation lines
+SQ1: Empennage of the plane finished in iridescent composite with a translucent fin edge and luminous cyan highlights
+SQ2: Right wing of the plane finished in iridescent composite with translucent trailing edges and glowing cyan navigation lines
+SQ3: Fuselage of the plane finished in iridescent ceramic-metal composite with smoked translucent inserts and glowing cyan channels

@@ -1,0 +1,59 @@
+Style 1 - Easy / Clean Everyday
+Global description: A park or garden bench featuring a seat, a high backrest, armrests, and a four-leg support structure styled like a simple Scandinavian outdoor bench in pale wood and matte white metal
+SQ0: The bottom part of the left leg finished in matte white powder-coated steel
+SQ1: The left armrest finished in pale ash wood with a satin outdoor seal
+SQ2: The middle armrest finished in pale ash wood with a satin outdoor seal
+SQ3: The seat finished in pale ash wood with a clean satin topcoat
+SQ4: The right armrest finished in pale ash wood with a satin outdoor seal
+SQ5: The backrest finished in pale ash slats with a clean satin topcoat
+SQ6: The upper part of the left leg finished in matte white powder-coated steel
+SQ7: The bottom part of the right leg finished in matte white powder-coated steel
+SQ8: The upper part of the right leg finished in matte white powder-coated steel
+
+Style 2 - Moderate / Material Contrast
+Global description: A park or garden bench featuring a seat, a high backrest, armrests, and a four-leg support structure styled like a warmly restored park bench in walnut, black iron, and weatherproof leather accents
+SQ0: The bottom part of the left leg finished in blackened iron with a lightly weathered seal
+SQ1: The left armrest finished in dark walnut with black iron brackets
+SQ2: The middle armrest finished in dark walnut with black iron brackets
+SQ3: The seat finished in walnut slats with a hand-rubbed oil finish
+SQ4: The right armrest finished in dark walnut with black iron brackets
+SQ5: The backrest finished in walnut slats with black iron framing
+SQ6: The upper part of the left leg finished in blackened iron with a lightly weathered seal
+SQ7: The bottom part of the right leg finished in blackened iron with a lightly weathered seal
+SQ8: The upper part of the right leg finished in blackened iron with a lightly weathered seal
+
+Style 3 - Medium / Premium Custom
+Global description: A park or garden bench featuring a seat, a high backrest, armrests, and a four-leg support structure styled like a premium designer bench in teak, brushed brass, and tailored outdoor upholstery
+SQ0: The bottom part of the left leg finished in brushed brass-finished steel
+SQ1: The left armrest finished in warm teak with brushed brass trim
+SQ2: The middle armrest finished in warm teak with brushed brass trim
+SQ3: The seat upholstered in weatherproof deep teal fabric over a teak base
+SQ4: The right armrest finished in warm teak with brushed brass trim
+SQ5: The backrest upholstered in weatherproof deep teal fabric over a teak backing
+SQ6: The upper part of the left leg finished in brushed brass-finished steel
+SQ7: The bottom part of the right leg finished in brushed brass-finished steel
+SQ8: The upper part of the right leg finished in brushed brass-finished steel
+
+Style 4 - Hard / Ornate Statement
+Global description: A park or garden bench featuring a seat, a high backrest, armrests, and a four-leg support structure styled like an ornate statement bench in lacquered mahogany, cast bronze, and geometric detailing
+SQ0: The bottom part of the left leg finished in cast bronze with engraved edges
+SQ1: The left armrest finished in lacquered mahogany with fine brass striping
+SQ2: The middle armrest finished in lacquered mahogany with fine brass striping
+SQ3: The seat finished in lacquered mahogany with brass edge bands
+SQ4: The right armrest finished in lacquered mahogany with fine brass striping
+SQ5: The backrest finished in lacquered mahogany with inset brass bands
+SQ6: The upper part of the left leg finished in cast bronze with engraved edges
+SQ7: The bottom part of the right leg finished in cast bronze with engraved edges
+SQ8: The upper part of the right leg finished in cast bronze with engraved edges
+
+Style 5 - Extreme / Futuristic Concept
+Global description: A park or garden bench featuring a seat, a high backrest, armrests, and a four-leg support structure styled like a futuristic public-space bench in translucent acrylic, satin titanium, and subtle cyan glow lines
+SQ0: The bottom part of the left leg finished in satin titanium with translucent footing caps
+SQ1: The left armrest finished in translucent acrylic over a satin titanium core
+SQ2: The middle armrest finished in translucent acrylic over a satin titanium core
+SQ3: The seat formed from translucent resin layered over a satin titanium frame
+SQ4: The right armrest finished in translucent acrylic over a satin titanium core
+SQ5: The backrest formed from translucent resin panels with softly glowing seams
+SQ6: The upper part of the left leg finished in satin titanium with translucent footing caps
+SQ7: The bottom part of the right leg finished in satin titanium with translucent footing caps
+SQ8: The upper part of the right leg finished in satin titanium with translucent footing caps

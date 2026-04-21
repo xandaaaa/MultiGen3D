@@ -1,0 +1,39 @@
+Style 1 - Easy / Clean Everyday
+Global description: A long, narrow rectangular bench, such as a park bench, consisting of a flat seating surface supported by two legs styled like a simple Scandinavian outdoor bench in pale wood and matte white metal
+SQ0: Left leg of the bench finished in matte white powder-coated steel
+SQ1: Left rim of the bench finished in pale ash wood with a satin outdoor seal
+SQ2: Right leg of the bench finished in matte white powder-coated steel
+SQ3: Left rim of the bench finished in pale ash wood with a satin outdoor seal
+SQ4: Seat of the bench finished in pale ash wood with a clean satin topcoat
+
+Style 2 - Moderate / Material Contrast
+Global description: A long, narrow rectangular bench, such as a park bench, consisting of a flat seating surface supported by two legs styled like a warmly restored park bench in walnut, black iron, and weatherproof leather accents
+SQ0: Left leg of the bench finished in blackened iron with a lightly weathered seal
+SQ1: Left rim of the bench finished in dark walnut with black iron brackets
+SQ2: Right leg of the bench finished in blackened iron with a lightly weathered seal
+SQ3: Left rim of the bench finished in dark walnut with black iron brackets
+SQ4: Seat of the bench finished in walnut slats with a hand-rubbed oil finish
+
+Style 3 - Medium / Premium Custom
+Global description: A long, narrow rectangular bench, such as a park bench, consisting of a flat seating surface supported by two legs styled like a premium designer bench in teak, brushed brass, and tailored outdoor upholstery
+SQ0: Left leg of the bench finished in brushed brass-finished steel
+SQ1: Left rim of the bench finished in warm teak with brushed brass trim
+SQ2: Right leg of the bench finished in brushed brass-finished steel
+SQ3: Left rim of the bench finished in warm teak with brushed brass trim
+SQ4: Seat of the bench upholstered in weatherproof deep teal fabric over a teak base
+
+Style 4 - Hard / Ornate Statement
+Global description: A long, narrow rectangular bench, such as a park bench, consisting of a flat seating surface supported by two legs styled like an ornate statement bench in lacquered mahogany, cast bronze, and geometric detailing
+SQ0: Left leg of the bench finished in cast bronze with engraved edges
+SQ1: Left rim of the bench finished in lacquered mahogany with fine brass striping
+SQ2: Right leg of the bench finished in cast bronze with engraved edges
+SQ3: Left rim of the bench finished in lacquered mahogany with fine brass striping
+SQ4: Seat of the bench finished in lacquered mahogany with brass edge bands
+
+Style 5 - Extreme / Futuristic Concept
+Global description: A long, narrow rectangular bench, such as a park bench, consisting of a flat seating surface supported by two legs styled like a futuristic public-space bench in translucent acrylic, satin titanium, and subtle cyan glow lines
+SQ0: Left leg of the bench finished in satin titanium with translucent footing caps
+SQ1: Left rim of the bench finished in translucent acrylic over a satin titanium core
+SQ2: Right leg of the bench finished in satin titanium with translucent footing caps
+SQ3: Left rim of the bench finished in translucent acrylic over a satin titanium core
+SQ4: Seat of the bench formed from translucent resin layered over a satin titanium frame

@@ -1,0 +1,44 @@
+Style 1 - Easy / Clean Everyday
+Global description: A ping-pong table featuring a flat rectangular playing surface, four supporting legs, and a central dividing net styled like a clean tournament table with classic color blocking and simple metal supports
+SQ0: One of the supporting legs finished in matte white powder-coated steel
+SQ1: One of the supporting legs finished in matte white powder-coated steel
+SQ2: The net spanning across the middle of the table made from crisp white woven mesh with a matte black top band
+SQ3: One of the supporting legs finished in matte white powder-coated steel
+SQ4: One of the supporting legs finished in matte white powder-coated steel
+SQ5: The main playing surface (tabletop) finished in classic tournament green laminate with thin white boundary lines
+
+Style 2 - Moderate / Material Contrast
+Global description: A ping-pong table featuring a flat rectangular playing surface, four supporting legs, and a central dividing net styled like a premium recreation table with rich color contrast, chrome accents, and tailored detailing
+SQ0: One of the supporting legs finished in blackened steel with chrome collars
+SQ1: One of the supporting legs finished in blackened steel with chrome collars
+SQ2: The net spanning across the middle of the table made from taut cream mesh with polished chrome posts
+SQ3: One of the supporting legs finished in blackened steel with chrome collars
+SQ4: One of the supporting legs finished in blackened steel with chrome collars
+SQ5: The main playing surface (tabletop) finished in deep blue laminate with cream edge trim and chrome accents
+
+Style 3 - Medium / Premium Custom
+Global description: A ping-pong table featuring a flat rectangular playing surface, four supporting legs, and a central dividing net styled like a high-end performance table with carbon fiber accents and metallic trim
+SQ0: One of the supporting legs finished in graphite metal with brushed aluminum accents
+SQ1: One of the supporting legs finished in graphite metal with brushed aluminum accents
+SQ2: The net spanning across the middle of the table made from dark technical mesh with brushed metal supports
+SQ3: One of the supporting legs finished in graphite metal with brushed aluminum accents
+SQ4: One of the supporting legs finished in graphite metal with brushed aluminum accents
+SQ5: The main playing surface (tabletop) finished in graphite composite with metallic silver edge lines
+
+Style 4 - Hard / Ornate Statement
+Global description: A ping-pong table featuring a flat rectangular playing surface, four supporting legs, and a central dividing net styled like an ornate showpiece game table with glossy lacquer, brass striping, and sculpted supports
+SQ0: One of the supporting legs finished in bronze-toned metal with fine brass striping
+SQ1: One of the supporting legs finished in bronze-toned metal with fine brass striping
+SQ2: The net spanning across the middle of the table made from ivory mesh with brass-capped supports and fine striping
+SQ3: One of the supporting legs finished in bronze-toned metal with fine brass striping
+SQ4: One of the supporting legs finished in bronze-toned metal with fine brass striping
+SQ5: The main playing surface (tabletop) finished in glossy midnight lacquer with brass striping
+
+Style 5 - Extreme / Futuristic Concept
+Global description: A ping-pong table featuring a flat rectangular playing surface, four supporting legs, and a central dividing net styled like a futuristic concept game table with translucent surfaces, satin titanium, and cyan edge lighting
+SQ0: One of the supporting legs finished in satin titanium with translucent footing caps
+SQ1: One of the supporting legs finished in satin titanium with translucent footing caps
+SQ2: The net spanning across the middle of the table made from translucent mesh with a softly glowing cyan top band
+SQ3: One of the supporting legs finished in satin titanium with translucent footing caps
+SQ4: One of the supporting legs finished in satin titanium with translucent footing caps
+SQ5: The main playing surface (tabletop) finished in translucent resin with glowing cyan playfield lines

@@ -1,0 +1,64 @@
+Style 1 - Easy / Clean Everyday
+Global description: A classic desk lamp featuring a large cone-shaped (empire) shade supported by a multi-leg stand on a flat base styled with matte enamel metal and a clean neutral shade
+SQ0: The base of the lamp finished in matte white enamel steel
+SQ1: A segment of the cone-shaped shade finished in matte white enamel with a pale gray inner lining
+SQ2: One of the stand legs finished in matte white enamel steel
+SQ3: A segment of the cone-shaped shade finished in matte white enamel with a pale gray inner lining
+SQ4: One of the stand legs finished in matte white enamel steel
+SQ5: One of the stand legs finished in matte white enamel steel
+SQ6: The central housing (socket area) where the bulb is placed finished in matte white enamel steel
+SQ7: A segment of the cone-shaped shade finished in matte white enamel with a pale gray inner lining
+SQ8: A segment of the cone-shaped shade finished in matte white enamel with a pale gray inner lining
+SQ9: One of the stand legs finished in matte white enamel steel
+
+Style 2 - Moderate / Material Contrast
+Global description: A classic desk lamp featuring a large cone-shaped (empire) shade supported by a multi-leg stand on a flat base styled with brushed brass, olive enamel, and warm linen
+SQ0: The base of the lamp finished in brushed brass with olive enamel accents
+SQ1: A segment of the cone-shaped shade finished in olive enamel with a warm cream linen interior
+SQ2: One of the stand legs finished in brushed brass with olive enamel accents
+SQ3: A segment of the cone-shaped shade finished in olive enamel with a warm cream linen interior
+SQ4: One of the stand legs finished in brushed brass with olive enamel accents
+SQ5: One of the stand legs finished in brushed brass with olive enamel accents
+SQ6: The central housing (socket area) where the bulb is placed finished in brushed brass with olive enamel accents
+SQ7: A segment of the cone-shaped shade finished in olive enamel with a warm cream linen interior
+SQ8: A segment of the cone-shaped shade finished in olive enamel with a warm cream linen interior
+SQ9: One of the stand legs finished in brushed brass with olive enamel accents
+
+Style 3 - Medium / Premium Custom
+Global description: A classic desk lamp featuring a large cone-shaped (empire) shade supported by a multi-leg stand on a flat base styled as a boutique designer lamp with smoked glass, bronze, and midnight lacquer
+SQ0: The base of the lamp finished in bronze with smoked glass or lacquered inserts
+SQ1: A segment of the cone-shaped shade finished in midnight blue lacquer with smoked glass edging
+SQ2: One of the stand legs finished in bronze with midnight lacquer accents
+SQ3: A segment of the cone-shaped shade finished in midnight blue lacquer with smoked glass edging
+SQ4: One of the stand legs finished in bronze with midnight lacquer accents
+SQ5: One of the stand legs finished in bronze with midnight lacquer accents
+SQ6: The central housing (socket area) where the bulb is placed finished in bronze with smoked glass or lacquered inserts
+SQ7: A segment of the cone-shaped shade finished in midnight blue lacquer with smoked glass edging
+SQ8: A segment of the cone-shaped shade finished in midnight blue lacquer with smoked glass edging
+SQ9: One of the stand legs finished in bronze with midnight lacquer accents
+
+Style 4 - Hard / Ornate Statement
+Global description: A classic desk lamp featuring a large cone-shaped (empire) shade supported by a multi-leg stand on a flat base styled as an ornate decorative lamp with stained glass, aged brass, and carved wood detailing
+SQ0: The base of the lamp finished in aged brass with carved walnut detailing
+SQ1: A segment of the cone-shaped shade finished in stained glass panels held by aged brass ribs
+SQ2: One of the stand legs finished in aged brass with engraved joints
+SQ3: A segment of the cone-shaped shade finished in stained glass panels held by aged brass ribs
+SQ4: One of the stand legs finished in aged brass with engraved joints
+SQ5: One of the stand legs finished in aged brass with engraved joints
+SQ6: The central housing (socket area) where the bulb is placed finished in aged brass with carved walnut detailing
+SQ7: A segment of the cone-shaped shade finished in stained glass panels held by aged brass ribs
+SQ8: A segment of the cone-shaped shade finished in stained glass panels held by aged brass ribs
+SQ9: One of the stand legs finished in aged brass with engraved joints
+
+Style 5 - Extreme / Futuristic Concept
+Global description: A classic desk lamp featuring a large cone-shaped (empire) shade supported by a multi-leg stand on a flat base styled as a futuristic luminous lamp with translucent resin, satin titanium, and a softly glowing core
+SQ0: The base of the lamp finished in satin titanium with a softly glowing translucent core
+SQ1: A segment of the cone-shaped shade formed from translucent resin with an iridescent surface and glowing inner rim
+SQ2: One of the stand legs finished in satin titanium with translucent joint covers and cyan glow lines
+SQ3: A segment of the cone-shaped shade formed from translucent resin with an iridescent surface and glowing inner rim
+SQ4: One of the stand legs finished in satin titanium with translucent joint covers and cyan glow lines
+SQ5: One of the stand legs finished in satin titanium with translucent joint covers and cyan glow lines
+SQ6: The central housing (socket area) where the bulb is placed finished in satin titanium with a softly glowing translucent core
+SQ7: A segment of the cone-shaped shade formed from translucent resin with an iridescent surface and glowing inner rim
+SQ8: A segment of the cone-shaped shade formed from translucent resin with an iridescent surface and glowing inner rim
+SQ9: One of the stand legs finished in satin titanium with translucent joint covers and cyan glow lines

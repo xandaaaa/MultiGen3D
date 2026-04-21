@@ -1,0 +1,64 @@
+Style 1 - Easy / Clean Everyday
+Global description: A swivel office chair with a backrest, seat cushion, and a five-wheel caster base styled with clean everyday materials and a restrained neutral palette
+SQ0: The pedestal or gas-lift support column finished in matte white or charcoal powder-coated steel
+SQ1: A wheel (caster) with a black rubber tread and a matte gray hub
+SQ2: A wheel (caster) with a black rubber tread and a matte gray hub
+SQ3: Left armrest finished in matte charcoal polymer with soft gray pads
+SQ4: A wheel (caster) with a black rubber tread and a matte gray hub
+SQ5: A wheel (caster) with a black rubber tread and a matte gray hub
+SQ6: The seat upholstered in breathable light gray fabric with a matte charcoal shell
+SQ7: Right armrest finished in matte charcoal polymer with soft gray pads
+SQ8: The backrest upholstered in breathable light gray fabric with a matte charcoal shell
+SQ9: A wheel (caster) with a black rubber tread and a matte gray hub
+
+Style 2 - Moderate / Material Contrast
+Global description: A swivel office chair with a backrest, seat cushion, and a five-wheel caster base styled with warm material contrast between walnut, black metal, and leather
+SQ0: The pedestal or gas-lift support column finished in blackened steel with walnut accents
+SQ1: A wheel (caster) with a black tread and a blackened steel hub
+SQ2: A wheel (caster) with a black tread and a blackened steel hub
+SQ3: Left armrest finished in blackened steel with tan leather pads
+SQ4: A wheel (caster) with a black tread and a blackened steel hub
+SQ5: A wheel (caster) with a black tread and a blackened steel hub
+SQ6: The seat upholstered in warm tan leather with black metal edging
+SQ7: Right armrest finished in blackened steel with tan leather pads
+SQ8: The backrest upholstered in warm tan leather with black metal edging
+SQ9: A wheel (caster) with a black tread and a blackened steel hub
+
+Style 3 - Medium / Premium Custom
+Global description: A swivel office chair with a backrest, seat cushion, and a five-wheel caster base styled as a premium designer chair with jewel-tone upholstery and brushed brass details
+SQ0: The pedestal or gas-lift support column finished in satin black metal with brushed brass detailing
+SQ1: A wheel (caster) with a silent black tread and a brushed brass-accented hub
+SQ2: A wheel (caster) with a silent black tread and a brushed brass-accented hub
+SQ3: Left armrest finished in satin black metal with brushed brass accents and blue pads
+SQ4: A wheel (caster) with a silent black tread and a brushed brass-accented hub
+SQ5: A wheel (caster) with a silent black tread and a brushed brass-accented hub
+SQ6: The seat upholstered in deep blue performance fabric with brushed brass trim
+SQ7: Right armrest finished in satin black metal with brushed brass accents and blue pads
+SQ8: The backrest upholstered in deep blue performance fabric with brushed brass trim
+SQ9: A wheel (caster) with a silent black tread and a brushed brass-accented hub
+
+Style 4 - Hard / Ornate Statement
+Global description: A swivel office chair with a backrest, seat cushion, and a five-wheel caster base styled as an ornate statement chair with lacquered dark wood, cream boucle, and brass inlay
+SQ0: The pedestal or gas-lift support column finished in bronze-toned metal with engraved edge lines
+SQ1: A wheel (caster) with a black tread and a bronze-toned hub with geometric detailing
+SQ2: A wheel (caster) with a black tread and a bronze-toned hub with geometric detailing
+SQ3: Left armrest finished in lacquered dark wood with cream boucle pads and brass edging
+SQ4: A wheel (caster) with a black tread and a bronze-toned hub with geometric detailing
+SQ5: A wheel (caster) with a black tread and a bronze-toned hub with geometric detailing
+SQ6: The seat upholstered in cream boucle with lacquered dark framing and brass striping
+SQ7: Right armrest finished in lacquered dark wood with cream boucle pads and brass edging
+SQ8: The backrest upholstered in cream boucle with lacquered dark framing and brass striping
+SQ9: A wheel (caster) with a black tread and a bronze-toned hub with geometric detailing
+
+Style 5 - Extreme / Futuristic Concept
+Global description: A swivel office chair with a backrest, seat cushion, and a five-wheel caster base styled as a futuristic chair with translucent structural parts, satin titanium, and subtle cyan glow accents
+SQ0: The pedestal or gas-lift support column finished in satin titanium with translucent structural highlights
+SQ1: A wheel (caster) with a dark adaptive tread and an iridescent hub ring with a faint cyan glow
+SQ2: A wheel (caster) with a dark adaptive tread and an iridescent hub ring with a faint cyan glow
+SQ3: Left armrest finished in satin titanium with translucent pads and cyan edge lighting
+SQ4: A wheel (caster) with a dark adaptive tread and an iridescent hub ring with a faint cyan glow
+SQ5: A wheel (caster) with a dark adaptive tread and an iridescent hub ring with a faint cyan glow
+SQ6: The seat upholstered in iridescent mesh-fabric with translucent shell panels and glowing seam lines
+SQ7: Right armrest finished in satin titanium with translucent pads and cyan edge lighting
+SQ8: The backrest upholstered in iridescent mesh-fabric with translucent shell panels and glowing seam lines
+SQ9: A wheel (caster) with a dark adaptive tread and an iridescent hub ring with a faint cyan glow

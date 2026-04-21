@@ -1,0 +1,39 @@
+Style 1 - Easy / Clean Everyday
+Global description: An adjustable desk lamp, often referred to as an architect or swing-arm lamp styled with matte enamel metal and a clean neutral shade
+SQ0: The base of the lamp finished in matte white enamel steel
+SQ1: The lamp shade or head assembly where the bulb is housed finished in matte white enamel with a pale gray inner lining
+SQ2: The upper part of the arm or segment of the stand, connected to the head finished in matte white enamel steel
+SQ3: The middle part of the arm finished in matte white enamel steel
+SQ4: The lower part of arm or segment of the stand, connected to the base finished in matte white enamel steel
+
+Style 2 - Moderate / Material Contrast
+Global description: An adjustable desk lamp, often referred to as an architect or swing-arm lamp styled with brushed brass, olive enamel, and warm linen
+SQ0: The base of the lamp finished in brushed brass with olive enamel accents
+SQ1: The lamp shade or head assembly where the bulb is housed finished in olive enamel with a warm cream linen interior
+SQ2: The upper part of the arm or segment of the stand, connected to the head finished in brushed brass with olive enamel accents
+SQ3: The middle part of the arm finished in brushed brass with olive enamel accents
+SQ4: The lower part of arm or segment of the stand, connected to the base finished in brushed brass with olive enamel accents
+
+Style 3 - Medium / Premium Custom
+Global description: An adjustable desk lamp, often referred to as an architect or swing-arm lamp styled as a boutique designer lamp with smoked glass, bronze, and midnight lacquer
+SQ0: The base of the lamp finished in bronze with smoked glass or lacquered inserts
+SQ1: The lamp shade or head assembly where the bulb is housed finished in midnight blue lacquer with smoked glass edging
+SQ2: The upper part of the arm or segment of the stand, connected to the head finished in bronze with midnight lacquer accents
+SQ3: The middle part of the arm finished in bronze with midnight lacquer accents
+SQ4: The lower part of arm or segment of the stand, connected to the base finished in bronze with smoked glass or lacquered inserts
+
+Style 4 - Hard / Ornate Statement
+Global description: An adjustable desk lamp, often referred to as an architect or swing-arm lamp styled as an ornate decorative lamp with stained glass, aged brass, and carved wood detailing
+SQ0: The base of the lamp finished in aged brass with carved walnut detailing
+SQ1: The lamp shade or head assembly where the bulb is housed finished in stained glass panels held by aged brass ribs
+SQ2: The upper part of the arm or segment of the stand, connected to the head finished in aged brass with engraved joints
+SQ3: The middle part of the arm finished in aged brass with engraved joints
+SQ4: The lower part of arm or segment of the stand, connected to the base finished in aged brass with carved walnut detailing
+
+Style 5 - Extreme / Futuristic Concept
+Global description: An adjustable desk lamp, often referred to as an architect or swing-arm lamp styled as a futuristic luminous lamp with translucent resin, satin titanium, and a softly glowing core
+SQ0: The base of the lamp finished in satin titanium with a softly glowing translucent core
+SQ1: The lamp shade or head assembly where the bulb is housed formed from translucent resin with an iridescent surface and glowing inner rim
+SQ2: The upper part of the arm or segment of the stand, connected to the head finished in satin titanium with translucent joint covers and cyan glow lines
+SQ3: The middle part of the arm finished in satin titanium with translucent joint covers and cyan glow lines
+SQ4: The lower part of arm or segment of the stand, connected to the base finished in satin titanium with a softly glowing translucent core

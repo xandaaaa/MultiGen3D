@@ -1,0 +1,54 @@
+Style 1 - Easy / Clean Everyday
+Global description: A multi-seater couch or sofa styled with oatmeal upholstery, pale wood accents, and a calm neutral palette
+SQ0: The left armrest/side support upholstered in soft oatmeal fabric
+SQ1: The left front leg finished in pale ash wood
+SQ2: The front support panel finished in pale ash wood with a satin seal
+SQ3: The right front leg finished in pale ash wood
+SQ4: The back support panel finished in pale ash wood with a satin seal
+SQ5: The seat cushion upholstered in soft oatmeal fabric
+SQ6: The right armrest/side support upholstered in soft oatmeal fabric
+SQ7: The backrest upholstered in soft oatmeal fabric
+
+Style 2 - Moderate / Material Contrast
+Global description: A multi-seater couch or sofa styled with saddle leather, walnut structure, and blackened metal support details
+SQ0: The left armrest/side support upholstered in supple saddle leather
+SQ1: The left front leg finished in walnut with blackened metal caps
+SQ2: The front support panel finished in walnut with blackened steel reinforcement
+SQ3: The right front leg finished in walnut with blackened metal caps
+SQ4: The back support panel finished in walnut with blackened steel reinforcement
+SQ5: The seat cushion upholstered in supple saddle leather
+SQ6: The right armrest/side support upholstered in supple saddle leather
+SQ7: The backrest upholstered in supple saddle leather
+
+Style 3 - Medium / Premium Custom
+Global description: A multi-seater couch or sofa styled as a premium designer sofa with jewel-toned velvet, dark walnut, and brushed brass accents
+SQ0: The left armrest/side support upholstered in deep emerald velvet with tailored seams
+SQ1: The left front leg finished in dark walnut with brushed brass ferrules
+SQ2: The front support panel finished in dark walnut with brushed brass accents
+SQ3: The right front leg finished in dark walnut with brushed brass ferrules
+SQ4: The back support panel finished in dark walnut with brushed brass accents
+SQ5: The seat cushion upholstered in deep emerald velvet with tailored seams
+SQ6: The right armrest/side support upholstered in deep emerald velvet with tailored seams
+SQ7: The backrest upholstered in deep emerald velvet with tailored seams
+
+Style 4 - Hard / Ornate Statement
+Global description: A multi-seater couch or sofa styled as an ornate sofa with cream boucle, lacquered dark framing, and brass inlay
+SQ0: The left armrest/side support upholstered in cream boucle with brass-edged channeling
+SQ1: The left front leg finished in lacquered ebony with brass detailing
+SQ2: The front support panel finished in lacquered dark wood with brass inlay
+SQ3: The right front leg finished in lacquered ebony with brass detailing
+SQ4: The back support panel finished in lacquered dark wood with brass inlay
+SQ5: The seat cushion upholstered in cream boucle with brass-edged channeling
+SQ6: The right armrest/side support upholstered in cream boucle with brass-edged channeling
+SQ7: The backrest upholstered in cream boucle with brass-edged channeling
+
+Style 5 - Extreme / Futuristic Concept
+Global description: A multi-seater couch or sofa styled as a futuristic sofa with iridescent performance fabric, satin titanium, and subtle cyan seam lighting
+SQ0: The left armrest/side support upholstered in iridescent performance fabric with softly glowing seam lines
+SQ1: The left front leg finished in satin titanium with translucent footing caps
+SQ2: The front support panel finished in satin titanium with translucent structural panels
+SQ3: The right front leg finished in satin titanium with translucent footing caps
+SQ4: The back support panel finished in satin titanium with translucent structural panels
+SQ5: The seat cushion upholstered in iridescent performance fabric with softly glowing seam lines
+SQ6: The right armrest/side support upholstered in iridescent performance fabric with softly glowing seam lines
+SQ7: The backrest upholstered in iridescent performance fabric with softly glowing seam lines

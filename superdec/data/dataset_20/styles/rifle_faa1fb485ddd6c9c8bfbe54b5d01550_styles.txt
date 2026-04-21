@@ -1,0 +1,34 @@
+Style 1 - Easy / Clean Everyday
+Global description: A long-range bolt-action rifle rendered with a straightforward utilitarian finish in matte black steel and textured polymer
+SQ0: The main body of the rifle finished in matte black parkerized steel
+SQ1: The front stand (bipod) finished in matte black steel
+SQ2: The buttstock finished in textured charcoal polymer
+SQ3: The shoulder rest (buttpad or stock extension) attached to the very rear of the buttstock finished in textured charcoal polymer
+
+Style 2 - Moderate / Material Contrast
+Global description: A long-range bolt-action rifle rendered with classic materials including blued steel and oiled walnut
+SQ0: The main body of the rifle finished in blued steel with subtle polished edges
+SQ1: The front stand (bipod) finished in blued steel
+SQ2: The buttstock finished in oiled walnut with a smooth hand-worn sheen
+SQ3: The shoulder rest (buttpad or stock extension) attached to the very rear of the buttstock finished in oiled walnut with a smooth hand-worn sheen
+
+Style 3 - Medium / Premium Custom
+Global description: A long-range bolt-action rifle rendered as a premium custom build with brushed stainless steel, carbon fiber, and precision-machined accents
+SQ0: The main body of the rifle finished in brushed stainless steel with carbon fiber accents
+SQ1: The front stand (bipod) finished in brushed stainless steel
+SQ2: The buttstock finished in layered carbon fiber with machined metal accents
+SQ3: The shoulder rest (buttpad or stock extension) attached to the very rear of the buttstock finished in layered carbon fiber with machined metal accents
+
+Style 4 - Hard / Ornate Statement
+Global description: A long-range bolt-action rifle rendered as a ceremonial display piece with engraved steel, dark rosewood, and brass filigree
+SQ0: The main body of the rifle finished in engraved steel with brass filigree details
+SQ1: The front stand (bipod) finished in engraved steel with brass collars
+SQ2: The buttstock finished in dark rosewood with engraved brass edge detailing
+SQ3: The shoulder rest (buttpad or stock extension) attached to the very rear of the buttstock finished in dark rosewood with engraved brass edge detailing
+
+Style 5 - Extreme / Futuristic Concept
+Global description: A long-range bolt-action rifle rendered as a futuristic concept prop with iridescent alloy plating, translucent grips, and glowing energy channels
+SQ0: The main body of the rifle finished in iridescent alloy plating with narrow glowing energy channels
+SQ1: The front stand (bipod) finished in iridescent alloy with cyan-lit joint lines
+SQ2: The buttstock finished in smoked translucent composite with faintly glowing internal channels
+SQ3: The shoulder rest (buttpad or stock extension) attached to the very rear of the buttstock finished in smoked translucent composite with faintly glowing internal channels

@@ -1,0 +1,24 @@
+Style 1 - Easy / Clean Everyday
+Global description: A tall, rectangular storage cabinet or locker finished as a clean storage piece in painted oak and matte white hardware-free panels
+SQ0: The main body/storage compartment finished in matte warm-white painted oak
+SQ1: The top panel or lid finished in pale oak with a smooth satin seal
+
+Style 2 - Moderate / Material Contrast
+Global description: A tall, rectangular storage cabinet or locker finished as a warm utilitarian piece in walnut with blackened steel trim
+SQ0: The main body/storage compartment finished in richly grained walnut with blackened steel reinforcement
+SQ1: The top panel or lid finished in walnut with a hand-oiled sheen
+
+Style 3 - Medium / Premium Custom
+Global description: A tall, rectangular storage cabinet or locker finished as a premium storage piece in deep green lacquer, walnut, and brushed brass
+SQ0: The main body/storage compartment finished in deep green lacquer over walnut with brushed brass accents
+SQ1: The top panel or lid finished in dark walnut with a polished stone-like inset surface
+
+Style 4 - Hard / Ornate Statement
+Global description: A tall, rectangular storage cabinet or locker finished as an ornate cabinet in glossy ebony lacquer, ribbed inserts, and brass inlay
+SQ0: The main body/storage compartment finished in glossy ebony lacquer with inset brass striping
+SQ1: The top panel or lid finished in glossy ebony lacquer with thin brass banding
+
+Style 5 - Extreme / Futuristic Concept
+Global description: A tall, rectangular storage cabinet or locker finished as a futuristic storage piece in smoked translucent panels, satin titanium, and cyan edge lighting
+SQ0: The main body/storage compartment finished in smoked translucent composite with satin titanium framing
+SQ1: The top panel or lid finished in translucent resin over satin titanium
