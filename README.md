@@ -128,3 +128,41 @@ SQ3: Fuselage of the plane
 ```
 
 See [superdec/data/dataset_20/previews/airplane_d18592d9615b01bbbc0909d98a1ff2b4_annotation.txt](superdec/data/dataset_20/previews/airplane_d18592d9615b01bbbc0909d98a1ff2b4_annotation.txt) for the canonical example. The SQ indices match the labels rendered by `sq_editor.py` and `preview_sqs.py`, so what you see in the editor is what you write in the annotation.
+
+## Benchmark: CLIP score evaluation
+
+We evaluate each approach using **CLIP score** — cosine similarity between rendered views and a holistic text prompt that specifies per-part appearance. The benchmark is designed to measure how faithfully an approach localizes different materials and colors to the correct spatial parts of the generated object.
+
+### Prompt suite — `benchmark/prompts.json`
+
+[benchmark/prompts.json](benchmark/prompts.json) contains **5 appearance prompts per shape** (100 total). Each prompt is a single holistic sentence that describes the whole object while specifying distinct materials and colors at the part level, for example:
+
+> *"A rounded chair with blue painted metal legs, red velvet seat cushion, white plastic armrests, and a dark walnut wooden backrest"*
+
+Prompts are varied across different material palettes (wood, metal, velvet, leather, plastic, etc.) and color combinations so that no two prompts for the same shape are similar.
+
+### Scoring script — `benchmark/clip_score.py`
+
+[benchmark/clip_score.py](benchmark/clip_score.py) computes CLIP ViT-B/32 cosine similarity between rendered PNG images and the benchmark prompts. It averages the score across all camera views for a given (shape, prompt) pair, then reports a mean score per approach.
+
+**Score a single renders directory against one prompt:**
+```bash
+python benchmark/clip_score.py \
+    --renders approach1_results/renders/chair_dfeb8d914d8b28ab5bb58f1e92d30bf7/prompt_0/ \
+    --prompt "A rounded chair with blue painted metal legs, red velvet seat cushion, ..."
+```
+
+**Run the full benchmark across all approaches:**
+```bash
+python benchmark/clip_score.py \
+    --benchmark benchmark/prompts.json \
+    --results-root . \
+    --approaches approach1 approach2 approach5 approach6 \
+    --output benchmark/results.json
+```
+
+**Expected renders layout.** Each approach's experiment script should save individual view PNGs under:
+```
+<approach>_results/renders/<shape_id>/prompt_<i>/view_<j>.png
+```
+where `shape_id` matches the `id` field in `prompts.json` and `prompt_i` indexes into the shape's 5-prompt list.
