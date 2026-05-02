@@ -1,0 +1,400 @@
+[
+  {
+    "id": "airplane_d18592d9615b01bbbc0909d98a1ff2b4",
+    "npz": "superdec/data/dataset_20/npz/airplane_d18592d9615b01bbbc0909d98a1ff2b4.npz",
+    "global_description": "A standard commercial airliner",
+    "parts": {
+      "SQ0": "Left wing",
+      "SQ1": "Empennage (tail section)",
+      "SQ2": "Right wing",
+      "SQ3": "Fuselage"
+    },
+    "prompts": [
+      "A commercial airliner with a white fuselage, red-tipped wings, and a blue tail section",
+      "A commercial airliner with a matte grey fuselage, yellow wings, and a black empennage",
+      "A commercial airliner with a silver metallic fuselage, orange striped wings, and a dark navy tail",
+      "A commercial airliner with a white fuselage, green wings, and a red tail section with gold accents",
+      "A commercial airliner with a glossy cream fuselage, sky-blue wings, and a burgundy tail section"
+    ]
+  },
+  {
+    "id": "airplane_f44c0e1e55a3469494f3355d9c061b5a",
+    "npz": "superdec/data/dataset_20/npz/airplane_f44c0e1e55a3469494f3355d9c061b5a.npz",
+    "global_description": "A fighter jet",
+    "parts": {
+      "SQ0": "Fuselage including main body and tail section",
+      "SQ1": "Wings (left and right)"
+    },
+    "prompts": [
+      "A fighter jet with a matte black fuselage and camouflage green wings",
+      "A fighter jet with a glossy dark grey fuselage and bright orange wings",
+      "A fighter jet with a sand-colored desert camo fuselage and dark brown wings",
+      "A fighter jet with a blue and white fuselage and silver metallic wings",
+      "A fighter jet with a red fuselage and white wings with black trim"
+    ]
+  },
+  {
+    "id": "bench_dd97603ce7538c15be5bbc844e6db7e",
+    "npz": "superdec/data/dataset_20/npz/bench_dd97603ce7538c15be5bbc844e6db7e.npz",
+    "global_description": "A long, narrow park bench with a flat seat and two supporting legs",
+    "parts": {
+      "SQ0": "Left leg",
+      "SQ1": "Left rim",
+      "SQ2": "Right leg",
+      "SQ3": "Right rim",
+      "SQ4": "Seat"
+    },
+    "prompts": [
+      "A park bench with black cast iron legs and rims and a natural oak wooden seat",
+      "A park bench with white painted metal legs and rims and a dark walnut wooden seat",
+      "A park bench with rusty brown iron legs and rims and a teak wooden seat with green moss",
+      "A park bench with gold metal legs and rims and a polished mahogany seat",
+      "A park bench with concrete grey legs and rims and a bright white painted wooden seat"
+    ]
+  },
+  {
+    "id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+    "npz": "superdec/data/dataset_20/npz/bench_f8aa82e7e4c58ce29d31c5ce17cce95d.npz",
+    "global_description": "A park bench with a seat, high backrest, armrests, and four legs",
+    "parts": {
+      "SQ0": "Bottom part of left leg",
+      "SQ1": "Left armrest",
+      "SQ2": "Middle armrest",
+      "SQ3": "Seat",
+      "SQ4": "Right armrest",
+      "SQ5": "Backrest",
+      "SQ6": "Upper part of left leg",
+      "SQ7": "Bottom part of right leg",
+      "SQ8": "Upper part of right leg"
+    },
+    "prompts": [
+      "A garden bench with black wrought iron legs, green painted armrests, a natural pine seat, and a white backrest",
+      "A garden bench with brown wooden legs, cream-colored armrests, a red-painted seat, and a dark brown backrest",
+      "A garden bench with brass-finished legs, walnut armrests, a forest green seat, and a matching green backrest",
+      "A garden bench with grey stone-textured legs, light oak armrests, a navy blue cushioned seat, and a white backrest",
+      "A garden bench with copper-patina legs, teak armrests, a charcoal grey seat, and a beige backrest"
+    ]
+  },
+  {
+    "id": "cabinet_bbbd4de3e7ab25ad80d6227ff9b21190",
+    "npz": "superdec/data/dataset_20/npz/cabinet_bbbd4de3e7ab25ad80d6227ff9b21190.npz",
+    "global_description": "A tall, slender storage cabinet",
+    "parts": {
+      "SQ0": "Left side panel",
+      "SQ1": "Front panel (door)",
+      "SQ2": "Right side panel",
+      "SQ3": "Top panel",
+      "SQ4": "Back panel"
+    },
+    "prompts": [
+      "A tall cabinet with white painted side panels, a glossy red front door, and a light oak top panel",
+      "A tall cabinet with dark walnut side panels, a glass-fronted door, and a black top panel",
+      "A tall cabinet with grey metal side panels, a navy blue front door, and a silver top panel",
+      "A tall cabinet with pine wood side panels, a bright yellow front door, and a matching pine top",
+      "A tall cabinet with matte black side panels, a mirrored front door, and a white marble top panel"
+    ]
+  },
+  {
+    "id": "cabinet_df55c6665781293cbe53b3b9f1274310",
+    "npz": "superdec/data/dataset_20/npz/cabinet_df55c6665781293cbe53b3b9f1274310.npz",
+    "global_description": "A tall, rectangular storage cabinet",
+    "parts": {
+      "SQ0": "Main body / storage compartment",
+      "SQ1": "Top panel or lid"
+    },
+    "prompts": [
+      "A rectangular storage cabinet with a white painted main body and a dark walnut wood top panel",
+      "A rectangular storage cabinet with a brushed steel main body and a black granite top panel",
+      "A rectangular storage cabinet with a navy blue main body and a light oak top panel",
+      "A rectangular storage cabinet with a terracotta red main body and a white marble top panel",
+      "A rectangular storage cabinet with a forest green main body and a brass-finished top panel"
+    ]
+  },
+  {
+    "id": "car_d287b02b4679c70ab7902335d9dd94a2",
+    "npz": "superdec/data/dataset_20/npz/car_d287b02b4679c70ab7902335d9dd94a2.npz",
+    "global_description": "A pickup truck with a cabin and open cargo bed",
+    "parts": {
+      "SQ0": "Cabin (passenger compartment)",
+      "SQ1": "Left fender of truck bed",
+      "SQ2": "Front-left wheel",
+      "SQ3": "Hood and front engine compartment",
+      "SQ4": "Front-right wheel",
+      "SQ5": "Right fender of truck bed",
+      "SQ6": "Tailgate",
+      "SQ7": "Rear-right wheel",
+      "SQ8": "Rear-left wheel",
+      "SQ9": "Floor panel of truck bed"
+    },
+    "prompts": [
+      "A pickup truck with a red cabin, black fenders on the truck bed, silver wheels, a white hood, and a grey tailgate and floor",
+      "A pickup truck with a navy blue cabin, rust-orange fenders, black wheels, a matching blue hood, and a silver tailgate",
+      "A pickup truck with a sandy beige cabin, dark green fenders, chrome wheels, a cream hood, and a brown wooden truck bed floor",
+      "A pickup truck with a matte black cabin, gunmetal grey fenders, red wheels, a black hood, and a silver tailgate",
+      "A pickup truck with a forest green cabin, olive drab fenders, white wheels, a green hood, and a black steel truck bed floor"
+    ]
+  },
+  {
+    "id": "car_f9cad36ae25540a0bb20fd1bc4860856",
+    "npz": "superdec/data/dataset_20/npz/car_f9cad36ae25540a0bb20fd1bc4860856.npz",
+    "global_description": "A four-door sedan",
+    "parts": {
+      "SQ0": "Rear-left wheel",
+      "SQ1": "Front-left wheel",
+      "SQ2": "Hood and front engine compartment",
+      "SQ3": "Front-right wheel",
+      "SQ4": "Rear-right wheel",
+      "SQ5": "Main cabin (roof and passenger compartment)"
+    },
+    "prompts": [
+      "A four-door sedan with a white cabin, black hood, and bright red wheels",
+      "A four-door sedan with a silver metallic cabin, dark blue hood, and gold chrome wheels",
+      "A four-door sedan with a jet black cabin, red hood, and chrome silver wheels",
+      "A four-door sedan with a pearl white cabin, yellow hood, and matte black wheels",
+      "A four-door sedan with a deep burgundy cabin, charcoal grey hood, and rose gold wheels"
+    ]
+  },
+  {
+    "id": "chair_dfeb8d914d8b28ab5bb58f1e92d30bf7",
+    "npz": "superdec/data/dataset_20/npz/chair_dfeb8d914d8b28ab5bb58f1e92d30bf7.npz",
+    "global_description": "A rounded chair with armrests and four splayed legs",
+    "parts": {
+      "SQ0": "Rear-left leg",
+      "SQ1": "Front-left leg",
+      "SQ2": "Left armrest",
+      "SQ3": "Front-right leg",
+      "SQ4": "Rear-right leg",
+      "SQ5": "Seat",
+      "SQ6": "Right armrest",
+      "SQ7": "Backrest"
+    },
+    "prompts": [
+      "A rounded chair with blue painted metal legs, red velvet seat cushion, white plastic armrests, and a dark walnut wooden backrest",
+      "A rounded chair with natural oak legs, a grey wool seat, black rubber armrests, and a woven rattan backrest",
+      "A rounded chair with gold-finished legs, a pink linen seat, transparent acrylic armrests, and a padded cream backrest",
+      "A rounded chair with black steel legs, a green leather seat, brass armrests, and a light beige upholstered backrest",
+      "A rounded chair with white lacquered legs, a navy blue canvas seat, birch wood armrests, and a mesh backrest"
+    ]
+  },
+  {
+    "id": "chair_f1f670ac53799c18492d9da2668ec34c",
+    "npz": "superdec/data/dataset_20/npz/chair_f1f670ac53799c18492d9da2668ec34c.npz",
+    "global_description": "A swivel office chair with backrest, seat cushion, and five-wheel caster base",
+    "parts": {
+      "SQ0": "Pedestal / gas-lift column",
+      "SQ1": "Caster wheel",
+      "SQ2": "Caster wheel",
+      "SQ3": "Left armrest",
+      "SQ4": "Caster wheel",
+      "SQ5": "Caster wheel",
+      "SQ6": "Seat",
+      "SQ7": "Right armrest",
+      "SQ8": "Backrest",
+      "SQ9": "Caster wheel"
+    },
+    "prompts": [
+      "An office chair with a chrome pedestal, black rubber wheels, black leather seat and backrest, and grey plastic armrests",
+      "An office chair with a matte black pedestal, red wheels, a teal blue fabric seat, a matching blue backrest, and white armrests",
+      "An office chair with a gold metallic pedestal, clear acrylic wheels, a pink velvet seat, a white backrest, and gold armrests",
+      "An office chair with a silver pedestal, dark grey wheels, a tan leather seat and backrest, and wooden armrests",
+      "An office chair with a white pedestal, pastel pink wheels, a mint green seat, a white mesh backrest, and light grey armrests"
+    ]
+  },
+  {
+    "id": "lamp_dc6c499e71d04971d22730b0728b2fc9",
+    "npz": "superdec/data/dataset_20/npz/lamp_dc6c499e71d04971d22730b0728b2fc9.npz",
+    "global_description": "An adjustable swing-arm desk lamp",
+    "parts": {
+      "SQ0": "Base",
+      "SQ1": "Lamp shade / head",
+      "SQ2": "Upper arm segment",
+      "SQ3": "Middle arm segment",
+      "SQ4": "Lower arm segment"
+    },
+    "prompts": [
+      "A swing-arm desk lamp with a black marble base, a bright red metal shade, a chrome upper arm, a brass middle arm, and a black lower arm",
+      "A swing-arm desk lamp with a white ceramic base, a lime green shade, and silver metallic arm segments throughout",
+      "A swing-arm desk lamp with a wooden base, a matte black cone shade, and copper-finished arm segments",
+      "A swing-arm desk lamp with a grey concrete base, a yellow enamel shade, a white upper arm, a grey middle arm, and a dark lower arm",
+      "A swing-arm desk lamp with a gold-plated base, a navy blue shade, and rose gold arm segments"
+    ]
+  },
+  {
+    "id": "lamp_f228f6cd86162beb659dda512294c744",
+    "npz": "superdec/data/dataset_20/npz/lamp_f228f6cd86162beb659dda512294c744.npz",
+    "global_description": "A classic desk lamp with a large cone-shaped shade, multi-leg stand, and flat base",
+    "parts": {
+      "SQ0": "Base",
+      "SQ1": "Shade segment",
+      "SQ2": "Stand leg",
+      "SQ3": "Shade segment",
+      "SQ4": "Stand leg",
+      "SQ5": "Stand leg",
+      "SQ6": "Central housing (bulb socket area)",
+      "SQ7": "Shade segment",
+      "SQ8": "Shade segment",
+      "SQ9": "Stand leg"
+    },
+    "prompts": [
+      "A classic desk lamp with a black marble base, a green enamel cone shade, brass stand legs, and a gold central socket housing",
+      "A classic desk lamp with a white ceramic base, a red-and-white striped cone shade, chrome stand legs, and a silver central housing",
+      "A classic desk lamp with a walnut wood base, a cream linen cone shade, dark bronze stand legs, and a bronze central housing",
+      "A classic desk lamp with a grey concrete base, a cobalt blue cone shade, matte black stand legs, and a gunmetal central housing",
+      "A classic desk lamp with a pink acrylic base, a pastel yellow cone shade, rose gold stand legs, and a white central housing"
+    ]
+  },
+  {
+    "id": "rifle_d88c106c00384130fb5c1b0f759e2bc1",
+    "npz": "superdec/data/dataset_20/npz/rifle_d88c106c00384130fb5c1b0f759e2bc1.npz",
+    "global_description": "A semi-automatic hand pistol",
+    "parts": {
+      "SQ0": "Trigger guard and lower frame",
+      "SQ1": "Grip (handle)",
+      "SQ2": "Slide and barrel assembly"
+    },
+    "prompts": [
+      "A pistol with a black polymer trigger guard, a brown wooden grip, and a stainless steel slide and barrel",
+      "A pistol with a tan desert-camo lower frame, a black rubber grip, and a matte black slide and barrel",
+      "A pistol with a red anodized trigger guard, a white pearl grip, and a chrome slide and barrel",
+      "A pistol with a grey composite lower frame, a dark grey textured grip, and a brushed steel slide and barrel",
+      "A pistol with an olive green trigger guard, a walnut wood grip, and a gold-titanium coated slide and barrel"
+    ]
+  },
+  {
+    "id": "rifle_faa1fb485ddd6c9c8bfbe54b5d01550",
+    "npz": "superdec/data/dataset_20/npz/rifle_faa1fb485ddd6c9c8bfbe54b5d01550.npz",
+    "global_description": "A long-range bolt-action rifle",
+    "parts": {
+      "SQ0": "Main body of the rifle",
+      "SQ1": "Front bipod stand",
+      "SQ2": "Buttstock",
+      "SQ3": "Buttpad (rear stock extension)"
+    },
+    "prompts": [
+      "A bolt-action rifle with a black polymer main body, silver metal bipod, dark walnut buttstock, and a black rubber buttpad",
+      "A bolt-action rifle with a tan desert-camo main body, gold-tipped bipod, sand-colored buttstock, and a brown rubber buttpad",
+      "A bolt-action rifle with a forest green main body, black bipod, olive drab buttstock, and a dark green buttpad",
+      "A bolt-action rifle with a grey carbon-fiber textured main body, chrome bipod, black synthetic buttstock, and a red rubber buttpad",
+      "A bolt-action rifle with a white arctic-camo main body, white bipod, white buttstock, and a grey buttpad"
+    ]
+  },
+  {
+    "id": "sofa_d9ae4cecb8203838f652f706160dc96d",
+    "npz": "superdec/data/dataset_20/npz/sofa_d9ae4cecb8203838f652f706160dc96d.npz",
+    "global_description": "A multi-seater couch or sofa",
+    "parts": {
+      "SQ0": "Left armrest",
+      "SQ1": "Left front leg",
+      "SQ2": "Front support panel",
+      "SQ3": "Right front leg",
+      "SQ4": "Back support panel",
+      "SQ5": "Seat cushion",
+      "SQ6": "Right armrest",
+      "SQ7": "Backrest"
+    },
+    "prompts": [
+      "A sofa with navy blue velvet armrests, gold metal legs, a white front panel, a grey flannel seat cushion, and a navy blue backrest",
+      "A sofa with cream leather armrests, dark walnut legs, a beige fabric front panel, a terracotta seat cushion, and a cream backrest",
+      "A sofa with forest green linen armrests, black iron legs, a charcoal front panel, a mustard yellow seat cushion, and a dark green backrest",
+      "A sofa with dusty pink velvet armrests, brass legs, a light grey front panel, a white boucle seat cushion, and a pale pink backrest",
+      "A sofa with burnt orange fabric armrests, silver metal legs, a tan front panel, a deep brown leather seat cushion, and an orange backrest"
+    ]
+  },
+  {
+    "id": "sofa_ed394e35b999f69edb039d8689a74349",
+    "npz": "superdec/data/dataset_20/npz/sofa_ed394e35b999f69edb039d8689a74349.npz",
+    "global_description": "A sectional L-shaped sofa with a main seating area and extended chaise section",
+    "parts": {
+      "SQ0": "Extended chaise seat cushion",
+      "SQ1": "Left armrest",
+      "SQ2": "Main seat cushion",
+      "SQ3": "Right armrest",
+      "SQ4": "Backrest"
+    },
+    "prompts": [
+      "An L-shaped sectional sofa with a light grey chaise cushion, white leather armrests, a charcoal main seat cushion, and a dark grey backrest",
+      "An L-shaped sectional sofa with a mustard yellow chaise cushion, navy blue armrests, a cream main seat cushion, and a navy blue backrest",
+      "An L-shaped sectional sofa with a blush pink chaise cushion, white boucle armrests, a rose velvet main seat, and a light pink backrest",
+      "An L-shaped sectional sofa with a forest green chaise cushion, dark walnut armrests, an olive main seat cushion, and a deep green backrest",
+      "An L-shaped sectional sofa with a burnt sienna chaise cushion, tan leather armrests, a rust orange main seat, and a brown backrest"
+    ]
+  },
+  {
+    "id": "table_d3a55d20bb9c93985a7746683ad193f0",
+    "npz": "superdec/data/dataset_20/npz/table_d3a55d20bb9c93985a7746683ad193f0.npz",
+    "global_description": "A ping-pong table with a flat playing surface, four legs, and a central net",
+    "parts": {
+      "SQ0": "Supporting leg",
+      "SQ1": "Supporting leg",
+      "SQ2": "Central net",
+      "SQ3": "Supporting leg",
+      "SQ4": "Supporting leg",
+      "SQ5": "Main playing surface (tabletop)"
+    },
+    "prompts": [
+      "A ping-pong table with black metal legs, a white net, and a regulation blue playing surface",
+      "A ping-pong table with red metal legs, a black net, and a green playing surface",
+      "A ping-pong table with silver aluminum legs, a yellow net, and a dark grey playing surface",
+      "A ping-pong table with white painted legs, a red net, and a forest green playing surface with white boundary lines",
+      "A ping-pong table with wooden legs, a black net, and a sky blue playing surface"
+    ]
+  },
+  {
+    "id": "table_f3b8c91c5dd1cb6b8722573b29f0d6d8",
+    "npz": "superdec/data/dataset_20/npz/table_f3b8c91c5dd1cb6b8722573b29f0d6d8.npz",
+    "global_description": "A rectangular table with a main surface, four legs, aprons, and lower crossbars",
+    "parts": {
+      "SQ0": "Lower crossbar (stretcher)",
+      "SQ1": "Corner leg",
+      "SQ2": "Apron beneath tabletop edge",
+      "SQ3": "Apron beneath tabletop edge",
+      "SQ4": "Corner leg",
+      "SQ5": "Lower crossbar (stretcher)",
+      "SQ6": "Corner leg",
+      "SQ7": "Apron beneath tabletop edge",
+      "SQ8": "Main flat tabletop",
+      "SQ9": "Corner leg",
+      "SQ10": "Apron beneath tabletop edge"
+    },
+    "prompts": [
+      "A rectangular table with black metal legs, white painted crossbars, grey aprons, and a natural oak tabletop",
+      "A rectangular table with dark walnut legs, matching walnut crossbars, cream aprons, and a white marble tabletop",
+      "A rectangular table with brass-finished legs, gold crossbars, black aprons, and a dark glass tabletop",
+      "A rectangular table with white painted legs, light oak crossbars, white aprons, and a pale birch tabletop",
+      "A rectangular table with industrial grey iron legs, black crossbars, dark grey aprons, and a reclaimed wood tabletop"
+    ]
+  },
+  {
+    "id": "watercraft_d3043fff20dad5c41dc762869682f4f",
+    "npz": "superdec/data/dataset_20/npz/watercraft_d3043fff20dad5c41dc762869682f4f.npz",
+    "global_description": "A watercraft with a cabin and hull",
+    "parts": {
+      "SQ0": "Cabin / superstructure",
+      "SQ1": "Hull"
+    },
+    "prompts": [
+      "A motorboat with a white fiberglass cabin and a navy blue hull",
+      "A motorboat with a grey metal cabin and a bright red hull",
+      "A motorboat with a cream-colored cabin and a dark green hull with gold trim",
+      "A motorboat with a black cabin and a bright yellow hull",
+      "A motorboat with a wood-paneled cabin and a white hull with blue racing stripes"
+    ]
+  },
+  {
+    "id": "watercraft_d95c49195e51912056f316a86bec8b19",
+    "npz": "superdec/data/dataset_20/npz/watercraft_d95c49195e51912056f316a86bec8b19.npz",
+    "global_description": "A sailboat",
+    "parts": {
+      "SQ0": "Hull",
+      "SQ1": "Jib / headsail",
+      "SQ2": "Mainsail"
+    },
+    "prompts": [
+      "A sailboat with a white hull, a red jib sail, and a white mainsail with blue stripes",
+      "A sailboat with a navy blue hull, a cream-colored jib, and a yellow mainsail",
+      "A sailboat with a dark teak wooden hull, a white jib, and a red mainsail",
+      "A sailboat with a black hull, a bright orange jib, and a white mainsail",
+      "A sailboat with a sky blue hull, a white jib, and a green mainsail"
+    ]
+  }
+]
