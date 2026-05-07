@@ -58,15 +58,16 @@ def get_extrinsics_intrinsics():
     )
 
 
-def render_gaussian(pipeline, slat, extr, intr):
+def render_gaussian(pipeline, slat, extr, intr, prompt=""):
     gs = pipeline.decode_slat(slat, formats=["gaussian"])["gaussian"][0]
     scales = gs.get_scaling
     if not torch.isfinite(scales).all() or scales.max().item() > 10.0:
         print(f"  WARNING: degenerate Gaussian scales (max={scales.max().item():.3g}) — skipping render")
         del gs
         return None
+    bg_color = (0, 0, 0) if "white" in prompt.lower() else (255, 255, 255)
     frames = render_utils.render_frames(
-        gs, extr, intr, {"resolution": 512, "bg_color": (255, 255, 255)}
+        gs, extr, intr, {"resolution": 512, "bg_color": bg_color}
     )["color"]
     del gs
     return frames
@@ -192,7 +193,7 @@ def run_shape(shape, approach, pipeline, extr, intr, results_root, steps, seed, 
                                  global_prompt, local_prompts, steps, current_seed, cfg_strength,
                                  lam=args.lam, tau=args.tau)
 
-        frames = render_gaussian(pipeline, slat, extr, intr)
+        frames = render_gaussian(pipeline, slat, extr, intr, prompt=global_prompt)
         del slat, coords, cond_struct
         if frames is None:
             print(f"    WARNING: degenerate Gaussian for prompt_{prompt_idx}, skipping")
