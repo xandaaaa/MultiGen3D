@@ -9,6 +9,9 @@ __pycache__/
 *.py[codz]
 *$py.class
 
+# previous stuff
+experiments/results
+
 # C extensions
 *.so
 logs/

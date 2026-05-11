@@ -9,8 +9,8 @@ Usage — score a single directory of renders against a prompt:
 Usage — score all approaches against the full benchmark:
     python benchmark/clip_score.py \
         --benchmark benchmark/prompts.json \
-        --results-root . \
-        --approaches approach1 approach2 approach5 approach6
+        --results-root results \
+        --approaches baseline local_sq
 
 Expected renders directory layout (created by the experiment scripts):
     <results_root>/<approach>_results/renders/<shape_id>/prompt_<i>/view_<j>.png
@@ -175,20 +175,18 @@ def main():
 
     bench = sub.add_parser("benchmark", help="Score all approaches across the full benchmark")
     bench.add_argument("--benchmark",    default="benchmark/prompts.json")
-    bench.add_argument("--results-root", default=".")
+    bench.add_argument("--results-root", default="results")
     bench.add_argument("--approaches",   nargs="+",
-                       default=["approach1", "approach2", "approach3",
-                                "approach4", "approach5", "approach6"])
-    bench.add_argument("--output", default=None)
+                       default=["baseline", "local_sq"])
+    bench.add_argument("--output", default="results/clip_scores.json")
 
     # Flat mode (no subcommand)
     parser.add_argument("--renders",      help="Directory of PNGs (single mode)")
     parser.add_argument("--prompt",       help="Text prompt (single mode)")
     parser.add_argument("--benchmark",    help="Path to prompts.json (benchmark mode)")
-    parser.add_argument("--results-root", default=".")
+    parser.add_argument("--results-root", default="results")
     parser.add_argument("--approaches",   nargs="+",
-                        default=["approach1", "approach2", "approach3",
-                                 "approach4", "approach5", "approach6"])
+                        default=["baseline", "local_sq"])
     parser.add_argument("--output", default=None)
 
     args = parser.parse_args()

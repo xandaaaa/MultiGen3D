@@ -1,0 +1,2322 @@
+{
+  "by_approach": {
+    "baseline": {
+      "mean": 0.30144744873046875,
+      "min": 0.23773193359375,
+      "max": 0.35906982421875,
+      "n": 100,
+      "records": [
+        {
+          "shape_id": "airplane_d18592d9615b01bbbc0909d98a1ff2b4",
+          "prompt_idx": 0,
+          "prompt": "A commercial airliner with a white fuselage, red-tipped wings, and a blue tail section",
+          "score": 0.29931640625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "airplane_d18592d9615b01bbbc0909d98a1ff2b4",
+          "prompt_idx": 1,
+          "prompt": "A commercial airliner with a matte grey fuselage, yellow wings, and a black empennage",
+          "score": 0.2860107421875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "airplane_d18592d9615b01bbbc0909d98a1ff2b4",
+          "prompt_idx": 2,
+          "prompt": "A commercial airliner with a silver metallic fuselage, orange striped wings, and a dark navy tail",
+          "score": 0.23773193359375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "airplane_d18592d9615b01bbbc0909d98a1ff2b4",
+          "prompt_idx": 3,
+          "prompt": "A commercial airliner with a white fuselage, green wings, and a red tail section with gold accents",
+          "score": 0.29095458984375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "airplane_d18592d9615b01bbbc0909d98a1ff2b4",
+          "prompt_idx": 4,
+          "prompt": "A commercial airliner with a glossy cream fuselage, sky-blue wings, and a burgundy tail section",
+          "score": 0.2879638671875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "airplane_f44c0e1e55a3469494f3355d9c061b5a",
+          "prompt_idx": 0,
+          "prompt": "A fighter jet with a matte black fuselage and camouflage green wings",
+          "score": 0.322265625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "airplane_f44c0e1e55a3469494f3355d9c061b5a",
+          "prompt_idx": 1,
+          "prompt": "A fighter jet with a glossy dark grey fuselage and bright orange wings",
+          "score": 0.33038330078125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "airplane_f44c0e1e55a3469494f3355d9c061b5a",
+          "prompt_idx": 2,
+          "prompt": "A fighter jet with a sand-colored desert camo fuselage and dark brown wings",
+          "score": 0.3193359375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "airplane_f44c0e1e55a3469494f3355d9c061b5a",
+          "prompt_idx": 3,
+          "prompt": "A fighter jet with a blue and white fuselage and silver metallic wings",
+          "score": 0.30657958984375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "airplane_f44c0e1e55a3469494f3355d9c061b5a",
+          "prompt_idx": 4,
+          "prompt": "A fighter jet with a red fuselage and white wings with black trim",
+          "score": 0.31646728515625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "bench_dd97603ce7538c15be5bbc844e6db7e",
+          "prompt_idx": 0,
+          "prompt": "A park bench with black cast iron legs and rims and a natural oak wooden seat",
+          "score": 0.28680419921875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "bench_dd97603ce7538c15be5bbc844e6db7e",
+          "prompt_idx": 1,
+          "prompt": "A park bench with white painted metal legs and rims and a dark walnut wooden seat",
+          "score": 0.2987060546875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "bench_dd97603ce7538c15be5bbc844e6db7e",
+          "prompt_idx": 2,
+          "prompt": "A park bench with rusty brown iron legs and rims and a teak wooden seat with green moss",
+          "score": 0.28790283203125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "bench_dd97603ce7538c15be5bbc844e6db7e",
+          "prompt_idx": 3,
+          "prompt": "A park bench with gold metal legs and rims and a polished mahogany seat",
+          "score": 0.2894287109375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "bench_dd97603ce7538c15be5bbc844e6db7e",
+          "prompt_idx": 4,
+          "prompt": "A park bench with concrete grey legs and rims and a bright white painted wooden seat",
+          "score": 0.241058349609375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+          "prompt_idx": 0,
+          "prompt": "A garden bench with black wrought iron legs, green painted armrests, a natural pine seat, and a white backrest",
+          "score": 0.331298828125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+          "prompt_idx": 1,
+          "prompt": "A garden bench with brown wooden legs, cream-colored armrests, a red-painted seat, and a dark brown backrest",
+          "score": 0.2867431640625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+          "prompt_idx": 2,
+          "prompt": "A garden bench with brass-finished legs, walnut armrests, a forest green seat, and a matching green backrest",
+          "score": 0.30914306640625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+          "prompt_idx": 3,
+          "prompt": "A garden bench with grey stone-textured legs, light oak armrests, a navy blue cushioned seat, and a white backrest",
+          "score": 0.324462890625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+          "prompt_idx": 4,
+          "prompt": "A garden bench with copper-patina legs, teak armrests, a charcoal grey seat, and a beige backrest",
+          "score": 0.29376220703125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "cabinet_bbbd4de3e7ab25ad80d6227ff9b21190",
+          "prompt_idx": 0,
+          "prompt": "A tall cabinet with white painted side panels, a glossy red front door, and a light oak top panel",
+          "score": 0.274078369140625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "cabinet_bbbd4de3e7ab25ad80d6227ff9b21190",
+          "prompt_idx": 1,
+          "prompt": "A tall cabinet with dark walnut side panels, a glass-fronted door, and a black top panel",
+          "score": 0.290283203125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "cabinet_bbbd4de3e7ab25ad80d6227ff9b21190",
+          "prompt_idx": 2,
+          "prompt": "A tall cabinet with grey metal side panels, a navy blue front door, and a silver top panel",
+          "score": 0.28619384765625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "cabinet_bbbd4de3e7ab25ad80d6227ff9b21190",
+          "prompt_idx": 3,
+          "prompt": "A tall cabinet with pine wood side panels, a bright yellow front door, and a matching pine top",
+          "score": 0.2864990234375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "cabinet_bbbd4de3e7ab25ad80d6227ff9b21190",
+          "prompt_idx": 4,
+          "prompt": "A tall cabinet with matte black side panels, a mirrored front door, and a white marble top panel",
+          "score": 0.279937744140625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "cabinet_df55c6665781293cbe53b3b9f1274310",
+          "prompt_idx": 0,
+          "prompt": "A rectangular storage cabinet with a white painted main body and a dark walnut wood top panel",
+          "score": 0.28265380859375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "cabinet_df55c6665781293cbe53b3b9f1274310",
+          "prompt_idx": 1,
+          "prompt": "A rectangular storage cabinet with a brushed steel main body and a black granite top panel",
+          "score": 0.2945556640625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "cabinet_df55c6665781293cbe53b3b9f1274310",
+          "prompt_idx": 2,
+          "prompt": "A rectangular storage cabinet with a navy blue main body and a light oak top panel",
+          "score": 0.27056884765625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "cabinet_df55c6665781293cbe53b3b9f1274310",
+          "prompt_idx": 3,
+          "prompt": "A rectangular storage cabinet with a terracotta red main body and a white marble top panel",
+          "score": 0.31304931640625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "cabinet_df55c6665781293cbe53b3b9f1274310",
+          "prompt_idx": 4,
+          "prompt": "A rectangular storage cabinet with a forest green main body and a brass-finished top panel",
+          "score": 0.34521484375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "car_d287b02b4679c70ab7902335d9dd94a2",
+          "prompt_idx": 0,
+          "prompt": "A pickup truck with a red cabin, black fenders on the truck bed, silver wheels, a white hood, and a grey tailgate and floor",
+          "score": 0.29095458984375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "car_d287b02b4679c70ab7902335d9dd94a2",
+          "prompt_idx": 1,
+          "prompt": "A pickup truck with a navy blue cabin, rust-orange fenders, black wheels, a matching blue hood, and a silver tailgate",
+          "score": 0.33746337890625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "car_d287b02b4679c70ab7902335d9dd94a2",
+          "prompt_idx": 2,
+          "prompt": "A pickup truck with a sandy beige cabin, dark green fenders, chrome wheels, a cream hood, and a brown wooden truck bed floor",
+          "score": 0.31646728515625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "car_d287b02b4679c70ab7902335d9dd94a2",
+          "prompt_idx": 3,
+          "prompt": "A pickup truck with a matte black cabin, gunmetal grey fenders, red wheels, a black hood, and a silver tailgate",
+          "score": 0.309234619140625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "car_d287b02b4679c70ab7902335d9dd94a2",
+          "prompt_idx": 4,
+          "prompt": "A pickup truck with a forest green cabin, olive drab fenders, white wheels, a green hood, and a black steel truck bed floor",
+          "score": 0.33050537109375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "car_f9cad36ae25540a0bb20fd1bc4860856",
+          "prompt_idx": 0,
+          "prompt": "A four-door sedan with a white cabin, black hood, and bright red wheels",
+          "score": 0.27032470703125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "car_f9cad36ae25540a0bb20fd1bc4860856",
+          "prompt_idx": 1,
+          "prompt": "A four-door sedan with a silver metallic cabin, dark blue hood, and gold chrome wheels",
+          "score": 0.247100830078125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "car_f9cad36ae25540a0bb20fd1bc4860856",
+          "prompt_idx": 2,
+          "prompt": "A four-door sedan with a jet black cabin, red hood, and chrome silver wheels",
+          "score": 0.271484375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "car_f9cad36ae25540a0bb20fd1bc4860856",
+          "prompt_idx": 3,
+          "prompt": "A four-door sedan with a pearl white cabin, yellow hood, and matte black wheels",
+          "score": 0.30157470703125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "car_f9cad36ae25540a0bb20fd1bc4860856",
+          "prompt_idx": 4,
+          "prompt": "A four-door sedan with a deep burgundy cabin, charcoal grey hood, and rose gold wheels",
+          "score": 0.28692626953125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "chair_dfeb8d914d8b28ab5bb58f1e92d30bf7",
+          "prompt_idx": 0,
+          "prompt": "A rounded chair with blue painted metal legs, red velvet seat cushion, white plastic armrests, and a dark walnut wooden backrest",
+          "score": 0.32745361328125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "chair_dfeb8d914d8b28ab5bb58f1e92d30bf7",
+          "prompt_idx": 1,
+          "prompt": "A rounded chair with natural oak legs, a grey wool seat, black rubber armrests, and a woven rattan backrest",
+          "score": 0.3387451171875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "chair_dfeb8d914d8b28ab5bb58f1e92d30bf7",
+          "prompt_idx": 2,
+          "prompt": "A rounded chair with gold-finished legs, a pink linen seat, transparent acrylic armrests, and a padded cream backrest",
+          "score": 0.3492431640625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "chair_dfeb8d914d8b28ab5bb58f1e92d30bf7",
+          "prompt_idx": 3,
+          "prompt": "A rounded chair with black steel legs, a green leather seat, brass armrests, and a light beige upholstered backrest",
+          "score": 0.340576171875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "chair_dfeb8d914d8b28ab5bb58f1e92d30bf7",
+          "prompt_idx": 4,
+          "prompt": "A rounded chair with white lacquered legs, a navy blue canvas seat, birch wood armrests, and a mesh backrest",
+          "score": 0.3544921875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "chair_f1f670ac53799c18492d9da2668ec34c",
+          "prompt_idx": 0,
+          "prompt": "An office chair with a chrome pedestal, black rubber wheels, black leather seat and backrest, and grey plastic armrests",
+          "score": 0.3282470703125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "chair_f1f670ac53799c18492d9da2668ec34c",
+          "prompt_idx": 1,
+          "prompt": "An office chair with a matte black pedestal, red wheels, a teal blue fabric seat, a matching blue backrest, and white armrests",
+          "score": 0.34600830078125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "chair_f1f670ac53799c18492d9da2668ec34c",
+          "prompt_idx": 2,
+          "prompt": "An office chair with a gold metallic pedestal, clear acrylic wheels, a pink velvet seat, a white backrest, and gold armrests",
+          "score": 0.35125732421875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "chair_f1f670ac53799c18492d9da2668ec34c",
+          "prompt_idx": 3,
+          "prompt": "An office chair with a silver pedestal, dark grey wheels, a tan leather seat and backrest, and wooden armrests",
+          "score": 0.3338623046875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "chair_f1f670ac53799c18492d9da2668ec34c",
+          "prompt_idx": 4,
+          "prompt": "An office chair with a white pedestal, pastel pink wheels, a mint green seat, a white mesh backrest, and light grey armrests",
+          "score": 0.3538818359375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "lamp_dc6c499e71d04971d22730b0728b2fc9",
+          "prompt_idx": 0,
+          "prompt": "A swing-arm desk lamp with a black marble base, a bright red metal shade, a chrome upper arm, a brass middle arm, and a black lower arm",
+          "score": 0.32440185546875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "lamp_dc6c499e71d04971d22730b0728b2fc9",
+          "prompt_idx": 1,
+          "prompt": "A swing-arm desk lamp with a white ceramic base, a lime green shade, and silver metallic arm segments throughout",
+          "score": 0.3519287109375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "lamp_dc6c499e71d04971d22730b0728b2fc9",
+          "prompt_idx": 2,
+          "prompt": "A swing-arm desk lamp with a wooden base, a matte black cone shade, and copper-finished arm segments",
+          "score": 0.3017578125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "lamp_dc6c499e71d04971d22730b0728b2fc9",
+          "prompt_idx": 3,
+          "prompt": "A swing-arm desk lamp with a grey concrete base, a yellow enamel shade, a white upper arm, a grey middle arm, and a dark lower arm",
+          "score": 0.35345458984375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "lamp_dc6c499e71d04971d22730b0728b2fc9",
+          "prompt_idx": 4,
+          "prompt": "A swing-arm desk lamp with a gold-plated base, a navy blue shade, and rose gold arm segments",
+          "score": 0.32879638671875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "lamp_f228f6cd86162beb659dda512294c744",
+          "prompt_idx": 0,
+          "prompt": "A classic desk lamp with a black marble base, a green enamel cone shade, brass stand legs, and a gold central socket housing",
+          "score": 0.343017578125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "lamp_f228f6cd86162beb659dda512294c744",
+          "prompt_idx": 1,
+          "prompt": "A classic desk lamp with a white ceramic base, a red-and-white striped cone shade, chrome stand legs, and a silver central housing",
+          "score": 0.3271484375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "lamp_f228f6cd86162beb659dda512294c744",
+          "prompt_idx": 2,
+          "prompt": "A classic desk lamp with a walnut wood base, a cream linen cone shade, dark bronze stand legs, and a bronze central housing",
+          "score": 0.30096435546875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "lamp_f228f6cd86162beb659dda512294c744",
+          "prompt_idx": 3,
+          "prompt": "A classic desk lamp with a grey concrete base, a cobalt blue cone shade, matte black stand legs, and a gunmetal central housing",
+          "score": 0.33282470703125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "lamp_f228f6cd86162beb659dda512294c744",
+          "prompt_idx": 4,
+          "prompt": "A classic desk lamp with a pink acrylic base, a pastel yellow cone shade, rose gold stand legs, and a white central housing",
+          "score": 0.3370361328125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "rifle_d88c106c00384130fb5c1b0f759e2bc1",
+          "prompt_idx": 0,
+          "prompt": "A pistol with a black polymer trigger guard, a brown wooden grip, and a stainless steel slide and barrel",
+          "score": 0.275360107421875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "rifle_d88c106c00384130fb5c1b0f759e2bc1",
+          "prompt_idx": 1,
+          "prompt": "A pistol with a tan desert-camo lower frame, a black rubber grip, and a matte black slide and barrel",
+          "score": 0.300140380859375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "rifle_d88c106c00384130fb5c1b0f759e2bc1",
+          "prompt_idx": 2,
+          "prompt": "A pistol with a red anodized trigger guard, a white pearl grip, and a chrome slide and barrel",
+          "score": 0.27001953125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "rifle_d88c106c00384130fb5c1b0f759e2bc1",
+          "prompt_idx": 3,
+          "prompt": "A pistol with a grey composite lower frame, a dark grey textured grip, and a brushed steel slide and barrel",
+          "score": 0.278472900390625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "rifle_d88c106c00384130fb5c1b0f759e2bc1",
+          "prompt_idx": 4,
+          "prompt": "A pistol with an olive green trigger guard, a walnut wood grip, and a gold-titanium coated slide and barrel",
+          "score": 0.267608642578125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "rifle_faa1fb485ddd6c9c8bfbe54b5d01550",
+          "prompt_idx": 0,
+          "prompt": "A bolt-action rifle with a black polymer main body, silver metal bipod, dark walnut buttstock, and a black rubber buttpad",
+          "score": 0.245208740234375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "rifle_faa1fb485ddd6c9c8bfbe54b5d01550",
+          "prompt_idx": 1,
+          "prompt": "A bolt-action rifle with a tan desert-camo main body, gold-tipped bipod, sand-colored buttstock, and a brown rubber buttpad",
+          "score": 0.24432373046875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "rifle_faa1fb485ddd6c9c8bfbe54b5d01550",
+          "prompt_idx": 2,
+          "prompt": "A bolt-action rifle with a forest green main body, black bipod, olive drab buttstock, and a dark green buttpad",
+          "score": 0.250091552734375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "rifle_faa1fb485ddd6c9c8bfbe54b5d01550",
+          "prompt_idx": 3,
+          "prompt": "A bolt-action rifle with a grey carbon-fiber textured main body, chrome bipod, black synthetic buttstock, and a red rubber buttpad",
+          "score": 0.24176025390625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "rifle_faa1fb485ddd6c9c8bfbe54b5d01550",
+          "prompt_idx": 4,
+          "prompt": "A bolt-action rifle with a white arctic-camo main body, white bipod, white buttstock, and a grey buttpad",
+          "score": 0.25189208984375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "sofa_d9ae4cecb8203838f652f706160dc96d",
+          "prompt_idx": 0,
+          "prompt": "A sofa with navy blue velvet armrests, gold metal legs, a white front panel, a grey flannel seat cushion, and a navy blue backrest",
+          "score": 0.35906982421875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "sofa_d9ae4cecb8203838f652f706160dc96d",
+          "prompt_idx": 1,
+          "prompt": "A sofa with cream leather armrests, dark walnut legs, a beige fabric front panel, a terracotta seat cushion, and a cream backrest",
+          "score": 0.32568359375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "sofa_d9ae4cecb8203838f652f706160dc96d",
+          "prompt_idx": 2,
+          "prompt": "A sofa with forest green linen armrests, black iron legs, a charcoal front panel, a mustard yellow seat cushion, and a dark green backrest",
+          "score": 0.34136962890625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "sofa_d9ae4cecb8203838f652f706160dc96d",
+          "prompt_idx": 3,
+          "prompt": "A sofa with dusty pink velvet armrests, brass legs, a light grey front panel, a white boucle seat cushion, and a pale pink backrest",
+          "score": 0.33935546875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "sofa_d9ae4cecb8203838f652f706160dc96d",
+          "prompt_idx": 4,
+          "prompt": "A sofa with burnt orange fabric armrests, silver metal legs, a tan front panel, a deep brown leather seat cushion, and an orange backrest",
+          "score": 0.334228515625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "sofa_ed394e35b999f69edb039d8689a74349",
+          "prompt_idx": 0,
+          "prompt": "An L-shaped sectional sofa with a light grey chaise cushion, white leather armrests, a charcoal main seat cushion, and a dark grey backrest",
+          "score": 0.3092041015625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "sofa_ed394e35b999f69edb039d8689a74349",
+          "prompt_idx": 1,
+          "prompt": "An L-shaped sectional sofa with a mustard yellow chaise cushion, navy blue armrests, a cream main seat cushion, and a navy blue backrest",
+          "score": 0.3031005859375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "sofa_ed394e35b999f69edb039d8689a74349",
+          "prompt_idx": 2,
+          "prompt": "An L-shaped sectional sofa with a blush pink chaise cushion, white boucle armrests, a rose velvet main seat, and a light pink backrest",
+          "score": 0.3177490234375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "sofa_ed394e35b999f69edb039d8689a74349",
+          "prompt_idx": 3,
+          "prompt": "An L-shaped sectional sofa with a forest green chaise cushion, dark walnut armrests, an olive main seat cushion, and a deep green backrest",
+          "score": 0.310546875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "sofa_ed394e35b999f69edb039d8689a74349",
+          "prompt_idx": 4,
+          "prompt": "An L-shaped sectional sofa with a burnt sienna chaise cushion, tan leather armrests, a rust orange main seat, and a brown backrest",
+          "score": 0.33734130859375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "table_d3a55d20bb9c93985a7746683ad193f0",
+          "prompt_idx": 0,
+          "prompt": "A ping-pong table with black metal legs, a white net, and a regulation blue playing surface",
+          "score": 0.35235595703125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "table_d3a55d20bb9c93985a7746683ad193f0",
+          "prompt_idx": 1,
+          "prompt": "A ping-pong table with red metal legs, a black net, and a green playing surface",
+          "score": 0.251678466796875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "table_d3a55d20bb9c93985a7746683ad193f0",
+          "prompt_idx": 2,
+          "prompt": "A ping-pong table with silver aluminum legs, a yellow net, and a dark grey playing surface",
+          "score": 0.29241943359375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "table_d3a55d20bb9c93985a7746683ad193f0",
+          "prompt_idx": 3,
+          "prompt": "A ping-pong table with white painted legs, a red net, and a forest green playing surface with white boundary lines",
+          "score": 0.27532958984375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "table_d3a55d20bb9c93985a7746683ad193f0",
+          "prompt_idx": 4,
+          "prompt": "A ping-pong table with wooden legs, a black net, and a sky blue playing surface",
+          "score": 0.273284912109375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "table_f3b8c91c5dd1cb6b8722573b29f0d6d8",
+          "prompt_idx": 0,
+          "prompt": "A rectangular table with black metal legs, white painted crossbars, grey aprons, and a natural oak tabletop",
+          "score": 0.2772216796875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "table_f3b8c91c5dd1cb6b8722573b29f0d6d8",
+          "prompt_idx": 1,
+          "prompt": "A rectangular table with dark walnut legs, matching walnut crossbars, cream aprons, and a white marble tabletop",
+          "score": 0.302490234375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "table_f3b8c91c5dd1cb6b8722573b29f0d6d8",
+          "prompt_idx": 2,
+          "prompt": "A rectangular table with brass-finished legs, gold crossbars, black aprons, and a dark glass tabletop",
+          "score": 0.29241943359375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "table_f3b8c91c5dd1cb6b8722573b29f0d6d8",
+          "prompt_idx": 3,
+          "prompt": "A rectangular table with white painted legs, light oak crossbars, white aprons, and a pale birch tabletop",
+          "score": 0.2724609375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "table_f3b8c91c5dd1cb6b8722573b29f0d6d8",
+          "prompt_idx": 4,
+          "prompt": "A rectangular table with industrial grey iron legs, black crossbars, dark grey aprons, and a reclaimed wood tabletop",
+          "score": 0.2987060546875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "watercraft_d3043fff20dad5c41dc762869682f4f",
+          "prompt_idx": 0,
+          "prompt": "A motorboat with a white fiberglass cabin and a navy blue hull",
+          "score": 0.283721923828125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "watercraft_d3043fff20dad5c41dc762869682f4f",
+          "prompt_idx": 1,
+          "prompt": "A motorboat with a grey metal cabin and a bright red hull",
+          "score": 0.28228759765625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "watercraft_d3043fff20dad5c41dc762869682f4f",
+          "prompt_idx": 2,
+          "prompt": "A motorboat with a cream-colored cabin and a dark green hull with gold trim",
+          "score": 0.2742919921875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "watercraft_d3043fff20dad5c41dc762869682f4f",
+          "prompt_idx": 3,
+          "prompt": "A motorboat with a black cabin and a bright yellow hull",
+          "score": 0.2677001953125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "watercraft_d3043fff20dad5c41dc762869682f4f",
+          "prompt_idx": 4,
+          "prompt": "A motorboat with a wood-paneled cabin and a white hull with blue racing stripes",
+          "score": 0.262420654296875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "watercraft_d95c49195e51912056f316a86bec8b19",
+          "prompt_idx": 0,
+          "prompt": "A sailboat with a white hull, a red jib sail, and a white mainsail with blue stripes",
+          "score": 0.286712646484375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "watercraft_d95c49195e51912056f316a86bec8b19",
+          "prompt_idx": 1,
+          "prompt": "A sailboat with a navy blue hull, a cream-colored jib, and a yellow mainsail",
+          "score": 0.274261474609375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "watercraft_d95c49195e51912056f316a86bec8b19",
+          "prompt_idx": 2,
+          "prompt": "A sailboat with a dark teak wooden hull, a white jib, and a red mainsail",
+          "score": 0.29248046875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "watercraft_d95c49195e51912056f316a86bec8b19",
+          "prompt_idx": 3,
+          "prompt": "A sailboat with a black hull, a bright orange jib, and a white mainsail",
+          "score": 0.298583984375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "watercraft_d95c49195e51912056f316a86bec8b19",
+          "prompt_idx": 4,
+          "prompt": "A sailboat with a sky blue hull, a white jib, and a green mainsail",
+          "score": 0.27490234375,
+          "n_views": 4
+        }
+      ]
+    },
+    "local_sq": {
+      "mean": 0.300294189453125,
+      "min": 0.240936279296875,
+      "max": 0.36865234375,
+      "n": 100,
+      "records": [
+        {
+          "shape_id": "airplane_d18592d9615b01bbbc0909d98a1ff2b4",
+          "prompt_idx": 0,
+          "prompt": "A commercial airliner with a white fuselage, red-tipped wings, and a blue tail section",
+          "score": 0.29852294921875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "airplane_d18592d9615b01bbbc0909d98a1ff2b4",
+          "prompt_idx": 1,
+          "prompt": "A commercial airliner with a matte grey fuselage, yellow wings, and a black empennage",
+          "score": 0.27197265625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "airplane_d18592d9615b01bbbc0909d98a1ff2b4",
+          "prompt_idx": 2,
+          "prompt": "A commercial airliner with a silver metallic fuselage, orange striped wings, and a dark navy tail",
+          "score": 0.2574462890625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "airplane_d18592d9615b01bbbc0909d98a1ff2b4",
+          "prompt_idx": 3,
+          "prompt": "A commercial airliner with a white fuselage, green wings, and a red tail section with gold accents",
+          "score": 0.280303955078125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "airplane_d18592d9615b01bbbc0909d98a1ff2b4",
+          "prompt_idx": 4,
+          "prompt": "A commercial airliner with a glossy cream fuselage, sky-blue wings, and a burgundy tail section",
+          "score": 0.27728271484375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "airplane_f44c0e1e55a3469494f3355d9c061b5a",
+          "prompt_idx": 0,
+          "prompt": "A fighter jet with a matte black fuselage and camouflage green wings",
+          "score": 0.316162109375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "airplane_f44c0e1e55a3469494f3355d9c061b5a",
+          "prompt_idx": 1,
+          "prompt": "A fighter jet with a glossy dark grey fuselage and bright orange wings",
+          "score": 0.30419921875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "airplane_f44c0e1e55a3469494f3355d9c061b5a",
+          "prompt_idx": 2,
+          "prompt": "A fighter jet with a sand-colored desert camo fuselage and dark brown wings",
+          "score": 0.318603515625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "airplane_f44c0e1e55a3469494f3355d9c061b5a",
+          "prompt_idx": 3,
+          "prompt": "A fighter jet with a blue and white fuselage and silver metallic wings",
+          "score": 0.30169677734375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "airplane_f44c0e1e55a3469494f3355d9c061b5a",
+          "prompt_idx": 4,
+          "prompt": "A fighter jet with a red fuselage and white wings with black trim",
+          "score": 0.31695556640625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "bench_dd97603ce7538c15be5bbc844e6db7e",
+          "prompt_idx": 0,
+          "prompt": "A park bench with black cast iron legs and rims and a natural oak wooden seat",
+          "score": 0.28759765625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "bench_dd97603ce7538c15be5bbc844e6db7e",
+          "prompt_idx": 1,
+          "prompt": "A park bench with white painted metal legs and rims and a dark walnut wooden seat",
+          "score": 0.30279541015625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "bench_dd97603ce7538c15be5bbc844e6db7e",
+          "prompt_idx": 2,
+          "prompt": "A park bench with rusty brown iron legs and rims and a teak wooden seat with green moss",
+          "score": 0.30230712890625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "bench_dd97603ce7538c15be5bbc844e6db7e",
+          "prompt_idx": 3,
+          "prompt": "A park bench with gold metal legs and rims and a polished mahogany seat",
+          "score": 0.27618408203125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "bench_dd97603ce7538c15be5bbc844e6db7e",
+          "prompt_idx": 4,
+          "prompt": "A park bench with concrete grey legs and rims and a bright white painted wooden seat",
+          "score": 0.263397216796875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+          "prompt_idx": 0,
+          "prompt": "A garden bench with black wrought iron legs, green painted armrests, a natural pine seat, and a white backrest",
+          "score": 0.32666015625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+          "prompt_idx": 1,
+          "prompt": "A garden bench with brown wooden legs, cream-colored armrests, a red-painted seat, and a dark brown backrest",
+          "score": 0.2734375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+          "prompt_idx": 2,
+          "prompt": "A garden bench with brass-finished legs, walnut armrests, a forest green seat, and a matching green backrest",
+          "score": 0.32830810546875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+          "prompt_idx": 3,
+          "prompt": "A garden bench with grey stone-textured legs, light oak armrests, a navy blue cushioned seat, and a white backrest",
+          "score": 0.3238525390625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+          "prompt_idx": 4,
+          "prompt": "A garden bench with copper-patina legs, teak armrests, a charcoal grey seat, and a beige backrest",
+          "score": 0.29901123046875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "cabinet_bbbd4de3e7ab25ad80d6227ff9b21190",
+          "prompt_idx": 0,
+          "prompt": "A tall cabinet with white painted side panels, a glossy red front door, and a light oak top panel",
+          "score": 0.28863525390625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "cabinet_bbbd4de3e7ab25ad80d6227ff9b21190",
+          "prompt_idx": 1,
+          "prompt": "A tall cabinet with dark walnut side panels, a glass-fronted door, and a black top panel",
+          "score": 0.30938720703125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "cabinet_bbbd4de3e7ab25ad80d6227ff9b21190",
+          "prompt_idx": 2,
+          "prompt": "A tall cabinet with grey metal side panels, a navy blue front door, and a silver top panel",
+          "score": 0.3072509765625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "cabinet_bbbd4de3e7ab25ad80d6227ff9b21190",
+          "prompt_idx": 3,
+          "prompt": "A tall cabinet with pine wood side panels, a bright yellow front door, and a matching pine top",
+          "score": 0.2772216796875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "cabinet_bbbd4de3e7ab25ad80d6227ff9b21190",
+          "prompt_idx": 4,
+          "prompt": "A tall cabinet with matte black side panels, a mirrored front door, and a white marble top panel",
+          "score": 0.251190185546875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "cabinet_df55c6665781293cbe53b3b9f1274310",
+          "prompt_idx": 0,
+          "prompt": "A rectangular storage cabinet with a white painted main body and a dark walnut wood top panel",
+          "score": 0.268524169921875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "cabinet_df55c6665781293cbe53b3b9f1274310",
+          "prompt_idx": 1,
+          "prompt": "A rectangular storage cabinet with a brushed steel main body and a black granite top panel",
+          "score": 0.28961181640625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "cabinet_df55c6665781293cbe53b3b9f1274310",
+          "prompt_idx": 2,
+          "prompt": "A rectangular storage cabinet with a navy blue main body and a light oak top panel",
+          "score": 0.297607421875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "cabinet_df55c6665781293cbe53b3b9f1274310",
+          "prompt_idx": 3,
+          "prompt": "A rectangular storage cabinet with a terracotta red main body and a white marble top panel",
+          "score": 0.318115234375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "cabinet_df55c6665781293cbe53b3b9f1274310",
+          "prompt_idx": 4,
+          "prompt": "A rectangular storage cabinet with a forest green main body and a brass-finished top panel",
+          "score": 0.33001708984375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "car_d287b02b4679c70ab7902335d9dd94a2",
+          "prompt_idx": 0,
+          "prompt": "A pickup truck with a red cabin, black fenders on the truck bed, silver wheels, a white hood, and a grey tailgate and floor",
+          "score": 0.2999267578125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "car_d287b02b4679c70ab7902335d9dd94a2",
+          "prompt_idx": 1,
+          "prompt": "A pickup truck with a navy blue cabin, rust-orange fenders, black wheels, a matching blue hood, and a silver tailgate",
+          "score": 0.324462890625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "car_d287b02b4679c70ab7902335d9dd94a2",
+          "prompt_idx": 2,
+          "prompt": "A pickup truck with a sandy beige cabin, dark green fenders, chrome wheels, a cream hood, and a brown wooden truck bed floor",
+          "score": 0.317626953125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "car_d287b02b4679c70ab7902335d9dd94a2",
+          "prompt_idx": 3,
+          "prompt": "A pickup truck with a matte black cabin, gunmetal grey fenders, red wheels, a black hood, and a silver tailgate",
+          "score": 0.3096923828125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "car_d287b02b4679c70ab7902335d9dd94a2",
+          "prompt_idx": 4,
+          "prompt": "A pickup truck with a forest green cabin, olive drab fenders, white wheels, a green hood, and a black steel truck bed floor",
+          "score": 0.340576171875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "car_f9cad36ae25540a0bb20fd1bc4860856",
+          "prompt_idx": 0,
+          "prompt": "A four-door sedan with a white cabin, black hood, and bright red wheels",
+          "score": 0.28143310546875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "car_f9cad36ae25540a0bb20fd1bc4860856",
+          "prompt_idx": 1,
+          "prompt": "A four-door sedan with a silver metallic cabin, dark blue hood, and gold chrome wheels",
+          "score": 0.25933837890625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "car_f9cad36ae25540a0bb20fd1bc4860856",
+          "prompt_idx": 2,
+          "prompt": "A four-door sedan with a jet black cabin, red hood, and chrome silver wheels",
+          "score": 0.26800537109375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "car_f9cad36ae25540a0bb20fd1bc4860856",
+          "prompt_idx": 3,
+          "prompt": "A four-door sedan with a pearl white cabin, yellow hood, and matte black wheels",
+          "score": 0.30023193359375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "car_f9cad36ae25540a0bb20fd1bc4860856",
+          "prompt_idx": 4,
+          "prompt": "A four-door sedan with a deep burgundy cabin, charcoal grey hood, and rose gold wheels",
+          "score": 0.295166015625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "chair_dfeb8d914d8b28ab5bb58f1e92d30bf7",
+          "prompt_idx": 0,
+          "prompt": "A rounded chair with blue painted metal legs, red velvet seat cushion, white plastic armrests, and a dark walnut wooden backrest",
+          "score": 0.31414794921875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "chair_dfeb8d914d8b28ab5bb58f1e92d30bf7",
+          "prompt_idx": 1,
+          "prompt": "A rounded chair with natural oak legs, a grey wool seat, black rubber armrests, and a woven rattan backrest",
+          "score": 0.33270263671875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "chair_dfeb8d914d8b28ab5bb58f1e92d30bf7",
+          "prompt_idx": 2,
+          "prompt": "A rounded chair with gold-finished legs, a pink linen seat, transparent acrylic armrests, and a padded cream backrest",
+          "score": 0.35113525390625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "chair_dfeb8d914d8b28ab5bb58f1e92d30bf7",
+          "prompt_idx": 3,
+          "prompt": "A rounded chair with black steel legs, a green leather seat, brass armrests, and a light beige upholstered backrest",
+          "score": 0.3349609375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "chair_dfeb8d914d8b28ab5bb58f1e92d30bf7",
+          "prompt_idx": 4,
+          "prompt": "A rounded chair with white lacquered legs, a navy blue canvas seat, birch wood armrests, and a mesh backrest",
+          "score": 0.35302734375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "chair_f1f670ac53799c18492d9da2668ec34c",
+          "prompt_idx": 0,
+          "prompt": "An office chair with a chrome pedestal, black rubber wheels, black leather seat and backrest, and grey plastic armrests",
+          "score": 0.33331298828125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "chair_f1f670ac53799c18492d9da2668ec34c",
+          "prompt_idx": 1,
+          "prompt": "An office chair with a matte black pedestal, red wheels, a teal blue fabric seat, a matching blue backrest, and white armrests",
+          "score": 0.3468017578125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "chair_f1f670ac53799c18492d9da2668ec34c",
+          "prompt_idx": 2,
+          "prompt": "An office chair with a gold metallic pedestal, clear acrylic wheels, a pink velvet seat, a white backrest, and gold armrests",
+          "score": 0.35638427734375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "chair_f1f670ac53799c18492d9da2668ec34c",
+          "prompt_idx": 3,
+          "prompt": "An office chair with a silver pedestal, dark grey wheels, a tan leather seat and backrest, and wooden armrests",
+          "score": 0.3408203125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "chair_f1f670ac53799c18492d9da2668ec34c",
+          "prompt_idx": 4,
+          "prompt": "An office chair with a white pedestal, pastel pink wheels, a mint green seat, a white mesh backrest, and light grey armrests",
+          "score": 0.3602294921875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "lamp_dc6c499e71d04971d22730b0728b2fc9",
+          "prompt_idx": 0,
+          "prompt": "A swing-arm desk lamp with a black marble base, a bright red metal shade, a chrome upper arm, a brass middle arm, and a black lower arm",
+          "score": 0.3028564453125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "lamp_dc6c499e71d04971d22730b0728b2fc9",
+          "prompt_idx": 1,
+          "prompt": "A swing-arm desk lamp with a white ceramic base, a lime green shade, and silver metallic arm segments throughout",
+          "score": 0.36865234375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "lamp_dc6c499e71d04971d22730b0728b2fc9",
+          "prompt_idx": 2,
+          "prompt": "A swing-arm desk lamp with a wooden base, a matte black cone shade, and copper-finished arm segments",
+          "score": 0.29779052734375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "lamp_dc6c499e71d04971d22730b0728b2fc9",
+          "prompt_idx": 3,
+          "prompt": "A swing-arm desk lamp with a grey concrete base, a yellow enamel shade, a white upper arm, a grey middle arm, and a dark lower arm",
+          "score": 0.34722900390625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "lamp_dc6c499e71d04971d22730b0728b2fc9",
+          "prompt_idx": 4,
+          "prompt": "A swing-arm desk lamp with a gold-plated base, a navy blue shade, and rose gold arm segments",
+          "score": 0.28094482421875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "lamp_f228f6cd86162beb659dda512294c744",
+          "prompt_idx": 0,
+          "prompt": "A classic desk lamp with a black marble base, a green enamel cone shade, brass stand legs, and a gold central socket housing",
+          "score": 0.32843017578125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "lamp_f228f6cd86162beb659dda512294c744",
+          "prompt_idx": 1,
+          "prompt": "A classic desk lamp with a white ceramic base, a red-and-white striped cone shade, chrome stand legs, and a silver central housing",
+          "score": 0.30120849609375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "lamp_f228f6cd86162beb659dda512294c744",
+          "prompt_idx": 2,
+          "prompt": "A classic desk lamp with a walnut wood base, a cream linen cone shade, dark bronze stand legs, and a bronze central housing",
+          "score": 0.308837890625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "lamp_f228f6cd86162beb659dda512294c744",
+          "prompt_idx": 3,
+          "prompt": "A classic desk lamp with a grey concrete base, a cobalt blue cone shade, matte black stand legs, and a gunmetal central housing",
+          "score": 0.31414794921875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "lamp_f228f6cd86162beb659dda512294c744",
+          "prompt_idx": 4,
+          "prompt": "A classic desk lamp with a pink acrylic base, a pastel yellow cone shade, rose gold stand legs, and a white central housing",
+          "score": 0.35498046875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "rifle_d88c106c00384130fb5c1b0f759e2bc1",
+          "prompt_idx": 0,
+          "prompt": "A pistol with a black polymer trigger guard, a brown wooden grip, and a stainless steel slide and barrel",
+          "score": 0.2667236328125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "rifle_d88c106c00384130fb5c1b0f759e2bc1",
+          "prompt_idx": 1,
+          "prompt": "A pistol with a tan desert-camo lower frame, a black rubber grip, and a matte black slide and barrel",
+          "score": 0.2904052734375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "rifle_d88c106c00384130fb5c1b0f759e2bc1",
+          "prompt_idx": 2,
+          "prompt": "A pistol with a red anodized trigger guard, a white pearl grip, and a chrome slide and barrel",
+          "score": 0.27728271484375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "rifle_d88c106c00384130fb5c1b0f759e2bc1",
+          "prompt_idx": 3,
+          "prompt": "A pistol with a grey composite lower frame, a dark grey textured grip, and a brushed steel slide and barrel",
+          "score": 0.27569580078125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "rifle_d88c106c00384130fb5c1b0f759e2bc1",
+          "prompt_idx": 4,
+          "prompt": "A pistol with an olive green trigger guard, a walnut wood grip, and a gold-titanium coated slide and barrel",
+          "score": 0.268402099609375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "rifle_faa1fb485ddd6c9c8bfbe54b5d01550",
+          "prompt_idx": 0,
+          "prompt": "A bolt-action rifle with a black polymer main body, silver metal bipod, dark walnut buttstock, and a black rubber buttpad",
+          "score": 0.240936279296875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "rifle_faa1fb485ddd6c9c8bfbe54b5d01550",
+          "prompt_idx": 1,
+          "prompt": "A bolt-action rifle with a tan desert-camo main body, gold-tipped bipod, sand-colored buttstock, and a brown rubber buttpad",
+          "score": 0.248016357421875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "rifle_faa1fb485ddd6c9c8bfbe54b5d01550",
+          "prompt_idx": 2,
+          "prompt": "A bolt-action rifle with a forest green main body, black bipod, olive drab buttstock, and a dark green buttpad",
+          "score": 0.274383544921875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "rifle_faa1fb485ddd6c9c8bfbe54b5d01550",
+          "prompt_idx": 3,
+          "prompt": "A bolt-action rifle with a grey carbon-fiber textured main body, chrome bipod, black synthetic buttstock, and a red rubber buttpad",
+          "score": 0.241943359375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "rifle_faa1fb485ddd6c9c8bfbe54b5d01550",
+          "prompt_idx": 4,
+          "prompt": "A bolt-action rifle with a white arctic-camo main body, white bipod, white buttstock, and a grey buttpad",
+          "score": 0.261505126953125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "sofa_d9ae4cecb8203838f652f706160dc96d",
+          "prompt_idx": 0,
+          "prompt": "A sofa with navy blue velvet armrests, gold metal legs, a white front panel, a grey flannel seat cushion, and a navy blue backrest",
+          "score": 0.346923828125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "sofa_d9ae4cecb8203838f652f706160dc96d",
+          "prompt_idx": 1,
+          "prompt": "A sofa with cream leather armrests, dark walnut legs, a beige fabric front panel, a terracotta seat cushion, and a cream backrest",
+          "score": 0.3233642578125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "sofa_d9ae4cecb8203838f652f706160dc96d",
+          "prompt_idx": 2,
+          "prompt": "A sofa with forest green linen armrests, black iron legs, a charcoal front panel, a mustard yellow seat cushion, and a dark green backrest",
+          "score": 0.33074951171875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "sofa_d9ae4cecb8203838f652f706160dc96d",
+          "prompt_idx": 3,
+          "prompt": "A sofa with dusty pink velvet armrests, brass legs, a light grey front panel, a white boucle seat cushion, and a pale pink backrest",
+          "score": 0.34149169921875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "sofa_d9ae4cecb8203838f652f706160dc96d",
+          "prompt_idx": 4,
+          "prompt": "A sofa with burnt orange fabric armrests, silver metal legs, a tan front panel, a deep brown leather seat cushion, and an orange backrest",
+          "score": 0.345703125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "sofa_ed394e35b999f69edb039d8689a74349",
+          "prompt_idx": 0,
+          "prompt": "An L-shaped sectional sofa with a light grey chaise cushion, white leather armrests, a charcoal main seat cushion, and a dark grey backrest",
+          "score": 0.31317138671875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "sofa_ed394e35b999f69edb039d8689a74349",
+          "prompt_idx": 1,
+          "prompt": "An L-shaped sectional sofa with a mustard yellow chaise cushion, navy blue armrests, a cream main seat cushion, and a navy blue backrest",
+          "score": 0.3065185546875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "sofa_ed394e35b999f69edb039d8689a74349",
+          "prompt_idx": 2,
+          "prompt": "An L-shaped sectional sofa with a blush pink chaise cushion, white boucle armrests, a rose velvet main seat, and a light pink backrest",
+          "score": 0.31390380859375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "sofa_ed394e35b999f69edb039d8689a74349",
+          "prompt_idx": 3,
+          "prompt": "An L-shaped sectional sofa with a forest green chaise cushion, dark walnut armrests, an olive main seat cushion, and a deep green backrest",
+          "score": 0.330078125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "sofa_ed394e35b999f69edb039d8689a74349",
+          "prompt_idx": 4,
+          "prompt": "An L-shaped sectional sofa with a burnt sienna chaise cushion, tan leather armrests, a rust orange main seat, and a brown backrest",
+          "score": 0.34112548828125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "table_d3a55d20bb9c93985a7746683ad193f0",
+          "prompt_idx": 0,
+          "prompt": "A ping-pong table with black metal legs, a white net, and a regulation blue playing surface",
+          "score": 0.25177001953125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "table_d3a55d20bb9c93985a7746683ad193f0",
+          "prompt_idx": 1,
+          "prompt": "A ping-pong table with red metal legs, a black net, and a green playing surface",
+          "score": 0.256103515625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "table_d3a55d20bb9c93985a7746683ad193f0",
+          "prompt_idx": 2,
+          "prompt": "A ping-pong table with silver aluminum legs, a yellow net, and a dark grey playing surface",
+          "score": 0.247100830078125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "table_d3a55d20bb9c93985a7746683ad193f0",
+          "prompt_idx": 3,
+          "prompt": "A ping-pong table with white painted legs, a red net, and a forest green playing surface with white boundary lines",
+          "score": 0.271728515625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "table_d3a55d20bb9c93985a7746683ad193f0",
+          "prompt_idx": 4,
+          "prompt": "A ping-pong table with wooden legs, a black net, and a sky blue playing surface",
+          "score": 0.30029296875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "table_f3b8c91c5dd1cb6b8722573b29f0d6d8",
+          "prompt_idx": 0,
+          "prompt": "A rectangular table with black metal legs, white painted crossbars, grey aprons, and a natural oak tabletop",
+          "score": 0.29364013671875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "table_f3b8c91c5dd1cb6b8722573b29f0d6d8",
+          "prompt_idx": 1,
+          "prompt": "A rectangular table with dark walnut legs, matching walnut crossbars, cream aprons, and a white marble tabletop",
+          "score": 0.3013916015625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "table_f3b8c91c5dd1cb6b8722573b29f0d6d8",
+          "prompt_idx": 2,
+          "prompt": "A rectangular table with brass-finished legs, gold crossbars, black aprons, and a dark glass tabletop",
+          "score": 0.296142578125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "table_f3b8c91c5dd1cb6b8722573b29f0d6d8",
+          "prompt_idx": 3,
+          "prompt": "A rectangular table with white painted legs, light oak crossbars, white aprons, and a pale birch tabletop",
+          "score": 0.27618408203125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "table_f3b8c91c5dd1cb6b8722573b29f0d6d8",
+          "prompt_idx": 4,
+          "prompt": "A rectangular table with industrial grey iron legs, black crossbars, dark grey aprons, and a reclaimed wood tabletop",
+          "score": 0.312744140625,
+          "n_views": 4
+        },
+        {
+          "shape_id": "watercraft_d3043fff20dad5c41dc762869682f4f",
+          "prompt_idx": 0,
+          "prompt": "A motorboat with a white fiberglass cabin and a navy blue hull",
+          "score": 0.261810302734375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "watercraft_d3043fff20dad5c41dc762869682f4f",
+          "prompt_idx": 1,
+          "prompt": "A motorboat with a grey metal cabin and a bright red hull",
+          "score": 0.262725830078125,
+          "n_views": 4
+        },
+        {
+          "shape_id": "watercraft_d3043fff20dad5c41dc762869682f4f",
+          "prompt_idx": 2,
+          "prompt": "A motorboat with a cream-colored cabin and a dark green hull with gold trim",
+          "score": 0.263275146484375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "watercraft_d3043fff20dad5c41dc762869682f4f",
+          "prompt_idx": 3,
+          "prompt": "A motorboat with a black cabin and a bright yellow hull",
+          "score": 0.265380859375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "watercraft_d3043fff20dad5c41dc762869682f4f",
+          "prompt_idx": 4,
+          "prompt": "A motorboat with a wood-paneled cabin and a white hull with blue racing stripes",
+          "score": 0.277191162109375,
+          "n_views": 4
+        },
+        {
+          "shape_id": "watercraft_d95c49195e51912056f316a86bec8b19",
+          "prompt_idx": 0,
+          "prompt": "A sailboat with a white hull, a red jib sail, and a white mainsail with blue stripes",
+          "score": 0.2752685546875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "watercraft_d95c49195e51912056f316a86bec8b19",
+          "prompt_idx": 1,
+          "prompt": "A sailboat with a navy blue hull, a cream-colored jib, and a yellow mainsail",
+          "score": 0.2860107421875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "watercraft_d95c49195e51912056f316a86bec8b19",
+          "prompt_idx": 2,
+          "prompt": "A sailboat with a dark teak wooden hull, a white jib, and a red mainsail",
+          "score": 0.30438232421875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "watercraft_d95c49195e51912056f316a86bec8b19",
+          "prompt_idx": 3,
+          "prompt": "A sailboat with a black hull, a bright orange jib, and a white mainsail",
+          "score": 0.2967529296875,
+          "n_views": 4
+        },
+        {
+          "shape_id": "watercraft_d95c49195e51912056f316a86bec8b19",
+          "prompt_idx": 4,
+          "prompt": "A sailboat with a sky blue hull, a white jib, and a green mainsail",
+          "score": 0.3018798828125,
+          "n_views": 4
+        }
+      ]
+    }
+  },
+  "comparison": [
+    {
+      "shape_id": "airplane_d18592d9615b01bbbc0909d98a1ff2b4",
+      "prompt_idx": 0,
+      "prompt": "A commercial airliner with a white fuselage, red-tipped wings, and a blue tail section",
+      "scores": {
+        "baseline": 0.299316,
+        "local_sq": 0.298523
+      }
+    },
+    {
+      "shape_id": "airplane_d18592d9615b01bbbc0909d98a1ff2b4",
+      "prompt_idx": 1,
+      "prompt": "A commercial airliner with a matte grey fuselage, yellow wings, and a black empennage",
+      "scores": {
+        "baseline": 0.286011,
+        "local_sq": 0.271973
+      }
+    },
+    {
+      "shape_id": "airplane_d18592d9615b01bbbc0909d98a1ff2b4",
+      "prompt_idx": 2,
+      "prompt": "A commercial airliner with a silver metallic fuselage, orange striped wings, and a dark navy tail",
+      "scores": {
+        "baseline": 0.237732,
+        "local_sq": 0.257446
+      }
+    },
+    {
+      "shape_id": "airplane_d18592d9615b01bbbc0909d98a1ff2b4",
+      "prompt_idx": 3,
+      "prompt": "A commercial airliner with a white fuselage, green wings, and a red tail section with gold accents",
+      "scores": {
+        "baseline": 0.290955,
+        "local_sq": 0.280304
+      }
+    },
+    {
+      "shape_id": "airplane_d18592d9615b01bbbc0909d98a1ff2b4",
+      "prompt_idx": 4,
+      "prompt": "A commercial airliner with a glossy cream fuselage, sky-blue wings, and a burgundy tail section",
+      "scores": {
+        "baseline": 0.287964,
+        "local_sq": 0.277283
+      }
+    },
+    {
+      "shape_id": "airplane_f44c0e1e55a3469494f3355d9c061b5a",
+      "prompt_idx": 0,
+      "prompt": "A fighter jet with a matte black fuselage and camouflage green wings",
+      "scores": {
+        "baseline": 0.322266,
+        "local_sq": 0.316162
+      }
+    },
+    {
+      "shape_id": "airplane_f44c0e1e55a3469494f3355d9c061b5a",
+      "prompt_idx": 1,
+      "prompt": "A fighter jet with a glossy dark grey fuselage and bright orange wings",
+      "scores": {
+        "baseline": 0.330383,
+        "local_sq": 0.304199
+      }
+    },
+    {
+      "shape_id": "airplane_f44c0e1e55a3469494f3355d9c061b5a",
+      "prompt_idx": 2,
+      "prompt": "A fighter jet with a sand-colored desert camo fuselage and dark brown wings",
+      "scores": {
+        "baseline": 0.319336,
+        "local_sq": 0.318604
+      }
+    },
+    {
+      "shape_id": "airplane_f44c0e1e55a3469494f3355d9c061b5a",
+      "prompt_idx": 3,
+      "prompt": "A fighter jet with a blue and white fuselage and silver metallic wings",
+      "scores": {
+        "baseline": 0.30658,
+        "local_sq": 0.301697
+      }
+    },
+    {
+      "shape_id": "airplane_f44c0e1e55a3469494f3355d9c061b5a",
+      "prompt_idx": 4,
+      "prompt": "A fighter jet with a red fuselage and white wings with black trim",
+      "scores": {
+        "baseline": 0.316467,
+        "local_sq": 0.316956
+      }
+    },
+    {
+      "shape_id": "bench_dd97603ce7538c15be5bbc844e6db7e",
+      "prompt_idx": 0,
+      "prompt": "A park bench with black cast iron legs and rims and a natural oak wooden seat",
+      "scores": {
+        "baseline": 0.286804,
+        "local_sq": 0.287598
+      }
+    },
+    {
+      "shape_id": "bench_dd97603ce7538c15be5bbc844e6db7e",
+      "prompt_idx": 1,
+      "prompt": "A park bench with white painted metal legs and rims and a dark walnut wooden seat",
+      "scores": {
+        "baseline": 0.298706,
+        "local_sq": 0.302795
+      }
+    },
+    {
+      "shape_id": "bench_dd97603ce7538c15be5bbc844e6db7e",
+      "prompt_idx": 2,
+      "prompt": "A park bench with rusty brown iron legs and rims and a teak wooden seat with green moss",
+      "scores": {
+        "baseline": 0.287903,
+        "local_sq": 0.302307
+      }
+    },
+    {
+      "shape_id": "bench_dd97603ce7538c15be5bbc844e6db7e",
+      "prompt_idx": 3,
+      "prompt": "A park bench with gold metal legs and rims and a polished mahogany seat",
+      "scores": {
+        "baseline": 0.289429,
+        "local_sq": 0.276184
+      }
+    },
+    {
+      "shape_id": "bench_dd97603ce7538c15be5bbc844e6db7e",
+      "prompt_idx": 4,
+      "prompt": "A park bench with concrete grey legs and rims and a bright white painted wooden seat",
+      "scores": {
+        "baseline": 0.241058,
+        "local_sq": 0.263397
+      }
+    },
+    {
+      "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+      "prompt_idx": 0,
+      "prompt": "A garden bench with black wrought iron legs, green painted armrests, a natural pine seat, and a white backrest",
+      "scores": {
+        "baseline": 0.331299,
+        "local_sq": 0.32666
+      }
+    },
+    {
+      "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+      "prompt_idx": 1,
+      "prompt": "A garden bench with brown wooden legs, cream-colored armrests, a red-painted seat, and a dark brown backrest",
+      "scores": {
+        "baseline": 0.286743,
+        "local_sq": 0.273438
+      }
+    },
+    {
+      "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+      "prompt_idx": 2,
+      "prompt": "A garden bench with brass-finished legs, walnut armrests, a forest green seat, and a matching green backrest",
+      "scores": {
+        "baseline": 0.309143,
+        "local_sq": 0.328308
+      }
+    },
+    {
+      "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+      "prompt_idx": 3,
+      "prompt": "A garden bench with grey stone-textured legs, light oak armrests, a navy blue cushioned seat, and a white backrest",
+      "scores": {
+        "baseline": 0.324463,
+        "local_sq": 0.323853
+      }
+    },
+    {
+      "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+      "prompt_idx": 4,
+      "prompt": "A garden bench with copper-patina legs, teak armrests, a charcoal grey seat, and a beige backrest",
+      "scores": {
+        "baseline": 0.293762,
+        "local_sq": 0.299011
+      }
+    },
+    {
+      "shape_id": "cabinet_bbbd4de3e7ab25ad80d6227ff9b21190",
+      "prompt_idx": 0,
+      "prompt": "A tall cabinet with white painted side panels, a glossy red front door, and a light oak top panel",
+      "scores": {
+        "baseline": 0.274078,
+        "local_sq": 0.288635
+      }
+    },
+    {
+      "shape_id": "cabinet_bbbd4de3e7ab25ad80d6227ff9b21190",
+      "prompt_idx": 1,
+      "prompt": "A tall cabinet with dark walnut side panels, a glass-fronted door, and a black top panel",
+      "scores": {
+        "baseline": 0.290283,
+        "local_sq": 0.309387
+      }
+    },
+    {
+      "shape_id": "cabinet_bbbd4de3e7ab25ad80d6227ff9b21190",
+      "prompt_idx": 2,
+      "prompt": "A tall cabinet with grey metal side panels, a navy blue front door, and a silver top panel",
+      "scores": {
+        "baseline": 0.286194,
+        "local_sq": 0.307251
+      }
+    },
+    {
+      "shape_id": "cabinet_bbbd4de3e7ab25ad80d6227ff9b21190",
+      "prompt_idx": 3,
+      "prompt": "A tall cabinet with pine wood side panels, a bright yellow front door, and a matching pine top",
+      "scores": {
+        "baseline": 0.286499,
+        "local_sq": 0.277222
+      }
+    },
+    {
+      "shape_id": "cabinet_bbbd4de3e7ab25ad80d6227ff9b21190",
+      "prompt_idx": 4,
+      "prompt": "A tall cabinet with matte black side panels, a mirrored front door, and a white marble top panel",
+      "scores": {
+        "baseline": 0.279938,
+        "local_sq": 0.25119
+      }
+    },
+    {
+      "shape_id": "cabinet_df55c6665781293cbe53b3b9f1274310",
+      "prompt_idx": 0,
+      "prompt": "A rectangular storage cabinet with a white painted main body and a dark walnut wood top panel",
+      "scores": {
+        "baseline": 0.282654,
+        "local_sq": 0.268524
+      }
+    },
+    {
+      "shape_id": "cabinet_df55c6665781293cbe53b3b9f1274310",
+      "prompt_idx": 1,
+      "prompt": "A rectangular storage cabinet with a brushed steel main body and a black granite top panel",
+      "scores": {
+        "baseline": 0.294556,
+        "local_sq": 0.289612
+      }
+    },
+    {
+      "shape_id": "cabinet_df55c6665781293cbe53b3b9f1274310",
+      "prompt_idx": 2,
+      "prompt": "A rectangular storage cabinet with a navy blue main body and a light oak top panel",
+      "scores": {
+        "baseline": 0.270569,
+        "local_sq": 0.297607
+      }
+    },
+    {
+      "shape_id": "cabinet_df55c6665781293cbe53b3b9f1274310",
+      "prompt_idx": 3,
+      "prompt": "A rectangular storage cabinet with a terracotta red main body and a white marble top panel",
+      "scores": {
+        "baseline": 0.313049,
+        "local_sq": 0.318115
+      }
+    },
+    {
+      "shape_id": "cabinet_df55c6665781293cbe53b3b9f1274310",
+      "prompt_idx": 4,
+      "prompt": "A rectangular storage cabinet with a forest green main body and a brass-finished top panel",
+      "scores": {
+        "baseline": 0.345215,
+        "local_sq": 0.330017
+      }
+    },
+    {
+      "shape_id": "car_d287b02b4679c70ab7902335d9dd94a2",
+      "prompt_idx": 0,
+      "prompt": "A pickup truck with a red cabin, black fenders on the truck bed, silver wheels, a white hood, and a grey tailgate and floor",
+      "scores": {
+        "baseline": 0.290955,
+        "local_sq": 0.299927
+      }
+    },
+    {
+      "shape_id": "car_d287b02b4679c70ab7902335d9dd94a2",
+      "prompt_idx": 1,
+      "prompt": "A pickup truck with a navy blue cabin, rust-orange fenders, black wheels, a matching blue hood, and a silver tailgate",
+      "scores": {
+        "baseline": 0.337463,
+        "local_sq": 0.324463
+      }
+    },
+    {
+      "shape_id": "car_d287b02b4679c70ab7902335d9dd94a2",
+      "prompt_idx": 2,
+      "prompt": "A pickup truck with a sandy beige cabin, dark green fenders, chrome wheels, a cream hood, and a brown wooden truck bed floor",
+      "scores": {
+        "baseline": 0.316467,
+        "local_sq": 0.317627
+      }
+    },
+    {
+      "shape_id": "car_d287b02b4679c70ab7902335d9dd94a2",
+      "prompt_idx": 3,
+      "prompt": "A pickup truck with a matte black cabin, gunmetal grey fenders, red wheels, a black hood, and a silver tailgate",
+      "scores": {
+        "baseline": 0.309235,
+        "local_sq": 0.309692
+      }
+    },
+    {
+      "shape_id": "car_d287b02b4679c70ab7902335d9dd94a2",
+      "prompt_idx": 4,
+      "prompt": "A pickup truck with a forest green cabin, olive drab fenders, white wheels, a green hood, and a black steel truck bed floor",
+      "scores": {
+        "baseline": 0.330505,
+        "local_sq": 0.340576
+      }
+    },
+    {
+      "shape_id": "car_f9cad36ae25540a0bb20fd1bc4860856",
+      "prompt_idx": 0,
+      "prompt": "A four-door sedan with a white cabin, black hood, and bright red wheels",
+      "scores": {
+        "baseline": 0.270325,
+        "local_sq": 0.281433
+      }
+    },
+    {
+      "shape_id": "car_f9cad36ae25540a0bb20fd1bc4860856",
+      "prompt_idx": 1,
+      "prompt": "A four-door sedan with a silver metallic cabin, dark blue hood, and gold chrome wheels",
+      "scores": {
+        "baseline": 0.247101,
+        "local_sq": 0.259338
+      }
+    },
+    {
+      "shape_id": "car_f9cad36ae25540a0bb20fd1bc4860856",
+      "prompt_idx": 2,
+      "prompt": "A four-door sedan with a jet black cabin, red hood, and chrome silver wheels",
+      "scores": {
+        "baseline": 0.271484,
+        "local_sq": 0.268005
+      }
+    },
+    {
+      "shape_id": "car_f9cad36ae25540a0bb20fd1bc4860856",
+      "prompt_idx": 3,
+      "prompt": "A four-door sedan with a pearl white cabin, yellow hood, and matte black wheels",
+      "scores": {
+        "baseline": 0.301575,
+        "local_sq": 0.300232
+      }
+    },
+    {
+      "shape_id": "car_f9cad36ae25540a0bb20fd1bc4860856",
+      "prompt_idx": 4,
+      "prompt": "A four-door sedan with a deep burgundy cabin, charcoal grey hood, and rose gold wheels",
+      "scores": {
+        "baseline": 0.286926,
+        "local_sq": 0.295166
+      }
+    },
+    {
+      "shape_id": "chair_dfeb8d914d8b28ab5bb58f1e92d30bf7",
+      "prompt_idx": 0,
+      "prompt": "A rounded chair with blue painted metal legs, red velvet seat cushion, white plastic armrests, and a dark walnut wooden backrest",
+      "scores": {
+        "baseline": 0.327454,
+        "local_sq": 0.314148
+      }
+    },
+    {
+      "shape_id": "chair_dfeb8d914d8b28ab5bb58f1e92d30bf7",
+      "prompt_idx": 1,
+      "prompt": "A rounded chair with natural oak legs, a grey wool seat, black rubber armrests, and a woven rattan backrest",
+      "scores": {
+        "baseline": 0.338745,
+        "local_sq": 0.332703
+      }
+    },
+    {
+      "shape_id": "chair_dfeb8d914d8b28ab5bb58f1e92d30bf7",
+      "prompt_idx": 2,
+      "prompt": "A rounded chair with gold-finished legs, a pink linen seat, transparent acrylic armrests, and a padded cream backrest",
+      "scores": {
+        "baseline": 0.349243,
+        "local_sq": 0.351135
+      }
+    },
+    {
+      "shape_id": "chair_dfeb8d914d8b28ab5bb58f1e92d30bf7",
+      "prompt_idx": 3,
+      "prompt": "A rounded chair with black steel legs, a green leather seat, brass armrests, and a light beige upholstered backrest",
+      "scores": {
+        "baseline": 0.340576,
+        "local_sq": 0.334961
+      }
+    },
+    {
+      "shape_id": "chair_dfeb8d914d8b28ab5bb58f1e92d30bf7",
+      "prompt_idx": 4,
+      "prompt": "A rounded chair with white lacquered legs, a navy blue canvas seat, birch wood armrests, and a mesh backrest",
+      "scores": {
+        "baseline": 0.354492,
+        "local_sq": 0.353027
+      }
+    },
+    {
+      "shape_id": "chair_f1f670ac53799c18492d9da2668ec34c",
+      "prompt_idx": 0,
+      "prompt": "An office chair with a chrome pedestal, black rubber wheels, black leather seat and backrest, and grey plastic armrests",
+      "scores": {
+        "baseline": 0.328247,
+        "local_sq": 0.333313
+      }
+    },
+    {
+      "shape_id": "chair_f1f670ac53799c18492d9da2668ec34c",
+      "prompt_idx": 1,
+      "prompt": "An office chair with a matte black pedestal, red wheels, a teal blue fabric seat, a matching blue backrest, and white armrests",
+      "scores": {
+        "baseline": 0.346008,
+        "local_sq": 0.346802
+      }
+    },
+    {
+      "shape_id": "chair_f1f670ac53799c18492d9da2668ec34c",
+      "prompt_idx": 2,
+      "prompt": "An office chair with a gold metallic pedestal, clear acrylic wheels, a pink velvet seat, a white backrest, and gold armrests",
+      "scores": {
+        "baseline": 0.351257,
+        "local_sq": 0.356384
+      }
+    },
+    {
+      "shape_id": "chair_f1f670ac53799c18492d9da2668ec34c",
+      "prompt_idx": 3,
+      "prompt": "An office chair with a silver pedestal, dark grey wheels, a tan leather seat and backrest, and wooden armrests",
+      "scores": {
+        "baseline": 0.333862,
+        "local_sq": 0.34082
+      }
+    },
+    {
+      "shape_id": "chair_f1f670ac53799c18492d9da2668ec34c",
+      "prompt_idx": 4,
+      "prompt": "An office chair with a white pedestal, pastel pink wheels, a mint green seat, a white mesh backrest, and light grey armrests",
+      "scores": {
+        "baseline": 0.353882,
+        "local_sq": 0.360229
+      }
+    },
+    {
+      "shape_id": "lamp_dc6c499e71d04971d22730b0728b2fc9",
+      "prompt_idx": 0,
+      "prompt": "A swing-arm desk lamp with a black marble base, a bright red metal shade, a chrome upper arm, a brass middle arm, and a black lower arm",
+      "scores": {
+        "baseline": 0.324402,
+        "local_sq": 0.302856
+      }
+    },
+    {
+      "shape_id": "lamp_dc6c499e71d04971d22730b0728b2fc9",
+      "prompt_idx": 1,
+      "prompt": "A swing-arm desk lamp with a white ceramic base, a lime green shade, and silver metallic arm segments throughout",
+      "scores": {
+        "baseline": 0.351929,
+        "local_sq": 0.368652
+      }
+    },
+    {
+      "shape_id": "lamp_dc6c499e71d04971d22730b0728b2fc9",
+      "prompt_idx": 2,
+      "prompt": "A swing-arm desk lamp with a wooden base, a matte black cone shade, and copper-finished arm segments",
+      "scores": {
+        "baseline": 0.301758,
+        "local_sq": 0.297791
+      }
+    },
+    {
+      "shape_id": "lamp_dc6c499e71d04971d22730b0728b2fc9",
+      "prompt_idx": 3,
+      "prompt": "A swing-arm desk lamp with a grey concrete base, a yellow enamel shade, a white upper arm, a grey middle arm, and a dark lower arm",
+      "scores": {
+        "baseline": 0.353455,
+        "local_sq": 0.347229
+      }
+    },
+    {
+      "shape_id": "lamp_dc6c499e71d04971d22730b0728b2fc9",
+      "prompt_idx": 4,
+      "prompt": "A swing-arm desk lamp with a gold-plated base, a navy blue shade, and rose gold arm segments",
+      "scores": {
+        "baseline": 0.328796,
+        "local_sq": 0.280945
+      }
+    },
+    {
+      "shape_id": "lamp_f228f6cd86162beb659dda512294c744",
+      "prompt_idx": 0,
+      "prompt": "A classic desk lamp with a black marble base, a green enamel cone shade, brass stand legs, and a gold central socket housing",
+      "scores": {
+        "baseline": 0.343018,
+        "local_sq": 0.32843
+      }
+    },
+    {
+      "shape_id": "lamp_f228f6cd86162beb659dda512294c744",
+      "prompt_idx": 1,
+      "prompt": "A classic desk lamp with a white ceramic base, a red-and-white striped cone shade, chrome stand legs, and a silver central housing",
+      "scores": {
+        "baseline": 0.327148,
+        "local_sq": 0.301208
+      }
+    },
+    {
+      "shape_id": "lamp_f228f6cd86162beb659dda512294c744",
+      "prompt_idx": 2,
+      "prompt": "A classic desk lamp with a walnut wood base, a cream linen cone shade, dark bronze stand legs, and a bronze central housing",
+      "scores": {
+        "baseline": 0.300964,
+        "local_sq": 0.308838
+      }
+    },
+    {
+      "shape_id": "lamp_f228f6cd86162beb659dda512294c744",
+      "prompt_idx": 3,
+      "prompt": "A classic desk lamp with a grey concrete base, a cobalt blue cone shade, matte black stand legs, and a gunmetal central housing",
+      "scores": {
+        "baseline": 0.332825,
+        "local_sq": 0.314148
+      }
+    },
+    {
+      "shape_id": "lamp_f228f6cd86162beb659dda512294c744",
+      "prompt_idx": 4,
+      "prompt": "A classic desk lamp with a pink acrylic base, a pastel yellow cone shade, rose gold stand legs, and a white central housing",
+      "scores": {
+        "baseline": 0.337036,
+        "local_sq": 0.35498
+      }
+    },
+    {
+      "shape_id": "rifle_d88c106c00384130fb5c1b0f759e2bc1",
+      "prompt_idx": 0,
+      "prompt": "A pistol with a black polymer trigger guard, a brown wooden grip, and a stainless steel slide and barrel",
+      "scores": {
+        "baseline": 0.27536,
+        "local_sq": 0.266724
+      }
+    },
+    {
+      "shape_id": "rifle_d88c106c00384130fb5c1b0f759e2bc1",
+      "prompt_idx": 1,
+      "prompt": "A pistol with a tan desert-camo lower frame, a black rubber grip, and a matte black slide and barrel",
+      "scores": {
+        "baseline": 0.30014,
+        "local_sq": 0.290405
+      }
+    },
+    {
+      "shape_id": "rifle_d88c106c00384130fb5c1b0f759e2bc1",
+      "prompt_idx": 2,
+      "prompt": "A pistol with a red anodized trigger guard, a white pearl grip, and a chrome slide and barrel",
+      "scores": {
+        "baseline": 0.27002,
+        "local_sq": 0.277283
+      }
+    },
+    {
+      "shape_id": "rifle_d88c106c00384130fb5c1b0f759e2bc1",
+      "prompt_idx": 3,
+      "prompt": "A pistol with a grey composite lower frame, a dark grey textured grip, and a brushed steel slide and barrel",
+      "scores": {
+        "baseline": 0.278473,
+        "local_sq": 0.275696
+      }
+    },
+    {
+      "shape_id": "rifle_d88c106c00384130fb5c1b0f759e2bc1",
+      "prompt_idx": 4,
+      "prompt": "A pistol with an olive green trigger guard, a walnut wood grip, and a gold-titanium coated slide and barrel",
+      "scores": {
+        "baseline": 0.267609,
+        "local_sq": 0.268402
+      }
+    },
+    {
+      "shape_id": "rifle_faa1fb485ddd6c9c8bfbe54b5d01550",
+      "prompt_idx": 0,
+      "prompt": "A bolt-action rifle with a black polymer main body, silver metal bipod, dark walnut buttstock, and a black rubber buttpad",
+      "scores": {
+        "baseline": 0.245209,
+        "local_sq": 0.240936
+      }
+    },
+    {
+      "shape_id": "rifle_faa1fb485ddd6c9c8bfbe54b5d01550",
+      "prompt_idx": 1,
+      "prompt": "A bolt-action rifle with a tan desert-camo main body, gold-tipped bipod, sand-colored buttstock, and a brown rubber buttpad",
+      "scores": {
+        "baseline": 0.244324,
+        "local_sq": 0.248016
+      }
+    },
+    {
+      "shape_id": "rifle_faa1fb485ddd6c9c8bfbe54b5d01550",
+      "prompt_idx": 2,
+      "prompt": "A bolt-action rifle with a forest green main body, black bipod, olive drab buttstock, and a dark green buttpad",
+      "scores": {
+        "baseline": 0.250092,
+        "local_sq": 0.274384
+      }
+    },
+    {
+      "shape_id": "rifle_faa1fb485ddd6c9c8bfbe54b5d01550",
+      "prompt_idx": 3,
+      "prompt": "A bolt-action rifle with a grey carbon-fiber textured main body, chrome bipod, black synthetic buttstock, and a red rubber buttpad",
+      "scores": {
+        "baseline": 0.24176,
+        "local_sq": 0.241943
+      }
+    },
+    {
+      "shape_id": "rifle_faa1fb485ddd6c9c8bfbe54b5d01550",
+      "prompt_idx": 4,
+      "prompt": "A bolt-action rifle with a white arctic-camo main body, white bipod, white buttstock, and a grey buttpad",
+      "scores": {
+        "baseline": 0.251892,
+        "local_sq": 0.261505
+      }
+    },
+    {
+      "shape_id": "sofa_d9ae4cecb8203838f652f706160dc96d",
+      "prompt_idx": 0,
+      "prompt": "A sofa with navy blue velvet armrests, gold metal legs, a white front panel, a grey flannel seat cushion, and a navy blue backrest",
+      "scores": {
+        "baseline": 0.35907,
+        "local_sq": 0.346924
+      }
+    },
+    {
+      "shape_id": "sofa_d9ae4cecb8203838f652f706160dc96d",
+      "prompt_idx": 1,
+      "prompt": "A sofa with cream leather armrests, dark walnut legs, a beige fabric front panel, a terracotta seat cushion, and a cream backrest",
+      "scores": {
+        "baseline": 0.325684,
+        "local_sq": 0.323364
+      }
+    },
+    {
+      "shape_id": "sofa_d9ae4cecb8203838f652f706160dc96d",
+      "prompt_idx": 2,
+      "prompt": "A sofa with forest green linen armrests, black iron legs, a charcoal front panel, a mustard yellow seat cushion, and a dark green backrest",
+      "scores": {
+        "baseline": 0.34137,
+        "local_sq": 0.33075
+      }
+    },
+    {
+      "shape_id": "sofa_d9ae4cecb8203838f652f706160dc96d",
+      "prompt_idx": 3,
+      "prompt": "A sofa with dusty pink velvet armrests, brass legs, a light grey front panel, a white boucle seat cushion, and a pale pink backrest",
+      "scores": {
+        "baseline": 0.339355,
+        "local_sq": 0.341492
+      }
+    },
+    {
+      "shape_id": "sofa_d9ae4cecb8203838f652f706160dc96d",
+      "prompt_idx": 4,
+      "prompt": "A sofa with burnt orange fabric armrests, silver metal legs, a tan front panel, a deep brown leather seat cushion, and an orange backrest",
+      "scores": {
+        "baseline": 0.334229,
+        "local_sq": 0.345703
+      }
+    },
+    {
+      "shape_id": "sofa_ed394e35b999f69edb039d8689a74349",
+      "prompt_idx": 0,
+      "prompt": "An L-shaped sectional sofa with a light grey chaise cushion, white leather armrests, a charcoal main seat cushion, and a dark grey backrest",
+      "scores": {
+        "baseline": 0.309204,
+        "local_sq": 0.313171
+      }
+    },
+    {
+      "shape_id": "sofa_ed394e35b999f69edb039d8689a74349",
+      "prompt_idx": 1,
+      "prompt": "An L-shaped sectional sofa with a mustard yellow chaise cushion, navy blue armrests, a cream main seat cushion, and a navy blue backrest",
+      "scores": {
+        "baseline": 0.303101,
+        "local_sq": 0.306519
+      }
+    },
+    {
+      "shape_id": "sofa_ed394e35b999f69edb039d8689a74349",
+      "prompt_idx": 2,
+      "prompt": "An L-shaped sectional sofa with a blush pink chaise cushion, white boucle armrests, a rose velvet main seat, and a light pink backrest",
+      "scores": {
+        "baseline": 0.317749,
+        "local_sq": 0.313904
+      }
+    },
+    {
+      "shape_id": "sofa_ed394e35b999f69edb039d8689a74349",
+      "prompt_idx": 3,
+      "prompt": "An L-shaped sectional sofa with a forest green chaise cushion, dark walnut armrests, an olive main seat cushion, and a deep green backrest",
+      "scores": {
+        "baseline": 0.310547,
+        "local_sq": 0.330078
+      }
+    },
+    {
+      "shape_id": "sofa_ed394e35b999f69edb039d8689a74349",
+      "prompt_idx": 4,
+      "prompt": "An L-shaped sectional sofa with a burnt sienna chaise cushion, tan leather armrests, a rust orange main seat, and a brown backrest",
+      "scores": {
+        "baseline": 0.337341,
+        "local_sq": 0.341125
+      }
+    },
+    {
+      "shape_id": "table_d3a55d20bb9c93985a7746683ad193f0",
+      "prompt_idx": 0,
+      "prompt": "A ping-pong table with black metal legs, a white net, and a regulation blue playing surface",
+      "scores": {
+        "baseline": 0.352356,
+        "local_sq": 0.25177
+      }
+    },
+    {
+      "shape_id": "table_d3a55d20bb9c93985a7746683ad193f0",
+      "prompt_idx": 1,
+      "prompt": "A ping-pong table with red metal legs, a black net, and a green playing surface",
+      "scores": {
+        "baseline": 0.251678,
+        "local_sq": 0.256104
+      }
+    },
+    {
+      "shape_id": "table_d3a55d20bb9c93985a7746683ad193f0",
+      "prompt_idx": 2,
+      "prompt": "A ping-pong table with silver aluminum legs, a yellow net, and a dark grey playing surface",
+      "scores": {
+        "baseline": 0.292419,
+        "local_sq": 0.247101
+      }
+    },
+    {
+      "shape_id": "table_d3a55d20bb9c93985a7746683ad193f0",
+      "prompt_idx": 3,
+      "prompt": "A ping-pong table with white painted legs, a red net, and a forest green playing surface with white boundary lines",
+      "scores": {
+        "baseline": 0.27533,
+        "local_sq": 0.271729
+      }
+    },
+    {
+      "shape_id": "table_d3a55d20bb9c93985a7746683ad193f0",
+      "prompt_idx": 4,
+      "prompt": "A ping-pong table with wooden legs, a black net, and a sky blue playing surface",
+      "scores": {
+        "baseline": 0.273285,
+        "local_sq": 0.300293
+      }
+    },
+    {
+      "shape_id": "table_f3b8c91c5dd1cb6b8722573b29f0d6d8",
+      "prompt_idx": 0,
+      "prompt": "A rectangular table with black metal legs, white painted crossbars, grey aprons, and a natural oak tabletop",
+      "scores": {
+        "baseline": 0.277222,
+        "local_sq": 0.29364
+      }
+    },
+    {
+      "shape_id": "table_f3b8c91c5dd1cb6b8722573b29f0d6d8",
+      "prompt_idx": 1,
+      "prompt": "A rectangular table with dark walnut legs, matching walnut crossbars, cream aprons, and a white marble tabletop",
+      "scores": {
+        "baseline": 0.30249,
+        "local_sq": 0.301392
+      }
+    },
+    {
+      "shape_id": "table_f3b8c91c5dd1cb6b8722573b29f0d6d8",
+      "prompt_idx": 2,
+      "prompt": "A rectangular table with brass-finished legs, gold crossbars, black aprons, and a dark glass tabletop",
+      "scores": {
+        "baseline": 0.292419,
+        "local_sq": 0.296143
+      }
+    },
+    {
+      "shape_id": "table_f3b8c91c5dd1cb6b8722573b29f0d6d8",
+      "prompt_idx": 3,
+      "prompt": "A rectangular table with white painted legs, light oak crossbars, white aprons, and a pale birch tabletop",
+      "scores": {
+        "baseline": 0.272461,
+        "local_sq": 0.276184
+      }
+    },
+    {
+      "shape_id": "table_f3b8c91c5dd1cb6b8722573b29f0d6d8",
+      "prompt_idx": 4,
+      "prompt": "A rectangular table with industrial grey iron legs, black crossbars, dark grey aprons, and a reclaimed wood tabletop",
+      "scores": {
+        "baseline": 0.298706,
+        "local_sq": 0.312744
+      }
+    },
+    {
+      "shape_id": "watercraft_d3043fff20dad5c41dc762869682f4f",
+      "prompt_idx": 0,
+      "prompt": "A motorboat with a white fiberglass cabin and a navy blue hull",
+      "scores": {
+        "baseline": 0.283722,
+        "local_sq": 0.26181
+      }
+    },
+    {
+      "shape_id": "watercraft_d3043fff20dad5c41dc762869682f4f",
+      "prompt_idx": 1,
+      "prompt": "A motorboat with a grey metal cabin and a bright red hull",
+      "scores": {
+        "baseline": 0.282288,
+        "local_sq": 0.262726
+      }
+    },
+    {
+      "shape_id": "watercraft_d3043fff20dad5c41dc762869682f4f",
+      "prompt_idx": 2,
+      "prompt": "A motorboat with a cream-colored cabin and a dark green hull with gold trim",
+      "scores": {
+        "baseline": 0.274292,
+        "local_sq": 0.263275
+      }
+    },
+    {
+      "shape_id": "watercraft_d3043fff20dad5c41dc762869682f4f",
+      "prompt_idx": 3,
+      "prompt": "A motorboat with a black cabin and a bright yellow hull",
+      "scores": {
+        "baseline": 0.2677,
+        "local_sq": 0.265381
+      }
+    },
+    {
+      "shape_id": "watercraft_d3043fff20dad5c41dc762869682f4f",
+      "prompt_idx": 4,
+      "prompt": "A motorboat with a wood-paneled cabin and a white hull with blue racing stripes",
+      "scores": {
+        "baseline": 0.262421,
+        "local_sq": 0.277191
+      }
+    },
+    {
+      "shape_id": "watercraft_d95c49195e51912056f316a86bec8b19",
+      "prompt_idx": 0,
+      "prompt": "A sailboat with a white hull, a red jib sail, and a white mainsail with blue stripes",
+      "scores": {
+        "baseline": 0.286713,
+        "local_sq": 0.275269
+      }
+    },
+    {
+      "shape_id": "watercraft_d95c49195e51912056f316a86bec8b19",
+      "prompt_idx": 1,
+      "prompt": "A sailboat with a navy blue hull, a cream-colored jib, and a yellow mainsail",
+      "scores": {
+        "baseline": 0.274261,
+        "local_sq": 0.286011
+      }
+    },
+    {
+      "shape_id": "watercraft_d95c49195e51912056f316a86bec8b19",
+      "prompt_idx": 2,
+      "prompt": "A sailboat with a dark teak wooden hull, a white jib, and a red mainsail",
+      "scores": {
+        "baseline": 0.29248,
+        "local_sq": 0.304382
+      }
+    },
+    {
+      "shape_id": "watercraft_d95c49195e51912056f316a86bec8b19",
+      "prompt_idx": 3,
+      "prompt": "A sailboat with a black hull, a bright orange jib, and a white mainsail",
+      "scores": {
+        "baseline": 0.298584,
+        "local_sq": 0.296753
+      }
+    },
+    {
+      "shape_id": "watercraft_d95c49195e51912056f316a86bec8b19",
+      "prompt_idx": 4,
+      "prompt": "A sailboat with a sky blue hull, a white jib, and a green mainsail",
+      "scores": {
+        "baseline": 0.274902,
+        "local_sq": 0.30188
+      }
+    }
+  ]
+}

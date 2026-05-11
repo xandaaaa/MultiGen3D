@@ -67,25 +67,25 @@ def sample_slat_coupled(
     W,
     conds_dict,
     cond_global,
-    steps=15,
+    steps=25,
     cfg_strength=7.5,
     lam=0.5,
+    rescale_t=3.0,
+    detail_t_threshold=0.5,
 ):
     """
-    Coupled denoising:
-      - one global branch conditioned on cond_global, shared across all voxels,
-      - P local branches each conditioned on its SQ-specific prompt.
-    At every step, each local branch's predicted x_0 is pulled toward the global
-    branch's predicted x_0 by a fraction lam of the gap. The Euler update is
-    then recomputed from the corrected x_0.
-
-    lam in [0, 1] is the effective "step size" of the coupling applied to x_0.
-    lam=0 recovers Approach 6 (up to soft W); lam=1 replaces each local x_0
-    with the global x_0 entirely.
+    Coupled denoising with time-staged CFG negatives:
+      Structural phase (t >= detail_t_threshold): local neg = global prompt
+        -> branches inherit global structure, add only part-specific deviation.
+      Detail phase    (t <  detail_t_threshold): local neg = null
+        -> full local signal so color/material features actually form.
+    Global branch always uses null negative (standard CFG).
+    Coupling pulls local x_0 toward global x_0 by lam at every step.
     """
     flow_model = pipeline.models['slat_flow_model_text']
     N, D = coords.shape[0], flow_model.in_channels
     device = pipeline.device
+    null_cond = pipeline.text_cond_model['null_cond']
 
     z_init = torch.randn(N, D, device=device)
     sample = sp.SparseTensor(feats=z_init, coords=coords)
@@ -93,42 +93,35 @@ def sample_slat_coupled(
 
     sampler = pipeline.slat_sampler
     t_seq = np.linspace(1, 0, steps + 1)
+    t_seq = rescale_t * t_seq / (1 + (rescale_t - 1) * t_seq)
     t_pairs = list((t_seq[i], t_seq[i + 1]) for i in range(steps))
 
     P = W.shape[1]
-    print(f"Sampling Coupled ({P} local + 1 global), lambda={lam}")
+    print(f"Sampling Coupled ({P} local + 1 global), lambda={lam}, detail_threshold={detail_t_threshold}")
 
     for step_idx, (t, t_prev) in enumerate(t_pairs):
-        dt = t_prev - t
+        neg_local = cond_global['cond'] if t >= detail_t_threshold else null_cond
 
-        # --- global branch predicts its x_0 first ---
+        # --- global branch: standard CFG with null negative ---
         out_g = sampler.sample_once(
             flow_model, sample_g, t, t_prev, cond_global['cond'],
             cfg_strength=cfg_strength, neg_cond=cond_global.get('neg_cond'),
-            cfg_interval=(0.0, 1.0),
+            cfg_interval=(0.0, 0.95),
         )
         x0_g = out_g.pred_x_0.feats  # (N, D)
 
-        # --- each local branch: predict x_0, couple to x0_g, recompute x_prev ---
+        # --- local branches: time-staged neg, coupling to x0_g ---
         feats_fused = torch.zeros_like(sample.feats)
         for sq_idx, cond in conds_dict.items():
             out_i = sampler.sample_once(
                 flow_model, sample, t, t_prev, cond['cond'],
-                cfg_strength=cfg_strength, neg_cond=cond.get('neg_cond'),
-                cfg_interval=(0.0, 1.0),
+                cfg_strength=cfg_strength, neg_cond=neg_local,
+                cfg_interval=(0.0, 0.95),
             )
             # Coupling on x_0: pull local x_0 toward global x_0 by lam.
             x0_i = out_i.pred_x_0.feats
             x0_i_coupled = x0_i + lam * (x0_g - x0_i)
 
-            # Re-derive pred_x_prev from the corrected x_0 using the same
-            # rectified-flow parametrization as sample_once:
-            #   v = (x_t - x_0) / t       (for sigma_min -> 0; this matches
-            #                              _v_to_xstart_eps at the x_0 side)
-            #   x_prev = x_t - (t - t_prev) * v
-            # We keep it numerically simple: interpolate between sample.feats
-            # and x0_i_coupled by the fraction dt/t of the remaining gap.
-            # This is exact for the sigma_min=0 rectified-flow case.
             frac = (t - t_prev) / max(t, 1e-6)
             feats_i_prev = sample.feats + frac * (x0_i_coupled - sample.feats)
 
@@ -136,12 +129,11 @@ def sample_slat_coupled(
             feats_fused += mask * feats_i_prev
             del out_i
 
-        # Per-step update for both branches.
         sample = sample.replace(feats_fused)
         sample_g = sample_g.replace(out_g.pred_x_prev.feats)
         del out_g
 
-        if step_idx % 3 == 0:
+        if step_idx % 5 == 0:
             print(f"    Step {step_idx}/{steps}")
 
     std = torch.tensor(pipeline.slat_normalization['std'])[None].to(device)
@@ -152,7 +144,7 @@ def sample_slat_coupled(
 def run_experiment(
     sq_path="gui/superquadrics/chair_sq.npz",
     output_dir="approach7_results",
-    steps=15,
+    steps=25,
     seed=42,
     lam=0.3,
     tau=0.02,

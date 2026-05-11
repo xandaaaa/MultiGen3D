@@ -206,11 +206,11 @@ def generate_approach7(superquadrics, text_prompt_handle, t0_idx, lam_handle, ta
   sq_params = [superquadrics[sq_id] for sq_id in sq_ids]
   W = compute_soft_W(coords_to_world(coords), sq_params, center, scale, tau=tau)
 
-  # Stage 2: coupled SLAT sampling
+  # Stage 2: coupled SLAT sampling (25 steps, rescale_t=3.0 matches pipeline defaults)
   torch.manual_seed(1)
   slat = sample_slat_coupled(
     pipeline, coords, W, conds_local, cond_global,
-    steps=steps, cfg_strength=cfg_strength, lam=lam,
+    steps=25, cfg_strength=cfg_strength, lam=lam, rescale_t=3.0,
   )
   slat = slat.replace(feats=slat.feats.detach())
 

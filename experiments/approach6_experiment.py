@@ -46,40 +46,126 @@ def compute_hard_W(voxel_pos, sq_params, mesh_center, mesh_scale):
     return W
 
 @torch.no_grad()
-def sample_slat_extreme(pipeline, coords, W, conds_dict, steps=15, cfg_strength=7.5):
+def sample_slat_regional_refine(pipeline, coords, W, conds_local, cond_global,
+                                 global_steps=25, refine_steps=10, t_noise=0.5,
+                                 cfg_strength=7.5, rescale_t=3.0):
     """
-    conds_dict: { sq_index (int) : cond (dict) }
-    W: (N, P) where P is the number of SQs
+    Two-stage approach:
+      1. Generate a coherent global SLAT with the global prompt (stays on-manifold).
+      2. For each SQ region, refine with the local prompt starting from the global
+         SLAT partially noised at level t_noise (inpainting style).
+         Non-masked voxels are reprojected at the correct noise level each step
+         so the model always has globally-coherent context during local recoloring.
+
+    This avoids the per-step masking corruption of sample_slat_extreme, where
+    mixing 10 velocity fields every step drives the shared state off-manifold and
+    causes feature collapse to gray by step 25.
     """
+    device = pipeline.device
+    flow_model = pipeline.models['slat_flow_model_text']
+    sampler = pipeline.slat_sampler
+    null_cond = pipeline.text_cond_model['null_cond']
+
+    std = torch.tensor(pipeline.slat_normalization['std'])[None].to(device)
+    mean = torch.tensor(pipeline.slat_normalization['mean'])[None].to(device)
+
+    # --- Stage 1: global generation ---
+    print("Stage 1: global generation...")
+    noise_global = torch.randn(coords.shape[0], flow_model.in_channels, device=device)
+    sample_g = sp.SparseTensor(feats=noise_global, coords=coords)
+    t_seq = np.linspace(1, 0, global_steps + 1)
+    t_seq = rescale_t * t_seq / (1 + (rescale_t - 1) * t_seq)
+    for t, t_prev in zip(t_seq[:-1], t_seq[1:]):
+        out = sampler.sample_once(flow_model, sample_g, t, t_prev, cond_global['cond'],
+                                  cfg_strength=cfg_strength, neg_cond=cond_global.get('neg_cond'),
+                                  cfg_interval=(0.5, 0.95))
+        sample_g = sample_g.replace(out.pred_x_prev.feats)
+        del out
+
+    # Normalized global clean features (in flow-model latent space, before mean/std)
+    x0_global = sample_g.feats  # (N, D), this is x_0 in normalized space
+
+    # --- Stage 2: per-SQ regional refinement ---
+    result_feats = x0_global.clone()
+
+    t_seq_r = np.linspace(t_noise, 0, refine_steps + 1)
+    t_seq_r = rescale_t * t_seq_r / (1 + (rescale_t - 1) * t_seq_r)
+    t_pairs_r = list((t_seq_r[i], t_seq_r[i + 1]) for i in range(refine_steps))
+
+    P = W.shape[1]
+    print(f"Stage 2: refining {P} SQ regions (t_noise={t_noise}, {refine_steps} steps each)...")
+
+    for sq_idx, cond_local in conds_local.items():
+        mask = (W[:, sq_idx] > 0.3).unsqueeze(1)  # (N, 1) bool
+        if not mask.any():
+            continue
+
+        # Fixed noise for this region — used to reprojected non-masked voxels each step
+        noise_fixed = torch.randn_like(x0_global)
+
+        # Initial state: global clean + noise_fixed blended at t_noise for ALL voxels
+        feats_init = (1 - t_noise) * x0_global + t_noise * noise_fixed
+        sample_r = sp.SparseTensor(feats=feats_init, coords=coords)
+
+        for t, t_prev in t_pairs_r:
+            out = sampler.sample_once(
+                flow_model, sample_r, t, t_prev, cond_local['cond'],
+                cfg_strength=cfg_strength, neg_cond=null_cond,
+                cfg_interval=(0.0, t_noise + 0.05),
+            )
+            # Masked region: take local branch's denoised features
+            # Non-masked region: reproject global clean to correct noise level t_prev
+            #   x_{t_prev} = (1 - t_prev)*x0_global + t_prev*noise_fixed
+            feats_nonmask = (1 - t_prev) * x0_global + t_prev * noise_fixed
+            new_feats = torch.where(mask, out.pred_x_prev.feats, feats_nonmask)
+            sample_r = sample_r.replace(new_feats)
+            del out
+
+        result_feats = torch.where(mask, sample_r.feats, result_feats)
+        print(f"    SQ {sq_idx} done")
+
+    # Apply pipeline normalization (mean/std) for decoder
+    sample_out = sp.SparseTensor(feats=result_feats * std + mean, coords=coords)
+    return sample_out
+
+
+# Keep old extreme sampler for reference / ablation
+@torch.no_grad()
+def sample_slat_extreme(pipeline, coords, W, conds_dict, cond_global,
+                        steps=25, cfg_strength=7.5, rescale_t=3.0,
+                        detail_t_threshold=0.5):
     flow_model = pipeline.models['slat_flow_model_text']
     N, D = coords.shape[0], flow_model.in_channels
     device = pipeline.device
+    null_cond = pipeline.text_cond_model['null_cond']
 
     z_init = torch.randn(N, D, device=device)
     sample = sp.SparseTensor(feats=z_init, coords=coords)
     sampler = pipeline.slat_sampler
     t_seq = np.linspace(1, 0, steps + 1)
+    t_seq = rescale_t * t_seq / (1 + (rescale_t - 1) * t_seq)
     t_pairs = list((t_seq[i], t_seq[i + 1]) for i in range(steps))
-    
+
     P = W.shape[1]
-    print(f"Sampling Extreme Composition: Integrating {P} separate prompts per step...")
+    print(f"Sampling Extreme Composition: {P} prompts, detail threshold t={detail_t_threshold}")
 
     for step_idx, (t, t_prev) in enumerate(t_pairs):
-        dt = t_prev - t
         feats_fused = torch.zeros_like(sample.feats)
-        
+        neg = cond_global['cond'] if t >= detail_t_threshold else null_cond
+
         for sq_idx, cond in conds_dict.items():
             out = sampler.sample_once(
-                flow_model, sample, t, t_prev, cond['cond'], 
-                cfg_strength=cfg_strength, neg_cond=cond.get('neg_cond'), cfg_interval=(0.0, 1.0)
+                flow_model, sample, t, t_prev, cond['cond'],
+                cfg_strength=cfg_strength, neg_cond=neg,
+                cfg_interval=(0.0, 0.95),
             )
-            mask = W[:, sq_idx:sq_idx+1]
+            mask = W[:, sq_idx:sq_idx + 1]
             feats_fused += mask * out.pred_x_prev.feats
-            del out 
-            
-        v_fused = (feats_fused - sample.feats) / dt
-        sample = sample.replace(sample.feats + dt * v_fused)
-        if step_idx % 3 == 0: print(f"    Step {step_idx}/{steps}")
+            del out
+
+        sample = sample.replace(feats_fused)
+        if step_idx % 5 == 0:
+            print(f"    Step {step_idx}/{steps}  neg={'global' if t >= detail_t_threshold else 'null'}")
 
     std = torch.tensor(pipeline.slat_normalization['std'])[None].to(device)
     mean = torch.tensor(pipeline.slat_normalization['mean'])[None].to(device)
@@ -126,20 +212,21 @@ def run_experiment():
     pipeline.cuda() 
 
     conds_local = {k: pipeline.get_cond_text([v]) for k, v in local_prompts_text.items()}
-    
+
     print("3. Sampling Base Structure...")
-  
+
     global_structure_prompt = "a minimalist chair with four thin legs, crossbars, a seat cushion, and a backrest"
-    cond_struct = pipeline.get_cond_text([global_structure_prompt])
-    
+    cond_global = pipeline.get_cond_text([global_structure_prompt])
+
     torch.manual_seed(seed)
-    coords = pipeline.sample_sparse_structure(cond_struct, num_samples=1, sampler_params={"steps": steps})
+    coords = pipeline.sample_sparse_structure(cond_global, num_samples=1, sampler_params={"steps": steps})
     W = compute_hard_W(coords_to_world(coords), sq_params, mesh_center, mesh_scale)
 
     # ================== RUN EXTREME EXP ==================
     print("\n--- Running Experiment 6 (Extreme) ---")
     torch.manual_seed(seed)
-    slat_exp6 = sample_slat_extreme(pipeline, coords, W, conds_local, steps=steps)
+    slat_exp6 = sample_slat_regional_refine(pipeline, coords, W, conds_local, cond_global,
+                                             global_steps=steps)
     gs_exp6 = pipeline.decode_slat(slat_exp6, formats=['gaussian'])['gaussian'][0]
     
     print("Rendering...")
