@@ -22,7 +22,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'e
 
 from trellis.pipelines import TrellisTextTo3DPipeline
 from trellis.utils import postprocessing_utils
-from approach7_experiment import compute_soft_W, sample_slat_coupled
+from decode_composite import decode_composite_gaussian
 from approach1_experiment import coords_to_world
 
 RESOLUTION = 32
@@ -144,15 +144,15 @@ def save_assets(input_sq, text_prompt, generated_glb, t0):
       f.write(text_prompt)
 
 
-def generate_approach7(superquadrics, text_prompt_handle, t0_idx, lam_handle, tau_handle) -> None:
-  print('generate_approach7')
+def generate_local_sq(superquadrics, text_prompt_handle, t0_idx, local_cfg_handle) -> None:
+  print('generate_local_sq')
   gui_elements['generate_button'].disabled = True
   gui_elements['generate_button_with_image'].disabled = True
-  gui_elements['generate_button_a7'].label = "Generating (Approach 7)..."
-  gui_elements['generate_button_a7'].icon = viser.Icon.LOADER
-  gui_elements['generate_button_a7'].color = 'orange'
+  gui_elements['generate_button_local_sq'].label = "Generating (Local SQ)..."
+  gui_elements['generate_button_local_sq'].icon = viser.Icon.LOADER
+  gui_elements['generate_button_local_sq'].color = 'orange'
 
-  # Build and normalize the merged SQ mesh (same as generate())
+  # Build and normalize the merged SQ mesh
   meshes = []
   for sq_id in superquadrics.keys():
     vertices, triangles = add_superquadric_compact_rot_mat(
@@ -180,21 +180,21 @@ def generate_approach7(superquadrics, text_prompt_handle, t0_idx, lam_handle, ta
     pipeline.cuda()
 
   global_prompt = text_prompt_handle.value
-  lam = lam_handle.value
-  tau = tau_handle.value
+  local_cfg = float(local_cfg_handle.value)
+  print(f"local_cfg={local_cfg}")
+
+  sq_ids = sorted(superquadrics.keys())
+  sq_prompts = {i: (gui_elements[f'sq_{sq_id}']['prompt'].value.strip() or global_prompt)
+                for i, sq_id in enumerate(sq_ids)}
+  sq_params = [superquadrics[sq_id] for sq_id in sq_ids]
 
   cond_global = pipeline.get_cond_text([global_prompt])
+  prompt_to_cond = {global_prompt: cond_global}
+  for i in range(len(sq_ids)):
+    if sq_prompts[i] not in prompt_to_cond:
+      prompt_to_cond[sq_prompts[i]] = pipeline.get_cond_text([sq_prompts[i]])
+  conds_local = {i: prompt_to_cond[sq_prompts[i]] for i in range(len(sq_ids))}
 
-  # Per-SQ conditions; fall back to global prompt if per-SQ prompt is empty
-  sq_ids = sorted(superquadrics.keys())
-  conds_local = {}
-  for i, sq_id in enumerate(sq_ids):
-    sq_prompt = gui_elements[f'sq_{sq_id}']['prompt'].value.strip()
-    if not sq_prompt:
-      sq_prompt = global_prompt
-    conds_local[i] = pipeline.get_cond_text([sq_prompt])
-
-  # Stage 1: sparse structure with spatial control
   cond_struct = {**cond_global, 'control': pipeline.encode_spatial_control(spatial_control_mesh_path)}
   torch.manual_seed(1)
   coords = pipeline.sample_sparse_structure(
@@ -202,30 +202,17 @@ def generate_approach7(superquadrics, text_prompt_handle, t0_idx, lam_handle, ta
     sampler_params={"steps": steps, "cfg_strength": cfg_strength, "t0_idx_value": t0_idx.value},
   )
 
-  # Compute soft voxel-to-SQ weights; sq_params in original (pre-norm) world space
-  sq_params = [superquadrics[sq_id] for sq_id in sq_ids]
-  W = compute_soft_W(coords_to_world(coords), sq_params, center, scale, tau=tau)
-
-  # Stage 2: coupled SLAT sampling (25 steps, rescale_t=3.0 matches pipeline defaults)
   torch.manual_seed(1)
-  slat = sample_slat_coupled(
-    pipeline, coords, W, conds_local, cond_global,
-    steps=25, cfg_strength=cfg_strength, lam=lam, rescale_t=3.0,
+  merged_g, mesh_geom = decode_composite_gaussian(
+    pipeline, coords, conds_local, cond_global, sq_params, center, scale,
+    steps=25, cfg_strength=cfg_strength, rescale_t=3.0,
+    local_cfg_strength=local_cfg,
   )
-  slat = slat.replace(feats=slat.feats.detach())
-
-  with torch.no_grad():
-    outputs = pipeline.decode_slat(slat, formats=['gaussian', 'mesh'])
-  glb = postprocessing_utils.to_glb(
-    outputs['gaussian'][0],
-    outputs['mesh'][0],
-    simplify=0.95,
-    texture_size=1024,
-  )
-  glb.export("sample_a7.glb")
+  glb = postprocessing_utils.to_glb(merged_g, mesh_geom, simplify=0.95, texture_size=1024)
+  glb.export("sample_local_sq.glb")
   glb.apply_scale(1 / scale)
   glb.apply_translation(center)
-  save_assets(input_sq=merged_mesh, text_prompt=f"a7_{global_prompt}", generated_glb=glb, t0=t0_idx.value)
+  save_assets(input_sq=merged_mesh, text_prompt=f"local_sq_{global_prompt}", generated_glb=glb, t0=t0_idx.value)
 
   global generated_mesh
   generated_mesh = server.scene.add_mesh_trimesh("generated_mesh", mesh=glb, visible=True)
@@ -234,9 +221,9 @@ def generate_approach7(superquadrics, text_prompt_handle, t0_idx, lam_handle, ta
 
   gui_elements['generate_button'].disabled = False
   gui_elements['generate_button_with_image'].disabled = False
-  gui_elements['generate_button_a7'].label = "Generate (Approach 7)"
-  gui_elements['generate_button_a7'].icon = viser.Icon.PLAYER_PLAY
-  gui_elements['generate_button_a7'].color = 'teal'
+  gui_elements['generate_button_local_sq'].label = "Generate (Local SQ)"
+  gui_elements['generate_button_local_sq'].icon = viser.Icon.PLAYER_PLAY
+  gui_elements['generate_button_local_sq'].color = 'teal'
 
 
 def generate(superquadrics, text_prompt_handle, t0_idx, image_control=False) -> None:
@@ -379,16 +366,13 @@ def setup_gui(server, superquadrics: dict) -> None:
   gui_elements['generate_button'] = server.gui.add_button("Generate", color='green', icon=viser.Icon.PLAYER_PLAY, order=5)
   gui_elements['generate_button'].on_click(lambda _: generate(superquadrics, text_prompt, t0_idx))
 
-  gui_elements['a7_folder'] = server.gui.add_folder("Approach 7 (Per-SQ Prompts)", order=6, expand_by_default=False)
-  with gui_elements['a7_folder']:
-    lam_slider = server.gui.add_slider("Coupling λ", min=0.0, max=1.0, step=0.05, initial_value=0.3,
-                                        marks=((0, "0 (indep.)"), (0.5, "0.5"), (1, "1 (global)")))
-    tau_slider = server.gui.add_slider("Softness τ", min=0.01, max=0.5, step=0.01, initial_value=0.02,
-                                        marks=((0.01, "hard"), (0.25, "0.25"), (0.5, "soft")))
-    gui_elements['lam_slider'] = lam_slider
-    gui_elements['tau_slider'] = tau_slider
-    gui_elements['generate_button_a7'] = server.gui.add_button("Generate (Approach 7)", color='teal', icon=viser.Icon.PLAYER_PLAY)
-    gui_elements['generate_button_a7'].on_click(lambda _: generate_approach7(superquadrics, text_prompt, t0_idx, lam_slider, tau_slider))
+  gui_elements['local_sq_folder'] = server.gui.add_folder("Local SQ (Per-SQ Prompts)", order=6, expand_by_default=False)
+  with gui_elements['local_sq_folder']:
+    local_cfg_slider = server.gui.add_slider("Local CFG (color strength)", min=1.0, max=30.0, step=0.5, initial_value=15.0,
+                                              marks=((1, "1"), (7.5, "7.5"), (15, "15"), (30, "30")))
+    gui_elements['local_cfg_slider'] = local_cfg_slider
+    gui_elements['generate_button_local_sq'] = server.gui.add_button("Generate (Local SQ)", color='teal', icon=viser.Icon.PLAYER_PLAY)
+    gui_elements['generate_button_local_sq'].on_click(lambda _: generate_local_sq(superquadrics, text_prompt, t0_idx, local_cfg_slider))
 
   gui_elements['save_sq_button'] = server.gui.add_button("Save as Template", color='gray', icon=viser.Icon.WRITING, order=0)
   gui_elements['save_sq_button'].on_click(
