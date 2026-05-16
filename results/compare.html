@@ -1,0 +1,1750 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>MultiGen3D Results Comparison</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: sans-serif;
+      background: #111;
+      color: #eee;
+      padding: 16px;
+    }
+
+    h1 {
+      font-size: 1.4rem;
+      margin-bottom: 20px;
+      color: #fff;
+    }
+
+    /* Shape nav */
+    #shape-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 24px;
+    }
+
+    #shape-nav button {
+      background: #2a2a2a;
+      border: 1px solid #444;
+      color: #ccc;
+      padding: 6px 12px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+
+    #shape-nav button:hover {
+      background: #3a3a3a;
+      color: #fff;
+    }
+
+    #shape-nav button.active {
+      background: #4a7cdc;
+      border-color: #6a9cf0;
+      color: #fff;
+    }
+
+    .shape-section {
+      display: none;
+    }
+
+    .shape-section.visible {
+      display: block;
+    }
+
+    .shape-header {
+      font-size: 1.1rem;
+      color: #adf;
+      margin-bottom: 16px;
+    }
+
+    .global-desc {
+      font-size: 0.85rem;
+      color: #888;
+      margin-bottom: 20px;
+    }
+
+    /* Prompt tabs */
+    .prompt-tabs {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 16px;
+      flex-wrap: wrap;
+    }
+
+    .prompt-tab {
+      background: #2a2a2a;
+      border: 1px solid #444;
+      color: #ccc;
+      padding: 5px 14px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 0.8rem;
+    }
+
+    .prompt-tab:hover {
+      background: #3a3a3a;
+    }
+
+    .prompt-tab.active {
+      background: #5a4fa0;
+      border-color: #8a7fd0;
+      color: #fff;
+    }
+
+    .prompt-panel {
+      display: none;
+    }
+
+    .prompt-panel.visible {
+      display: block;
+    }
+
+    /* Prompt text box */
+    .prompt-box {
+      background: #1e1e2e;
+      border-left: 4px solid #7c6fcd;
+      padding: 12px 16px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+    }
+
+    .prompt-box .label {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #888;
+      margin-bottom: 4px;
+    }
+
+    .prompt-box .global-text {
+      font-size: 1rem;
+      color: #ddf;
+      margin-bottom: 10px;
+    }
+
+    .prompt-box .local-heading {
+      font-size: 0.7rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #888;
+      margin-bottom: 6px;
+      margin-top: 6px;
+    }
+
+    .local-parts {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .local-part {
+      background: #2a2435;
+      border: 1px solid #4a3f6a;
+      border-radius: 4px;
+      padding: 4px 10px;
+      font-size: 0.82rem;
+      color: #ccc;
+    }
+
+    .local-part span {
+      color: #aaa;
+      font-size: 0.72rem;
+      margin-right: 4px;
+    }
+
+    /* Side-by-side comparison */
+    .comparison {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .method-block {}
+
+    .method-label {
+      font-size: 0.78rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #aaa;
+      margin-bottom: 10px;
+      padding: 4px 10px;
+      border-radius: 4px;
+      display: inline-block;
+    }
+
+    .method-label.baseline {
+      background: #2a3a2a;
+      color: #8fcf8f;
+      border: 1px solid #4a6f4a;
+    }
+
+    .method-label.local-sq {
+      background: #2a2a3a;
+      color: #8f8fcf;
+      border: 1px solid #4a4a6f;
+    }
+
+    .views-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 6px;
+    }
+
+    .views-grid img {
+      width: 100%;
+      border-radius: 4px;
+      border: 1px solid #333;
+      cursor: pointer;
+      transition: transform 0.15s;
+    }
+
+    .views-grid img:hover {
+      transform: scale(1.02);
+      border-color: #666;
+    }
+
+    /* Lightbox */
+    #lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0, 0, 0, 0.88);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #lightbox.open {
+      display: flex;
+    }
+
+    #lightbox img {
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 6px;
+    }
+
+    #lightbox .close-btn {
+      position: fixed;
+      top: 16px;
+      right: 20px;
+      font-size: 2rem;
+      cursor: pointer;
+      color: #fff;
+      line-height: 1;
+    }
+
+
+    /* CLIP score */
+    .score-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 18px;
+      flex-wrap: wrap;
+    }
+
+    .score-chip {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      border-radius: 6px;
+      padding: 5px 12px;
+      font-size: 0.82rem;
+    }
+
+    .score-chip.baseline {
+      background: #1e2e1e;
+      border: 1px solid #4a6f4a;
+    }
+
+    .score-chip.local-sq {
+      background: #1e1e2e;
+      border: 1px solid #4a4a6f;
+    }
+
+    .score-chip .method {
+      font-size: 0.68rem;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      color: #888;
+      margin-right: 2px;
+    }
+
+    .score-chip .val {
+      font-size: 0.95rem;
+      font-weight: 600;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .score-chip.baseline .val {
+      color: #8fcf8f;
+    }
+
+    .score-chip.local-sq .val {
+      color: #8f8fcf;
+    }
+
+    .score-chip .delta {
+      font-size: 0.72rem;
+      margin-left: 2px;
+    }
+
+    .delta.win {
+      color: #6fcf6f;
+    }
+
+    .delta.loss {
+      color: #cf6f6f;
+    }
+
+    .score-chip .winner-crown {
+      font-size: 0.8rem;
+      margin-left: 3px;
+    }
+
+    /* Overall summary bar */
+    #overall-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 8px;
+      padding: 10px 16px;
+      margin-bottom: 24px;
+      font-size: 0.82rem;
+    }
+
+    #overall-bar .ob-label {
+      color: #888;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      font-size: 0.7rem;
+      margin-right: 4px;
+    }
+
+    #overall-bar .ob-chip {
+      padding: 3px 10px;
+      border-radius: 4px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    #overall-bar .ob-chip.baseline {
+      background: #1e2e1e;
+      color: #8fcf8f;
+      border: 1px solid #4a6f4a;
+    }
+
+    #overall-bar .ob-chip.local-sq {
+      background: #1e1e2e;
+      color: #8f8fcf;
+      border: 1px solid #4a4a6f;
+    }
+
+    @media (max-width: 700px) {
+      .comparison {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <h1>MultiGen3D — Results Comparison</h1>
+
+  <div id="overall-bar">
+    <span class="ob-label">Overall CLIP Score</span>
+    <span class="ob-chip baseline">Baseline <strong id="ob-baseline"></strong></span>
+    <span class="ob-chip local-sq">Local SQ <strong id="ob-local-sq"></strong></span>
+  </div>
+  <div id="shape-nav"></div>
+  <div id="shapes-container"></div>
+
+  <!-- Lightbox -->
+  <div id="lightbox">
+    <span class="close-btn" onclick="closeLightbox()">&#10005;</span>
+    <img id="lightbox-img" src="" alt="">
+  </div>
+
+  <script>
+
+    const CLIP_SCORES = { "airplane_d18592d9615b01bbbc0909d98a1ff2b4": { "0": { "baseline": 0.299316, "local_sq": 0.298523 }, "1": { "baseline": 0.286011, "local_sq": 0.271973 }, "2": { "baseline": 0.237732, "local_sq": 0.257446 }, "3": { "baseline": 0.290955, "local_sq": 0.280304 }, "4": { "baseline": 0.287964, "local_sq": 0.277283 } }, "airplane_f44c0e1e55a3469494f3355d9c061b5a": { "0": { "baseline": 0.322266, "local_sq": 0.316162 }, "1": { "baseline": 0.330383, "local_sq": 0.304199 }, "2": { "baseline": 0.319336, "local_sq": 0.318604 }, "3": { "baseline": 0.30658, "local_sq": 0.301697 }, "4": { "baseline": 0.316467, "local_sq": 0.316956 } }, "bench_dd97603ce7538c15be5bbc844e6db7e": { "0": { "baseline": 0.286804, "local_sq": 0.287598 }, "1": { "baseline": 0.298706, "local_sq": 0.302795 }, "2": { "baseline": 0.287903, "local_sq": 0.302307 }, "3": { "baseline": 0.289429, "local_sq": 0.276184 }, "4": { "baseline": 0.241058, "local_sq": 0.263397 } }, "bench_f8aa82e7e4c58ce29d31c5ce17cce95d": { "0": { "baseline": 0.331299, "local_sq": 0.32666 }, "1": { "baseline": 0.286743, "local_sq": 0.273438 }, "2": { "baseline": 0.309143, "local_sq": 0.328308 }, "3": { "baseline": 0.324463, "local_sq": 0.323853 }, "4": { "baseline": 0.293762, "local_sq": 0.299011 } }, "cabinet_bbbd4de3e7ab25ad80d6227ff9b21190": { "0": { "baseline": 0.274078, "local_sq": 0.288635 }, "1": { "baseline": 0.290283, "local_sq": 0.309387 }, "2": { "baseline": 0.286194, "local_sq": 0.307251 }, "3": { "baseline": 0.286499, "local_sq": 0.277222 }, "4": { "baseline": 0.279938, "local_sq": 0.25119 } }, "cabinet_df55c6665781293cbe53b3b9f1274310": { "0": { "baseline": 0.282654, "local_sq": 0.268524 }, "1": { "baseline": 0.294556, "local_sq": 0.289612 }, "2": { "baseline": 0.270569, "local_sq": 0.297607 }, "3": { "baseline": 0.313049, "local_sq": 0.318115 }, "4": { "baseline": 0.345215, "local_sq": 0.330017 } }, "car_d287b02b4679c70ab7902335d9dd94a2": { "0": { "baseline": 0.290955, "local_sq": 0.299927 }, "1": { "baseline": 0.337463, "local_sq": 0.324463 }, "2": { "baseline": 0.316467, "local_sq": 0.317627 }, "3": { "baseline": 0.309235, "local_sq": 0.309692 }, "4": { "baseline": 0.330505, "local_sq": 0.340576 } }, "car_f9cad36ae25540a0bb20fd1bc4860856": { "0": { "baseline": 0.270325, "local_sq": 0.281433 }, "1": { "baseline": 0.247101, "local_sq": 0.259338 }, "2": { "baseline": 0.271484, "local_sq": 0.268005 }, "3": { "baseline": 0.301575, "local_sq": 0.300232 }, "4": { "baseline": 0.286926, "local_sq": 0.295166 } }, "chair_dfeb8d914d8b28ab5bb58f1e92d30bf7": { "0": { "baseline": 0.327454, "local_sq": 0.314148 }, "1": { "baseline": 0.338745, "local_sq": 0.332703 }, "2": { "baseline": 0.349243, "local_sq": 0.351135 }, "3": { "baseline": 0.340576, "local_sq": 0.334961 }, "4": { "baseline": 0.354492, "local_sq": 0.353027 } }, "chair_f1f670ac53799c18492d9da2668ec34c": { "0": { "baseline": 0.328247, "local_sq": 0.333313 }, "1": { "baseline": 0.346008, "local_sq": 0.346802 }, "2": { "baseline": 0.351257, "local_sq": 0.356384 }, "3": { "baseline": 0.333862, "local_sq": 0.34082 }, "4": { "baseline": 0.353882, "local_sq": 0.360229 } }, "lamp_dc6c499e71d04971d22730b0728b2fc9": { "0": { "baseline": 0.324402, "local_sq": 0.302856 }, "1": { "baseline": 0.351929, "local_sq": 0.368652 }, "2": { "baseline": 0.301758, "local_sq": 0.297791 }, "3": { "baseline": 0.353455, "local_sq": 0.347229 }, "4": { "baseline": 0.328796, "local_sq": 0.280945 } }, "lamp_f228f6cd86162beb659dda512294c744": { "0": { "baseline": 0.343018, "local_sq": 0.32843 }, "1": { "baseline": 0.327148, "local_sq": 0.301208 }, "2": { "baseline": 0.300964, "local_sq": 0.308838 }, "3": { "baseline": 0.332825, "local_sq": 0.314148 }, "4": { "baseline": 0.337036, "local_sq": 0.35498 } }, "rifle_d88c106c00384130fb5c1b0f759e2bc1": { "0": { "baseline": 0.27536, "local_sq": 0.266724 }, "1": { "baseline": 0.30014, "local_sq": 0.290405 }, "2": { "baseline": 0.27002, "local_sq": 0.277283 }, "3": { "baseline": 0.278473, "local_sq": 0.275696 }, "4": { "baseline": 0.267609, "local_sq": 0.268402 } }, "rifle_faa1fb485ddd6c9c8bfbe54b5d01550": { "0": { "baseline": 0.245209, "local_sq": 0.240936 }, "1": { "baseline": 0.244324, "local_sq": 0.248016 }, "2": { "baseline": 0.250092, "local_sq": 0.274384 }, "3": { "baseline": 0.24176, "local_sq": 0.241943 }, "4": { "baseline": 0.251892, "local_sq": 0.261505 } }, "sofa_d9ae4cecb8203838f652f706160dc96d": { "0": { "baseline": 0.35907, "local_sq": 0.346924 }, "1": { "baseline": 0.325684, "local_sq": 0.323364 }, "2": { "baseline": 0.34137, "local_sq": 0.33075 }, "3": { "baseline": 0.339355, "local_sq": 0.341492 }, "4": { "baseline": 0.334229, "local_sq": 0.345703 } }, "sofa_ed394e35b999f69edb039d8689a74349": { "0": { "baseline": 0.309204, "local_sq": 0.313171 }, "1": { "baseline": 0.303101, "local_sq": 0.306519 }, "2": { "baseline": 0.317749, "local_sq": 0.313904 }, "3": { "baseline": 0.310547, "local_sq": 0.330078 }, "4": { "baseline": 0.337341, "local_sq": 0.341125 } }, "table_d3a55d20bb9c93985a7746683ad193f0": { "0": { "baseline": 0.352356, "local_sq": 0.25177 }, "1": { "baseline": 0.251678, "local_sq": 0.256104 }, "2": { "baseline": 0.292419, "local_sq": 0.247101 }, "3": { "baseline": 0.27533, "local_sq": 0.271729 }, "4": { "baseline": 0.273285, "local_sq": 0.300293 } }, "table_f3b8c91c5dd1cb6b8722573b29f0d6d8": { "0": { "baseline": 0.277222, "local_sq": 0.29364 }, "1": { "baseline": 0.30249, "local_sq": 0.301392 }, "2": { "baseline": 0.292419, "local_sq": 0.296143 }, "3": { "baseline": 0.272461, "local_sq": 0.276184 }, "4": { "baseline": 0.298706, "local_sq": 0.312744 } }, "watercraft_d3043fff20dad5c41dc762869682f4f": { "0": { "baseline": 0.283722, "local_sq": 0.26181 }, "1": { "baseline": 0.282288, "local_sq": 0.262726 }, "2": { "baseline": 0.274292, "local_sq": 0.263275 }, "3": { "baseline": 0.2677, "local_sq": 0.265381 }, "4": { "baseline": 0.262421, "local_sq": 0.277191 } }, "watercraft_d95c49195e51912056f316a86bec8b19": { "0": { "baseline": 0.286713, "local_sq": 0.275269 }, "1": { "baseline": 0.274261, "local_sq": 0.286011 }, "2": { "baseline": 0.29248, "local_sq": 0.304382 }, "3": { "baseline": 0.298584, "local_sq": 0.296753 }, "4": { "baseline": 0.274902, "local_sq": 0.30188 } } };
+    const CLIP_OVERALL = { "baseline": 0.3014, "local_sq": 0.3003 };
+
+    const DATA = [
+      {
+        "id": "airplane_d18592d9615b01bbbc0909d98a1ff2b4",
+        "npz": "superdec/data/dataset_20/npz/airplane_d18592d9615b01bbbc0909d98a1ff2b4.npz",
+        "global_description": "A standard commercial airliner",
+        "parts": {
+          "SQ0": "Left wing",
+          "SQ1": "Empennage (tail section)",
+          "SQ2": "Right wing",
+          "SQ3": "Fuselage"
+        },
+        "prompts": [
+          "A commercial airliner with a white fuselage, red-tipped wings, and a blue tail section",
+          "A commercial airliner with a matte grey fuselage, yellow wings, and a black empennage",
+          "A commercial airliner with a silver metallic fuselage, orange striped wings, and a dark navy tail",
+          "A commercial airliner with a white fuselage, green wings, and a red tail section with gold accents",
+          "A commercial airliner with a glossy cream fuselage, sky-blue wings, and a burgundy tail section"
+        ],
+        "local_prompts": [
+          {
+            "0": "red-tipped metal left wing",
+            "1": "blue painted metal tail section",
+            "2": "red-tipped metal right wing",
+            "3": "white painted metal fuselage"
+          },
+          {
+            "0": "yellow painted metal left wing",
+            "1": "black painted metal empennage",
+            "2": "yellow painted metal right wing",
+            "3": "matte grey painted fuselage"
+          },
+          {
+            "0": "orange striped wing",
+            "1": "dark navy tail",
+            "2": "orange striped wing",
+            "3": "silver metallic fuselage"
+          },
+          {
+            "0": "green painted metal left wing",
+            "1": "red tail section with gold accents",
+            "2": "green painted metal right wing",
+            "3": "white painted metal fuselage"
+          },
+          {
+            "0": "sky-blue painted wing",
+            "1": "burgundy painted tail section",
+            "2": "sky-blue painted wing",
+            "3": "glossy cream fuselage"
+          }
+        ]
+      },
+      {
+        "id": "airplane_f44c0e1e55a3469494f3355d9c061b5a",
+        "npz": "superdec/data/dataset_20/npz/airplane_f44c0e1e55a3469494f3355d9c061b5a.npz",
+        "global_description": "A fighter jet",
+        "parts": {
+          "SQ0": "Fuselage including main body and tail section",
+          "SQ1": "Wings (left and right)"
+        },
+        "prompts": [
+          "A fighter jet with a matte black fuselage and camouflage green wings",
+          "A fighter jet with a glossy dark grey fuselage and bright orange wings",
+          "A fighter jet with a sand-colored desert camo fuselage and dark brown wings",
+          "A fighter jet with a blue and white fuselage and silver metallic wings",
+          "A fighter jet with a red fuselage and white wings with black trim"
+        ],
+        "local_prompts": [
+          {
+            "0": "matte black fuselage and tail",
+            "1": "camouflage green wings"
+          },
+          {
+            "0": "glossy dark grey fuselage",
+            "1": "bright orange wings"
+          },
+          {
+            "0": "sand-colored desert camo fuselage",
+            "1": "dark brown wings"
+          },
+          {
+            "0": "blue and white fuselage",
+            "1": "silver metallic wings"
+          },
+          {
+            "0": "a red fuselage",
+            "1": "white wings with black trim"
+          }
+        ]
+      },
+      {
+        "id": "bench_dd97603ce7538c15be5bbc844e6db7e",
+        "npz": "superdec/data/dataset_20/npz/bench_dd97603ce7538c15be5bbc844e6db7e.npz",
+        "global_description": "A long, narrow park bench with a flat seat and two supporting legs",
+        "parts": {
+          "SQ0": "Left leg",
+          "SQ1": "Left rim",
+          "SQ2": "Right leg",
+          "SQ3": "Right rim",
+          "SQ4": "Seat"
+        },
+        "prompts": [
+          "A park bench with black cast iron legs and rims and a natural oak wooden seat",
+          "A park bench with white painted metal legs and rims and a dark walnut wooden seat",
+          "A park bench with rusty brown iron legs and rims and a teak wooden seat with green moss",
+          "A park bench with gold metal legs and rims and a polished mahogany seat",
+          "A park bench with concrete grey legs and rims and a bright white painted wooden seat"
+        ],
+        "local_prompts": [
+          {
+            "0": "black cast iron left leg",
+            "1": "black cast iron left rim",
+            "2": "black cast iron right leg",
+            "3": "black cast iron right rim",
+            "4": "natural oak wooden seat"
+          },
+          {
+            "0": "a white painted metal leg",
+            "1": "a white painted metal rim",
+            "2": "a white painted metal leg",
+            "3": "a white painted metal rim",
+            "4": "a dark walnut wooden seat"
+          },
+          {
+            "0": "rusty brown iron left leg",
+            "1": "rusty brown iron left rim",
+            "2": "rusty brown iron right leg",
+            "3": "rusty brown iron right rim",
+            "4": "teak wooden seat with moss"
+          },
+          {
+            "0": "gold metal left leg",
+            "1": "gold metal left rim",
+            "2": "gold metal right leg",
+            "3": "gold metal right rim",
+            "4": "polished mahogany seat"
+          },
+          {
+            "0": "a concrete grey left leg",
+            "1": "a concrete grey left rim",
+            "2": "a concrete grey right leg",
+            "3": "a concrete grey right rim",
+            "4": "a bright white wooden seat"
+          }
+        ]
+      },
+      {
+        "id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+        "npz": "superdec/data/dataset_20/npz/bench_f8aa82e7e4c58ce29d31c5ce17cce95d.npz",
+        "global_description": "A park bench with a seat, high backrest, armrests, and four legs",
+        "parts": {
+          "SQ0": "Bottom part of left leg",
+          "SQ1": "Left armrest",
+          "SQ2": "Middle armrest",
+          "SQ3": "Seat",
+          "SQ4": "Right armrest",
+          "SQ5": "Backrest",
+          "SQ6": "Upper part of left leg",
+          "SQ7": "Bottom part of right leg",
+          "SQ8": "Upper part of right leg"
+        },
+        "prompts": [
+          "A garden bench with black wrought iron legs, green painted armrests, a natural pine seat, and a white backrest",
+          "A garden bench with brown wooden legs, cream-colored armrests, a red-painted seat, and a dark brown backrest",
+          "A garden bench with brass-finished legs, walnut armrests, a forest green seat, and a matching green backrest",
+          "A garden bench with grey stone-textured legs, light oak armrests, a navy blue cushioned seat, and a white backrest",
+          "A garden bench with copper-patina legs, teak armrests, a charcoal grey seat, and a beige backrest"
+        ],
+        "local_prompts": [
+          {
+            "0": "black wrought iron leg bottom",
+            "1": "green painted armrest",
+            "2": "green painted armrest",
+            "3": "natural pine seat",
+            "4": "green painted armrest",
+            "5": "white backrest",
+            "6": "black wrought iron leg upper",
+            "7": "black wrought iron leg bottom",
+            "8": "black wrought iron leg upper"
+          },
+          {
+            "0": "brown wooden bottom left leg",
+            "1": "cream-colored armrest",
+            "2": "cream-colored armrest",
+            "3": "red-painted seat",
+            "4": "cream-colored armrest",
+            "5": "dark brown backrest",
+            "6": "brown wooden upper left leg",
+            "7": "brown wooden bottom right leg",
+            "8": "brown wooden upper right leg"
+          },
+          {
+            "0": "brass-finished bottom left leg",
+            "1": "walnut left armrest",
+            "2": "walnut middle armrest",
+            "3": "forest green seat",
+            "4": "walnut right armrest",
+            "5": "forest green backrest",
+            "6": "brass-finished upper left leg",
+            "7": "brass-finished bottom right leg",
+            "8": "brass-finished upper right leg"
+          },
+          {
+            "0": "grey stone-textured bottom left leg",
+            "1": "light oak left armrest",
+            "2": "light oak middle armrest",
+            "3": "navy blue cushioned seat",
+            "4": "light oak right armrest",
+            "5": "white backrest",
+            "6": "grey stone-textured upper left leg",
+            "7": "grey stone-textured bottom right leg",
+            "8": "grey stone-textured upper right leg"
+          },
+          {
+            "0": "copper-patina bottom left leg",
+            "1": "teak left armrest",
+            "2": "teak middle armrest",
+            "3": "charcoal grey seat",
+            "4": "teak right armrest",
+            "5": "beige backrest",
+            "6": "copper-patina upper left leg",
+            "7": "copper-patina bottom right leg",
+            "8": "copper-patina upper right leg"
+          }
+        ]
+      },
+      {
+        "id": "cabinet_bbbd4de3e7ab25ad80d6227ff9b21190",
+        "npz": "superdec/data/dataset_20/npz/cabinet_bbbd4de3e7ab25ad80d6227ff9b21190.npz",
+        "global_description": "A tall, slender storage cabinet",
+        "parts": {
+          "SQ0": "Left side panel",
+          "SQ1": "Front panel (door)",
+          "SQ2": "Right side panel",
+          "SQ3": "Top panel",
+          "SQ4": "Back panel"
+        },
+        "prompts": [
+          "A tall cabinet with white painted side panels, a glossy red front door, and a light oak top panel",
+          "A tall cabinet with dark walnut side panels, a glass-fronted door, and a black top panel",
+          "A tall cabinet with grey metal side panels, a navy blue front door, and a silver top panel",
+          "A tall cabinet with pine wood side panels, a bright yellow front door, and a matching pine top",
+          "A tall cabinet with matte black side panels, a mirrored front door, and a white marble top panel"
+        ],
+        "local_prompts": [
+          {
+            "0": "white painted side panel",
+            "1": "glossy red front door",
+            "2": "white painted side panel",
+            "3": "light oak top panel",
+            "4": "neutral back panel"
+          },
+          {
+            "0": "dark walnut left side panel",
+            "1": "glass-fronted door",
+            "2": "dark walnut right side panel",
+            "3": "black top panel",
+            "4": "neutral back panel"
+          },
+          {
+            "0": "grey metal left side panel",
+            "1": "navy blue front door",
+            "2": "grey metal right side panel",
+            "3": "silver top panel",
+            "4": "grey metal back panel"
+          },
+          {
+            "0": "pine wood left side panel",
+            "1": "bright yellow front panel",
+            "2": "pine wood right side panel",
+            "3": "pine wood top panel",
+            "4": "neutral back panel"
+          },
+          {
+            "0": "matte black side panel",
+            "1": "mirrored front door",
+            "2": "matte black side panel",
+            "3": "white marble top panel",
+            "4": "neutral back panel"
+          }
+        ]
+      },
+      {
+        "id": "cabinet_df55c6665781293cbe53b3b9f1274310",
+        "npz": "superdec/data/dataset_20/npz/cabinet_df55c6665781293cbe53b3b9f1274310.npz",
+        "global_description": "A tall, rectangular storage cabinet",
+        "parts": {
+          "SQ0": "Main body / storage compartment",
+          "SQ1": "Top panel or lid"
+        },
+        "prompts": [
+          "A rectangular storage cabinet with a white painted main body and a dark walnut wood top panel",
+          "A rectangular storage cabinet with a brushed steel main body and a black granite top panel",
+          "A rectangular storage cabinet with a navy blue main body and a light oak top panel",
+          "A rectangular storage cabinet with a terracotta red main body and a white marble top panel",
+          "A rectangular storage cabinet with a forest green main body and a brass-finished top panel"
+        ],
+        "local_prompts": [
+          {
+            "0": "a white painted main body",
+            "1": "a dark walnut wood top panel"
+          },
+          {
+            "0": "a brushed steel main body",
+            "1": "a black granite top panel"
+          },
+          {
+            "0": "navy blue main body",
+            "1": "light oak top panel"
+          },
+          {
+            "0": "terracotta red storage compartment",
+            "1": "white marble top panel"
+          },
+          {
+            "0": "forest green storage compartment",
+            "1": "brass-finished top panel"
+          }
+        ],
+        "seeds": [
+          null,
+          123,
+          null,
+          null,
+          null
+        ]
+      },
+      {
+        "id": "car_d287b02b4679c70ab7902335d9dd94a2",
+        "npz": "superdec/data/dataset_20/npz/car_d287b02b4679c70ab7902335d9dd94a2.npz",
+        "global_description": "A pickup truck with a cabin and open cargo bed",
+        "parts": {
+          "SQ0": "Cabin (passenger compartment)",
+          "SQ1": "Left fender of truck bed",
+          "SQ2": "Front-left wheel",
+          "SQ3": "Hood and front engine compartment",
+          "SQ4": "Front-right wheel",
+          "SQ5": "Right fender of truck bed",
+          "SQ6": "Tailgate",
+          "SQ7": "Rear-right wheel",
+          "SQ8": "Rear-left wheel",
+          "SQ9": "Floor panel of truck bed"
+        },
+        "prompts": [
+          "A pickup truck with a red cabin, black fenders on the truck bed, silver wheels, a white hood, and a grey tailgate and floor",
+          "A pickup truck with a navy blue cabin, rust-orange fenders, black wheels, a matching blue hood, and a silver tailgate",
+          "A pickup truck with a sandy beige cabin, dark green fenders, chrome wheels, a cream hood, and a brown wooden truck bed floor",
+          "A pickup truck with a matte black cabin, gunmetal grey fenders, red wheels, a black hood, and a silver tailgate",
+          "A pickup truck with a forest green cabin, olive drab fenders, white wheels, a green hood, and a black steel truck bed floor"
+        ],
+        "local_prompts": [
+          {
+            "0": "a red painted metal cabin",
+            "1": "a black painted metal fender",
+            "2": "a silver metal wheel",
+            "3": "a white painted metal hood",
+            "4": "a silver metal wheel",
+            "5": "a black painted metal fender",
+            "6": "a grey painted metal tailgate",
+            "7": "a silver metal wheel",
+            "8": "a silver metal wheel",
+            "9": "a grey painted metal floor panel"
+          },
+          {
+            "0": "navy blue cabin",
+            "1": "rust-orange fender",
+            "2": "black wheel",
+            "3": "matching blue hood",
+            "4": "black wheel",
+            "5": "rust-orange fender",
+            "6": "silver tailgate",
+            "7": "black wheel",
+            "8": "black wheel",
+            "9": "neutral metal floor panel"
+          },
+          {
+            "0": "sandy beige cabin",
+            "1": "dark green left fender",
+            "2": "chrome front-left wheel",
+            "3": "cream hood and engine compartment",
+            "4": "chrome front-right wheel",
+            "5": "dark green right fender",
+            "6": "brown wooden tailgate",
+            "7": "chrome rear-right wheel",
+            "8": "chrome rear-left wheel",
+            "9": "brown wooden floor panel"
+          },
+          {
+            "0": "matte black cabin",
+            "1": "gunmetal grey left fender",
+            "2": "red front-left wheel",
+            "3": "black hood",
+            "4": "red front-right wheel",
+            "5": "gunmetal grey right fender",
+            "6": "silver tailgate",
+            "7": "red rear-right wheel",
+            "8": "red rear-left wheel",
+            "9": "neutral metal floor panel"
+          },
+          {
+            "0": "forest green cabin",
+            "1": "olive drab fender",
+            "2": "white wheel",
+            "3": "green hood",
+            "4": "white wheel",
+            "5": "olive drab fender",
+            "6": "black steel tailgate",
+            "7": "white wheel",
+            "8": "white wheel",
+            "9": "black steel floor panel"
+          }
+        ]
+      },
+      {
+        "id": "car_f9cad36ae25540a0bb20fd1bc4860856",
+        "npz": "superdec/data/dataset_20/npz/car_f9cad36ae25540a0bb20fd1bc4860856.npz",
+        "global_description": "A four-door sedan",
+        "parts": {
+          "SQ0": "Rear-left wheel",
+          "SQ1": "Front-left wheel",
+          "SQ2": "Hood and front engine compartment",
+          "SQ3": "Front-right wheel",
+          "SQ4": "Rear-right wheel",
+          "SQ5": "Main cabin (roof and passenger compartment)"
+        },
+        "prompts": [
+          "A four-door sedan with a white cabin, black hood, and bright red wheels",
+          "A four-door sedan with a silver metallic cabin, dark blue hood, and gold chrome wheels",
+          "A four-door sedan with a jet black cabin, red hood, and chrome silver wheels",
+          "A four-door sedan with a pearl white cabin, yellow hood, and matte black wheels",
+          "A four-door sedan with a deep burgundy cabin, charcoal grey hood, and rose gold wheels"
+        ],
+        "local_prompts": [
+          {
+            "0": "a bright red wheel",
+            "1": "a bright red wheel",
+            "2": "a black hood",
+            "3": "a bright red wheel",
+            "4": "a bright red wheel",
+            "5": "a white cabin"
+          },
+          {
+            "0": "a gold chrome rear-left wheel",
+            "1": "a gold chrome front-left wheel",
+            "2": "a dark blue hood",
+            "3": "a gold chrome front-right wheel",
+            "4": "a gold chrome rear-right wheel",
+            "5": "a silver metallic cabin"
+          },
+          {
+            "0": "chrome silver rear-left wheel",
+            "1": "chrome silver front-left wheel",
+            "2": "red hood and engine compartment",
+            "3": "chrome silver front-right wheel",
+            "4": "chrome silver rear-right wheel",
+            "5": "jet black cabin"
+          },
+          {
+            "0": "matte black rear-left wheel",
+            "1": "matte black front-left wheel",
+            "2": "yellow hood",
+            "3": "matte black front-right wheel",
+            "4": "matte black rear-right wheel",
+            "5": "pearl white cabin"
+          },
+          {
+            "0": "rose gold rear-left wheel",
+            "1": "rose gold front-left wheel",
+            "2": "charcoal grey hood",
+            "3": "rose gold front-right wheel",
+            "4": "rose gold rear-right wheel",
+            "5": "deep burgundy cabin"
+          }
+        ]
+      },
+      {
+        "id": "chair_dfeb8d914d8b28ab5bb58f1e92d30bf7",
+        "npz": "superdec/data/dataset_20/npz/chair_dfeb8d914d8b28ab5bb58f1e92d30bf7.npz",
+        "global_description": "A rounded chair with armrests and four splayed legs",
+        "parts": {
+          "SQ0": "Rear-left leg",
+          "SQ1": "Front-left leg",
+          "SQ2": "Left armrest",
+          "SQ3": "Front-right leg",
+          "SQ4": "Rear-right leg",
+          "SQ5": "Seat",
+          "SQ6": "Right armrest",
+          "SQ7": "Backrest"
+        },
+        "prompts": [
+          "A rounded chair with blue painted metal legs, red velvet seat cushion, white plastic armrests, and a dark walnut wooden backrest",
+          "A rounded chair with natural oak legs, a grey wool seat, black rubber armrests, and a woven rattan backrest",
+          "A rounded chair with gold-finished legs, a pink linen seat, transparent acrylic armrests, and a padded cream backrest",
+          "A rounded chair with black steel legs, a green leather seat, brass armrests, and a light beige upholstered backrest",
+          "A rounded chair with white lacquered legs, a navy blue canvas seat, birch wood armrests, and a mesh backrest"
+        ],
+        "local_prompts": [
+          {
+            "0": "blue painted metal rear-left leg",
+            "1": "blue painted metal front-left leg",
+            "2": "white plastic left armrest",
+            "3": "blue painted metal front-right leg",
+            "4": "blue painted metal rear-right leg",
+            "5": "red velvet seat cushion",
+            "6": "white plastic right armrest",
+            "7": "dark walnut wooden backrest"
+          },
+          {
+            "0": "natural oak rear-left leg",
+            "1": "natural oak front-left leg",
+            "2": "black rubber left armrest",
+            "3": "natural oak front-right leg",
+            "4": "natural oak rear-right leg",
+            "5": "grey wool seat",
+            "6": "black rubber right armrest",
+            "7": "woven rattan backrest"
+          },
+          {
+            "0": "gold-finished rear-left leg",
+            "1": "gold-finished front-left leg",
+            "2": "transparent acrylic left armrest",
+            "3": "gold-finished front-right leg",
+            "4": "gold-finished rear-right leg",
+            "5": "pink linen seat",
+            "6": "transparent acrylic right armrest",
+            "7": "padded cream backrest"
+          },
+          {
+            "0": "a black steel rear-left leg",
+            "1": "a black steel front-left leg",
+            "2": "a brass left armrest",
+            "3": "a black steel front-right leg",
+            "4": "a black steel rear-right leg",
+            "5": "a green leather seat",
+            "6": "a brass right armrest",
+            "7": "a light beige upholstered backrest"
+          },
+          {
+            "0": "white lacquered rear-left leg",
+            "1": "white lacquered front-left leg",
+            "2": "birch wood left armrest",
+            "3": "white lacquered front-right leg",
+            "4": "white lacquered rear-right leg",
+            "5": "navy blue canvas seat",
+            "6": "birch wood right armrest",
+            "7": "mesh backrest"
+          }
+        ]
+      },
+      {
+        "id": "chair_f1f670ac53799c18492d9da2668ec34c",
+        "npz": "superdec/data/dataset_20/npz/chair_f1f670ac53799c18492d9da2668ec34c.npz",
+        "global_description": "A swivel office chair with backrest, seat cushion, and five-wheel caster base",
+        "parts": {
+          "SQ0": "Pedestal / gas-lift column",
+          "SQ1": "Caster wheel",
+          "SQ2": "Caster wheel",
+          "SQ3": "Left armrest",
+          "SQ4": "Caster wheel",
+          "SQ5": "Caster wheel",
+          "SQ6": "Seat",
+          "SQ7": "Right armrest",
+          "SQ8": "Backrest",
+          "SQ9": "Caster wheel"
+        },
+        "prompts": [
+          "An office chair with a chrome pedestal, black rubber wheels, black leather seat and backrest, and grey plastic armrests",
+          "An office chair with a matte black pedestal, red wheels, a teal blue fabric seat, a matching blue backrest, and white armrests",
+          "An office chair with a gold metallic pedestal, clear acrylic wheels, a pink velvet seat, a white backrest, and gold armrests",
+          "An office chair with a silver pedestal, dark grey wheels, a tan leather seat and backrest, and wooden armrests",
+          "An office chair with a white pedestal, pastel pink wheels, a mint green seat, a white mesh backrest, and light grey armrests"
+        ],
+        "local_prompts": [
+          {
+            "0": "chrome pedestal gas-lift column",
+            "1": "black rubber caster wheel",
+            "2": "black rubber caster wheel",
+            "3": "grey plastic left armrest",
+            "4": "black rubber caster wheel",
+            "5": "black rubber caster wheel",
+            "6": "black leather seat cushion",
+            "7": "grey plastic right armrest",
+            "8": "black leather backrest",
+            "9": "black rubber caster wheel"
+          },
+          {
+            "0": "matte black metal pedestal",
+            "1": "red plastic caster wheel",
+            "2": "red plastic caster wheel",
+            "3": "white plastic armrest",
+            "4": "red plastic caster wheel",
+            "5": "red plastic caster wheel",
+            "6": "teal blue fabric seat",
+            "7": "white plastic armrest",
+            "8": "teal blue fabric backrest",
+            "9": "red plastic caster wheel"
+          },
+          {
+            "0": "a gold metallic pedestal",
+            "1": "a clear acrylic caster wheel",
+            "2": "a clear acrylic caster wheel",
+            "3": "a gold metallic armrest",
+            "4": "a clear acrylic caster wheel",
+            "5": "a clear acrylic caster wheel",
+            "6": "a pink velvet seat",
+            "7": "a gold metallic armrest",
+            "8": "a white backrest",
+            "9": "a clear acrylic caster wheel"
+          },
+          {
+            "0": "a silver pedestal column",
+            "1": "a dark grey caster wheel",
+            "2": "a dark grey caster wheel",
+            "3": "a wooden left armrest",
+            "4": "a dark grey caster wheel",
+            "5": "a dark grey caster wheel",
+            "6": "a tan leather seat",
+            "7": "a wooden right armrest",
+            "8": "a tan leather backrest",
+            "9": "a dark grey caster wheel"
+          },
+          {
+            "0": "a white pedestal column",
+            "1": "a pastel pink wheel",
+            "2": "a pastel pink wheel",
+            "3": "a light grey armrest",
+            "4": "a pastel pink wheel",
+            "5": "a pastel pink wheel",
+            "6": "a mint green seat",
+            "7": "a light grey armrest",
+            "8": "a white mesh backrest",
+            "9": "a pastel pink wheel"
+          }
+        ]
+      },
+      {
+        "id": "lamp_dc6c499e71d04971d22730b0728b2fc9",
+        "npz": "superdec/data/dataset_20/npz/lamp_dc6c499e71d04971d22730b0728b2fc9.npz",
+        "global_description": "An adjustable swing-arm desk lamp",
+        "parts": {
+          "SQ0": "Base",
+          "SQ1": "Lamp shade / head",
+          "SQ2": "Upper arm segment",
+          "SQ3": "Middle arm segment",
+          "SQ4": "Lower arm segment"
+        },
+        "prompts": [
+          "A swing-arm desk lamp with a black marble base, a bright red metal shade, a chrome upper arm, a brass middle arm, and a black lower arm",
+          "A swing-arm desk lamp with a white ceramic base, a lime green shade, and silver metallic arm segments throughout",
+          "A swing-arm desk lamp with a wooden base, a matte black cone shade, and copper-finished arm segments",
+          "A swing-arm desk lamp with a grey concrete base, a yellow enamel shade, a white upper arm, a grey middle arm, and a dark lower arm",
+          "A swing-arm desk lamp with a gold-plated base, a navy blue shade, and rose gold arm segments"
+        ],
+        "local_prompts": [
+          {
+            "0": "a black marble base",
+            "1": "a bright red metal shade",
+            "2": "a chrome upper arm",
+            "3": "a brass middle arm",
+            "4": "a black lower arm"
+          },
+          {
+            "0": "a white ceramic base",
+            "1": "a lime green shade",
+            "2": "a silver metallic upper arm",
+            "3": "a silver metallic middle arm",
+            "4": "a silver metallic lower arm"
+          },
+          {
+            "0": "a wooden base",
+            "1": "a matte black cone shade",
+            "2": "a copper-finished upper arm",
+            "3": "a copper-finished middle arm",
+            "4": "a copper-finished lower arm"
+          },
+          {
+            "0": "a grey concrete base",
+            "1": "a yellow enamel shade",
+            "2": "a white upper arm",
+            "3": "a grey middle arm",
+            "4": "a dark lower arm"
+          },
+          {
+            "0": "a gold-plated base",
+            "1": "a navy blue shade",
+            "2": "a rose gold upper arm",
+            "3": "a rose gold middle arm",
+            "4": "a rose gold lower arm"
+          }
+        ]
+      },
+      {
+        "id": "lamp_f228f6cd86162beb659dda512294c744",
+        "npz": "superdec/data/dataset_20/npz/lamp_f228f6cd86162beb659dda512294c744.npz",
+        "global_description": "A classic desk lamp with a large cone-shaped shade, multi-leg stand, and flat base",
+        "parts": {
+          "SQ0": "Base",
+          "SQ1": "Shade segment",
+          "SQ2": "Stand leg",
+          "SQ3": "Shade segment",
+          "SQ4": "Stand leg",
+          "SQ5": "Stand leg",
+          "SQ6": "Central housing (bulb socket area)",
+          "SQ7": "Shade segment",
+          "SQ8": "Shade segment",
+          "SQ9": "Stand leg"
+        },
+        "prompts": [
+          "A classic desk lamp with a black marble base, a green enamel cone shade, brass stand legs, and a gold central socket housing",
+          "A classic desk lamp with a white ceramic base, a red-and-white striped cone shade, chrome stand legs, and a silver central housing",
+          "A classic desk lamp with a walnut wood base, a cream linen cone shade, dark bronze stand legs, and a bronze central housing",
+          "A classic desk lamp with a grey concrete base, a cobalt blue cone shade, matte black stand legs, and a gunmetal central housing",
+          "A classic desk lamp with a pink acrylic base, a pastel yellow cone shade, rose gold stand legs, and a white central housing"
+        ],
+        "local_prompts": [
+          {
+            "0": "a black marble base",
+            "1": "a green enamel shade segment",
+            "2": "a brass stand leg",
+            "3": "a green enamel shade segment",
+            "4": "a brass stand leg",
+            "5": "a brass stand leg",
+            "6": "a gold central housing",
+            "7": "a green enamel shade segment",
+            "8": "a green enamel shade segment",
+            "9": "a brass stand leg"
+          },
+          {
+            "0": "a white ceramic base",
+            "1": "a red-and-white striped shade",
+            "2": "a chrome stand leg",
+            "3": "a red-and-white striped shade",
+            "4": "a chrome stand leg",
+            "5": "a chrome stand leg",
+            "6": "a silver central housing",
+            "7": "a red-and-white striped shade",
+            "8": "a red-and-white striped shade",
+            "9": "a chrome stand leg"
+          },
+          {
+            "0": "walnut wood base",
+            "1": "cream linen shade segment",
+            "2": "dark bronze stand leg",
+            "3": "cream linen shade segment",
+            "4": "dark bronze stand leg",
+            "5": "dark bronze stand leg",
+            "6": "bronze central housing",
+            "7": "cream linen shade segment",
+            "8": "cream linen shade segment",
+            "9": "dark bronze stand leg"
+          },
+          {
+            "0": "a grey concrete base",
+            "1": "a cobalt blue cone shade",
+            "2": "a matte black stand leg",
+            "3": "a cobalt blue cone shade",
+            "4": "a matte black stand leg",
+            "5": "a matte black stand leg",
+            "6": "a gunmetal central housing",
+            "7": "a cobalt blue cone shade",
+            "8": "a cobalt blue cone shade",
+            "9": "a matte black stand leg"
+          },
+          {
+            "0": "a pink acrylic base",
+            "1": "a pastel yellow shade segment",
+            "2": "a rose gold stand leg",
+            "3": "a pastel yellow shade segment",
+            "4": "a rose gold stand leg",
+            "5": "a rose gold stand leg",
+            "6": "a white central housing",
+            "7": "a pastel yellow shade segment",
+            "8": "a pastel yellow shade segment",
+            "9": "a rose gold stand leg"
+          }
+        ]
+      },
+      {
+        "id": "rifle_d88c106c00384130fb5c1b0f759e2bc1",
+        "npz": "superdec/data/dataset_20/npz/rifle_d88c106c00384130fb5c1b0f759e2bc1.npz",
+        "global_description": "A semi-automatic hand pistol",
+        "parts": {
+          "SQ0": "Trigger guard and lower frame",
+          "SQ1": "Grip (handle)",
+          "SQ2": "Slide and barrel assembly"
+        },
+        "prompts": [
+          "A pistol with a black polymer trigger guard, a brown wooden grip, and a stainless steel slide and barrel",
+          "A pistol with a tan desert-camo lower frame, a black rubber grip, and a matte black slide and barrel",
+          "A pistol with a red anodized trigger guard, a white pearl grip, and a chrome slide and barrel",
+          "A pistol with a grey composite lower frame, a dark grey textured grip, and a brushed steel slide and barrel",
+          "A pistol with an olive green trigger guard, a walnut wood grip, and a gold-titanium coated slide and barrel"
+        ],
+        "local_prompts": [
+          {
+            "0": "black polymer trigger guard",
+            "1": "brown wooden grip",
+            "2": "stainless steel slide and barrel"
+          },
+          {
+            "0": "tan desert-camo lower frame",
+            "1": "black rubber grip",
+            "2": "matte black slide and barrel"
+          },
+          {
+            "0": "red anodized trigger guard",
+            "1": "white pearl grip",
+            "2": "chrome slide and barrel"
+          },
+          {
+            "0": "grey composite lower frame",
+            "1": "dark grey textured grip",
+            "2": "brushed steel slide and barrel"
+          },
+          {
+            "0": "olive green trigger guard",
+            "1": "walnut wood grip",
+            "2": "gold-titanium coated slide and barrel"
+          }
+        ]
+      },
+      {
+        "id": "rifle_faa1fb485ddd6c9c8bfbe54b5d01550",
+        "npz": "superdec/data/dataset_20/npz/rifle_faa1fb485ddd6c9c8bfbe54b5d01550.npz",
+        "global_description": "A long-range bolt-action rifle",
+        "parts": {
+          "SQ0": "Main body of the rifle",
+          "SQ1": "Front bipod stand",
+          "SQ2": "Buttstock",
+          "SQ3": "Buttpad (rear stock extension)"
+        },
+        "prompts": [
+          "A bolt-action rifle with a black polymer main body, silver metal bipod, dark walnut buttstock, and a black rubber buttpad",
+          "A bolt-action rifle with a tan desert-camo main body, gold-tipped bipod, sand-colored buttstock, and a brown rubber buttpad",
+          "A bolt-action rifle with a forest green main body, black bipod, olive drab buttstock, and a dark green buttpad",
+          "A bolt-action rifle with a grey carbon-fiber textured main body, chrome bipod, black synthetic buttstock, and a red rubber buttpad",
+          "A bolt-action rifle with a white arctic-camo main body, white bipod, white buttstock, and a grey buttpad"
+        ],
+        "local_prompts": [
+          {
+            "0": "black polymer main body",
+            "1": "silver metal bipod",
+            "2": "dark walnut buttstock",
+            "3": "black rubber buttpad"
+          },
+          {
+            "0": "tan desert-camo main body",
+            "1": "gold-tipped bipod",
+            "2": "sand-colored buttstock",
+            "3": "brown rubber buttpad"
+          },
+          {
+            "0": "forest green metal main body",
+            "1": "black metal bipod stand",
+            "2": "olive drab composite buttstock",
+            "3": "dark green rubber buttpad"
+          },
+          {
+            "0": "grey carbon-fiber textured main body",
+            "1": "chrome bipod stand",
+            "2": "black synthetic buttstock",
+            "3": "red rubber buttpad"
+          },
+          {
+            "0": "white arctic-camo main body",
+            "1": "white bipod stand",
+            "2": "white buttstock",
+            "3": "grey buttpad"
+          }
+        ]
+      },
+      {
+        "id": "sofa_d9ae4cecb8203838f652f706160dc96d",
+        "npz": "superdec/data/dataset_20/npz/sofa_d9ae4cecb8203838f652f706160dc96d.npz",
+        "global_description": "A multi-seater couch or sofa",
+        "parts": {
+          "SQ0": "Left armrest",
+          "SQ1": "Left front leg",
+          "SQ2": "Front support panel",
+          "SQ3": "Right front leg",
+          "SQ4": "Back support panel",
+          "SQ5": "Seat cushion",
+          "SQ6": "Right armrest",
+          "SQ7": "Backrest"
+        },
+        "prompts": [
+          "A sofa with navy blue velvet armrests, gold metal legs, a white front panel, a grey flannel seat cushion, and a navy blue backrest",
+          "A sofa with cream leather armrests, dark walnut legs, a beige fabric front panel, a terracotta seat cushion, and a cream backrest",
+          "A sofa with forest green linen armrests, black iron legs, a charcoal front panel, a mustard yellow seat cushion, and a dark green backrest",
+          "A sofa with dusty pink velvet armrests, brass legs, a light grey front panel, a white boucle seat cushion, and a pale pink backrest",
+          "A sofa with burnt orange fabric armrests, silver metal legs, a tan front panel, a deep brown leather seat cushion, and an orange backrest"
+        ],
+        "local_prompts": [
+          {
+            "0": "navy blue velvet armrest",
+            "1": "gold metal leg",
+            "2": "white front panel",
+            "3": "gold metal leg",
+            "4": "neutral back support panel",
+            "5": "grey flannel seat cushion",
+            "6": "navy blue velvet armrest",
+            "7": "navy blue backrest"
+          },
+          {
+            "0": "cream leather armrest",
+            "1": "dark walnut leg",
+            "2": "beige fabric panel",
+            "3": "dark walnut leg",
+            "4": "beige fabric panel",
+            "5": "terracotta seat cushion",
+            "6": "cream leather armrest",
+            "7": "cream backrest"
+          },
+          {
+            "0": "forest green linen armrest",
+            "1": "black iron leg",
+            "2": "charcoal front panel",
+            "3": "black iron leg",
+            "4": "charcoal front panel",
+            "5": "mustard yellow seat cushion",
+            "6": "forest green linen armrest",
+            "7": "dark green backrest"
+          },
+          {
+            "0": "dusty pink velvet left armrest",
+            "1": "brass left front leg",
+            "2": "light grey front panel",
+            "3": "brass right front leg",
+            "4": "neutral back support panel",
+            "5": "white boucle seat cushion",
+            "6": "dusty pink velvet right armrest",
+            "7": "pale pink backrest"
+          },
+          {
+            "0": "burnt orange fabric armrest",
+            "1": "silver metal leg",
+            "2": "tan front panel",
+            "3": "silver metal leg",
+            "4": "orange backrest",
+            "5": "deep brown leather seat cushion",
+            "6": "burnt orange fabric armrest",
+            "7": "orange backrest"
+          }
+        ]
+      },
+      {
+        "id": "sofa_ed394e35b999f69edb039d8689a74349",
+        "npz": "superdec/data/dataset_20/npz/sofa_ed394e35b999f69edb039d8689a74349.npz",
+        "global_description": "A sectional L-shaped sofa with a main seating area and extended chaise section",
+        "parts": {
+          "SQ0": "Extended chaise seat cushion",
+          "SQ1": "Left armrest",
+          "SQ2": "Main seat cushion",
+          "SQ3": "Right armrest",
+          "SQ4": "Backrest"
+        },
+        "prompts": [
+          "An L-shaped sectional sofa with a light grey chaise cushion, white leather armrests, a charcoal main seat cushion, and a dark grey backrest",
+          "An L-shaped sectional sofa with a mustard yellow chaise cushion, navy blue armrests, a cream main seat cushion, and a navy blue backrest",
+          "An L-shaped sectional sofa with a blush pink chaise cushion, white boucle armrests, a rose velvet main seat, and a light pink backrest",
+          "An L-shaped sectional sofa with a forest green chaise cushion, dark walnut armrests, an olive main seat cushion, and a deep green backrest",
+          "An L-shaped sectional sofa with a burnt sienna chaise cushion, tan leather armrests, a rust orange main seat, and a brown backrest"
+        ],
+        "local_prompts": [
+          {
+            "0": "light grey chaise cushion",
+            "1": "white leather armrest",
+            "2": "charcoal main seat cushion",
+            "3": "white leather armrest",
+            "4": "dark grey backrest"
+          },
+          {
+            "0": "mustard yellow chaise cushion",
+            "1": "navy blue armrest",
+            "2": "cream main seat cushion",
+            "3": "navy blue armrest",
+            "4": "navy blue backrest"
+          },
+          {
+            "0": "blush pink chaise cushion",
+            "1": "white boucle armrest",
+            "2": "rose velvet main seat",
+            "3": "white boucle armrest",
+            "4": "light pink backrest"
+          },
+          {
+            "0": "forest green chaise cushion",
+            "1": "dark walnut armrest",
+            "2": "olive main seat cushion",
+            "3": "dark walnut armrest",
+            "4": "deep green backrest"
+          },
+          {
+            "0": "burnt sienna chaise cushion",
+            "1": "tan leather armrest",
+            "2": "rust orange main seat",
+            "3": "tan leather armrest",
+            "4": "brown backrest"
+          }
+        ]
+      },
+      {
+        "id": "table_d3a55d20bb9c93985a7746683ad193f0",
+        "npz": "superdec/data/dataset_20/npz/table_d3a55d20bb9c93985a7746683ad193f0.npz",
+        "global_description": "A ping-pong table with a flat playing surface, four legs, and a central net",
+        "parts": {
+          "SQ0": "Supporting leg",
+          "SQ1": "Supporting leg",
+          "SQ2": "Central net",
+          "SQ3": "Supporting leg",
+          "SQ4": "Supporting leg",
+          "SQ5": "Main playing surface (tabletop)"
+        },
+        "prompts": [
+          "A ping-pong table with black metal legs, a white net, and a regulation blue playing surface",
+          "A ping-pong table with red metal legs, a black net, and a green playing surface",
+          "A ping-pong table with silver aluminum legs, a yellow net, and a dark grey playing surface",
+          "A ping-pong table with white painted legs, a red net, and a forest green playing surface with white boundary lines",
+          "A ping-pong table with wooden legs, a black net, and a sky blue playing surface"
+        ],
+        "local_prompts": [
+          {
+            "0": "black metal supporting leg",
+            "1": "black metal supporting leg",
+            "2": "white net",
+            "3": "black metal supporting leg",
+            "4": "black metal supporting leg",
+            "5": "blue playing surface"
+          },
+          {
+            "0": "a red metal supporting leg",
+            "1": "a red metal supporting leg",
+            "2": "a black net",
+            "3": "a red metal supporting leg",
+            "4": "a red metal supporting leg",
+            "5": "a green playing surface"
+          },
+          {
+            "0": "a silver aluminum supporting leg",
+            "1": "a silver aluminum supporting leg",
+            "2": "a yellow central net",
+            "3": "a silver aluminum supporting leg",
+            "4": "a silver aluminum supporting leg",
+            "5": "a dark grey playing surface"
+          },
+          {
+            "0": "a white painted leg",
+            "1": "a white painted leg",
+            "2": "a red net",
+            "3": "a white painted leg",
+            "4": "a white painted leg",
+            "5": "a forest green tabletop"
+          },
+          {
+            "0": "a wooden supporting leg",
+            "1": "a wooden supporting leg",
+            "2": "a black net",
+            "3": "a wooden supporting leg",
+            "4": "a wooden supporting leg",
+            "5": "a sky blue playing surface"
+          }
+        ]
+      },
+      {
+        "id": "table_f3b8c91c5dd1cb6b8722573b29f0d6d8",
+        "npz": "superdec/data/dataset_20/npz/table_f3b8c91c5dd1cb6b8722573b29f0d6d8.npz",
+        "global_description": "A rectangular table with a main surface, four legs, aprons, and lower crossbars",
+        "parts": {
+          "SQ0": "Lower crossbar (stretcher)",
+          "SQ1": "Corner leg",
+          "SQ2": "Apron beneath tabletop edge",
+          "SQ3": "Apron beneath tabletop edge",
+          "SQ4": "Corner leg",
+          "SQ5": "Lower crossbar (stretcher)",
+          "SQ6": "Corner leg",
+          "SQ7": "Apron beneath tabletop edge",
+          "SQ8": "Main flat tabletop",
+          "SQ9": "Corner leg",
+          "SQ10": "Apron beneath tabletop edge"
+        },
+        "prompts": [
+          "A rectangular table with black metal legs, white painted crossbars, grey aprons, and a natural oak tabletop",
+          "A rectangular table with dark walnut legs, matching walnut crossbars, cream aprons, and a white marble tabletop",
+          "A rectangular table with brass-finished legs, gold crossbars, black aprons, and a dark glass tabletop",
+          "A rectangular table with white painted legs, light oak crossbars, white aprons, and a pale birch tabletop",
+          "A rectangular table with industrial grey iron legs, black crossbars, dark grey aprons, and a reclaimed wood tabletop"
+        ],
+        "local_prompts": [
+          {
+            "0": "a white painted crossbar",
+            "1": "a black metal corner leg",
+            "2": "a grey apron beneath tabletop",
+            "3": "a grey apron beneath tabletop",
+            "4": "a black metal corner leg",
+            "5": "a white painted crossbar",
+            "6": "a black metal corner leg",
+            "7": "a grey apron beneath tabletop",
+            "8": "a natural oak tabletop",
+            "9": "a black metal corner leg",
+            "10": "a grey apron beneath tabletop"
+          },
+          {
+            "0": "dark walnut lower crossbar",
+            "1": "dark walnut corner leg",
+            "2": "cream apron beneath tabletop",
+            "3": "cream apron beneath tabletop",
+            "4": "dark walnut corner leg",
+            "5": "dark walnut lower crossbar",
+            "6": "dark walnut corner leg",
+            "7": "cream apron beneath tabletop",
+            "8": "white marble tabletop",
+            "9": "dark walnut corner leg",
+            "10": "cream apron beneath tabletop"
+          },
+          {
+            "0": "gold lower crossbar",
+            "1": "brass-finished corner leg",
+            "2": "black apron beneath tabletop",
+            "3": "black apron beneath tabletop",
+            "4": "brass-finished corner leg",
+            "5": "gold lower crossbar",
+            "6": "brass-finished corner leg",
+            "7": "black apron beneath tabletop",
+            "8": "dark glass tabletop",
+            "9": "brass-finished corner leg",
+            "10": "black apron beneath tabletop"
+          },
+          {
+            "0": "light oak lower crossbar",
+            "1": "white painted corner leg",
+            "2": "white painted apron",
+            "3": "white painted apron",
+            "4": "white painted corner leg",
+            "5": "light oak lower crossbar",
+            "6": "white painted corner leg",
+            "7": "white painted apron",
+            "8": "pale birch tabletop",
+            "9": "white painted corner leg",
+            "10": "white painted apron"
+          },
+          {
+            "0": "black iron lower crossbar",
+            "1": "industrial grey iron leg",
+            "2": "dark grey apron",
+            "3": "dark grey apron",
+            "4": "industrial grey iron leg",
+            "5": "black iron lower crossbar",
+            "6": "industrial grey iron leg",
+            "7": "dark grey apron",
+            "8": "reclaimed wood tabletop",
+            "9": "industrial grey iron leg",
+            "10": "dark grey apron"
+          }
+        ]
+      },
+      {
+        "id": "watercraft_d3043fff20dad5c41dc762869682f4f",
+        "npz": "superdec/data/dataset_20/npz/watercraft_d3043fff20dad5c41dc762869682f4f.npz",
+        "global_description": "A watercraft with a cabin and hull",
+        "parts": {
+          "SQ0": "Cabin / superstructure",
+          "SQ1": "Hull"
+        },
+        "prompts": [
+          "A motorboat with a white fiberglass cabin and a navy blue hull",
+          "A motorboat with a grey metal cabin and a bright red hull",
+          "A motorboat with a cream-colored cabin and a dark green hull with gold trim",
+          "A motorboat with a black cabin and a bright yellow hull",
+          "A motorboat with a wood-paneled cabin and a white hull with blue racing stripes"
+        ],
+        "local_prompts": [
+          {
+            "0": "white fiberglass cabin",
+            "1": "navy blue hull"
+          },
+          {
+            "0": "a grey metal cabin",
+            "1": "a bright red hull"
+          },
+          {
+            "0": "cream-colored cabin",
+            "1": "dark green hull with gold trim"
+          },
+          {
+            "0": "a black cabin",
+            "1": "a bright yellow hull"
+          },
+          {
+            "0": "wood-paneled cabin",
+            "1": "white hull with blue stripes"
+          }
+        ]
+      },
+      {
+        "id": "watercraft_d95c49195e51912056f316a86bec8b19",
+        "npz": "superdec/data/dataset_20/npz/watercraft_d95c49195e51912056f316a86bec8b19.npz",
+        "global_description": "A sailboat",
+        "parts": {
+          "SQ0": "Hull",
+          "SQ1": "Jib / headsail",
+          "SQ2": "Mainsail"
+        },
+        "prompts": [
+          "A sailboat with a white hull, a red jib sail, and a white mainsail with blue stripes",
+          "A sailboat with a navy blue hull, a cream-colored jib, and a yellow mainsail",
+          "A sailboat with a dark teak wooden hull, a white jib, and a red mainsail",
+          "A sailboat with a black hull, a bright orange jib, and a white mainsail",
+          "A sailboat with a sky blue hull, a white jib, and a green mainsail"
+        ],
+        "local_prompts": [
+          {
+            "0": "a white hull",
+            "1": "a red jib sail",
+            "2": "a white mainsail with blue stripes"
+          },
+          {
+            "0": "navy blue hull",
+            "1": "cream-colored jib",
+            "2": "yellow mainsail"
+          },
+          {
+            "0": "dark teak wooden hull",
+            "1": "white jib",
+            "2": "red mainsail"
+          },
+          {
+            "0": "a black hull",
+            "1": "a bright orange jib",
+            "2": "a white mainsail"
+          },
+          {
+            "0": "a sky blue hull",
+            "1": "a white jib",
+            "2": "a green mainsail"
+          }
+        ]
+      }
+    ];
+
+    function renderData() {
+      const nav = document.getElementById('shape-nav');
+      const container = document.getElementById('shapes-container');
+
+      DATA.forEach((shape, si) => {
+        // Nav button
+        const btn = document.createElement('button');
+        btn.textContent = shape.id.replace(/_[a-f0-9]+$/, '') + ' ' + (si + 1);
+        btn.title = shape.id;
+        btn.onclick = () => activateShape(si);
+        if (si === 0) btn.classList.add('active');
+        nav.appendChild(btn);
+
+        // Shape section
+        const sec = document.createElement('div');
+        sec.className = 'shape-section' + (si === 0 ? ' visible' : '');
+        sec.id = 'shape-' + si;
+
+        sec.innerHTML = `
+      <div class="shape-header">${shape.id}</div>
+      <div class="global-desc">${shape.global_description} &mdash; Parts: ${Object.entries(shape.parts).map(([k, v]) => `<strong>${k}</strong>: ${v}`).join(', ')}</div>
+      <div class="prompt-tabs">${shape.prompts.map((_, pi) => `<button class="prompt-tab ${pi === 0 ? 'active' : ''}" onclick="activatePrompt(${si},${pi})">Prompt ${pi}</button>`).join('')}</div>
+      ${shape.prompts.map((prompt, pi) => {
+          const localPrompt = shape.local_prompts[pi];
+          const localParts = Object.entries(localPrompt).map(([k, v]) =>
+            `<div class="local-part"><span>SQ${k}</span>${v}</div>`).join('');
+          return `
+        <div class="prompt-panel ${pi === 0 ? 'visible' : ''}" id="panel-${si}-${pi}">
+          <div class="prompt-box">
+            <div class="label">Global Prompt</div>
+            <div class="global-text">${prompt}</div>
+            <div class="local-heading">Local Prompts per Part</div>
+            <div class="local-parts">${localParts}</div>
+          </div>
+          <div class="score-bar" id="scores-${si}-${pi}"></div>
+          <div class="comparison">
+            <div class="method-block">
+              <div class="method-label baseline">Baseline</div>
+              <div class="views-grid">
+                ${[0, 1, 2, 3].map(v => `<img src="baseline_results/renders/${shape.id}/prompt_${pi}/view_${v}.png" alt="view ${v}" onclick="openLightbox(this.src)">`).join('')}
+              </div>
+            </div>
+            <div class="method-block">
+              <div class="method-label local-sq">Local SQ</div>
+              <div class="views-grid">
+                ${[0, 1, 2, 3].map(v => `<img src="local_sq_results/renders/${shape.id}/prompt_${pi}/view_${v}.png" alt="view ${v}" onclick="openLightbox(this.src)">`).join('')}
+              </div>
+            </div>
+          </div>
+        </div>`;
+        }).join('')}
+    `;
+        container.appendChild(sec);
+      });
+    }
+
+    function activateShape(si) {
+      document.querySelectorAll('.shape-section').forEach(el => el.classList.remove('visible'));
+      document.querySelectorAll('#shape-nav button').forEach(el => el.classList.remove('active'));
+      document.getElementById('shape-' + si).classList.add('visible');
+      document.querySelectorAll('#shape-nav button')[si].classList.add('active');
+    }
+
+    function activatePrompt(si, pi) {
+      const sec = document.getElementById('shape-' + si);
+      sec.querySelectorAll('.prompt-panel').forEach(el => el.classList.remove('visible'));
+      sec.querySelectorAll('.prompt-tab').forEach(el => el.classList.remove('active'));
+      document.getElementById(`panel-${si}-${pi}`).classList.add('visible');
+      sec.querySelectorAll('.prompt-tab')[pi].classList.add('active');
+    }
+
+    function openLightbox(src) {
+      document.getElementById('lightbox-img').src = src;
+      document.getElementById('lightbox').classList.add('open');
+    }
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+    }
+    document.getElementById('lightbox').addEventListener('click', e => {
+      if (e.target === e.currentTarget) closeLightbox();
+    });
+
+    renderData();
+
+    function populateScores(si, pi) {
+      const shape = DATA[si];
+      const bar = document.getElementById('scores-' + si + '-' + pi);
+      if (!bar) return;
+      const sc = (CLIP_SCORES[shape.id] || {})[String(pi)];
+      if (!sc) { bar.innerHTML = ''; return; }
+      const bv = sc.baseline, lv = sc.local_sq;
+      const diff = (lv - bv).toFixed(4);
+      const sign = diff > 0 ? '+' : '';
+      const bWins = bv >= lv;
+      bar.innerHTML = `
+    <span class="score-chip baseline">
+      <span class="method">Baseline</span>
+      <span class="val">${bv.toFixed(4)}</span>
+      ${bWins ? '<span class="winner-crown">&#9733;</span>' : ''}
+    </span>
+    <span class="score-chip local-sq">
+      <span class="method">Local SQ</span>
+      <span class="val">${lv.toFixed(4)}</span>
+      ${!bWins ? '<span class="winner-crown">&#9733;</span>' : ''}
+      <span class="delta ${diff >= 0 ? 'win' : 'loss'}">(${sign}${diff})</span>
+    </span>`;
+    }
+
+    // Override activatePrompt to also update scores
+    const _origActivatePrompt = activatePrompt;
+    activatePrompt = function (si, pi) {
+      _origActivatePrompt(si, pi);
+      populateScores(si, pi);
+    };
+
+    // Init overall bar
+    document.getElementById('ob-baseline').textContent = CLIP_OVERALL.baseline.toFixed(4);
+    document.getElementById('ob-local-sq').textContent = CLIP_OVERALL.local_sq.toFixed(4);
+
+    // Populate scores for the initially visible panels
+    DATA.forEach((_, si) => populateScores(si, 0));
+
+  </script>
+</body>
+
+</html>
