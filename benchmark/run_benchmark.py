@@ -54,6 +54,7 @@ from local_sq import (
     sample_slat_regional_refine as sample_slat_local_sq_regional,
 )
 from approach7_experiment import compute_soft_W as compute_soft_W_7, sample_slat_coupled
+from decode_composite import decode_composite_gaussian
 
 
 # ---------------------------------------------------------------------------
@@ -66,12 +67,12 @@ def get_extrinsics_intrinsics():
     )
 
 
-def render_gaussian(pipeline, slat, extr, intr, prompt=""):
-    gs = pipeline.decode_slat(slat, formats=["gaussian"])["gaussian"][0]
+def _render_gs(gs, extr, intr, prompt=""):
+    """Render an already-decoded Gaussian. Used by both the slat-based path
+    (decode_slat → _render_gs) and the direct-Gaussian path (decode_composite)."""
     scales = gs.get_scaling
     if not torch.isfinite(scales).all() or scales.max().item() > 10.0:
         print(f"  WARNING: degenerate Gaussian scales (max={scales.max().item():.3g}) — skipping render")
-        del gs
         return None
     gc.collect()
     torch.cuda.empty_cache()
@@ -98,6 +99,12 @@ def render_gaussian(pipeline, slat, extr, intr, prompt=""):
         frames.extend(frames_i)
         gc.collect()
         torch.cuda.empty_cache()
+    return frames
+
+
+def render_gaussian(pipeline, slat, extr, intr, prompt=""):
+    gs = pipeline.decode_slat(slat, formats=["gaussian"])["gaussian"][0]
+    frames = _render_gs(gs, extr, intr, prompt=prompt)
     del gs
     return frames
 
@@ -188,6 +195,24 @@ def run_local_sq(pipeline, coords, sq_params, mesh_center, mesh_scale,
     raise ValueError(f"Unknown sampler_variant: {sampler_variant!r}")
 
 
+def run_decode_composite(pipeline, coords, sq_params, mesh_center, mesh_scale,
+                         global_prompt, local_prompts, steps, seed, cfg_strength,
+                         local_cfg=15.0, soft_tau=None):
+    """Compositional CFG: per-region CFG with shared noise trajectory.
+    Returns a Gaussian directly (decoder runs inside decode_composite_gaussian).
+    """
+    cond_global = pipeline.get_cond_text([global_prompt])
+    conds_local = {k: pipeline.get_cond_text([v]) for k, v in local_prompts.items()}
+    torch.manual_seed(seed)
+    gs, _mesh = decode_composite_gaussian(
+        pipeline, coords, conds_local, cond_global,
+        sq_params, mesh_center, mesh_scale,
+        steps=steps, cfg_strength=cfg_strength,
+        local_cfg_strength=local_cfg, soft_tau=soft_tau,
+    )
+    return gs
+
+
 def run_approach7(pipeline, coords, sq_params, mesh_center, mesh_scale,
                   global_prompt, local_prompts, steps, seed, cfg_strength,
                   lam=0.3, tau=0.02):
@@ -219,10 +244,10 @@ def run_shape(shape, approach, pipeline, extr, intr, results_root, steps, seed, 
 
     sq_params = load_sq_params(os.path.join(project_root, shape["npz"]))
     # superdec npz files are Y-up (ShapeNet convention); TRELLIS sparse coords
-    # are Z-up. local_sq routes voxels to SQs using radial distance, which is
+    # are Z-up. Approaches that route voxels to SQs by radial distance are
     # frame-sensitive — convert here so the routing math operates in the same
     # frame as the voxels. Other approaches retain prior behavior.
-    if approach == "local_sq":
+    if approach in ("local_sq", "decode_composite"):
         sq_params = convert_shapenet_yup_to_trellis_zup(sq_params)
     mesh_center, mesh_scale = compute_mesh_normalization(sq_params)
 
@@ -282,6 +307,8 @@ def run_shape(shape, approach, pipeline, extr, intr, results_root, steps, seed, 
                 sq_viz_written = True
             prompt_debug_dir = str(shape_debug_dir / f"prompt_{prompt_idx}")
 
+        slat = None
+        gs_direct = None
         if approach == "baseline":
             slat = run_baseline(pipeline, coords, global_prompt, steps, current_seed, cfg_strength)
         elif approach == "approach5":
@@ -300,21 +327,37 @@ def run_shape(shape, approach, pipeline, extr, intr, results_root, steps, seed, 
             slat = run_approach7(pipeline, coords, sq_params, mesh_center, mesh_scale,
                                  global_prompt, local_prompts, steps, current_seed, cfg_strength,
                                  lam=args.lam, tau=args.tau)
+        elif approach == "decode_composite":
+            # Returns a Gaussian directly (sampler decodes internally).
+            gs_direct = run_decode_composite(
+                pipeline, coords, sq_params, mesh_center, mesh_scale,
+                global_prompt, local_prompts, steps, current_seed, cfg_strength,
+                local_cfg=args.local_cfg, soft_tau=args.soft_tau,
+            )
+        else:
+            sys.exit(f"Unknown approach: {approach!r}")
 
         if prompt_debug_dir is not None:
             # Diagnostic run: standard view renders already exist from prior
             # benchmark runs; skip the final render to leave GPU headroom for
             # per-SQ snapshots on heavy shapes.
-            del slat, coords, cond_struct
+            if slat is not None: del slat
+            if gs_direct is not None: del gs_direct
+            del coords, cond_struct
             print(f"    [debug] skipped final render (diagnostic mode)")
         else:
-            if approach == "local_sq":
-                # extreme_v1 sampler accumulates per-step GPU state across
-                # P prompts × 15 steps; clear before the rasterizer needs ~50MiB.
+            if approach in ("local_sq", "decode_composite"):
+                # Multi-prompt-per-step samplers accumulate per-step GPU state;
+                # clear before the rasterizer needs ~50MiB.
                 gc.collect()
                 torch.cuda.empty_cache()
-            frames = render_gaussian(pipeline, slat, extr, intr, prompt=global_prompt)
-            del slat, coords, cond_struct
+            if gs_direct is not None:
+                frames = _render_gs(gs_direct, extr, intr, prompt=global_prompt)
+                del gs_direct
+            else:
+                frames = render_gaussian(pipeline, slat, extr, intr, prompt=global_prompt)
+                del slat
+            del coords, cond_struct
             if frames is None:
                 print(f"    WARNING: degenerate Gaussian for prompt_{prompt_idx}, skipping")
             else:
@@ -334,7 +377,8 @@ def run_shape(shape, approach, pipeline, extr, intr, results_root, steps, seed, 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--approach", required=True,
-                        choices=["baseline", "approach5", "approach6", "local_sq", "approach7"])
+                        choices=["baseline", "approach5", "approach6", "local_sq", "approach7",
+                                 "decode_composite"])
     parser.add_argument("--shape-idx", default="all",
                         help="Index into prompts JSON (0-based), or 'all' to run every shape")
     parser.add_argument("--prompts-file", default="benchmark/prompts_augmented.json")
@@ -354,6 +398,11 @@ def main():
                         help="local_sq sampler. 'extreme_v1' (default): pre-91da279 multi-prompt "
                              "fusion (achieves visible per-SQ coloring). 'regional_refine': "
                              "two-stage global+refinement (weak color control, kept for ablation).")
+    parser.add_argument("--local-cfg", type=float, default=15.0,
+                        help="decode_composite: per-region local-prompt CFG strength (default 15.0).")
+    parser.add_argument("--soft-tau", type=float, default=None,
+                        help="decode_composite: optional softmax temperature for soft SQ masks. "
+                             "Omit for hard (one-hot) masks.")
     args = parser.parse_args()
 
     with open(args.prompts_file) as f:
