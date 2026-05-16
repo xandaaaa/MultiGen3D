@@ -1,0 +1,10 @@
+SQ 0: a pink plastic chair leg
+SQ 5: a blue plastic chair leg
+SQ 1: a yellow plastic chair leg
+SQ 3: a chair leg made of natural brown wood
+SQ 7: a green plastic chair backrest
+SQ 8: a chair seat cushion made of soft red velvet fabric
+SQ 2: a silver chair crossbar
+SQ 4: a silver chair crossbar
+SQ 6: a silver chair crossbar
+SQ 9: a silver chair crossbar
