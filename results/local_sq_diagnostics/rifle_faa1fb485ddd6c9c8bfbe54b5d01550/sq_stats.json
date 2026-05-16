@@ -1,0 +1,12 @@
+{
+  "n_voxels_total": 850,
+  "per_sq_active_voxels": {
+    "0": 465,
+    "1": 120,
+    "2": 207,
+    "3": 58
+  },
+  "mask_threshold": 0.02,
+  "seed": 42,
+  "prompt_used_for_structure": "A bolt-action rifle with a black polymer main body, silver metal bipod, dark walnut buttstock, and a black rubber buttpad"
+}

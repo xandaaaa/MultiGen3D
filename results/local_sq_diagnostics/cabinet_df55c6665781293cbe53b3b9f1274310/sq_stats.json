@@ -1,0 +1,10 @@
+{
+  "n_voxels_total": 16272,
+  "per_sq_active_voxels": {
+    "0": 15384,
+    "1": 888
+  },
+  "mask_threshold": 0.02,
+  "seed": 42,
+  "prompt_used_for_structure": "A rectangular storage cabinet with a white painted main body and a dark walnut wood top panel"
+}

@@ -1,0 +1,14 @@
+{
+  "n_voxels_total": 5547,
+  "per_sq_active_voxels": {
+    "0": 396,
+    "1": 462,
+    "2": 3644,
+    "3": 396,
+    "4": 474,
+    "5": 175
+  },
+  "mask_threshold": 0.02,
+  "seed": 42,
+  "prompt_used_for_structure": "A ping-pong table with black metal legs, a white net, and a regulation blue playing surface"
+}

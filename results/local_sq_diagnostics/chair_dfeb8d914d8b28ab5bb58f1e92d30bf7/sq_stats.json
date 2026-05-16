@@ -1,0 +1,16 @@
+{
+  "n_voxels_total": 19564,
+  "per_sq_active_voxels": {
+    "0": 705,
+    "1": 520,
+    "2": 6005,
+    "3": 560,
+    "4": 834,
+    "5": 5970,
+    "6": 2042,
+    "7": 2928
+  },
+  "mask_threshold": 0.02,
+  "seed": 42,
+  "prompt_used_for_structure": "A rounded chair with blue painted metal legs, red velvet seat cushion, white plastic armrests, and a dark walnut wooden backrest"
+}

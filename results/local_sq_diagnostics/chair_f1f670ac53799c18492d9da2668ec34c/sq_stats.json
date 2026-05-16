@@ -1,0 +1,18 @@
+{
+  "n_voxels_total": 11156,
+  "per_sq_active_voxels": {
+    "0": 1140,
+    "1": 233,
+    "2": 199,
+    "3": 3048,
+    "4": 164,
+    "5": 181,
+    "6": 4423,
+    "7": 57,
+    "8": 1464,
+    "9": 247
+  },
+  "mask_threshold": 0.02,
+  "seed": 42,
+  "prompt_used_for_structure": "An office chair with a chrome pedestal, black rubber wheels, black leather seat and backrest, and grey plastic armrests"
+}

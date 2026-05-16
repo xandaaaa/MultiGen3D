@@ -1,0 +1,11 @@
+{
+  "n_voxels_total": 10192,
+  "per_sq_active_voxels": {
+    "0": 6555,
+    "1": 958,
+    "2": 2679
+  },
+  "mask_threshold": 0.02,
+  "seed": 42,
+  "prompt_used_for_structure": "A sailboat with a white hull, a red jib sail, and a white mainsail with blue stripes"
+}

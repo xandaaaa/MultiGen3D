@@ -1,0 +1,19 @@
+{
+  "n_voxels_total": 12176,
+  "per_sq_active_voxels": {
+    "0": 77,
+    "1": 379,
+    "2": 280,
+    "3": 3308,
+    "4": 393,
+    "5": 3,
+    "6": 306,
+    "7": 461,
+    "8": 3787,
+    "9": 436,
+    "10": 2746
+  },
+  "mask_threshold": 0.02,
+  "seed": 42,
+  "prompt_used_for_structure": "A rectangular table with black metal legs, white painted crossbars, grey aprons, and a natural oak tabletop"
+}

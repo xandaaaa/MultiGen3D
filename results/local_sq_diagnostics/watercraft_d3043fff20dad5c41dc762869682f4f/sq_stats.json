@@ -1,0 +1,10 @@
+{
+  "n_voxels_total": 8397,
+  "per_sq_active_voxels": {
+    "0": 1103,
+    "1": 7294
+  },
+  "mask_threshold": 0.02,
+  "seed": 42,
+  "prompt_used_for_structure": "A motorboat with a white fiberglass cabin and a navy blue hull"
+}

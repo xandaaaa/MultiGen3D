@@ -1,0 +1,13 @@
+{
+  "n_voxels_total": 6331,
+  "per_sq_active_voxels": {
+    "0": 2053,
+    "1": 86,
+    "2": 558,
+    "3": 3381,
+    "4": 253
+  },
+  "mask_threshold": 0.02,
+  "seed": 42,
+  "prompt_used_for_structure": "A swing-arm desk lamp with a black marble base, a bright red metal shade, a chrome upper arm, a brass middle arm, and a black lower arm"
+}
