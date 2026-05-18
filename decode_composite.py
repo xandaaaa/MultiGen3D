@@ -1,8 +1,13 @@
-import torch
+import gc
+import os
+
 import numpy as np
+import torch
+from PIL import Image
 
 from trellis.modules import sparse as sp
 from trellis.pipelines.samplers.flow_euler import FlowEulerSampler
+from trellis.utils import render_utils
 
 
 def superquadric_radial_distance(x_local, semi_axes, eps):
@@ -74,6 +79,7 @@ def sample_composite_slat(
     rescale_t=3.0,
     cfg_interval=(0.5, 0.95),
     soft_tau=None,
+    debug_dir=None,
 ):
     """Compositional CFG with per-region strength. At each denoising step we
     predict velocity once per unique prompt plus once for the negative prompt.
@@ -118,13 +124,58 @@ def sample_composite_slat(
     noise = torch.randn(coords.shape[0], flow_model.in_channels, device=device)
     sample = sp.SparseTensor(feats=noise, coords=coords)
 
+    if debug_dir is not None:
+        os.makedirs(debug_dir, exist_ok=True)
+        dbg_extr, dbg_intr = render_utils.yaw_pitch_r_fov_to_extrinsics_intrinsics(
+            [0, np.pi / 2, np.pi, 3 * np.pi / 2], [0.35] * 4, 10, 8
+        )
+        snapshot_oom = {"hit": False}
+
+        def snapshot(name, feats):
+            if snapshot_oom["hit"]:
+                return
+            snap = None
+            gs = None
+            frames = None
+            try:
+                snap = sp.SparseTensor(feats=feats * std + mean, coords=coords)
+                gs = pipeline.decode_slat(snap, formats=["gaussian"])["gaussian"][0]
+                scales = gs.get_scaling
+                if not torch.isfinite(scales).all() or scales.max().item() > 10.0:
+                    print(
+                        f"  [debug] snapshot {name}: degenerate Gaussian "
+                        f"(max scale={scales.max().item():.3g}), skipping render"
+                    )
+                    return
+                frames = render_utils.render_frames(
+                    gs, dbg_extr, dbg_intr,
+                    {"resolution": 512, "bg_color": (255, 255, 255)},
+                )["color"]
+                for j, frame in enumerate(frames):
+                    Image.fromarray(frame).save(os.path.join(debug_dir, f"{name}_view_{j}.png"))
+                Image.fromarray(np.concatenate(frames, axis=1)).save(
+                    os.path.join(debug_dir, f"{name}_grid.png")
+                )
+                print(f"  [debug] snapshot {name} saved")
+            except torch.cuda.OutOfMemoryError as e:
+                snapshot_oom["hit"] = True
+                print(f"  [debug] snapshot {name}: OOM ({e}); skipping remaining snapshots this prompt")
+            except Exception as e:
+                print(f"  [debug] snapshot {name}: failed ({type(e).__name__}: {e})")
+            finally:
+                del snap, gs, frames
+                gc.collect()
+                torch.cuda.empty_cache()
+    else:
+        snapshot = None
+
     print(
         f"[decode_composite] compositional CFG: {len(cond_for_prompt)} unique prompts, "
         f"{steps} steps, cfg(global)={cfg_strength}, cfg(local)={local_cfg_strength}, "
         f"cfg_interval={cfg_interval}, soft_tau={soft_tau}"
     )
 
-    for t, t_prev in zip(t_seq[:-1], t_seq[1:]):
+    for step_idx, (t, t_prev) in enumerate(zip(t_seq[:-1], t_seq[1:])):
         cfg_on = cfg_interval[0] <= t <= cfg_interval[1]
 
         v_pos_blend = torch.zeros_like(sample.feats)
@@ -145,6 +196,10 @@ def sample_composite_slat(
             v_combined = v_pos_blend
 
         sample = sample.replace(sample.feats - (t - t_prev) * v_combined)
+        if step_idx % 3 == 0:
+            print(f"    Step {step_idx}/{steps}")
+        if snapshot is not None and (step_idx == 0 or (step_idx + 1) % 3 == 0 or step_idx == steps - 1):
+            snapshot(f"step_{step_idx:02d}", sample.feats)
 
     return sp.SparseTensor(feats=sample.feats * std + mean, coords=coords)
 
@@ -164,6 +219,7 @@ def decode_composite_gaussian(
     local_cfg_strength=15.0,
     cfg_interval=(0.5, 0.95),
     soft_tau=None,
+    debug_dir=None,
 ):
     """Sample one composite SLAT via compositional CFG and decode it. Returns
     (gaussian, mesh) decoded from the same SLAT — appearance varies by SQ region,
@@ -177,6 +233,7 @@ def decode_composite_gaussian(
         steps=steps, cfg_strength=cfg_strength,
         local_cfg_strength=local_cfg_strength,
         rescale_t=rescale_t, cfg_interval=cfg_interval, soft_tau=soft_tau,
+        debug_dir=debug_dir,
     )
     out = pipeline.decode_slat(slat, formats=["gaussian", "mesh"])
     return out["gaussian"][0], out["mesh"][0]

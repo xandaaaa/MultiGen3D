@@ -54,7 +54,7 @@ from local_sq import (
     sample_slat_regional_refine as sample_slat_local_sq_regional,
 )
 from approach7_experiment import compute_soft_W as compute_soft_W_7, sample_slat_coupled
-from decode_composite import decode_composite_gaussian
+from decode_composite import decode_composite_gaussian, sample_composite_slat
 
 
 # ---------------------------------------------------------------------------
@@ -197,13 +197,25 @@ def run_local_sq(pipeline, coords, sq_params, mesh_center, mesh_scale,
 
 def run_decode_composite(pipeline, coords, sq_params, mesh_center, mesh_scale,
                          global_prompt, local_prompts, steps, seed, cfg_strength,
-                         local_cfg=15.0, soft_tau=None):
+                         local_cfg=15.0, soft_tau=None, debug_dir=None):
     """Compositional CFG: per-region CFG with shared noise trajectory.
-    Returns a Gaussian directly (decoder runs inside decode_composite_gaussian).
+    Returns a Gaussian directly unless debug_dir is set, in which case sampler
+    snapshots are written and the final decode/render path is skipped.
     """
     cond_global = pipeline.get_cond_text([global_prompt])
     conds_local = {k: pipeline.get_cond_text([v]) for k, v in local_prompts.items()}
     torch.manual_seed(seed)
+    if debug_dir is not None:
+        slat = sample_composite_slat(
+            pipeline, coords, conds_local, cond_global,
+            sq_params, mesh_center, mesh_scale,
+            steps=steps, cfg_strength=cfg_strength,
+            local_cfg_strength=local_cfg, soft_tau=soft_tau,
+            debug_dir=debug_dir,
+        )
+        del slat
+        return None
+
     gs, _mesh = decode_composite_gaussian(
         pipeline, coords, conds_local, cond_global,
         sq_params, mesh_center, mesh_scale,
@@ -253,7 +265,7 @@ def run_shape(shape, approach, pipeline, extr, intr, results_root, steps, seed, 
 
     shape_debug_dir = None
     sq_viz_written = False
-    if args.debug_dir and approach == "local_sq":
+    if args.debug_dir and approach in ("local_sq", "decode_composite"):
         shape_debug_dir = Path(args.debug_dir) / shape_id
         shape_debug_dir.mkdir(parents=True, exist_ok=True)
 
@@ -333,6 +345,7 @@ def run_shape(shape, approach, pipeline, extr, intr, results_root, steps, seed, 
                 pipeline, coords, sq_params, mesh_center, mesh_scale,
                 global_prompt, local_prompts, steps, current_seed, cfg_strength,
                 local_cfg=args.local_cfg, soft_tau=args.soft_tau,
+                debug_dir=prompt_debug_dir,
             )
         else:
             sys.exit(f"Unknown approach: {approach!r}")
@@ -340,7 +353,7 @@ def run_shape(shape, approach, pipeline, extr, intr, results_root, steps, seed, 
         if prompt_debug_dir is not None:
             # Diagnostic run: standard view renders already exist from prior
             # benchmark runs; skip the final render to leave GPU headroom for
-            # per-SQ snapshots on heavy shapes.
+            # decoded sampler snapshots on heavy shapes.
             if slat is not None: del slat
             if gs_direct is not None: del gs_direct
             del coords, cond_struct
@@ -391,8 +404,8 @@ def main():
     parser.add_argument("--force", action="store_true",
                         help="Regenerate renders even when view PNGs already exist")
     parser.add_argument("--debug-dir", default=None,
-                        help="If set (and approach=local_sq), dump per-shape SQ assignment "
-                             "viz and per-prompt decoded snapshots after each refinement stage.")
+                        help="If set (and approach=local_sq or decode_composite), dump per-shape "
+                             "SQ assignment viz and per-prompt decoded sampler snapshots.")
     parser.add_argument("--sampler-variant", default="extreme_v1",
                         choices=["extreme_v1", "regional_refine"],
                         help="local_sq sampler. 'extreme_v1' (default): pre-91da279 multi-prompt "

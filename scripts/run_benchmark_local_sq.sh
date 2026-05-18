@@ -24,7 +24,7 @@ which python
 export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 
 python benchmark/run_benchmark.py \
-    --approach local_sq \
+    --approach decode_composite \
     --shape-idx all \
     --prompts-file benchmark/prompts_augmented.json \
     --results-root results \
