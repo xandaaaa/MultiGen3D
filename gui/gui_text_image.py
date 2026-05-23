@@ -144,11 +144,11 @@ def save_assets(input_sq, text_prompt, generated_glb, t0):
       f.write(text_prompt)
 
 
-def generate_local_sq(superquadrics, text_prompt_handle, t0_idx, local_cfg_handle) -> None:
+def generate_local_sq(superquadrics, text_prompt_handle, t0_idx, local_cfg_handle, soft_tau_handle) -> None:
   print('generate_local_sq')
   gui_elements['generate_button'].disabled = True
   gui_elements['generate_button_with_image'].disabled = True
-  gui_elements['generate_button_local_sq'].label = "Generating (Local SQ)..."
+  gui_elements['generate_button_local_sq'].label = "Generating (Composite)..."
   gui_elements['generate_button_local_sq'].icon = viser.Icon.LOADER
   gui_elements['generate_button_local_sq'].color = 'orange'
 
@@ -181,7 +181,8 @@ def generate_local_sq(superquadrics, text_prompt_handle, t0_idx, local_cfg_handl
 
   global_prompt = text_prompt_handle.value
   local_cfg = float(local_cfg_handle.value)
-  print(f"local_cfg={local_cfg}")
+  soft_tau = float(soft_tau_handle.value) if soft_tau_handle.value > 0 else None
+  print(f"local_cfg={local_cfg}, soft_tau={soft_tau}")
 
   sq_ids = sorted(superquadrics.keys())
   sq_prompts = {i: (gui_elements[f'sq_{sq_id}']['prompt'].value.strip() or global_prompt)
@@ -206,7 +207,7 @@ def generate_local_sq(superquadrics, text_prompt_handle, t0_idx, local_cfg_handl
   merged_g, mesh_geom = decode_composite_gaussian(
     pipeline, coords, conds_local, cond_global, sq_params, center, scale,
     steps=25, cfg_strength=cfg_strength, rescale_t=3.0,
-    local_cfg_strength=local_cfg,
+    local_cfg_strength=local_cfg, soft_tau=soft_tau,
   )
   glb = postprocessing_utils.to_glb(merged_g, mesh_geom, simplify=0.95, texture_size=1024)
   glb.export("sample_local_sq.glb")
@@ -221,7 +222,7 @@ def generate_local_sq(superquadrics, text_prompt_handle, t0_idx, local_cfg_handl
 
   gui_elements['generate_button'].disabled = False
   gui_elements['generate_button_with_image'].disabled = False
-  gui_elements['generate_button_local_sq'].label = "Generate (Local SQ)"
+  gui_elements['generate_button_local_sq'].label = "Generate (Composite)"
   gui_elements['generate_button_local_sq'].icon = viser.Icon.PLAYER_PLAY
   gui_elements['generate_button_local_sq'].color = 'teal'
 
@@ -366,13 +367,16 @@ def setup_gui(server, superquadrics: dict) -> None:
   gui_elements['generate_button'] = server.gui.add_button("Generate", color='green', icon=viser.Icon.PLAYER_PLAY, order=5)
   gui_elements['generate_button'].on_click(lambda _: generate(superquadrics, text_prompt, t0_idx))
 
-  gui_elements['local_sq_folder'] = server.gui.add_folder("Local SQ (Per-SQ Prompts)", order=6, expand_by_default=False)
+  gui_elements['local_sq_folder'] = server.gui.add_folder("Composite Generation (Per-SQ Prompts)", order=6, expand_by_default=False)
   with gui_elements['local_sq_folder']:
     local_cfg_slider = server.gui.add_slider("Local CFG (color strength)", min=1.0, max=30.0, step=0.5, initial_value=15.0,
                                               marks=((1, "1"), (7.5, "7.5"), (15, "15"), (30, "30")))
     gui_elements['local_cfg_slider'] = local_cfg_slider
-    gui_elements['generate_button_local_sq'] = server.gui.add_button("Generate (Local SQ)", color='teal', icon=viser.Icon.PLAYER_PLAY)
-    gui_elements['generate_button_local_sq'].on_click(lambda _: generate_local_sq(superquadrics, text_prompt, t0_idx, local_cfg_slider))
+    soft_tau_slider = server.gui.add_slider("Soft mask τ (0 = hard)", min=0.0, max=0.2, step=0.005, initial_value=0.0,
+                                             marks=((0, "hard"), (0.03, "0.03"), (0.1, "0.1"), (0.2, "0.2")))
+    gui_elements['soft_tau_slider'] = soft_tau_slider
+    gui_elements['generate_button_local_sq'] = server.gui.add_button("Generate (Composite)", color='teal', icon=viser.Icon.PLAYER_PLAY)
+    gui_elements['generate_button_local_sq'].on_click(lambda _: generate_local_sq(superquadrics, text_prompt, t0_idx, local_cfg_slider, soft_tau_slider))
 
   gui_elements['save_sq_button'] = server.gui.add_button("Save as Template", color='gray', icon=viser.Icon.WRITING, order=0)
   gui_elements['save_sq_button'].on_click(

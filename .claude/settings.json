@@ -1,0 +1,35 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(python3 -c ' *)",
+      "Bash(squeue -u xanyap)",
+      "Bash(sinfo -o '%P %a %l %D %t')",
+      "Bash(sacctmgr show *)",
+      "Read(//etc/slurm/**)",
+      "Bash(sinfo -p eu-g6)",
+      "Bash(squeue -j 463347)",
+      "Bash(sbatch scripts/run_dc_tunedA.sh)",
+      "Bash(squeue -j 463610)",
+      "Bash(sacct -j 463610 --format=JobID,State,Elapsed,NodeList)",
+      "Bash(sbatch scripts/run_dc_tunedB.sh)",
+      "Bash(python3 -c \"import ast; ast.parse\\(open\\('benchmark/run_benchmark.py'\\).read\\(\\)\\); print\\('run_benchmark.py OK'\\)\")",
+      "Bash(python3 -c \"import ast; ast.parse\\(open\\('decode_composite.py'\\).read\\(\\)\\); print\\('decode_composite.py OK'\\)\")",
+      "Bash(squeue -j 463610,463621)",
+      "Bash(sbatch scripts/run_dc_v2.sh)",
+      "Bash(squeue -j 463610,463621,463641 -o \"%i %T %S %r\")",
+      "Bash(squeue -j 463610,463621,463641 -o \"%i %T %M %r\")",
+      "Bash(squeue -r -j 463610,463621,463641 -h -t RUNNING)",
+      "Bash(squeue -j 463610,463621,463641 -t RUNNING)",
+      "Bash(squeue -r -j 463610,463621,463641 -o \"%i %T %M\")",
+      "Bash(awk '$2==\"RUNNING\"')",
+      "Bash(awk 'NR>1 {print $2}')",
+      "Bash(cat)",
+      "Bash(chmod +x /tmp/check_complete.sh)",
+      "Bash(/tmp/check_complete.sh)",
+      "Bash(scancel 463610 463621 463641)",
+      "Bash(sbatch scripts/run_dc_tunedA_serial.sh)",
+      "Bash(sbatch scripts/run_dc_v2_serial.sh)",
+      "Bash(ln -sfn \"$\\(pwd\\)/results/decode_composite_tunedA_results\" \"results/dctunedA_results\")"
+    ]
+  }
+}

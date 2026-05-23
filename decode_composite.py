@@ -205,6 +205,125 @@ def sample_composite_slat(
 
 
 @torch.no_grad()
+def sample_composite_slat_v2(
+    pipeline,
+    coords,
+    conds_local,
+    cond_global,
+    sq_params,
+    mesh_center,
+    mesh_scale,
+    steps=25,
+    cfg_strength=7.5,
+    local_corr_strength=5.0,
+    rescale_t=3.0,
+    cfg_interval=(0.0, 1.0),
+    soft_tau=None,
+    debug_dir=None,
+):
+    """v2: 'baseline + per-region delta'. At each step we predict the global
+    velocity once (with full CFG vs the negative prompt), then add a localized
+    correction for each region that pushes the local prompt's velocity away from
+    the global one. Total forward passes per step = (#unique_local + 2).
+
+    Math:
+        v_global_cfg = (1 + s_g) * v_global - s_g * v_neg
+        v_corr_i = s_l * (v_local_i - v_global)
+        v_total = v_global_cfg + Σ mask_i * v_corr_i
+
+    Compared to the v1 sampler this preserves baseline object identity (the v_global
+    pass mirrors the baseline TRELLIS run exactly) and only nudges each region by
+    a *delta* in the direction of its local prompt. Less aggressive than v1's
+    per-region full CFG, so it tends not to destabilize the global structure.
+    """
+    device = pipeline.device
+    flow_model = pipeline.models["slat_flow_model_text"]
+    sampler = pipeline.slat_sampler
+    std = torch.tensor(pipeline.slat_normalization["std"])[None].to(device)
+    mean = torch.tensor(pipeline.slat_normalization["mean"])[None].to(device)
+    neg_cond_tensor = cond_global["neg_cond"]
+    global_cond_tensor = cond_global["cond"]
+
+    prompt_to_sqs = {}
+    cond_for_prompt = {}
+    for sq_idx, cond in conds_local.items():
+        key = id(cond)
+        prompt_to_sqs.setdefault(key, []).append(sq_idx)
+        cond_for_prompt[key] = cond
+
+    masks = _voxel_masks_per_prompt(
+        coords, sq_params, mesh_center, mesh_scale, prompt_to_sqs, soft_tau=soft_tau,
+    )
+
+    t_seq = np.linspace(1, 0, steps + 1)
+    t_seq = rescale_t * t_seq / (1 + (rescale_t - 1) * t_seq)
+
+    noise = torch.randn(coords.shape[0], flow_model.in_channels, device=device)
+    sample = sp.SparseTensor(feats=noise, coords=coords)
+
+    print(
+        f"[decode_composite v2] global+delta: {len(cond_for_prompt)} unique locals, "
+        f"{steps} steps, cfg(global)={cfg_strength}, local_corr={local_corr_strength}, "
+        f"cfg_interval={cfg_interval}, soft_tau={soft_tau}"
+    )
+
+    for step_idx, (t, t_prev) in enumerate(zip(t_seq[:-1], t_seq[1:])):
+        cfg_on = cfg_interval[0] <= t <= cfg_interval[1]
+
+        v_global = _predict_v(sampler, flow_model, sample, t, global_cond_tensor)
+        if cfg_on and cfg_strength > 0:
+            v_neg = _predict_v(sampler, flow_model, sample, t, neg_cond_tensor)
+            v_global_cfg = (1.0 + cfg_strength) * v_global.feats - cfg_strength * v_neg.feats
+            del v_neg
+        else:
+            v_global_cfg = v_global.feats
+
+        v_correction = torch.zeros_like(sample.feats)
+        if cfg_on and local_corr_strength != 0:
+            for key, mask in masks.items():
+                v_local = _predict_v(sampler, flow_model, sample, t, cond_for_prompt[key]["cond"])
+                v_correction = v_correction + mask * local_corr_strength * (v_local.feats - v_global.feats)
+                del v_local
+
+        v_total = v_global_cfg + v_correction
+        sample = sample.replace(sample.feats - (t - t_prev) * v_total)
+        del v_global
+        if step_idx % 3 == 0:
+            print(f"    Step {step_idx}/{steps}")
+
+    return sp.SparseTensor(feats=sample.feats * std + mean, coords=coords)
+
+
+@torch.no_grad()
+def decode_composite_v2_gaussian(
+    pipeline,
+    coords,
+    conds_local,
+    cond_global,
+    sq_params,
+    mesh_center,
+    mesh_scale,
+    steps=25,
+    cfg_strength=7.5,
+    rescale_t=3.0,
+    local_corr_strength=5.0,
+    cfg_interval=(0.0, 1.0),
+    soft_tau=None,
+    debug_dir=None,
+):
+    slat = sample_composite_slat_v2(
+        pipeline, coords, conds_local, cond_global,
+        sq_params, mesh_center, mesh_scale,
+        steps=steps, cfg_strength=cfg_strength,
+        local_corr_strength=local_corr_strength,
+        rescale_t=rescale_t, cfg_interval=cfg_interval, soft_tau=soft_tau,
+        debug_dir=debug_dir,
+    )
+    out = pipeline.decode_slat(slat, formats=["gaussian", "mesh"])
+    return out["gaussian"][0], out["mesh"][0]
+
+
+@torch.no_grad()
 def decode_composite_gaussian(
     pipeline,
     coords,

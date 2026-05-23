@@ -1,34 +1,22 @@
 #!/bin/bash
-#SBATCH --job-name=bench_baseline
+#SBATCH --job-name=clip_score
 #SBATCH --account=ls_polle
-#SBATCH --time=04:00:00
+#SBATCH --time=00:30:00
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
-#SBATCH --mem-per-cpu=16G
-#SBATCH --output=logs/bench_baseline_%A_%a.out
-#SBATCH --error=logs/bench_baseline_%A_%a.err
-
-echo "=========================================="
-echo "Job started on: $(date)"
-echo "Job ID: $SLURM_JOB_ID  Shape: $SLURM_ARRAY_TASK_ID / 19"
-echo "Running on node: $SLURMD_NODENAME"
-echo "=========================================="
+#SBATCH --mem-per-cpu=8G
+#SBATCH --gpus=4090:1
+#SBATCH --output=logs/clip_%j.out
+#SBATCH --error=logs/clip_%j.err
 
 module load eth_proxy
 export HF_HOME=/cluster/project/cvg/students/xanyap/.cache/huggingface
 source /cluster/project/cvg/students/xanyap/miniconda3/bin/activate base
 conda activate spacecontrol
-which python
 
-export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
-
+cd /cluster/scratch/xanyap/MultiGen3D
 python benchmark/clip_score.py \
     --benchmark benchmark/prompts_augmented.json \
     --results-root results \
-    --approaches baseline local_sq \
+    --approaches baseline decode_composite \
     --output results/clip_scores.json
-
-echo "=========================================="
-echo "Job completed on: $(date)"
-echo "Total runtime: $SECONDS seconds"
-echo "=========================================="

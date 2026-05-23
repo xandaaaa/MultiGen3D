@@ -54,7 +54,12 @@ from local_sq import (
     sample_slat_regional_refine as sample_slat_local_sq_regional,
 )
 from approach7_experiment import compute_soft_W as compute_soft_W_7, sample_slat_coupled
-from decode_composite import decode_composite_gaussian, sample_composite_slat
+from decode_composite import (
+    decode_composite_gaussian,
+    decode_composite_v2_gaussian,
+    sample_composite_slat,
+    sample_composite_slat_v2,
+)
 
 
 # ---------------------------------------------------------------------------
@@ -67,7 +72,7 @@ def get_extrinsics_intrinsics():
     )
 
 
-def _render_gs(gs, extr, intr, prompt=""):
+def _render_gs(gs, extr, intr, prompt="", resolution=512):
     """Render an already-decoded Gaussian. Used by both the slat-based path
     (decode_slat → _render_gs) and the direct-Gaussian path (decode_composite)."""
     scales = gs.get_scaling
@@ -87,14 +92,14 @@ def _render_gs(gs, extr, intr, prompt=""):
         intr_i = [intr[i]] if isinstance(intr, list) else intr[i:i+1]
         try:
             frames_i = render_utils.render_frames(
-                gs, extr_i, intr_i, {"resolution": 256, "bg_color": bg_color}, verbose=False,
+                gs, extr_i, intr_i, {"resolution": resolution, "bg_color": bg_color}, verbose=False,
             )["color"]
         except torch.cuda.OutOfMemoryError as e:
             print(f"  WARNING: OOM on view {i}, retrying after cache clear: {e}")
             gc.collect()
             torch.cuda.empty_cache()
             frames_i = render_utils.render_frames(
-                gs, extr_i, intr_i, {"resolution": 256, "bg_color": bg_color}, verbose=False,
+                gs, extr_i, intr_i, {"resolution": resolution, "bg_color": bg_color}, verbose=False,
             )["color"]
         frames.extend(frames_i)
         gc.collect()
@@ -102,9 +107,9 @@ def _render_gs(gs, extr, intr, prompt=""):
     return frames
 
 
-def render_gaussian(pipeline, slat, extr, intr, prompt=""):
+def render_gaussian(pipeline, slat, extr, intr, prompt="", resolution=512):
     gs = pipeline.decode_slat(slat, formats=["gaussian"])["gaussian"][0]
-    frames = _render_gs(gs, extr, intr, prompt=prompt)
+    frames = _render_gs(gs, extr, intr, prompt=prompt, resolution=resolution)
     del gs
     return frames
 
@@ -225,6 +230,36 @@ def run_decode_composite(pipeline, coords, sq_params, mesh_center, mesh_scale,
     return gs
 
 
+def run_decode_composite_v2(pipeline, coords, sq_params, mesh_center, mesh_scale,
+                            global_prompt, local_prompts, steps, seed, cfg_strength,
+                            local_corr=5.0, soft_tau=None, debug_dir=None):
+    """v2 sampler: 'baseline + per-region delta'. Preserves baseline object
+    identity via global CFG, then nudges each region with a scaled delta in the
+    direction of its local prompt. See sample_composite_slat_v2 for math.
+    """
+    cond_global = pipeline.get_cond_text([global_prompt])
+    conds_local = {k: pipeline.get_cond_text([v]) for k, v in local_prompts.items()}
+    torch.manual_seed(seed)
+    if debug_dir is not None:
+        slat = sample_composite_slat_v2(
+            pipeline, coords, conds_local, cond_global,
+            sq_params, mesh_center, mesh_scale,
+            steps=steps, cfg_strength=cfg_strength,
+            local_corr_strength=local_corr, soft_tau=soft_tau,
+            debug_dir=debug_dir,
+        )
+        del slat
+        return None
+
+    gs, _mesh = decode_composite_v2_gaussian(
+        pipeline, coords, conds_local, cond_global,
+        sq_params, mesh_center, mesh_scale,
+        steps=steps, cfg_strength=cfg_strength,
+        local_corr_strength=local_corr, soft_tau=soft_tau,
+    )
+    return gs
+
+
 def run_approach7(pipeline, coords, sq_params, mesh_center, mesh_scale,
                   global_prompt, local_prompts, steps, seed, cfg_strength,
                   lam=0.3, tau=0.02):
@@ -245,7 +280,8 @@ def run_approach7(pipeline, coords, sq_params, mesh_center, mesh_scale,
 def run_shape(shape, approach, pipeline, extr, intr, results_root, steps, seed, cfg_strength, args):
     shape_id = shape["id"]
     n_prompts = len(shape["prompts"])
-    output_root = Path(results_root) / f"{approach}_results" / "renders" / shape_id
+    out_subdir = f"{approach}_{args.output_suffix}_results" if args.output_suffix else f"{approach}_results"
+    output_root = Path(results_root) / out_subdir / "renders" / shape_id
 
     print(f"\n{'='*60}")
     print(f"Shape: {shape_id}  ({n_prompts} prompts)")
@@ -347,6 +383,13 @@ def run_shape(shape, approach, pipeline, extr, intr, results_root, steps, seed, 
                 local_cfg=args.local_cfg, soft_tau=args.soft_tau,
                 debug_dir=prompt_debug_dir,
             )
+        elif approach == "decode_composite_v2":
+            gs_direct = run_decode_composite_v2(
+                pipeline, coords, sq_params, mesh_center, mesh_scale,
+                global_prompt, local_prompts, steps, current_seed, cfg_strength,
+                local_corr=args.local_corr, soft_tau=args.soft_tau,
+                debug_dir=prompt_debug_dir,
+            )
         else:
             sys.exit(f"Unknown approach: {approach!r}")
 
@@ -365,10 +408,12 @@ def run_shape(shape, approach, pipeline, extr, intr, results_root, steps, seed, 
                 gc.collect()
                 torch.cuda.empty_cache()
             if gs_direct is not None:
-                frames = _render_gs(gs_direct, extr, intr, prompt=global_prompt)
+                frames = _render_gs(gs_direct, extr, intr, prompt=global_prompt,
+                                    resolution=args.resolution)
                 del gs_direct
             else:
-                frames = render_gaussian(pipeline, slat, extr, intr, prompt=global_prompt)
+                frames = render_gaussian(pipeline, slat, extr, intr, prompt=global_prompt,
+                                         resolution=args.resolution)
                 del slat
             del coords, cond_struct
             if frames is None:
@@ -391,7 +436,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--approach", required=True,
                         choices=["baseline", "approach5", "approach6", "local_sq", "approach7",
-                                 "decode_composite"])
+                                 "decode_composite", "decode_composite_v2"])
     parser.add_argument("--shape-idx", default="all",
                         help="Index into prompts JSON (0-based), or 'all' to run every shape")
     parser.add_argument("--prompts-file", default="benchmark/prompts_augmented.json")
@@ -413,10 +458,30 @@ def main():
                              "two-stage global+refinement (weak color control, kept for ablation).")
     parser.add_argument("--local-cfg", type=float, default=15.0,
                         help="decode_composite: per-region local-prompt CFG strength (default 15.0).")
+    parser.add_argument("--local-corr", type=float, default=5.0,
+                        help="decode_composite_v2: per-region local-prompt correction strength "
+                             "(coefficient on v_local - v_global; default 5.0).")
     parser.add_argument("--soft-tau", type=float, default=None,
                         help="decode_composite: optional softmax temperature for soft SQ masks. "
                              "Omit for hard (one-hot) masks.")
+    parser.add_argument("--output-suffix", default=None,
+                        help="Optional suffix for the output directory, so several tuning runs "
+                             "of the same approach don't collide. Example: 'v2' → results/"
+                             "<approach>_v2_results/.")
+    parser.add_argument("--resolution", type=int, default=512,
+                        help="Render resolution in pixels (default 512 to match baseline; "
+                             "drop to 256 if 16G GPUs OOM).")
     args = parser.parse_args()
+
+    # Honor SLURM array semantics if shape-idx is left at its default ("all")
+    # — that way a single array task in a job array picks up its own shape.
+    if args.shape_idx == "all" and "SLURM_ARRAY_TASK_ID" in os.environ:
+        slurm_id = os.environ["SLURM_ARRAY_TASK_ID"]
+        # 4294967294 is the sentinel SLURM uses for a non-array job submission
+        # that was started with sbatch's array env stub; ignore it.
+        if slurm_id != "4294967294":
+            args.shape_idx = slurm_id
+            print(f"[run_benchmark] Using shape-idx={slurm_id} from SLURM_ARRAY_TASK_ID")
 
     with open(args.prompts_file) as f:
         shapes = json.load(f)
