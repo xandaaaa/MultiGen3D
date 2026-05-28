@@ -1,13 +1,13 @@
 #!/bin/bash
-#SBATCH --job-name=decode_composite
+#SBATCH --job-name=multigen
 #SBATCH --account=ls_polle
 #SBATCH --time=06:00:00
 #SBATCH --ntasks=1
 #SBATCH --cpus-per-task=4
 #SBATCH --mem-per-cpu=16G
 #SBATCH --gpus=4090:1
-#SBATCH --output=logs/decode_composite_%j.out
-#SBATCH --error=logs/decode_composite_%j.err
+#SBATCH --output=logs/multigen_%j.out
+#SBATCH --error=logs/multigen_%j.err
 
 echo "=========================================="
 echo "Job started on: $(date)"
@@ -25,7 +25,7 @@ export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 
 cd /cluster/scratch/xanyap/MultiGen3D
 python benchmark/run_benchmark.py \
-    --approach decode_composite \
+    --approach multigen \
     --prompts-file benchmark/prompts_augmented.json \
     --results-root results \
     --resolution 512 \

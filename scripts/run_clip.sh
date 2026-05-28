@@ -18,5 +18,5 @@ cd /cluster/scratch/xanyap/MultiGen3D
 python benchmark/clip_score.py \
     --benchmark benchmark/prompts_augmented.json \
     --results-root results \
-    --approaches baseline decode_composite \
+    --approaches baseline multigen \
     --output results/clip_scores.json

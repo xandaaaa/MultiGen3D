@@ -16,6 +16,7 @@ Approaches:
     approach6 — legacy per-SQ hard routing (one distinct prompt per SQ)
     local_sq  — migrated local_sq.py implementation, saved under local_sq_results
     approach7 — coupled diffusion (soft W + global coupling branch)
+    multigen  — compositional CFG via SQ region masks (multigen.py)
 
 Usage:
     python benchmark/run_benchmark.py --approach baseline --shape-idx 3
@@ -54,12 +55,7 @@ from local_sq import (
     sample_slat_regional_refine as sample_slat_local_sq_regional,
 )
 from approach7_experiment import compute_soft_W as compute_soft_W_7, sample_slat_coupled
-from decode_composite import (
-    decode_composite_gaussian,
-    decode_composite_v2_gaussian,
-    sample_composite_slat,
-    sample_composite_slat_v2,
-)
+from multigen import multigen_generate, sample_multigen_slat
 
 
 # ---------------------------------------------------------------------------
@@ -74,7 +70,7 @@ def get_extrinsics_intrinsics():
 
 def _render_gs(gs, extr, intr, prompt="", resolution=512):
     """Render an already-decoded Gaussian. Used by both the slat-based path
-    (decode_slat → _render_gs) and the direct-Gaussian path (decode_composite)."""
+    (decode_slat → _render_gs) and the direct-Gaussian path (multigen)."""
     scales = gs.get_scaling
     if not torch.isfinite(scales).all() or scales.max().item() > 10.0:
         print(f"  WARNING: degenerate Gaussian scales (max={scales.max().item():.3g}) — skipping render")
@@ -200,9 +196,9 @@ def run_local_sq(pipeline, coords, sq_params, mesh_center, mesh_scale,
     raise ValueError(f"Unknown sampler_variant: {sampler_variant!r}")
 
 
-def run_decode_composite(pipeline, coords, sq_params, mesh_center, mesh_scale,
-                         global_prompt, local_prompts, steps, seed, cfg_strength,
-                         local_cfg=15.0, soft_tau=None, debug_dir=None):
+def run_multigen(pipeline, coords, sq_params, mesh_center, mesh_scale,
+              global_prompt, local_prompts, steps, seed, cfg_strength,
+              local_cfg=15.0, soft_tau=None, debug_dir=None):
     """Compositional CFG: per-region CFG with shared noise trajectory.
     Returns a Gaussian directly unless debug_dir is set, in which case sampler
     snapshots are written and the final decode/render path is skipped.
@@ -211,7 +207,7 @@ def run_decode_composite(pipeline, coords, sq_params, mesh_center, mesh_scale,
     conds_local = {k: pipeline.get_cond_text([v]) for k, v in local_prompts.items()}
     torch.manual_seed(seed)
     if debug_dir is not None:
-        slat = sample_composite_slat(
+        slat = sample_multigen_slat(
             pipeline, coords, conds_local, cond_global,
             sq_params, mesh_center, mesh_scale,
             steps=steps, cfg_strength=cfg_strength,
@@ -221,41 +217,11 @@ def run_decode_composite(pipeline, coords, sq_params, mesh_center, mesh_scale,
         del slat
         return None
 
-    gs, _mesh = decode_composite_gaussian(
+    gs, _mesh = multigen_generate(
         pipeline, coords, conds_local, cond_global,
         sq_params, mesh_center, mesh_scale,
         steps=steps, cfg_strength=cfg_strength,
         local_cfg_strength=local_cfg, soft_tau=soft_tau,
-    )
-    return gs
-
-
-def run_decode_composite_v2(pipeline, coords, sq_params, mesh_center, mesh_scale,
-                            global_prompt, local_prompts, steps, seed, cfg_strength,
-                            local_corr=5.0, soft_tau=None, debug_dir=None):
-    """v2 sampler: 'baseline + per-region delta'. Preserves baseline object
-    identity via global CFG, then nudges each region with a scaled delta in the
-    direction of its local prompt. See sample_composite_slat_v2 for math.
-    """
-    cond_global = pipeline.get_cond_text([global_prompt])
-    conds_local = {k: pipeline.get_cond_text([v]) for k, v in local_prompts.items()}
-    torch.manual_seed(seed)
-    if debug_dir is not None:
-        slat = sample_composite_slat_v2(
-            pipeline, coords, conds_local, cond_global,
-            sq_params, mesh_center, mesh_scale,
-            steps=steps, cfg_strength=cfg_strength,
-            local_corr_strength=local_corr, soft_tau=soft_tau,
-            debug_dir=debug_dir,
-        )
-        del slat
-        return None
-
-    gs, _mesh = decode_composite_v2_gaussian(
-        pipeline, coords, conds_local, cond_global,
-        sq_params, mesh_center, mesh_scale,
-        steps=steps, cfg_strength=cfg_strength,
-        local_corr_strength=local_corr, soft_tau=soft_tau,
     )
     return gs
 
@@ -295,7 +261,7 @@ def run_shape(shape, approach, pipeline, extr, intr, results_root, steps, seed, 
     # are Z-up. Approaches that route voxels to SQs by radial distance are
     # frame-sensitive — convert here so the routing math operates in the same
     # frame as the voxels. Other approaches retain prior behavior.
-    if approach in ("local_sq", "decode_composite"):
+    if approach in ("local_sq", "multigen"):
         sq_params = convert_shapenet_yup_to_trellis_zup(sq_params)
     mesh_center, mesh_scale = compute_mesh_normalization(sq_params)
 
@@ -375,19 +341,11 @@ def run_shape(shape, approach, pipeline, extr, intr, results_root, steps, seed, 
             slat = run_approach7(pipeline, coords, sq_params, mesh_center, mesh_scale,
                                  global_prompt, local_prompts, steps, current_seed, cfg_strength,
                                  lam=args.lam, tau=args.tau)
-        elif approach == "decode_composite":
-            # Returns a Gaussian directly (sampler decodes internally).
-            gs_direct = run_decode_composite(
+        elif approach == "multigen":
+            gs_direct = run_multigen(
                 pipeline, coords, sq_params, mesh_center, mesh_scale,
                 global_prompt, local_prompts, steps, current_seed, cfg_strength,
                 local_cfg=args.local_cfg, soft_tau=args.soft_tau,
-                debug_dir=prompt_debug_dir,
-            )
-        elif approach == "decode_composite_v2":
-            gs_direct = run_decode_composite_v2(
-                pipeline, coords, sq_params, mesh_center, mesh_scale,
-                global_prompt, local_prompts, steps, current_seed, cfg_strength,
-                local_corr=args.local_corr, soft_tau=args.soft_tau,
                 debug_dir=prompt_debug_dir,
             )
         else:
@@ -402,7 +360,7 @@ def run_shape(shape, approach, pipeline, extr, intr, results_root, steps, seed, 
             del coords, cond_struct
             print(f"    [debug] skipped final render (diagnostic mode)")
         else:
-            if approach in ("local_sq", "decode_composite"):
+            if approach in ("local_sq", "multigen"):
                 # Multi-prompt-per-step samplers accumulate per-step GPU state;
                 # clear before the rasterizer needs ~50MiB.
                 gc.collect()
@@ -436,7 +394,7 @@ def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--approach", required=True,
                         choices=["baseline", "approach5", "approach6", "local_sq", "approach7",
-                                 "decode_composite", "decode_composite_v2"])
+                                 "multigen"])
     parser.add_argument("--shape-idx", default="all",
                         help="Index into prompts JSON (0-based), or 'all' to run every shape")
     parser.add_argument("--prompts-file", default="benchmark/prompts_augmented.json")
@@ -449,7 +407,7 @@ def main():
     parser.add_argument("--force", action="store_true",
                         help="Regenerate renders even when view PNGs already exist")
     parser.add_argument("--debug-dir", default=None,
-                        help="If set (and approach=local_sq or decode_composite), dump per-shape "
+                        help="If set (and approach=local_sq or multigen), dump per-shape "
                              "SQ assignment viz and per-prompt decoded sampler snapshots.")
     parser.add_argument("--sampler-variant", default="extreme_v1",
                         choices=["extreme_v1", "regional_refine"],
@@ -457,12 +415,9 @@ def main():
                              "fusion (achieves visible per-SQ coloring). 'regional_refine': "
                              "two-stage global+refinement (weak color control, kept for ablation).")
     parser.add_argument("--local-cfg", type=float, default=15.0,
-                        help="decode_composite: per-region local-prompt CFG strength (default 15.0).")
-    parser.add_argument("--local-corr", type=float, default=5.0,
-                        help="decode_composite_v2: per-region local-prompt correction strength "
-                             "(coefficient on v_local - v_global; default 5.0).")
+                        help="multigen: per-region local-prompt CFG strength (default 15.0).")
     parser.add_argument("--soft-tau", type=float, default=None,
-                        help="decode_composite: optional softmax temperature for soft SQ masks. "
+                        help="multigen: optional softmax temperature for soft SQ masks. "
                              "Omit for hard (one-hot) masks.")
     parser.add_argument("--output-suffix", default=None,
                         help="Optional suffix for the output directory, so several tuning runs "

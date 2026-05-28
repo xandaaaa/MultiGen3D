@@ -22,7 +22,7 @@ sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..', 'e
 
 from trellis.pipelines import TrellisTextTo3DPipeline
 from trellis.utils import postprocessing_utils
-from decode_composite import decode_composite_gaussian
+from multigen import multigen_generate
 from approach1_experiment import coords_to_world
 
 RESOLUTION = 32
@@ -144,11 +144,11 @@ def save_assets(input_sq, text_prompt, generated_glb, t0):
       f.write(text_prompt)
 
 
-def generate_local_sq(superquadrics, text_prompt_handle, t0_idx, local_cfg_handle, soft_tau_handle) -> None:
+def generate_local_sq(superquadrics, text_prompt_handle, t0_idx, local_cfg=15.0, soft_tau=None) -> None:
   print('generate_local_sq')
   gui_elements['generate_button'].disabled = True
   gui_elements['generate_button_with_image'].disabled = True
-  gui_elements['generate_button_local_sq'].label = "Generating (Composite)..."
+  gui_elements['generate_button_local_sq'].label = "Generating MultiGen..."
   gui_elements['generate_button_local_sq'].icon = viser.Icon.LOADER
   gui_elements['generate_button_local_sq'].color = 'orange'
 
@@ -180,8 +180,6 @@ def generate_local_sq(superquadrics, text_prompt_handle, t0_idx, local_cfg_handl
     pipeline.cuda()
 
   global_prompt = text_prompt_handle.value
-  local_cfg = float(local_cfg_handle.value)
-  soft_tau = float(soft_tau_handle.value) if soft_tau_handle.value > 0 else None
   print(f"local_cfg={local_cfg}, soft_tau={soft_tau}")
 
   sq_ids = sorted(superquadrics.keys())
@@ -204,7 +202,7 @@ def generate_local_sq(superquadrics, text_prompt_handle, t0_idx, local_cfg_handl
   )
 
   torch.manual_seed(1)
-  merged_g, mesh_geom = decode_composite_gaussian(
+  merged_g, mesh_geom = multigen_generate(
     pipeline, coords, conds_local, cond_global, sq_params, center, scale,
     steps=25, cfg_strength=cfg_strength, rescale_t=3.0,
     local_cfg_strength=local_cfg, soft_tau=soft_tau,
@@ -222,7 +220,7 @@ def generate_local_sq(superquadrics, text_prompt_handle, t0_idx, local_cfg_handl
 
   gui_elements['generate_button'].disabled = False
   gui_elements['generate_button_with_image'].disabled = False
-  gui_elements['generate_button_local_sq'].label = "Generate (Composite)"
+  gui_elements['generate_button_local_sq'].label = "Generate MultiGen"
   gui_elements['generate_button_local_sq'].icon = viser.Icon.PLAYER_PLAY
   gui_elements['generate_button_local_sq'].color = 'teal'
 
@@ -322,37 +320,42 @@ def setup_gui(server, superquadrics: dict) -> None:
   global scene_elements
   global active_template_id
   global active_superquadric
+  global image_prompt_handle
 
   gui_elements = {}
   active_superquadric = -1
   server.gui.reset()
   server.scene.reset()
-
   scene_elements = {}
-  server.gui.set_panel_label("Superquadrics")
-  t0_idx = server.gui.add_slider(f"Control strength (t0)", order=3, min=0, max=steps, step=1.0, initial_value=6.0, marks=((0, "0"), (steps // 3, f"{steps // 3}"), (2 * steps // 3, f"{2 * steps // 3}")),)
-  text_prompt = server.gui.add_text("Text prompt", "chair", disabled=False, order=4)
-  global image_prompt_handle 
-  
-  select_template_dropdown = server.gui.add_dropdown(label="Object Template",
-                          # options=[str(i) for i in range(len(get_all_templates()))],
-                          options=get_all_templates().values(),
-                          order=0, initial_value=get_all_templates()[active_template_id])
-  select_template_dropdown.on_update(lambda _: select_template_from_id([key for key, val in get_all_templates().items() if val == select_template_dropdown.value][0]))
+
+  server.gui.set_panel_label("MultiGen3D")
+
+  # --- Shared controls ---
+  select_template_dropdown = server.gui.add_dropdown(
+      label="Object Template",
+      options=get_all_templates().values(),
+      order=0, initial_value=get_all_templates()[active_template_id])
+  select_template_dropdown.on_update(lambda _: select_template_from_id(
+      [key for key, val in get_all_templates().items() if val == select_template_dropdown.value][0]))
   gui_elements['select_template_dropdown'] = select_template_dropdown
 
+  text_prompt = server.gui.add_text("Text prompt", "chair", order=1)
+  t0_idx = server.gui.add_slider(
+      "Control strength (t0)", order=2, min=0, max=steps, step=1.0, initial_value=6.0,
+      marks=((0, "0"), (steps // 3, f"{steps // 3}"), (2 * steps // 3, f"{2 * steps // 3}")))
+
+  # --- Per-SQ region controls (shown when a SQ is selected) ---
   for id, superquadric in superquadrics.items():
       gui_elements_per_sq = {}
       gui_elements_per_sq['folder'] = server.gui.add_folder(
-        f'Superquadric {id}', order=1, expand_by_default=True, visible=False)
-      with gui_elements_per_sq[f'folder']:
-        gui_elements_per_sq['prompt'] = server.gui.add_text(f"Prompt (optional)", initial_value=superquadric.get('prompt', ''))
-        gui_elements_per_sq['shape_1'] = server.gui.add_slider(f"Shape 1", min=0, max=2, step=0.01, initial_value=superquadric['shape'][0], marks=((0, "0"), (1, "1"), (2, "2")),)
-        gui_elements_per_sq['shape_2'] = server.gui.add_slider(f"Shape 2", min=0, max=2, step=0.01, initial_value=superquadric['shape'][1], marks=((0, "0"), (1, "1"), (2, "2")),)
-        gui_elements_per_sq['scale_x'] = server.gui.add_slider(f"Scale X", min=0, max=1, step=0.002, initial_value=superquadric['scale'][0], marks=((0, "0"), (1, "1"), (2, "2")),)
-        gui_elements_per_sq['scale_y'] = server.gui.add_slider(f"Scale Y", min=0, max=1, step=0.002, initial_value=superquadric['scale'][1], marks=((0, "0"), (1, "1"), (2, "2")),)
-        gui_elements_per_sq['scale_z'] = server.gui.add_slider(f"Scale Z", min=0, max=1, step=0.002, initial_value=superquadric['scale'][2], marks=((0, "0"), (1, "1"), (2, "2")),)
-
+          f'Superquadric {id}', order=3, expand_by_default=True, visible=False)
+      with gui_elements_per_sq['folder']:
+        gui_elements_per_sq['prompt'] = server.gui.add_text("Region prompt (MultiGen only)", initial_value=superquadric.get('prompt', ''))
+        gui_elements_per_sq['shape_1'] = server.gui.add_slider("Shape 1", min=0, max=2, step=0.01, initial_value=superquadric['shape'][0], marks=((0, "0"), (1, "1"), (2, "2")))
+        gui_elements_per_sq['shape_2'] = server.gui.add_slider("Shape 2", min=0, max=2, step=0.01, initial_value=superquadric['shape'][1], marks=((0, "0"), (1, "1"), (2, "2")))
+        gui_elements_per_sq['scale_x'] = server.gui.add_slider("Scale X", min=0, max=1, step=0.002, initial_value=superquadric['scale'][0], marks=((0, "0"), (0.5, "0.5"), (1, "1")))
+        gui_elements_per_sq['scale_y'] = server.gui.add_slider("Scale Y", min=0, max=1, step=0.002, initial_value=superquadric['scale'][1], marks=((0, "0"), (0.5, "0.5"), (1, "1")))
+        gui_elements_per_sq['scale_z'] = server.gui.add_slider("Scale Z", min=0, max=1, step=0.002, initial_value=superquadric['scale'][2], marks=((0, "0"), (0.5, "0.5"), (1, "1")))
         for k in gui_elements_per_sq.keys():
           try:
             gui_elements_per_sq[k].on_update(lambda _: update_sq(superquadrics, active_superquadric, resolution=RESOLUTION))
@@ -364,36 +367,38 @@ def setup_gui(server, superquadrics: dict) -> None:
         gui_elements_per_sq['delete_button'].on_click(lambda _: delete_active_superquadric())
       gui_elements[f'sq_{id}'] = gui_elements_per_sq
 
-  gui_elements['generate_button'] = server.gui.add_button("Generate", color='green', icon=viser.Icon.PLAYER_PLAY, order=5)
-  gui_elements['generate_button'].on_click(lambda _: generate(superquadrics, text_prompt, t0_idx))
+  # --- Mode 1: Standard ---
+  standard_folder = server.gui.add_folder("Standard", order=4, expand_by_default=True)
+  with standard_folder:
+    gui_elements['generate_button'] = server.gui.add_button(
+        "Generate", color='green', icon=viser.Icon.PLAYER_PLAY)
+    gui_elements['generate_button'].on_click(lambda _: generate(superquadrics, text_prompt, t0_idx))
 
-  gui_elements['local_sq_folder'] = server.gui.add_folder("Composite Generation (Per-SQ Prompts)", order=6, expand_by_default=False)
-  with gui_elements['local_sq_folder']:
-    local_cfg_slider = server.gui.add_slider("Local CFG (color strength)", min=1.0, max=30.0, step=0.5, initial_value=15.0,
-                                              marks=((1, "1"), (7.5, "7.5"), (15, "15"), (30, "30")))
-    gui_elements['local_cfg_slider'] = local_cfg_slider
-    soft_tau_slider = server.gui.add_slider("Soft mask τ (0 = hard)", min=0.0, max=0.2, step=0.005, initial_value=0.0,
-                                             marks=((0, "hard"), (0.03, "0.03"), (0.1, "0.1"), (0.2, "0.2")))
-    gui_elements['soft_tau_slider'] = soft_tau_slider
-    gui_elements['generate_button_local_sq'] = server.gui.add_button("Generate (Composite)", color='teal', icon=viser.Icon.PLAYER_PLAY)
-    gui_elements['generate_button_local_sq'].on_click(lambda _: generate_local_sq(superquadrics, text_prompt, t0_idx, local_cfg_slider, soft_tau_slider))
+    gui_elements['folder_image_conditioning'] = server.gui.add_folder(
+        "Image prompt (optional texture)", expand_by_default=False)
+    with gui_elements['folder_image_conditioning']:
+      image_prompt_handle = server.gui.add_upload_button("Select image", color='gray')
+      image_prompt_handle.on_upload(handle_upload_image)
+      gui_elements['generate_button_with_image'] = server.gui.add_button(
+          "Apply Texture", disabled=True, color='green', icon=viser.Icon.PLAYER_PLAY)
+      gui_elements['generate_button_with_image'].on_click(
+          lambda _: generate(superquadrics, text_prompt, t0_idx, True))
 
-  gui_elements['save_sq_button'] = server.gui.add_button("Save as Template", color='gray', icon=viser.Icon.WRITING, order=0)
+  # --- Mode 2: MultiGen (compositional SQ) ---
+  multigen_folder = server.gui.add_folder("MultiGen — Spatial Prompts", order=5, expand_by_default=True)
+  with multigen_folder:
+    gui_elements['generate_button_local_sq'] = server.gui.add_button(
+        "Generate MultiGen", color='teal', icon=viser.Icon.PLAYER_PLAY)
+    gui_elements['generate_button_local_sq'].on_click(
+        lambda _: generate_local_sq(superquadrics, text_prompt, t0_idx))
+
+  # --- Utilities ---
+  gui_elements['save_sq_button'] = server.gui.add_button(
+      "Save as Template", color='gray', icon=viser.Icon.WRITING, order=6)
   gui_elements['save_sq_button'].on_click(
-     lambda _: save_superquadric_to_file(
-        superquadrics, f'gui/superquadrics/{text_prompt.value}_sq.npz',
-        )
-     )
+      lambda _: save_superquadric_to_file(superquadrics, f'gui/superquadrics/{text_prompt.value}_sq.npz'))
 
-  server.gui.add_folder("", expand_by_default=False, order=6)
-
-  gui_elements['folder_image_conditioning'] = server.gui.add_folder("Optional image prompt (texture only)", order=7, expand_by_default=True)
-  with gui_elements['folder_image_conditioning']:
-    image_prompt_handle = server.gui.add_upload_button("Select image prompt", color = 'gray', order=10)
-    image_prompt_handle.on_upload(handle_upload_image)
-    gui_elements['generate_button_with_image'] = server.gui.add_button("Apply Texture", disabled = True, color='green', icon=viser.Icon.PLAYER_PLAY, order = 12)
-    gui_elements['generate_button_with_image'].on_click(lambda _: generate(superquadrics, text_prompt, t0_idx, True))
-  toggle_button = server.gui.add_button("Toggle", color='gray', order = 100)
+  toggle_button = server.gui.add_button("Toggle SQ / Mesh", color='gray', order=100)
   toggle_button.on_click(lambda _: toggle_sq_mesh())
 
   return gui_elements
