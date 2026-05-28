@@ -301,7 +301,8 @@ def generate(superquadrics, text_prompt_handle, t0_idx, image_control=False) -> 
 
 
 def get_all_templates() -> dict:
-  return {i: f.split('_')[0] for i, f in enumerate(sorted(os.listdir('gui/superquadrics/'))) if f.endswith('_sq.npz')}
+  files = [f for f in sorted(os.listdir('gui/superquadrics/')) if f.endswith('_sq.npz')]
+  return {i: f.split('_')[0] for i, f in enumerate(files)}
 
 
 def handle_upload_image(event):

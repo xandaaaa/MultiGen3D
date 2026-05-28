@@ -28,7 +28,9 @@ python benchmark/run_benchmark.py \
     --approach multigen \
     --prompts-file benchmark/prompts_augmented.json \
     --results-root results \
+    --steps 25 \
     --resolution 512 \
+    --force \
     --seed 42
 
 echo "=========================================="

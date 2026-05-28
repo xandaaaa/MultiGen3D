@@ -11,12 +11,15 @@ Also saves a row image per prompt for quick visual inspection:
     <results_root>/<approach>_results/renders/<shape_id>/prompt_<i>/grid.png
 
 Approaches:
-    baseline  — standard TRELLIS, global prompt only (no SQ routing)
+    baseline     — standard TRELLIS, global prompt only, text-driven structure (no SQ control)
+    spacecontrol — SQ-mesh spatial control on the structure + single global-prompt SLAT
+                   (the apples-to-apples reference for multigen: same geometry, no SQ routing)
     approach5 — height-grouped semantic routing (3 groups: bottom / mid / top)
     approach6 — legacy per-SQ hard routing (one distinct prompt per SQ)
     local_sq  — migrated local_sq.py implementation, saved under local_sq_results
     approach7 — coupled diffusion (soft W + global coupling branch)
-    multigen  — compositional CFG via SQ region masks (multigen.py)
+    multigen  — compositional CFG via SQ region masks, with the sparse structure
+                conditioned on the merged SQ mesh via spatial control (matches the GUI)
 
 Usage:
     python benchmark/run_benchmark.py --approach baseline --shape-idx 3
@@ -44,7 +47,7 @@ os.environ["SPCONV_ALGO"] = "native"
 from trellis.pipelines import TrellisTextTo3DPipeline
 from trellis.utils import render_utils
 
-from approach1_experiment import coords_to_world, compute_mesh_normalization, load_sq_params, save_sq_assignment_viz
+from sq_utils import coords_to_world, load_sq_params, save_sq_assignment_viz
 from approach5_experiment import group_sqs_by_height, compute_hard_W, sample_slat_compositional
 from approach6_experiment import compute_hard_W as compute_hard_W_6, sample_slat_regional_refine
 from local_sq import (
@@ -55,7 +58,12 @@ from local_sq import (
     sample_slat_regional_refine as sample_slat_local_sq_regional,
 )
 from approach7_experiment import compute_soft_W as compute_soft_W_7, sample_slat_coupled
-from multigen import multigen_generate, sample_multigen_slat
+from multigen import (
+    compute_mesh_normalization,
+    multigen_generate,
+    sample_multigen_slat,
+    write_spatial_control_mesh,
+)
 
 
 # ---------------------------------------------------------------------------
@@ -204,7 +212,20 @@ def run_multigen(pipeline, coords, sq_params, mesh_center, mesh_scale,
     snapshots are written and the final decode/render path is skipped.
     """
     cond_global = pipeline.get_cond_text([global_prompt])
-    conds_local = {k: pipeline.get_cond_text([v]) for k, v in local_prompts.items()}
+    # Mirror the GUI (generate_local_sq): cover EVERY SQ, fall back to the global
+    # prompt where a region has none, dedupe by prompt string, and reuse the
+    # cond_global object for global-equal regions so they denoise at the global
+    # cfg strength while others use local_cfg. Without this, every region runs at
+    # local_cfg with no coherent global base, and any SQ missing from local_prompts
+    # gets a zero mask and is left as undenoised noise.
+    prompt_to_cond = {global_prompt: cond_global}
+    conds_local = {}
+    for i in range(len(sq_params)):
+        p = local_prompts.get(i, "")
+        p = (p.strip() if isinstance(p, str) else "") or global_prompt
+        if p not in prompt_to_cond:
+            prompt_to_cond[p] = pipeline.get_cond_text([p])
+        conds_local[i] = prompt_to_cond[p]
     torch.manual_seed(seed)
     if debug_dir is not None:
         slat = sample_multigen_slat(
@@ -261,7 +282,7 @@ def run_shape(shape, approach, pipeline, extr, intr, results_root, steps, seed, 
     # are Z-up. Approaches that route voxels to SQs by radial distance are
     # frame-sensitive — convert here so the routing math operates in the same
     # frame as the voxels. Other approaches retain prior behavior.
-    if approach in ("local_sq", "multigen"):
+    if approach in ("local_sq", "multigen", "spacecontrol"):
         sq_params = convert_shapenet_yup_to_trellis_zup(sq_params)
     mesh_center, mesh_scale = compute_mesh_normalization(sq_params)
 
@@ -288,9 +309,31 @@ def run_shape(shape, approach, pipeline, extr, intr, results_root, steps, seed, 
             print(f"  (using per-prompt seed={current_seed})")
 
         cond_struct = pipeline.get_cond_text([global_prompt])
+        ss_sampler_params = {"steps": steps}
+        if approach in ("multigen", "spacecontrol"):
+            # Match the GUI: condition the sparse structure on the merged SQ mesh
+            # so the voxels fill the superquadric volume. Without this the structure
+            # comes from text alone and ignores the SQ layout, so the SLAT region
+            # masks route over voxels that don't match the SQs. spacecontrol uses the
+            # same SQ-locked geometry but a single global-prompt SLAT, so it is the
+            # apples-to-apples reference for what multigen's per-region SLAT adds.
+            # SQ artifacts (control mesh + the voxelized/latent debug plys that
+            # encode_spatial_control drops next to it) go to a shared
+            # results/superquadrics/<shape_id>/ instead of the render folders.
+            sq_dir = Path(results_root) / "superquadrics" / shape_id
+            sq_dir.mkdir(parents=True, exist_ok=True)
+            control_path = str(sq_dir / "spatial_control_mesh.ply")
+            write_spatial_control_mesh(sq_params, control_path, mesh_center, mesh_scale)
+            cond_struct = {**cond_struct, "control": pipeline.encode_spatial_control(control_path)}
+            # GUI uses t0_idx=6 at 12 structure steps (fraction 0.5). t0 depends
+            # only on the idx/steps fraction, so scale with --steps to match.
+            t0_idx = args.t0_idx if args.t0_idx is not None else round(0.5 * steps)
+            ss_sampler_params.update(
+                cfg_strength=cfg_strength, t0_idx_value=min(t0_idx, steps)
+            )
         torch.manual_seed(current_seed)
         coords = pipeline.sample_sparse_structure(
-            cond_struct, num_samples=1, sampler_params={"steps": steps}
+            cond_struct, num_samples=1, sampler_params=ss_sampler_params
         )
 
         prompt_debug_dir = None
@@ -323,7 +366,9 @@ def run_shape(shape, approach, pipeline, extr, intr, results_root, steps, seed, 
 
         slat = None
         gs_direct = None
-        if approach == "baseline":
+        if approach in ("baseline", "spacecontrol"):
+            # Same single-global-prompt SLAT for both; they differ only in whether
+            # `coords` came from SQ spatial control (spacecontrol) or text (baseline).
             slat = run_baseline(pipeline, coords, global_prompt, steps, current_seed, cfg_strength)
         elif approach == "approach5":
             slat = run_approach5(pipeline, coords, sq_params, mesh_center, mesh_scale,
@@ -393,8 +438,8 @@ def run_shape(shape, approach, pipeline, extr, intr, results_root, steps, seed, 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--approach", required=True,
-                        choices=["baseline", "approach5", "approach6", "local_sq", "approach7",
-                                 "multigen"])
+                        choices=["baseline", "spacecontrol", "approach5", "approach6",
+                                 "local_sq", "approach7", "multigen"])
     parser.add_argument("--shape-idx", default="all",
                         help="Index into prompts JSON (0-based), or 'all' to run every shape")
     parser.add_argument("--prompts-file", default="benchmark/prompts_augmented.json")
@@ -419,6 +464,12 @@ def main():
     parser.add_argument("--soft-tau", type=float, default=None,
                         help="multigen: optional softmax temperature for soft SQ masks. "
                              "Omit for hard (one-hot) masks.")
+    parser.add_argument("--t0-idx", type=int, default=None,
+                        help="multigen: spatial-control strength as an index into the "
+                             "sparse-structure t-schedule (higher = stronger adherence to "
+                             "the SQ mesh). Default: round(0.5 * --steps), matching the GUI's "
+                             "control slider (6 at 12 steps = fraction 0.5). "
+                             "Clamped to --steps; only used when --approach multigen.")
     parser.add_argument("--output-suffix", default=None,
                         help="Optional suffix for the output directory, so several tuning runs "
                              "of the same approach don't collide. Example: 'v2' → results/"

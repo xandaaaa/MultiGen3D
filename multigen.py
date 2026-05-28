@@ -1,5 +1,6 @@
 import gc
 import os
+import sys
 
 import numpy as np
 import torch
@@ -8,6 +9,52 @@ from PIL import Image
 from trellis.modules import sparse as sp
 from trellis.pipelines.samplers.flow_euler import FlowEulerSampler
 from trellis.utils import render_utils
+
+
+def _merged_sq_mesh(sq_params, resolution=100):
+    """Open3D mesh of all superquadrics concatenated, in their native frame."""
+    import open3d as o3d
+    sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "gui"))
+    from gui_text_image import add_superquadric_compact_rot_mat
+    from utils import merge_meshes
+    meshes = []
+    for sq in sq_params:
+        verts, tris = add_superquadric_compact_rot_mat(
+            sq["scale"], sq["shape"], sq["translation"], sq["rotation"],
+            resolution=resolution,
+        )
+        m = o3d.geometry.TriangleMesh()
+        m.vertices = o3d.utility.Vector3dVector(verts)
+        m.triangles = o3d.utility.Vector3iVector(np.asarray(tris))
+        meshes.append(m)
+    return merge_meshes(meshes)
+
+
+def _aabb_normalization(mesh):
+    verts = np.asarray(mesh.vertices)
+    aabb = np.stack([verts.min(0), verts.max(0)])
+    center = (aabb[0] + aabb[1]) / 2
+    scale = 1.0 / (aabb[1] - aabb[0]).max()
+    return center, scale
+
+
+def compute_mesh_normalization(sq_params):
+    """AABB normalization (center, 1/max_extent) of the merged SQ mesh. The SLAT
+    sampler applies the same transform to SQ centers (see _sq_distance_matrix), so
+    the routing masks and the voxels end up in one frame."""
+    return _aabb_normalization(_merged_sq_mesh(sq_params))
+
+
+def write_spatial_control_mesh(sq_params, out_path, center, scale):
+    """Write the merged SQ mesh, normalized by (center, scale), to out_path so it
+    can be encoded as a TRELLIS spatial-control signal for sparse-structure
+    sampling. Reusing the same (center, scale) the sampler applies to SQ centers
+    keeps the conditioned voxels aligned with the SQ routing masks."""
+    import open3d as o3d
+    mesh = _merged_sq_mesh(sq_params)
+    mesh.translate(-center)
+    mesh.scale(scale, (0, 0, 0))
+    o3d.io.write_triangle_mesh(out_path, mesh)
 
 
 def superquadric_radial_distance(x_local, semi_axes, eps):

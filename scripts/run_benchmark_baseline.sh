@@ -24,11 +24,13 @@ which python
 export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True
 
 python benchmark/run_benchmark.py \
-    --approach baseline \
+    --approach spacecontrol \
     --shape-idx all \
     --prompts-file benchmark/prompts_augmented.json \
     --results-root results \
-    --steps 15 \
+    --steps 25 \
+    --resolution 512 \
+    --force \
     --seed 42
 
 echo "=========================================="
