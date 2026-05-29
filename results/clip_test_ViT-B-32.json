@@ -1,0 +1,329 @@
+{
+  "config": {
+    "clip_model": "ViT-B/32",
+    "mask_bg": false
+  },
+  "by_approach": {
+    "spacecontrol": {
+      "mean": 0.3003483057022095,
+      "min": 0.28472593426704407,
+      "max": 0.3239668011665344,
+      "local_mean": 0.26965892041722933,
+      "n": 5,
+      "records": [
+        {
+          "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+          "prompt_idx": 0,
+          "prompt": "A garden bench with black wrought iron legs, green painted armrests, a natural pine seat, and a white backrest",
+          "score": 0.29928362369537354,
+          "n_views": 4,
+          "local_score": 0.27347343042492867,
+          "local_per_phrase": {
+            "black wrought iron leg bottom": 0.25096002221107483,
+            "black wrought iron leg upper": 0.25779396295547485,
+            "green painted armrest": 0.3133736252784729,
+            "natural pine seat": 0.2583625316619873,
+            "white backrest": 0.2677805721759796
+          },
+          "local_per_attribute": {
+            "black wrought iron": 0.25437699258327484,
+            "green painted": 0.3133736252784729,
+            "natural pine": 0.2583625316619873,
+            "white": 0.2677805721759796
+          }
+        },
+        {
+          "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+          "prompt_idx": 1,
+          "prompt": "A garden bench with brown wooden legs, cream-colored armrests, a red-painted seat, and a dark brown backrest",
+          "score": 0.29717135429382324,
+          "n_views": 4,
+          "local_score": 0.2815236337482929,
+          "local_per_phrase": {
+            "brown wooden bottom left leg": 0.25292134284973145,
+            "brown wooden bottom right leg": 0.2509603500366211,
+            "brown wooden upper left leg": 0.25471988320350647,
+            "brown wooden upper right leg": 0.25363412499427795,
+            "cream-colored armrest": 0.2852817475795746,
+            "dark brown backrest": 0.2820134162902832,
+            "red-painted seat": 0.30574044585227966
+          },
+          "local_per_attribute": {
+            "brown wooden": 0.25305892527103424,
+            "cream-colored": 0.2852817475795746,
+            "dark brown": 0.2820134162902832,
+            "red-painted": 0.30574044585227966
+          }
+        },
+        {
+          "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+          "prompt_idx": 2,
+          "prompt": "A garden bench with brass-finished legs, walnut armrests, a forest green seat, and a matching green backrest",
+          "score": 0.3239668011665344,
+          "n_views": 4,
+          "local_score": 0.2641550948222478,
+          "local_per_phrase": {
+            "brass-finished bottom left leg": 0.2210792601108551,
+            "brass-finished bottom right leg": 0.22488759458065033,
+            "brass-finished upper left leg": 0.2270604968070984,
+            "brass-finished upper right leg": 0.22964034974575043,
+            "forest green backrest": 0.31367018818855286,
+            "forest green seat": 0.3071852922439575,
+            "walnut left armrest": 0.2522658109664917,
+            "walnut middle armrest": 0.26686373353004456,
+            "walnut right armrest": 0.2499823123216629
+          },
+          "local_per_attribute": {
+            "brass-finished": 0.22566692531108856,
+            "forest green": 0.3104277402162552,
+            "walnut": 0.2563706189393997
+          }
+        },
+        {
+          "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+          "prompt_idx": 3,
+          "prompt": "A garden bench with grey stone-textured legs, light oak armrests, a navy blue cushioned seat, and a white backrest",
+          "score": 0.2965938150882721,
+          "n_views": 4,
+          "local_score": 0.27960385102778673,
+          "local_per_phrase": {
+            "grey stone-textured bottom left leg": 0.23761291801929474,
+            "grey stone-textured bottom right leg": 0.24254006147384644,
+            "grey stone-textured upper left leg": 0.24247604608535767,
+            "grey stone-textured upper right leg": 0.24607229232788086,
+            "light oak left armrest": 0.27123743295669556,
+            "light oak middle armrest": 0.2962454855442047,
+            "light oak right armrest": 0.27744197845458984,
+            "navy blue cushioned seat": 0.32146239280700684,
+            "white backrest": 0.27313604950904846
+          },
+          "local_per_attribute": {
+            "grey stone-textured": 0.24217532947659492,
+            "light oak": 0.2816416323184967,
+            "navy blue": 0.32146239280700684,
+            "white": 0.27313604950904846
+          }
+        },
+        {
+          "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+          "prompt_idx": 4,
+          "prompt": "A garden bench with copper-patina legs, teak armrests, a charcoal grey seat, and a beige backrest",
+          "score": 0.28472593426704407,
+          "n_views": 4,
+          "local_score": 0.24953859206289053,
+          "local_per_phrase": {
+            "beige backrest": 0.2672557234764099,
+            "charcoal grey seat": 0.219923198223114,
+            "copper-patina bottom left leg": 0.24499474465847015,
+            "copper-patina bottom right leg": 0.24356427788734436,
+            "copper-patina upper left leg": 0.2545826733112335,
+            "copper-patina upper right leg": 0.24948030710220337,
+            "teak left armrest": 0.2551501989364624,
+            "teak middle armrest": 0.27667737007141113,
+            "teak right armrest": 0.2566322684288025
+          },
+          "local_per_attribute": {
+            "beige": 0.2672557234764099,
+            "charcoal grey": 0.219923198223114,
+            "copper-patina": 0.24815550073981285,
+            "teak": 0.26281994581222534
+          }
+        }
+      ]
+    },
+    "multigen": {
+      "mean": 0.28695638179779054,
+      "min": 0.27350807189941406,
+      "max": 0.316741406917572,
+      "local_mean": 0.26488367577807764,
+      "n": 5,
+      "records": [
+        {
+          "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+          "prompt_idx": 0,
+          "prompt": "A garden bench with black wrought iron legs, green painted armrests, a natural pine seat, and a white backrest",
+          "score": 0.27385443449020386,
+          "n_views": 4,
+          "local_score": 0.26333202235400677,
+          "local_per_phrase": {
+            "black wrought iron leg bottom": 0.22444096207618713,
+            "black wrought iron leg upper": 0.23283226788043976,
+            "green painted armrest": 0.2985677123069763,
+            "natural pine seat": 0.23962461948394775,
+            "white backrest": 0.28649914264678955
+          },
+          "local_per_attribute": {
+            "black wrought iron": 0.22863661497831345,
+            "green painted": 0.2985677123069763,
+            "natural pine": 0.23962461948394775,
+            "white": 0.28649914264678955
+          }
+        },
+        {
+          "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+          "prompt_idx": 1,
+          "prompt": "A garden bench with brown wooden legs, cream-colored armrests, a red-painted seat, and a dark brown backrest",
+          "score": 0.28723907470703125,
+          "n_views": 4,
+          "local_score": 0.2817663922905922,
+          "local_per_phrase": {
+            "brown wooden bottom left leg": 0.2618659734725952,
+            "brown wooden bottom right leg": 0.25972652435302734,
+            "brown wooden upper left leg": 0.2633797228336334,
+            "brown wooden upper right leg": 0.2625393569469452,
+            "cream-colored armrest": 0.2749220132827759,
+            "dark brown backrest": 0.2949076294898987,
+            "red-painted seat": 0.2953580319881439
+          },
+          "local_per_attribute": {
+            "brown wooden": 0.2618778944015503,
+            "cream-colored": 0.2749220132827759,
+            "dark brown": 0.2949076294898987,
+            "red-painted": 0.2953580319881439
+          }
+        },
+        {
+          "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+          "prompt_idx": 2,
+          "prompt": "A garden bench with brass-finished legs, walnut armrests, a forest green seat, and a matching green backrest",
+          "score": 0.316741406917572,
+          "n_views": 4,
+          "local_score": 0.2628767126136356,
+          "local_per_phrase": {
+            "brass-finished bottom left leg": 0.22356010973453522,
+            "brass-finished bottom right leg": 0.22581267356872559,
+            "brass-finished upper left leg": 0.23157507181167603,
+            "brass-finished upper right leg": 0.23306529223918915,
+            "forest green backrest": 0.309603214263916,
+            "forest green seat": 0.31280767917633057,
+            "walnut left armrest": 0.24526908993721008,
+            "walnut middle armrest": 0.2586120665073395,
+            "walnut right armrest": 0.24288305640220642
+          },
+          "local_per_attribute": {
+            "brass-finished": 0.2285032868385315,
+            "forest green": 0.3112054467201233,
+            "walnut": 0.24892140428225198
+          }
+        },
+        {
+          "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+          "prompt_idx": 3,
+          "prompt": "A garden bench with grey stone-textured legs, light oak armrests, a navy blue cushioned seat, and a white backrest",
+          "score": 0.27350807189941406,
+          "n_views": 4,
+          "local_score": 0.2657186115781466,
+          "local_per_phrase": {
+            "grey stone-textured bottom left leg": 0.22502501308918,
+            "grey stone-textured bottom right leg": 0.22786074876785278,
+            "grey stone-textured upper left leg": 0.2315620481967926,
+            "grey stone-textured upper right leg": 0.23483003675937653,
+            "light oak left armrest": 0.2368701994419098,
+            "light oak middle armrest": 0.2616584897041321,
+            "light oak right armrest": 0.24591688811779022,
+            "navy blue cushioned seat": 0.2911737561225891,
+            "white backrest": 0.2937327027320862
+          },
+          "local_per_attribute": {
+            "grey stone-textured": 0.22981946170330048,
+            "light oak": 0.2481485257546107,
+            "navy blue": 0.2911737561225891,
+            "white": 0.2937327027320862
+          }
+        },
+        {
+          "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+          "prompt_idx": 4,
+          "prompt": "A garden bench with copper-patina legs, teak armrests, a charcoal grey seat, and a beige backrest",
+          "score": 0.28343892097473145,
+          "n_views": 4,
+          "local_score": 0.25072464005400735,
+          "local_per_phrase": {
+            "beige backrest": 0.2892487347126007,
+            "charcoal grey seat": 0.20278775691986084,
+            "copper-patina bottom left leg": 0.23597534000873566,
+            "copper-patina bottom right leg": 0.23397693037986755,
+            "copper-patina upper left leg": 0.2486017942428589,
+            "copper-patina upper right leg": 0.2425515055656433,
+            "teak left armrest": 0.26519641280174255,
+            "teak middle armrest": 0.2801602780818939,
+            "teak right armrest": 0.2664003372192383
+          },
+          "local_per_attribute": {
+            "beige": 0.2892487347126007,
+            "charcoal grey": 0.20278775691986084,
+            "copper-patina": 0.24027639254927635,
+            "teak": 0.27058567603429157
+          }
+        }
+      ]
+    }
+  },
+  "comparison": [
+    {
+      "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+      "prompt_idx": 0,
+      "prompt": "A garden bench with black wrought iron legs, green painted armrests, a natural pine seat, and a white backrest",
+      "scores": {
+        "spacecontrol": 0.299284,
+        "multigen": 0.273854
+      },
+      "local_scores": {
+        "spacecontrol": 0.273473,
+        "multigen": 0.263332
+      }
+    },
+    {
+      "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+      "prompt_idx": 1,
+      "prompt": "A garden bench with brown wooden legs, cream-colored armrests, a red-painted seat, and a dark brown backrest",
+      "scores": {
+        "spacecontrol": 0.297171,
+        "multigen": 0.287239
+      },
+      "local_scores": {
+        "spacecontrol": 0.281524,
+        "multigen": 0.281766
+      }
+    },
+    {
+      "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+      "prompt_idx": 2,
+      "prompt": "A garden bench with brass-finished legs, walnut armrests, a forest green seat, and a matching green backrest",
+      "scores": {
+        "spacecontrol": 0.323967,
+        "multigen": 0.316741
+      },
+      "local_scores": {
+        "spacecontrol": 0.264155,
+        "multigen": 0.262877
+      }
+    },
+    {
+      "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+      "prompt_idx": 3,
+      "prompt": "A garden bench with grey stone-textured legs, light oak armrests, a navy blue cushioned seat, and a white backrest",
+      "scores": {
+        "spacecontrol": 0.296594,
+        "multigen": 0.273508
+      },
+      "local_scores": {
+        "spacecontrol": 0.279604,
+        "multigen": 0.265719
+      }
+    },
+    {
+      "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+      "prompt_idx": 4,
+      "prompt": "A garden bench with copper-patina legs, teak armrests, a charcoal grey seat, and a beige backrest",
+      "scores": {
+        "spacecontrol": 0.284726,
+        "multigen": 0.283439
+      },
+      "local_scores": {
+        "spacecontrol": 0.249539,
+        "multigen": 0.250725
+      }
+    }
+  ]
+}

@@ -1,0 +1,359 @@
+{
+  "model": "Qwen/Qwen2.5-VL-7B-Instruct",
+  "summary": {
+    "spacecontrol": {
+      "parts": 19,
+      "present_rate": 0.8421052631578947,
+      "correct_of_present": 0.4375,
+      "correct_strict": 0.3684210526315789
+    },
+    "multigen": {
+      "parts": 19,
+      "present_rate": 1.0,
+      "correct_of_present": 0.42105263157894735,
+      "correct_strict": 0.42105263157894735
+    }
+  },
+  "records": {
+    "spacecontrol": [
+      {
+        "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+        "prompt_idx": 0,
+        "prompt": "A garden bench with black wrought iron legs, green painted armrests, a natural pine seat, and a white backrest",
+        "groups": {
+          "black wrought iron": {
+            "present": true,
+            "color_answer": "black metal",
+            "match": true,
+            "present_answer": "yes",
+            "noun": "leg"
+          },
+          "green painted": {
+            "present": false,
+            "color_answer": null,
+            "match": false,
+            "present_answer": "no",
+            "noun": "armrest"
+          },
+          "natural pine": {
+            "present": true,
+            "color_answer": "green leather",
+            "match": false,
+            "present_answer": "yes",
+            "noun": "seat"
+          },
+          "white": {
+            "present": true,
+            "color_answer": "green leather",
+            "match": false,
+            "present_answer": "yes",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+        "prompt_idx": 1,
+        "prompt": "A garden bench with brown wooden legs, cream-colored armrests, a red-painted seat, and a dark brown backrest",
+        "groups": {
+          "brown wooden": {
+            "present": true,
+            "color_answer": "brown metal",
+            "match": false,
+            "present_answer": "yes",
+            "noun": "leg"
+          },
+          "cream-colored": {
+            "present": false,
+            "color_answer": null,
+            "match": false,
+            "present_answer": "no",
+            "noun": "armrest"
+          },
+          "red-painted": {
+            "present": true,
+            "color_answer": "red plastic",
+            "match": true,
+            "present_answer": "yes",
+            "noun": "seat"
+          },
+          "dark brown": {
+            "present": true,
+            "color_answer": "red plastic",
+            "match": false,
+            "present_answer": "yes",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+        "prompt_idx": 2,
+        "prompt": "A garden bench with brass-finished legs, walnut armrests, a forest green seat, and a matching green backrest",
+        "groups": {
+          "brass-finished": {
+            "present": true,
+            "color_answer": "brown metal",
+            "match": false,
+            "present_answer": "yes",
+            "noun": "leg"
+          },
+          "walnut": {
+            "present": false,
+            "color_answer": null,
+            "match": false,
+            "present_answer": "no",
+            "noun": "armrest"
+          },
+          "forest green": {
+            "present": true,
+            "color_answer": "green fabric",
+            "match": true,
+            "present_answer": "yes",
+            "noun": "seat"
+          }
+        }
+      },
+      {
+        "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+        "prompt_idx": 3,
+        "prompt": "A garden bench with grey stone-textured legs, light oak armrests, a navy blue cushioned seat, and a white backrest",
+        "groups": {
+          "grey stone-textured": {
+            "present": true,
+            "color_answer": "grey stone",
+            "match": true,
+            "present_answer": "yes",
+            "noun": "leg"
+          },
+          "light oak": {
+            "present": true,
+            "color_answer": "grey stone",
+            "match": false,
+            "present_answer": "yes",
+            "noun": "armrest"
+          },
+          "navy blue": {
+            "present": true,
+            "color_answer": "blue leather",
+            "match": true,
+            "present_answer": "yes",
+            "noun": "seat"
+          },
+          "white": {
+            "present": true,
+            "color_answer": "blue leather",
+            "match": false,
+            "present_answer": "yes",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+        "prompt_idx": 4,
+        "prompt": "A garden bench with copper-patina legs, teak armrests, a charcoal grey seat, and a beige backrest",
+        "groups": {
+          "copper-patina": {
+            "present": true,
+            "color_answer": "brown metal",
+            "match": true,
+            "present_answer": "yes",
+            "noun": "leg"
+          },
+          "teak": {
+            "present": true,
+            "color_answer": "black leather",
+            "match": false,
+            "present_answer": "yes",
+            "noun": "armrest"
+          },
+          "charcoal grey": {
+            "present": true,
+            "color_answer": "grey fabric",
+            "match": true,
+            "present_answer": "yes",
+            "noun": "seat"
+          },
+          "beige": {
+            "present": true,
+            "color_answer": "black leather",
+            "match": false,
+            "present_answer": "yes",
+            "noun": "backrest"
+          }
+        }
+      }
+    ],
+    "multigen": [
+      {
+        "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+        "prompt_idx": 0,
+        "prompt": "A garden bench with black wrought iron legs, green painted armrests, a natural pine seat, and a white backrest",
+        "groups": {
+          "black wrought iron": {
+            "present": true,
+            "color_answer": "black metal",
+            "match": true,
+            "present_answer": "yes",
+            "noun": "leg"
+          },
+          "green painted": {
+            "present": true,
+            "color_answer": "white leather",
+            "match": false,
+            "present_answer": "yes",
+            "noun": "armrest"
+          },
+          "natural pine": {
+            "present": true,
+            "color_answer": "green plastic",
+            "match": false,
+            "present_answer": "yes",
+            "noun": "seat"
+          },
+          "white": {
+            "present": true,
+            "color_answer": "white leather",
+            "match": true,
+            "present_answer": "yes",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+        "prompt_idx": 1,
+        "prompt": "A garden bench with brown wooden legs, cream-colored armrests, a red-painted seat, and a dark brown backrest",
+        "groups": {
+          "brown wooden": {
+            "present": true,
+            "color_answer": "brown metal",
+            "match": false,
+            "present_answer": "yes",
+            "noun": "leg"
+          },
+          "cream-colored": {
+            "present": true,
+            "color_answer": "brown plastic",
+            "match": false,
+            "present_answer": "yes",
+            "noun": "armrest"
+          },
+          "red-painted": {
+            "present": true,
+            "color_answer": "red plastic",
+            "match": true,
+            "present_answer": "yes",
+            "noun": "seat"
+          },
+          "dark brown": {
+            "present": true,
+            "color_answer": "brown plastic",
+            "match": true,
+            "present_answer": "yes",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+        "prompt_idx": 2,
+        "prompt": "A garden bench with brass-finished legs, walnut armrests, a forest green seat, and a matching green backrest",
+        "groups": {
+          "brass-finished": {
+            "present": true,
+            "color_answer": "brown metal",
+            "match": false,
+            "present_answer": "yes",
+            "noun": "leg"
+          },
+          "walnut": {
+            "present": true,
+            "color_answer": "brown metal",
+            "match": false,
+            "present_answer": "yes",
+            "noun": "armrest"
+          },
+          "forest green": {
+            "present": true,
+            "color_answer": "green leather",
+            "match": true,
+            "present_answer": "yes",
+            "noun": "seat"
+          }
+        }
+      },
+      {
+        "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+        "prompt_idx": 3,
+        "prompt": "A garden bench with grey stone-textured legs, light oak armrests, a navy blue cushioned seat, and a white backrest",
+        "groups": {
+          "grey stone-textured": {
+            "present": true,
+            "color_answer": "grey stone",
+            "match": true,
+            "present_answer": "yes",
+            "noun": "leg"
+          },
+          "light oak": {
+            "present": true,
+            "color_answer": "black metal",
+            "match": false,
+            "present_answer": "yes",
+            "noun": "armrest"
+          },
+          "navy blue": {
+            "present": true,
+            "color_answer": "blue plastic",
+            "match": true,
+            "present_answer": "yes",
+            "noun": "seat"
+          },
+          "white": {
+            "present": true,
+            "color_answer": "blue plastic",
+            "match": false,
+            "present_answer": "yes",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+        "prompt_idx": 4,
+        "prompt": "A garden bench with copper-patina legs, teak armrests, a charcoal grey seat, and a beige backrest",
+        "groups": {
+          "copper-patina": {
+            "present": true,
+            "color_answer": "brown metal",
+            "match": false,
+            "present_answer": "yes",
+            "noun": "leg"
+          },
+          "teak": {
+            "present": true,
+            "color_answer": "brown metal",
+            "match": false,
+            "present_answer": "yes",
+            "noun": "armrest"
+          },
+          "charcoal grey": {
+            "present": true,
+            "color_answer": "grey metal",
+            "match": false,
+            "present_answer": "yes",
+            "noun": "seat"
+          },
+          "beige": {
+            "present": true,
+            "color_answer": "beige leather",
+            "match": true,
+            "present_answer": "yes",
+            "noun": "backrest"
+          }
+        }
+      }
+    ]
+  }
+}

@@ -129,40 +129,71 @@ SQ3: Fuselage of the plane
 
 See [superdec/data/dataset_20/previews/airplane_d18592d9615b01bbbc0909d98a1ff2b4_annotation.txt](superdec/data/dataset_20/previews/airplane_d18592d9615b01bbbc0909d98a1ff2b4_annotation.txt) for the canonical example. The SQ indices match the labels rendered by `sq_editor.py` and `preview_sqs.py`, so what you see in the editor is what you write in the annotation.
 
-## Benchmark: CLIP score evaluation
+## Benchmark: CLIP-based evaluation
 
-We evaluate each approach using **CLIP score** — cosine similarity between rendered views and a holistic text prompt that specifies per-part appearance. The benchmark is designed to measure how faithfully an approach localizes different materials and colors to the correct spatial parts of the generated object.
+We evaluate each approach with CLIP cosine similarity between rendered views and the benchmark prompts. Our prompts are **compositional** — they bind a distinct material/color to each part ("white backrest, brass legs") — and plain global CLIP is known to be weak at exactly this *attribute binding*: it collapses image and text into single vectors and matches them as a bag of concepts, so a render with the right colors present *anywhere* scores as well as one with the colors on the *correct* parts. In practice global CLIP disagreed with human evaluation: approaches that placed each color correctly often lost on global CLIP.
 
-### Prompt suite — `benchmark/prompts.json`
+The headline metric is therefore a **per-attribute CLIP win-rate**, not a single global score. Three changes make CLIP track human judgment:
 
-[benchmark/prompts.json](benchmark/prompts.json) contains **5 appearance prompts per shape** (100 total). Each prompt is a single holistic sentence that describes the whole object while specifying distinct materials and colors at the part level, for example:
+1. **Per-attribute scoring** — instead of one prompt vs. the whole image, each part phrase is scored separately (from `local_prompts` in `benchmark/prompts_augmented.json`), forcing CLIP to evaluate each part's color/material binding.
+2. **Attribute grouping** — phrases are grouped by their color/material descriptor (part-noun and position words are stripped), so a shape's four legs count as *one* "brass-finished" attribute rather than outvoting a single seat or backrest.
+3. **Background neutralization** (`--mask-bg`) — the renderer paints the background pure black or pure white depending on the prompt, which is itself a strong CLIP color cue; pixels matching the background are composited to neutral grey before scoring.
+
+Default backbone is **ViT-L/14** (`--clip-model`); the coarse ViT-B/32 misses fine attributes.
+
+### Metric definition
+
+For each `(shape, prompt, attribute-group)`:
+
+1. Render 4 views, mask the background to grey.
+2. CLIP-encode the views and the attribute phrase, L2-normalize, take cosine similarity averaged over views (and over phrases sharing the descriptor).
+
+The method with the higher score **wins** that attribute group. The **headline number is the fraction of attribute groups each method wins.** A secondary *grouped mean* (mean of attribute-group scores) is also reported, but it is biased by CLIP's blind spot for hard material words (e.g. metallic finishes on thin legs score low for *every* method), so it is not the headline.
+
+### Worked example — `bench_f8aa82e7e4c58ce29d31c5ce17cce95d`, prompt 3
+
+Prompt: *"A garden bench with grey stone-textured legs, light oak armrests, a navy blue cushioned seat, and a white backrest."* The 9 superquadrics reduce to 4 attribute groups (4 legs + 3 armrests collapse), scored under ViT-L/14 + `--mask-bg`:
+
+| Attribute group | SpaceControl | MultiGen | Winner |
+|---|---|---|---|
+| grey stone-textured (legs) | 0.189 | 0.185 | SpaceControl |
+| light oak (armrests) | 0.208 | 0.184 | SpaceControl |
+| navy blue (seat) | 0.271 | 0.269 | SpaceControl |
+| **white (backrest)** | **0.182** | **0.223** | **MultiGen** |
+
+CLIP correctly credits MultiGen on the white backrest (SpaceControl renders it blue) — the exact part flagged in human eval. Tallied across all 5 prompts (19 attribute groups), **MultiGen wins 11 vs. SpaceControl 8**, matching human judgment, even though the grouped means are near-tied.
+
+### Prompt suite — `benchmark/prompts.json` / `prompts_augmented.json`
+
+[benchmark/prompts.json](benchmark/prompts.json) holds **5 holistic appearance prompts per shape**, e.g.:
 
 > *"A rounded chair with blue painted metal legs, red velvet seat cushion, white plastic armrests, and a dark walnut wooden backrest"*
 
-Prompts are varied across different material palettes (wood, metal, velvet, leather, plastic, etc.) and color combinations so that no two prompts for the same shape are similar.
+[benchmark/prompts_augmented.json](benchmark/prompts_augmented.json) adds `local_prompts`: the same prompts decomposed into a per-superquadric phrase, which the per-attribute metric consumes. Use the augmented file for the win-rate metric.
 
 ### Scoring script — `benchmark/clip_score.py`
 
-[benchmark/clip_score.py](benchmark/clip_score.py) computes CLIP ViT-B/32 cosine similarity between rendered PNG images and the benchmark prompts. It averages the score across all camera views for a given (shape, prompt) pair, then reports a mean score per approach.
-
-**Score a single renders directory against one prompt:**
+**Score one renders directory against a single holistic prompt** (quick check, global CLIP only):
 ```bash
 python benchmark/clip_score.py \
     --renders approach1_results/renders/chair_dfeb8d914d8b28ab5bb58f1e92d30bf7/prompt_0/ \
-    --prompt "A rounded chair with blue painted metal legs, red velvet seat cushion, ..."
+    --prompt "A rounded chair with blue painted metal legs, red velvet seat cushion, ..." \
+    --clip-model ViT-L/14 --mask-bg
 ```
 
-**Run the full benchmark across all approaches:**
+**Run the full per-attribute benchmark (headline win-rate)** — pass exactly two approaches to get the pairwise win-rate:
 ```bash
 python benchmark/clip_score.py \
-    --benchmark benchmark/prompts.json \
-    --results-root . \
-    --approaches approach1 approach2 approach5 approach6 \
-    --output benchmark/results.json
+    --benchmark benchmark/prompts_augmented.json \
+    --results-root results \
+    --approaches spacecontrol multigen \
+    --clip-model ViT-L/14 --mask-bg \
+    --output results/clip_scores.json
 ```
+Useful flags: `--shape-id <id>` to score a single shape; omit `--clip-model`/`--mask-bg` to fall back to ViT-B/32 with raw backgrounds.
 
 **Expected renders layout.** Each approach's experiment script should save individual view PNGs under:
 ```
-<approach>_results/renders/<shape_id>/prompt_<i>/view_<j>.png
+<results_root>/<approach>_results/renders/<shape_id>/prompt_<i>/view_<j>.png
 ```
-where `shape_id` matches the `id` field in `prompts.json` and `prompt_i` indexes into the shape's 5-prompt list.
+where `shape_id` matches the `id` field in the prompts file and `prompt_i` indexes into the shape's 5-prompt list.

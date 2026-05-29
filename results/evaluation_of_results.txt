@@ -1,0 +1,32 @@
+This file documents human evaluation of the results after looking at compare.html
+
+airplane_d18592d9615b01bbbc0909d98a1ff2b4
+
+prompt 0: multigen adheres to prompt closely, achieves higher clip score than spacecontrol
+
+prompt 1: multigen adheres to prompt closer than spacecontrol (prompt says to have grey fuselage and black empennage but space control has yellow on the fuselage and empennage; multigen does not have a black empennage but does have a darker grey empennage) but spacecontrol has a higher clip score
+
+prompt 2: multigen adheres to prompt closer than spacecontrol (prompt says ro have silver fuselage, orange striped wings and dark navy tail), both spacecontrol and multigen fail to generate dark navy tail, but multigen generates orange striped wings successfully. However spacecontrol has a higher clip score
+
+prompt 3: multigen adheres to prompt closely, achieves higher clip score than spacecontrol
+
+prompt 4: multigen adheres to prompt closer than spacecontrol but spacecontrol has a higher clip score
+
+bench_dd97603ce7538c15be5bbc844e6db7e
+
+prompt 4: multigen adheres to prompt closer than spacecontrol but spacecontrol has a higher clip score (prompt says the seat should be bright white and multigen clearly has a brigher white wooden seat than spacecontrol)
+
+bench_f8aa82e7e4c58ce29d31c5ce17cce95d
+
+prompt 0: multigen adheres to prompt closer than spacecontrol but spacecontrol has a higher clip score (prompt says the backrest should be white but spacecontrol generates a green backrest) 
+
+prompt 1: multigen adheres to prompt closer than spacecontrol but spacecontrol has a higher clip score (prompt says the backrest should be dark brown but spacecontrol generates a red backrest) 
+
+prompt 2: multigen adheres to prompt closer than spacecontrol but spacecontrol has a higher clip score (prompt says the seat should be green but spacecontrol generates a brown wooden seat) 
+
+prompt 3: multigen adheres to prompt closer than spacecontrol but spacecontrol has a higher clip score (prompt says the backrest should be white but spacecontrol generates a blue backrest) 
+
+lamp_f228f6cd86162beb659dda512294c744
+
+prompt 1: multigen adheres to prompt closer than spacecontrol but spacecontrol has a higher clip score (prompt says the cone shade should be red and white striped, multigen generated that while spacecontrol is still pure white or pure red)
+
