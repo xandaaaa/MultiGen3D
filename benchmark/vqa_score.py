@@ -1,109 +1,108 @@
-"""VQA-based per-part appearance scoring for the MultiGen3D benchmark.
+"""VQA-based per-part colour scoring for the MultiGen3D benchmark.
 
-Motivation: CLIP cosine similarity cannot distinguish a *miscolored* part from an
-*absent* one (e.g. the bench armrests that neither approach generates still get a
-plausible "light oak armrest" CLIP score). A vision-language model can be asked
-directly whether a part exists and what colour/material it is, which is exactly the
-judgment human evaluation makes.
+For each (shape, prompt, attribute-group) we show all rendered views to a VLM
+and ask a single direct question:
 
-For each (shape, prompt, attribute-group) we ask Qwen2.5-VL, shown all rendered
-views of the object:
-  1. presence : "Is there a <part> in this object?"  -> yes / no
-  2. colour   : "What is the colour and material of the <part>?"  -> short phrase
-  3. match    : does the colour answer match the prompt's intended descriptor?
-                graded by the same model (handles synonyms: navy~dark blue, etc.)
+    "Does the <noun> of this 3D object look <descriptor>? Answer only 'yes' or 'no'."
 
-Per method we report, over the parts the prompt asked for:
-  - present   : fraction of parts the model says actually exist in the render
-  - correct   : fraction of *present* parts whose colour matches the prompt
-  - correct_strict : correct over ALL asked parts (absent part counts as wrong)
+This avoids the fragile three-step presence→colour→match chain. Whether a part
+is structurally present is irrelevant — what matters is whether it *looks* like
+the prompt intended.
+
+Per method we report:
+  - match_rate : fraction of parts whose colour/material matches the descriptor
 
 Usage:
     python benchmark/vqa_score.py \
         --benchmark benchmark/prompts_augmented.json \
         --results-root results \
         --approaches spacecontrol multigen \
-        --shape-id bench_f8aa82e7e4c58ce29d31c5ce17cce95d \
-        --output results/vqa_scores.json
+        --output results/vqa_scores.json \
+        --api-key sk-...
+
+    # or set OPENAI_API_KEY in the environment and omit --api-key
 """
 
 import argparse
+import base64
+import io
 import json
+import os
 import sys
 from collections import Counter
 from pathlib import Path
 from typing import Dict, List
 
-import torch
 from PIL import Image
 
 sys.path.insert(0, str(Path(__file__).parent))
-from clip_score import attribute_key, _PART_TOKENS, find_renders, neutralize_background
+from clip_score import attribute_key, find_renders, neutralize_background
 
-MODEL_ID = "Qwen/Qwen2.5-VL-7B-Instruct"
+DEFAULT_MODEL = "gpt-5.5"
 
-# Tokens that name the part itself (used to label the group / phrase a question).
-_PART_NOUNS = {"leg", "legs", "armrest", "armrests", "rim", "rims", "seat",
-               "backrest", "cushion", "shade", "base", "frame"}
+_PART_NOUNS = {
+    # furniture
+    "leg", "legs", "armrest", "armrests", "rim", "rims", "seat", "backrest",
+    "cushion", "shade", "base", "frame", "drawer", "drawers", "door", "doors",
+    "handle", "handles", "shelf", "shelves", "panel", "knob", "rail",
+    # airplane / vehicle
+    "fuselage", "wing", "wings", "tail", "empennage", "cockpit", "nose",
+    "engine", "engines", "fin", "rudder", "canopy", "body",
+}
 
 
 def part_noun(phrases: List[str]) -> str:
-    """Most common part-noun across a group's phrases, e.g. 'leg' or 'backrest'."""
+    """Most common part-noun in the group's phrases (e.g. 'leg', 'fuselage').
+    Falls back to the full first phrase when no known noun is found."""
     nouns = [w for ph in phrases for w in ph.lower().split() if w in _PART_NOUNS]
     if not nouns:
-        return "part"
+        return phrases[0].lower() if phrases else "part"
     noun = Counter(nouns).most_common(1)[0][0]
     return noun.rstrip("s") if noun.endswith("s") else noun
 
 
-def load_vlm():
-    from transformers import Qwen2_5_VLForConditionalGeneration, AutoProcessor
-    device = "cuda" if torch.cuda.is_available() else "cpu"
-    dtype = torch.bfloat16 if device == "cuda" else torch.float32
-    model = Qwen2_5_VLForConditionalGeneration.from_pretrained(
-        MODEL_ID, torch_dtype=dtype, device_map="auto" if device == "cuda" else None,
-    ).eval()
-    processor = AutoProcessor.from_pretrained(MODEL_ID)
-    return model, processor, device
+def _encode_image(img: Image.Image) -> str:
+    buf = io.BytesIO()
+    img.save(buf, format="PNG")
+    return base64.b64encode(buf.getvalue()).decode("utf-8")
 
 
-@torch.no_grad()
-def ask(model, processor, images: List[Image.Image], question: str,
-        max_new_tokens: int = 40) -> str:
-    content = [{"type": "image", "image": im} for im in images]
+def load_client(api_key: str = None):
+    from openai import OpenAI
+    key = api_key or os.environ.get("OPENAI_API_KEY")
+    if not key:
+        sys.exit("OpenAI API key required: pass --api-key or set OPENAI_API_KEY")
+    return OpenAI(api_key=key)
+
+
+def ask(client, model: str, images: List[Image.Image], question: str) -> str:
+    content = [
+        {"type": "image_url",
+         "image_url": {"url": f"data:image/png;base64,{_encode_image(im)}", "detail": "low"}}
+        for im in images
+    ]
     content.append({"type": "text", "text": question})
-    messages = [{"role": "user", "content": content}]
-    text = processor.apply_chat_template(messages, tokenize=False,
-                                         add_generation_prompt=True)
-    inputs = processor(text=[text], images=images, return_tensors="pt").to(model.device)
-    out = model.generate(**inputs, max_new_tokens=max_new_tokens, do_sample=False)
-    trimmed = out[:, inputs.input_ids.shape[1]:]
-    return processor.batch_decode(trimmed, skip_special_tokens=True)[0].strip()
+    resp = client.chat.completions.create(
+        model=model,
+        messages=[{"role": "user", "content": content}],
+    )
+    return (resp.choices[0].message.content or "").strip()
 
 
 def yes(answer: str) -> bool:
     return answer.strip().lower().startswith(("yes", "y "))
 
 
-def score_group(model, processor, images, noun: str, descriptor: str) -> Dict:
-    present_ans = ask(model, processor, images,
-                      f"Look at this 3D object. Is there a {noun} present in it? "
-                      f"Answer only 'yes' or 'no'.", max_new_tokens=5)
-    present = yes(present_ans)
-    if not present:
-        return {"present": False, "color_answer": None, "match": False,
-                "present_answer": present_ans}
-
-    color_ans = ask(model, processor, images,
-                    f"What is the colour and material of the {noun} of this object? "
-                    f"Answer with a short phrase only.", max_new_tokens=30)
-    match_ans = ask(model, processor, images,
-                    f"The {noun} is supposed to be '{descriptor}'. "
-                    f"You described it as '{color_ans}'. "
-                    f"Do these describe the same colour and material? "
-                    f"Answer only 'yes' or 'no'.", max_new_tokens=5)
-    return {"present": True, "color_answer": color_ans,
-            "match": yes(match_ans), "present_answer": present_ans}
+def score_group(client, model: str, images: List[Image.Image],
+                noun: str, descriptor: str) -> Dict:
+    """Ask the VLM directly whether the part matches the intended colour/material."""
+    question = (
+        f"These are rendered views of a 3D object. "
+        f"Does the {noun} look {descriptor}? "
+        f"Answer only 'yes' or 'no'."
+    )
+    answer = ask(client, model, images, question)
+    return {"match": yes(answer), "answer": answer}
 
 
 def run(args):
@@ -114,8 +113,9 @@ def run(args):
         if not shapes:
             sys.exit(f"No shape with id {args.shape_id}")
 
-    model, processor, device = load_vlm()
-    print(f"Loaded {MODEL_ID} on {device}")
+    client = load_client(args.api_key)
+    model = args.vlm_model
+    print(f"Using model: {model}")
 
     results = {}
     for approach in args.approaches:
@@ -133,7 +133,6 @@ def run(args):
                 images = [neutralize_background(Image.open(p)) for p in paths]
                 local = local_all[pi] if pi < len(local_all) else {}
 
-                # group phrases by colour/material descriptor
                 groups: Dict[str, List[str]] = {}
                 for ph in local.values():
                     groups.setdefault(attribute_key(ph), []).append(ph)
@@ -142,57 +141,53 @@ def run(args):
                 group_results = {}
                 for desc, phrases in groups.items():
                     noun = part_noun(phrases)
-                    g = score_group(model, processor, images, noun, desc)
+                    g = score_group(client, model, images, noun, desc)
                     group_results[desc] = {**g, "noun": noun}
-                    tag = ("ABSENT" if not g["present"]
-                           else ("MATCH" if g["match"] else "wrong"))
-                    ca = g["color_answer"] or ""
-                    print(f"     {desc:22s} ({noun:8s}) -> {tag:6s}  \"{ca}\"")
+                    tag = "MATCH" if g["match"] else "wrong"
+                    print(f"     {desc:30s} ({noun:10s}) -> {tag:6s}  [{g['answer']}]")
 
                 records.append({"shape_id": shape_id, "prompt_idx": pi,
                                 "prompt": prompt, "groups": group_results})
         results[approach] = records
 
-    # ---- summary ----
+    # Summary
     print(f"\n\n{'='*70}\n  VQA SUMMARY\n{'='*70}")
-    print(f"  {'Approach':<16} {'present':>8} {'correct':>9} {'strict':>8} {'parts':>6}")
-    print(f"  {'-'*50}")
+    print(f"  {'Approach':<16} {'match_rate':>10} {'parts':>6}")
+    print(f"  {'-'*35}")
     summary = {}
     for approach, recs in results.items():
-        total = present = correct = 0
+        total = correct = 0
         for r in recs:
             for desc, g in r["groups"].items():
                 total += 1
-                if g["present"]:
-                    present += 1
-                    if g["match"]:
-                        correct += 1
+                if g["match"]:
+                    correct += 1
         s = {
             "parts": total,
-            "present_rate": present / total if total else None,
-            "correct_of_present": correct / present if present else None,
-            "correct_strict": correct / total if total else None,
+            "match_rate": correct / total if total else None,
         }
         summary[approach] = s
-        pr = f"{s['present_rate']:.0%}" if s["present_rate"] is not None else "n/a"
-        co = f"{s['correct_of_present']:.0%}" if s["correct_of_present"] is not None else "n/a"
-        st = f"{s['correct_strict']:.0%}" if s["correct_strict"] is not None else "n/a"
-        print(f"  {approach:<16} {pr:>8} {co:>9} {st:>8} {total:>6}")
+        mr = f"{s['match_rate']:.0%}" if s["match_rate"] is not None else "n/a"
+        print(f"  {approach:<16} {mr:>10} {total:>6}")
 
     if args.output:
-        out = {"model": MODEL_ID, "summary": summary, "records": results}
+        out = {"model": model, "summary": summary, "records": results}
         with open(args.output, "w") as f:
             json.dump(out, f, indent=2)
         print(f"\n  Written to {args.output}")
 
 
 def main():
-    ap = argparse.ArgumentParser(description="VQA per-part scoring (Qwen2.5-VL)")
+    ap = argparse.ArgumentParser(description="VQA per-part colour scoring via OpenAI API")
     ap.add_argument("--benchmark", default="benchmark/prompts_augmented.json")
     ap.add_argument("--results-root", default="results")
     ap.add_argument("--approaches", nargs="+", default=["spacecontrol", "multigen"])
     ap.add_argument("--shape-id", default=None)
     ap.add_argument("--output", default=None)
+    ap.add_argument("--api-key", default=None,
+                    help="OpenAI API key (falls back to OPENAI_API_KEY env var)")
+    ap.add_argument("--vlm-model", default=DEFAULT_MODEL,
+                    help=f"OpenAI model to use (default: {DEFAULT_MODEL})")
     run(ap.parse_args())
 
 

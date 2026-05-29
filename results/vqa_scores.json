@@ -1,0 +1,5259 @@
+{
+  "model": "gpt-5.5",
+  "summary": {
+    "spacecontrol": {
+      "parts": 384,
+      "match_rate": 0.6119791666666666
+    },
+    "multigen": {
+      "parts": 384,
+      "match_rate": 0.7473958333333334
+    }
+  },
+  "records": {
+    "spacecontrol": [
+      {
+        "shape_id": "airplane_d18592d9615b01bbbc0909d98a1ff2b4",
+        "prompt_idx": 0,
+        "prompt": "A commercial airliner with a white fuselage, red-tipped wings, and a blue tail section",
+        "groups": {
+          "red-tipped metal wing": {
+            "match": false,
+            "answer": "no",
+            "noun": "wing"
+          },
+          "blue painted metal tail section": {
+            "match": false,
+            "answer": "no",
+            "noun": "tail"
+          },
+          "white painted metal fuselage": {
+            "match": true,
+            "answer": "yes",
+            "noun": "fuselage"
+          }
+        }
+      },
+      {
+        "shape_id": "airplane_d18592d9615b01bbbc0909d98a1ff2b4",
+        "prompt_idx": 1,
+        "prompt": "A commercial airliner with a matte grey fuselage, yellow wings, and a black empennage",
+        "groups": {
+          "yellow painted metal wing": {
+            "match": true,
+            "answer": "yes",
+            "noun": "wing"
+          },
+          "black painted metal empennage": {
+            "match": true,
+            "answer": "yes",
+            "noun": "empennage"
+          },
+          "matte grey painted fuselage": {
+            "match": true,
+            "answer": "yes",
+            "noun": "fuselage"
+          }
+        }
+      },
+      {
+        "shape_id": "airplane_d18592d9615b01bbbc0909d98a1ff2b4",
+        "prompt_idx": 2,
+        "prompt": "A commercial airliner with a silver metallic fuselage, orange striped wings, and a dark navy tail",
+        "groups": {
+          "orange striped wing": {
+            "match": true,
+            "answer": "yes",
+            "noun": "wing"
+          },
+          "dark navy tail": {
+            "match": false,
+            "answer": "no",
+            "noun": "tail"
+          },
+          "silver metallic fuselage": {
+            "match": true,
+            "answer": "yes",
+            "noun": "fuselage"
+          }
+        }
+      },
+      {
+        "shape_id": "airplane_d18592d9615b01bbbc0909d98a1ff2b4",
+        "prompt_idx": 3,
+        "prompt": "A commercial airliner with a white fuselage, green wings, and a red tail section with gold accents",
+        "groups": {
+          "green painted metal wing": {
+            "match": false,
+            "answer": "no",
+            "noun": "wing"
+          },
+          "red tail section with gold accents": {
+            "match": false,
+            "answer": "no",
+            "noun": "tail"
+          },
+          "white painted metal fuselage": {
+            "match": true,
+            "answer": "yes",
+            "noun": "fuselage"
+          }
+        }
+      },
+      {
+        "shape_id": "airplane_d18592d9615b01bbbc0909d98a1ff2b4",
+        "prompt_idx": 4,
+        "prompt": "A commercial airliner with a glossy cream fuselage, sky-blue wings, and a burgundy tail section",
+        "groups": {
+          "sky-blue painted wing": {
+            "match": false,
+            "answer": "no",
+            "noun": "wing"
+          },
+          "burgundy painted tail section": {
+            "match": false,
+            "answer": "no",
+            "noun": "tail"
+          },
+          "glossy cream fuselage": {
+            "match": true,
+            "answer": "yes",
+            "noun": "fuselage"
+          }
+        }
+      },
+      {
+        "shape_id": "airplane_f44c0e1e55a3469494f3355d9c061b5a",
+        "prompt_idx": 0,
+        "prompt": "A fighter jet with a matte black fuselage and camouflage green wings",
+        "groups": {
+          "matte black fuselage tail": {
+            "match": false,
+            "answer": "no",
+            "noun": "fuselage"
+          },
+          "camouflage green wings": {
+            "match": true,
+            "answer": "yes",
+            "noun": "wing"
+          }
+        }
+      },
+      {
+        "shape_id": "airplane_f44c0e1e55a3469494f3355d9c061b5a",
+        "prompt_idx": 1,
+        "prompt": "A fighter jet with a glossy dark grey fuselage and bright orange wings",
+        "groups": {
+          "glossy dark grey fuselage": {
+            "match": true,
+            "answer": "yes",
+            "noun": "fuselage"
+          },
+          "bright orange wings": {
+            "match": true,
+            "answer": "yes",
+            "noun": "wing"
+          }
+        }
+      },
+      {
+        "shape_id": "airplane_f44c0e1e55a3469494f3355d9c061b5a",
+        "prompt_idx": 2,
+        "prompt": "A fighter jet with a sand-colored desert camo fuselage and dark brown wings",
+        "groups": {
+          "sand-colored desert camo fuselage": {
+            "match": true,
+            "answer": "yes",
+            "noun": "fuselage"
+          },
+          "dark brown wings": {
+            "match": false,
+            "answer": "no",
+            "noun": "wing"
+          }
+        }
+      },
+      {
+        "shape_id": "airplane_f44c0e1e55a3469494f3355d9c061b5a",
+        "prompt_idx": 3,
+        "prompt": "A fighter jet with a blue and white fuselage and silver metallic wings",
+        "groups": {
+          "blue white fuselage": {
+            "match": true,
+            "answer": "yes",
+            "noun": "fuselage"
+          },
+          "silver metallic wings": {
+            "match": false,
+            "answer": "no",
+            "noun": "wing"
+          }
+        }
+      },
+      {
+        "shape_id": "airplane_f44c0e1e55a3469494f3355d9c061b5a",
+        "prompt_idx": 4,
+        "prompt": "A fighter jet with a red fuselage and white wings with black trim",
+        "groups": {
+          "red fuselage": {
+            "match": true,
+            "answer": "yes",
+            "noun": "fuselage"
+          },
+          "white wings with black trim": {
+            "match": false,
+            "answer": "no",
+            "noun": "wing"
+          }
+        }
+      },
+      {
+        "shape_id": "bench_dd97603ce7538c15be5bbc844e6db7e",
+        "prompt_idx": 0,
+        "prompt": "A park bench with black cast iron legs and rims and a natural oak wooden seat",
+        "groups": {
+          "black cast iron": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "natural oak wooden": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          }
+        }
+      },
+      {
+        "shape_id": "bench_dd97603ce7538c15be5bbc844e6db7e",
+        "prompt_idx": 1,
+        "prompt": "A park bench with white painted metal legs and rims and a dark walnut wooden seat",
+        "groups": {
+          "white painted metal": {
+            "match": false,
+            "answer": "no",
+            "noun": "leg"
+          },
+          "dark walnut wooden": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          }
+        }
+      },
+      {
+        "shape_id": "bench_dd97603ce7538c15be5bbc844e6db7e",
+        "prompt_idx": 2,
+        "prompt": "A park bench with rusty brown iron legs and rims and a teak wooden seat with green moss",
+        "groups": {
+          "rusty brown iron": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "teak wooden with moss": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          }
+        }
+      },
+      {
+        "shape_id": "bench_dd97603ce7538c15be5bbc844e6db7e",
+        "prompt_idx": 3,
+        "prompt": "A park bench with gold metal legs and rims and a polished mahogany seat",
+        "groups": {
+          "gold metal": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "polished mahogany": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          }
+        }
+      },
+      {
+        "shape_id": "bench_dd97603ce7538c15be5bbc844e6db7e",
+        "prompt_idx": 4,
+        "prompt": "A park bench with concrete grey legs and rims and a bright white painted wooden seat",
+        "groups": {
+          "concrete grey": {
+            "match": false,
+            "answer": "no",
+            "noun": "leg"
+          },
+          "bright white wooden": {
+            "match": false,
+            "answer": "no",
+            "noun": "seat"
+          }
+        }
+      },
+      {
+        "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+        "prompt_idx": 0,
+        "prompt": "A garden bench with black wrought iron legs, green painted armrests, a natural pine seat, and a white backrest",
+        "groups": {
+          "black wrought iron": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "green painted": {
+            "match": true,
+            "answer": "yes",
+            "noun": "armrest"
+          },
+          "natural pine": {
+            "match": false,
+            "answer": "no",
+            "noun": "seat"
+          },
+          "white": {
+            "match": false,
+            "answer": "no",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+        "prompt_idx": 1,
+        "prompt": "A garden bench with brown wooden legs, cream-colored armrests, a red-painted seat, and a dark brown backrest",
+        "groups": {
+          "brown wooden": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "cream-colored": {
+            "match": false,
+            "answer": "no",
+            "noun": "armrest"
+          },
+          "red-painted": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          },
+          "dark brown": {
+            "match": false,
+            "answer": "no",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+        "prompt_idx": 2,
+        "prompt": "A garden bench with brass-finished legs, walnut armrests, a forest green seat, and a matching green backrest",
+        "groups": {
+          "brass-finished": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "walnut": {
+            "match": false,
+            "answer": "no",
+            "noun": "armrest"
+          },
+          "forest green": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          }
+        }
+      },
+      {
+        "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+        "prompt_idx": 3,
+        "prompt": "A garden bench with grey stone-textured legs, light oak armrests, a navy blue cushioned seat, and a white backrest",
+        "groups": {
+          "grey stone-textured": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "light oak": {
+            "match": false,
+            "answer": "no",
+            "noun": "armrest"
+          },
+          "navy blue": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          },
+          "white": {
+            "match": false,
+            "answer": "no",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+        "prompt_idx": 4,
+        "prompt": "A garden bench with copper-patina legs, teak armrests, a charcoal grey seat, and a beige backrest",
+        "groups": {
+          "copper-patina": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "teak": {
+            "match": false,
+            "answer": "no",
+            "noun": "armrest"
+          },
+          "charcoal grey": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          },
+          "beige": {
+            "match": false,
+            "answer": "no",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "cabinet_bbbd4de3e7ab25ad80d6227ff9b21190",
+        "prompt_idx": 0,
+        "prompt": "A tall cabinet with white painted side panels, a glossy red front door, and a light oak top panel",
+        "groups": {
+          "white painted side panel": {
+            "match": false,
+            "answer": "no",
+            "noun": "panel"
+          },
+          "glossy red door": {
+            "match": true,
+            "answer": "yes",
+            "noun": "door"
+          },
+          "light oak panel": {
+            "match": false,
+            "answer": "no",
+            "noun": "panel"
+          },
+          "neutral panel": {
+            "match": false,
+            "answer": "no",
+            "noun": "panel"
+          }
+        }
+      },
+      {
+        "shape_id": "cabinet_bbbd4de3e7ab25ad80d6227ff9b21190",
+        "prompt_idx": 1,
+        "prompt": "A tall cabinet with dark walnut side panels, a glass-fronted door, and a black top panel",
+        "groups": {
+          "dark walnut side panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          },
+          "glass-fronted door": {
+            "match": true,
+            "answer": "yes",
+            "noun": "door"
+          },
+          "black panel": {
+            "match": false,
+            "answer": "no",
+            "noun": "panel"
+          },
+          "neutral panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          }
+        }
+      },
+      {
+        "shape_id": "cabinet_bbbd4de3e7ab25ad80d6227ff9b21190",
+        "prompt_idx": 2,
+        "prompt": "A tall cabinet with grey metal side panels, a navy blue front door, and a silver top panel",
+        "groups": {
+          "grey metal side panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          },
+          "navy blue door": {
+            "match": true,
+            "answer": "yes",
+            "noun": "door"
+          },
+          "silver panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          },
+          "grey metal panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          }
+        }
+      },
+      {
+        "shape_id": "cabinet_bbbd4de3e7ab25ad80d6227ff9b21190",
+        "prompt_idx": 3,
+        "prompt": "A tall cabinet with pine wood side panels, a bright yellow front door, and a matching pine top",
+        "groups": {
+          "pine wood side panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          },
+          "bright yellow panel": {
+            "match": false,
+            "answer": "no",
+            "noun": "panel"
+          },
+          "pine wood panel": {
+            "match": false,
+            "answer": "no",
+            "noun": "panel"
+          },
+          "neutral panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          }
+        }
+      },
+      {
+        "shape_id": "cabinet_bbbd4de3e7ab25ad80d6227ff9b21190",
+        "prompt_idx": 4,
+        "prompt": "A tall cabinet with matte black side panels, a mirrored front door, and a white marble top panel",
+        "groups": {
+          "matte black side panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          },
+          "mirrored door": {
+            "match": true,
+            "answer": "yes",
+            "noun": "door"
+          },
+          "white marble panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          },
+          "neutral panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          }
+        }
+      },
+      {
+        "shape_id": "cabinet_df55c6665781293cbe53b3b9f1274310",
+        "prompt_idx": 0,
+        "prompt": "A rectangular storage cabinet with a white painted main body and a dark walnut wood top panel",
+        "groups": {
+          "white painted main body": {
+            "match": true,
+            "answer": "yes",
+            "noun": "body"
+          },
+          "dark walnut wood panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          }
+        }
+      },
+      {
+        "shape_id": "cabinet_df55c6665781293cbe53b3b9f1274310",
+        "prompt_idx": 1,
+        "prompt": "A rectangular storage cabinet with a brushed steel main body and a black granite top panel",
+        "groups": {
+          "brushed steel main body": {
+            "match": true,
+            "answer": "yes",
+            "noun": "body"
+          },
+          "black granite panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          }
+        }
+      },
+      {
+        "shape_id": "cabinet_df55c6665781293cbe53b3b9f1274310",
+        "prompt_idx": 2,
+        "prompt": "A rectangular storage cabinet with a navy blue main body and a light oak top panel",
+        "groups": {
+          "navy blue main body": {
+            "match": true,
+            "answer": "yes",
+            "noun": "body"
+          },
+          "light oak panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          }
+        }
+      },
+      {
+        "shape_id": "cabinet_df55c6665781293cbe53b3b9f1274310",
+        "prompt_idx": 3,
+        "prompt": "A rectangular storage cabinet with a terracotta red main body and a white marble top panel",
+        "groups": {
+          "terracotta red storage compartment": {
+            "match": true,
+            "answer": "yes",
+            "noun": "terracotta red storage compartment"
+          },
+          "white marble panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          }
+        }
+      },
+      {
+        "shape_id": "cabinet_df55c6665781293cbe53b3b9f1274310",
+        "prompt_idx": 4,
+        "prompt": "A rectangular storage cabinet with a forest green main body and a brass-finished top panel",
+        "groups": {
+          "forest green storage compartment": {
+            "match": true,
+            "answer": "yes",
+            "noun": "forest green storage compartment"
+          },
+          "brass-finished panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          }
+        }
+      },
+      {
+        "shape_id": "car_d287b02b4679c70ab7902335d9dd94a2",
+        "prompt_idx": 0,
+        "prompt": "A pickup truck with a red cabin, black fenders on the truck bed, silver wheels, a white hood, and a grey tailgate and floor",
+        "groups": {
+          "red painted metal cabin": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a red painted metal cabin"
+          },
+          "black painted metal fender": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a black painted metal fender"
+          },
+          "silver metal wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a silver metal wheel"
+          },
+          "white painted metal hood": {
+            "match": false,
+            "answer": "no",
+            "noun": "a white painted metal hood"
+          },
+          "grey painted metal tailgate": {
+            "match": false,
+            "answer": "no",
+            "noun": "a grey painted metal tailgate"
+          },
+          "grey painted metal floor panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          }
+        }
+      },
+      {
+        "shape_id": "car_d287b02b4679c70ab7902335d9dd94a2",
+        "prompt_idx": 1,
+        "prompt": "A pickup truck with a navy blue cabin, rust-orange fenders, black wheels, a matching blue hood, and a silver tailgate",
+        "groups": {
+          "navy blue cabin": {
+            "match": true,
+            "answer": "yes",
+            "noun": "navy blue cabin"
+          },
+          "rust-orange fender": {
+            "match": true,
+            "answer": "yes",
+            "noun": "rust-orange fender"
+          },
+          "black wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "black wheel"
+          },
+          "matching blue hood": {
+            "match": true,
+            "answer": "yes",
+            "noun": "matching blue hood"
+          },
+          "silver tailgate": {
+            "match": false,
+            "answer": "no",
+            "noun": "silver tailgate"
+          },
+          "neutral metal floor panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          }
+        }
+      },
+      {
+        "shape_id": "car_d287b02b4679c70ab7902335d9dd94a2",
+        "prompt_idx": 2,
+        "prompt": "A pickup truck with a sandy beige cabin, dark green fenders, chrome wheels, a cream hood, and a brown wooden truck bed floor",
+        "groups": {
+          "sandy beige cabin": {
+            "match": true,
+            "answer": "yes",
+            "noun": "sandy beige cabin"
+          },
+          "dark green fender": {
+            "match": false,
+            "answer": "no",
+            "noun": "dark green left fender"
+          },
+          "chrome front-left wheel": {
+            "match": false,
+            "answer": "no",
+            "noun": "chrome front-left wheel"
+          },
+          "cream hood engine compartment": {
+            "match": true,
+            "answer": "yes",
+            "noun": "engine"
+          },
+          "chrome front-right wheel": {
+            "match": false,
+            "answer": "no",
+            "noun": "chrome front-right wheel"
+          },
+          "brown wooden tailgate": {
+            "match": false,
+            "answer": "no",
+            "noun": "brown wooden tailgate"
+          },
+          "chrome rear-right wheel": {
+            "match": false,
+            "answer": "no",
+            "noun": "chrome rear-right wheel"
+          },
+          "chrome rear-left wheel": {
+            "match": false,
+            "answer": "no",
+            "noun": "chrome rear-left wheel"
+          },
+          "brown wooden floor panel": {
+            "match": false,
+            "answer": "no",
+            "noun": "panel"
+          }
+        }
+      },
+      {
+        "shape_id": "car_d287b02b4679c70ab7902335d9dd94a2",
+        "prompt_idx": 3,
+        "prompt": "A pickup truck with a matte black cabin, gunmetal grey fenders, red wheels, a black hood, and a silver tailgate",
+        "groups": {
+          "matte black cabin": {
+            "match": true,
+            "answer": "yes",
+            "noun": "matte black cabin"
+          },
+          "gunmetal grey fender": {
+            "match": true,
+            "answer": "yes",
+            "noun": "gunmetal grey left fender"
+          },
+          "red front-left wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "red front-left wheel"
+          },
+          "black hood": {
+            "match": true,
+            "answer": "yes",
+            "noun": "black hood"
+          },
+          "red front-right wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "red front-right wheel"
+          },
+          "silver tailgate": {
+            "match": false,
+            "answer": "no",
+            "noun": "silver tailgate"
+          },
+          "red rear-right wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "red rear-right wheel"
+          },
+          "red rear-left wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "red rear-left wheel"
+          },
+          "neutral metal floor panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          }
+        }
+      },
+      {
+        "shape_id": "car_d287b02b4679c70ab7902335d9dd94a2",
+        "prompt_idx": 4,
+        "prompt": "A pickup truck with a forest green cabin, olive drab fenders, white wheels, a green hood, and a black steel truck bed floor",
+        "groups": {
+          "forest green cabin": {
+            "match": true,
+            "answer": "yes",
+            "noun": "forest green cabin"
+          },
+          "olive drab fender": {
+            "match": true,
+            "answer": "yes",
+            "noun": "olive drab fender"
+          },
+          "white wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "white wheel"
+          },
+          "green hood": {
+            "match": true,
+            "answer": "yes",
+            "noun": "green hood"
+          },
+          "black steel tailgate": {
+            "match": false,
+            "answer": "no",
+            "noun": "black steel tailgate"
+          },
+          "black steel floor panel": {
+            "match": false,
+            "answer": "no",
+            "noun": "panel"
+          }
+        }
+      },
+      {
+        "shape_id": "car_f9cad36ae25540a0bb20fd1bc4860856",
+        "prompt_idx": 0,
+        "prompt": "A four-door sedan with a white cabin, black hood, and bright red wheels",
+        "groups": {
+          "bright red wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a bright red wheel"
+          },
+          "black hood": {
+            "match": false,
+            "answer": "no",
+            "noun": "a black hood"
+          },
+          "white cabin": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a white cabin"
+          }
+        }
+      },
+      {
+        "shape_id": "car_f9cad36ae25540a0bb20fd1bc4860856",
+        "prompt_idx": 1,
+        "prompt": "A four-door sedan with a silver metallic cabin, dark blue hood, and gold chrome wheels",
+        "groups": {
+          "gold chrome rear-left wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a gold chrome rear-left wheel"
+          },
+          "gold chrome front-left wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a gold chrome front-left wheel"
+          },
+          "dark blue hood": {
+            "match": false,
+            "answer": "no",
+            "noun": "a dark blue hood"
+          },
+          "gold chrome front-right wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a gold chrome front-right wheel"
+          },
+          "gold chrome rear-right wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a gold chrome rear-right wheel"
+          },
+          "silver metallic cabin": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a silver metallic cabin"
+          }
+        }
+      },
+      {
+        "shape_id": "car_f9cad36ae25540a0bb20fd1bc4860856",
+        "prompt_idx": 2,
+        "prompt": "A four-door sedan with a jet black cabin, red hood, and chrome silver wheels",
+        "groups": {
+          "chrome silver rear-left wheel": {
+            "match": false,
+            "answer": "no",
+            "noun": "chrome silver rear-left wheel"
+          },
+          "chrome silver front-left wheel": {
+            "match": false,
+            "answer": "no",
+            "noun": "chrome silver front-left wheel"
+          },
+          "red hood engine compartment": {
+            "match": false,
+            "answer": "no",
+            "noun": "engine"
+          },
+          "chrome silver front-right wheel": {
+            "match": false,
+            "answer": "no",
+            "noun": "chrome silver front-right wheel"
+          },
+          "chrome silver rear-right wheel": {
+            "match": false,
+            "answer": "no",
+            "noun": "chrome silver rear-right wheel"
+          },
+          "jet black cabin": {
+            "match": false,
+            "answer": "no",
+            "noun": "jet black cabin"
+          }
+        }
+      },
+      {
+        "shape_id": "car_f9cad36ae25540a0bb20fd1bc4860856",
+        "prompt_idx": 3,
+        "prompt": "A four-door sedan with a pearl white cabin, yellow hood, and matte black wheels",
+        "groups": {
+          "matte black rear-left wheel": {
+            "match": false,
+            "answer": "no",
+            "noun": "matte black rear-left wheel"
+          },
+          "matte black front-left wheel": {
+            "match": false,
+            "answer": "no",
+            "noun": "matte black front-left wheel"
+          },
+          "yellow hood": {
+            "match": true,
+            "answer": "yes",
+            "noun": "yellow hood"
+          },
+          "matte black front-right wheel": {
+            "match": false,
+            "answer": "no",
+            "noun": "matte black front-right wheel"
+          },
+          "matte black rear-right wheel": {
+            "match": false,
+            "answer": "no",
+            "noun": "matte black rear-right wheel"
+          },
+          "pearl white cabin": {
+            "match": true,
+            "answer": "yes",
+            "noun": "pearl white cabin"
+          }
+        }
+      },
+      {
+        "shape_id": "car_f9cad36ae25540a0bb20fd1bc4860856",
+        "prompt_idx": 4,
+        "prompt": "A four-door sedan with a deep burgundy cabin, charcoal grey hood, and rose gold wheels",
+        "groups": {
+          "rose gold rear-left wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "rose gold rear-left wheel"
+          },
+          "rose gold front-left wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "rose gold front-left wheel"
+          },
+          "charcoal grey hood": {
+            "match": false,
+            "answer": "no",
+            "noun": "charcoal grey hood"
+          },
+          "rose gold front-right wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "rose gold front-right wheel"
+          },
+          "rose gold rear-right wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "rose gold rear-right wheel"
+          },
+          "deep burgundy cabin": {
+            "match": true,
+            "answer": "yes",
+            "noun": "deep burgundy cabin"
+          }
+        }
+      },
+      {
+        "shape_id": "chair_dfeb8d914d8b28ab5bb58f1e92d30bf7",
+        "prompt_idx": 0,
+        "prompt": "A rounded chair with blue painted metal legs, red velvet seat cushion, white plastic armrests, and a dark walnut wooden backrest",
+        "groups": {
+          "blue painted metal rear-left": {
+            "match": false,
+            "answer": "no",
+            "noun": "leg"
+          },
+          "blue painted metal front-left": {
+            "match": false,
+            "answer": "no",
+            "noun": "leg"
+          },
+          "white plastic": {
+            "match": false,
+            "answer": "no",
+            "noun": "armrest"
+          },
+          "blue painted metal front-right": {
+            "match": false,
+            "answer": "no",
+            "noun": "leg"
+          },
+          "blue painted metal rear-right": {
+            "match": false,
+            "answer": "no",
+            "noun": "leg"
+          },
+          "red velvet": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          },
+          "dark walnut wooden": {
+            "match": false,
+            "answer": "no",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "chair_dfeb8d914d8b28ab5bb58f1e92d30bf7",
+        "prompt_idx": 1,
+        "prompt": "A rounded chair with natural oak legs, a grey wool seat, black rubber armrests, and a woven rattan backrest",
+        "groups": {
+          "natural oak rear-left": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "natural oak front-left": {
+            "match": false,
+            "answer": "no",
+            "noun": "leg"
+          },
+          "black rubber": {
+            "match": true,
+            "answer": "yes",
+            "noun": "armrest"
+          },
+          "natural oak front-right": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "natural oak rear-right": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "grey wool": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          },
+          "woven rattan": {
+            "match": true,
+            "answer": "yes",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "chair_dfeb8d914d8b28ab5bb58f1e92d30bf7",
+        "prompt_idx": 2,
+        "prompt": "A rounded chair with gold-finished legs, a pink linen seat, transparent acrylic armrests, and a padded cream backrest",
+        "groups": {
+          "gold-finished rear-left": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "gold-finished front-left": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "transparent acrylic": {
+            "match": false,
+            "answer": "no",
+            "noun": "armrest"
+          },
+          "gold-finished front-right": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "gold-finished rear-right": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "pink linen": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          },
+          "padded cream": {
+            "match": false,
+            "answer": "no",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "chair_dfeb8d914d8b28ab5bb58f1e92d30bf7",
+        "prompt_idx": 3,
+        "prompt": "A rounded chair with black steel legs, a green leather seat, brass armrests, and a light beige upholstered backrest",
+        "groups": {
+          "black steel rear-left": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "black steel front-left": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "brass": {
+            "match": false,
+            "answer": "no",
+            "noun": "armrest"
+          },
+          "black steel front-right": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "black steel rear-right": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "green leather": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          },
+          "light beige upholstered": {
+            "match": false,
+            "answer": "no",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "chair_dfeb8d914d8b28ab5bb58f1e92d30bf7",
+        "prompt_idx": 4,
+        "prompt": "A rounded chair with white lacquered legs, a navy blue canvas seat, birch wood armrests, and a mesh backrest",
+        "groups": {
+          "white lacquered rear-left": {
+            "match": false,
+            "answer": "no",
+            "noun": "leg"
+          },
+          "white lacquered front-left": {
+            "match": false,
+            "answer": "no",
+            "noun": "leg"
+          },
+          "birch wood": {
+            "match": false,
+            "answer": "no",
+            "noun": "armrest"
+          },
+          "white lacquered front-right": {
+            "match": false,
+            "answer": "no",
+            "noun": "leg"
+          },
+          "white lacquered rear-right": {
+            "match": false,
+            "answer": "no",
+            "noun": "leg"
+          },
+          "navy blue canvas": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          },
+          "mesh": {
+            "match": false,
+            "answer": "no",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "chair_f1f670ac53799c18492d9da2668ec34c",
+        "prompt_idx": 0,
+        "prompt": "An office chair with a chrome pedestal, black rubber wheels, black leather seat and backrest, and grey plastic armrests",
+        "groups": {
+          "chrome pedestal gas-lift column": {
+            "match": false,
+            "answer": "no",
+            "noun": "chrome pedestal gas-lift column"
+          },
+          "black rubber caster wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "black rubber caster wheel"
+          },
+          "grey plastic": {
+            "match": false,
+            "answer": "no",
+            "noun": "armrest"
+          },
+          "black leather": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          }
+        }
+      },
+      {
+        "shape_id": "chair_f1f670ac53799c18492d9da2668ec34c",
+        "prompt_idx": 1,
+        "prompt": "An office chair with a matte black pedestal, red wheels, a teal blue fabric seat, a matching blue backrest, and white armrests",
+        "groups": {
+          "matte black metal pedestal": {
+            "match": true,
+            "answer": "yes",
+            "noun": "matte black metal pedestal"
+          },
+          "red plastic caster wheel": {
+            "match": false,
+            "answer": "no",
+            "noun": "red plastic caster wheel"
+          },
+          "white plastic": {
+            "match": false,
+            "answer": "no",
+            "noun": "armrest"
+          },
+          "teal blue fabric": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          }
+        }
+      },
+      {
+        "shape_id": "chair_f1f670ac53799c18492d9da2668ec34c",
+        "prompt_idx": 2,
+        "prompt": "An office chair with a gold metallic pedestal, clear acrylic wheels, a pink velvet seat, a white backrest, and gold armrests",
+        "groups": {
+          "gold metallic pedestal": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a gold metallic pedestal"
+          },
+          "clear acrylic caster wheel": {
+            "match": false,
+            "answer": "no",
+            "noun": "a clear acrylic caster wheel"
+          },
+          "gold metallic": {
+            "match": false,
+            "answer": "no",
+            "noun": "armrest"
+          },
+          "pink velvet": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          },
+          "white": {
+            "match": false,
+            "answer": "no",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "chair_f1f670ac53799c18492d9da2668ec34c",
+        "prompt_idx": 3,
+        "prompt": "An office chair with a silver pedestal, dark grey wheels, a tan leather seat and backrest, and wooden armrests",
+        "groups": {
+          "silver pedestal column": {
+            "match": false,
+            "answer": "no",
+            "noun": "a silver pedestal column"
+          },
+          "dark grey caster wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a dark grey caster wheel"
+          },
+          "wooden": {
+            "match": false,
+            "answer": "no",
+            "noun": "armrest"
+          },
+          "tan leather": {
+            "match": false,
+            "answer": "no",
+            "noun": "seat"
+          }
+        }
+      },
+      {
+        "shape_id": "chair_f1f670ac53799c18492d9da2668ec34c",
+        "prompt_idx": 4,
+        "prompt": "An office chair with a white pedestal, pastel pink wheels, a mint green seat, a white mesh backrest, and light grey armrests",
+        "groups": {
+          "white pedestal column": {
+            "match": false,
+            "answer": "no",
+            "noun": "a white pedestal column"
+          },
+          "pastel pink wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a pastel pink wheel"
+          },
+          "light grey": {
+            "match": false,
+            "answer": "no",
+            "noun": "armrest"
+          },
+          "mint green": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          },
+          "white mesh": {
+            "match": false,
+            "answer": "no",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "lamp_dc6c499e71d04971d22730b0728b2fc9",
+        "prompt_idx": 0,
+        "prompt": "A swing-arm desk lamp with a black marble base, a bright red metal shade, a chrome upper arm, a brass middle arm, and a black lower arm",
+        "groups": {
+          "black marble": {
+            "match": false,
+            "answer": "no",
+            "noun": "base"
+          },
+          "bright red metal": {
+            "match": false,
+            "answer": "no",
+            "noun": "shade"
+          },
+          "chrome arm": {
+            "match": false,
+            "answer": "no",
+            "noun": "a chrome upper arm"
+          },
+          "brass arm": {
+            "match": false,
+            "answer": "no",
+            "noun": "a brass middle arm"
+          },
+          "black arm": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a black lower arm"
+          }
+        }
+      },
+      {
+        "shape_id": "lamp_dc6c499e71d04971d22730b0728b2fc9",
+        "prompt_idx": 1,
+        "prompt": "A swing-arm desk lamp with a white ceramic base, a lime green shade, and silver metallic arm segments throughout",
+        "groups": {
+          "white ceramic": {
+            "match": true,
+            "answer": "yes",
+            "noun": "base"
+          },
+          "lime green": {
+            "match": true,
+            "answer": "yes",
+            "noun": "shade"
+          },
+          "silver metallic arm": {
+            "match": false,
+            "answer": "no",
+            "noun": "a silver metallic upper arm"
+          }
+        }
+      },
+      {
+        "shape_id": "lamp_dc6c499e71d04971d22730b0728b2fc9",
+        "prompt_idx": 2,
+        "prompt": "A swing-arm desk lamp with a wooden base, a matte black cone shade, and copper-finished arm segments",
+        "groups": {
+          "wooden": {
+            "match": false,
+            "answer": "no",
+            "noun": "base"
+          },
+          "matte black cone": {
+            "match": true,
+            "answer": "yes",
+            "noun": "shade"
+          },
+          "copper-finished arm": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a copper-finished upper arm"
+          }
+        }
+      },
+      {
+        "shape_id": "lamp_dc6c499e71d04971d22730b0728b2fc9",
+        "prompt_idx": 3,
+        "prompt": "A swing-arm desk lamp with a grey concrete base, a yellow enamel shade, a white upper arm, a grey middle arm, and a dark lower arm",
+        "groups": {
+          "grey concrete": {
+            "match": true,
+            "answer": "yes",
+            "noun": "base"
+          },
+          "yellow enamel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "shade"
+          },
+          "white arm": {
+            "match": false,
+            "answer": "no",
+            "noun": "a white upper arm"
+          },
+          "grey arm": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a grey middle arm"
+          },
+          "dark arm": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a dark lower arm"
+          }
+        }
+      },
+      {
+        "shape_id": "lamp_dc6c499e71d04971d22730b0728b2fc9",
+        "prompt_idx": 4,
+        "prompt": "A swing-arm desk lamp with a gold-plated base, a navy blue shade, and rose gold arm segments",
+        "groups": {
+          "gold-plated": {
+            "match": true,
+            "answer": "yes",
+            "noun": "base"
+          },
+          "navy blue": {
+            "match": true,
+            "answer": "yes",
+            "noun": "shade"
+          },
+          "rose gold arm": {
+            "match": false,
+            "answer": "no",
+            "noun": "a rose gold upper arm"
+          }
+        }
+      },
+      {
+        "shape_id": "lamp_f228f6cd86162beb659dda512294c744",
+        "prompt_idx": 0,
+        "prompt": "A classic desk lamp with a black marble base, a green enamel cone shade, brass stand legs, and a gold central socket housing",
+        "groups": {
+          "black marble": {
+            "match": true,
+            "answer": "yes",
+            "noun": "base"
+          },
+          "green enamel segment": {
+            "match": true,
+            "answer": "yes",
+            "noun": "shade"
+          },
+          "brass stand": {
+            "match": false,
+            "answer": "no",
+            "noun": "leg"
+          },
+          "gold central housing": {
+            "match": false,
+            "answer": "no",
+            "noun": "a gold central housing"
+          }
+        }
+      },
+      {
+        "shape_id": "lamp_f228f6cd86162beb659dda512294c744",
+        "prompt_idx": 1,
+        "prompt": "A classic desk lamp with a white ceramic base, a red-and-white striped cone shade, chrome stand legs, and a silver central housing",
+        "groups": {
+          "white ceramic": {
+            "match": true,
+            "answer": "yes",
+            "noun": "base"
+          },
+          "red-and-white striped": {
+            "match": false,
+            "answer": "no",
+            "noun": "shade"
+          },
+          "chrome stand": {
+            "match": false,
+            "answer": "no",
+            "noun": "leg"
+          },
+          "silver central housing": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a silver central housing"
+          }
+        }
+      },
+      {
+        "shape_id": "lamp_f228f6cd86162beb659dda512294c744",
+        "prompt_idx": 2,
+        "prompt": "A classic desk lamp with a walnut wood base, a cream linen cone shade, dark bronze stand legs, and a bronze central housing",
+        "groups": {
+          "walnut wood": {
+            "match": true,
+            "answer": "yes",
+            "noun": "base"
+          },
+          "cream linen segment": {
+            "match": true,
+            "answer": "yes",
+            "noun": "shade"
+          },
+          "dark bronze stand": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "bronze central housing": {
+            "match": true,
+            "answer": "yes",
+            "noun": "bronze central housing"
+          }
+        }
+      },
+      {
+        "shape_id": "lamp_f228f6cd86162beb659dda512294c744",
+        "prompt_idx": 3,
+        "prompt": "A classic desk lamp with a grey concrete base, a cobalt blue cone shade, matte black stand legs, and a gunmetal central housing",
+        "groups": {
+          "grey concrete": {
+            "match": true,
+            "answer": "yes",
+            "noun": "base"
+          },
+          "cobalt blue cone": {
+            "match": false,
+            "answer": "no",
+            "noun": "shade"
+          },
+          "matte black stand": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "gunmetal central housing": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a gunmetal central housing"
+          }
+        }
+      },
+      {
+        "shape_id": "lamp_f228f6cd86162beb659dda512294c744",
+        "prompt_idx": 4,
+        "prompt": "A classic desk lamp with a pink acrylic base, a pastel yellow cone shade, rose gold stand legs, and a white central housing",
+        "groups": {
+          "pink acrylic": {
+            "match": true,
+            "answer": "yes",
+            "noun": "base"
+          },
+          "pastel yellow segment": {
+            "match": true,
+            "answer": "yes",
+            "noun": "shade"
+          },
+          "rose gold stand": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "white central housing": {
+            "match": false,
+            "answer": "no",
+            "noun": "a white central housing"
+          }
+        }
+      },
+      {
+        "shape_id": "rifle_d88c106c00384130fb5c1b0f759e2bc1",
+        "prompt_idx": 0,
+        "prompt": "A pistol with a black polymer trigger guard, a brown wooden grip, and a stainless steel slide and barrel",
+        "groups": {
+          "black polymer trigger guard": {
+            "match": true,
+            "answer": "yes",
+            "noun": "black polymer trigger guard"
+          },
+          "brown wooden grip": {
+            "match": true,
+            "answer": "yes",
+            "noun": "brown wooden grip"
+          },
+          "stainless steel slide barrel": {
+            "match": false,
+            "answer": "no",
+            "noun": "stainless steel slide and barrel"
+          }
+        }
+      },
+      {
+        "shape_id": "rifle_d88c106c00384130fb5c1b0f759e2bc1",
+        "prompt_idx": 1,
+        "prompt": "A pistol with a tan desert-camo lower frame, a black rubber grip, and a matte black slide and barrel",
+        "groups": {
+          "tan desert-camo": {
+            "match": true,
+            "answer": "yes",
+            "noun": "frame"
+          },
+          "black rubber grip": {
+            "match": false,
+            "answer": "no",
+            "noun": "black rubber grip"
+          },
+          "matte black slide barrel": {
+            "match": false,
+            "answer": "no",
+            "noun": "matte black slide and barrel"
+          }
+        }
+      },
+      {
+        "shape_id": "rifle_d88c106c00384130fb5c1b0f759e2bc1",
+        "prompt_idx": 2,
+        "prompt": "A pistol with a red anodized trigger guard, a white pearl grip, and a chrome slide and barrel",
+        "groups": {
+          "red anodized trigger guard": {
+            "match": false,
+            "answer": "no",
+            "noun": "red anodized trigger guard"
+          },
+          "white pearl grip": {
+            "match": false,
+            "answer": "no",
+            "noun": "white pearl grip"
+          },
+          "chrome slide barrel": {
+            "match": false,
+            "answer": "no",
+            "noun": "chrome slide and barrel"
+          }
+        }
+      },
+      {
+        "shape_id": "rifle_d88c106c00384130fb5c1b0f759e2bc1",
+        "prompt_idx": 3,
+        "prompt": "A pistol with a grey composite lower frame, a dark grey textured grip, and a brushed steel slide and barrel",
+        "groups": {
+          "grey composite": {
+            "match": true,
+            "answer": "yes",
+            "noun": "frame"
+          },
+          "dark grey textured grip": {
+            "match": true,
+            "answer": "yes",
+            "noun": "dark grey textured grip"
+          },
+          "brushed steel slide barrel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "brushed steel slide and barrel"
+          }
+        }
+      },
+      {
+        "shape_id": "rifle_d88c106c00384130fb5c1b0f759e2bc1",
+        "prompt_idx": 4,
+        "prompt": "A pistol with an olive green trigger guard, a walnut wood grip, and a gold-titanium coated slide and barrel",
+        "groups": {
+          "olive green trigger guard": {
+            "match": false,
+            "answer": "no",
+            "noun": "olive green trigger guard"
+          },
+          "walnut wood grip": {
+            "match": true,
+            "answer": "yes",
+            "noun": "walnut wood grip"
+          },
+          "gold-titanium coated slide barrel": {
+            "match": false,
+            "answer": "no",
+            "noun": "gold-titanium coated slide and barrel"
+          }
+        }
+      },
+      {
+        "shape_id": "rifle_faa1fb485ddd6c9c8bfbe54b5d01550",
+        "prompt_idx": 0,
+        "prompt": "A bolt-action rifle with a black polymer main body, silver metal bipod, dark walnut buttstock, and a black rubber buttpad",
+        "groups": {
+          "black polymer main body": {
+            "match": true,
+            "answer": "yes",
+            "noun": "body"
+          },
+          "silver metal bipod": {
+            "match": false,
+            "answer": "no",
+            "noun": "silver metal bipod"
+          },
+          "dark walnut buttstock": {
+            "match": true,
+            "answer": "yes",
+            "noun": "dark walnut buttstock"
+          },
+          "black rubber buttpad": {
+            "match": true,
+            "answer": "yes",
+            "noun": "black rubber buttpad"
+          }
+        }
+      },
+      {
+        "shape_id": "rifle_faa1fb485ddd6c9c8bfbe54b5d01550",
+        "prompt_idx": 1,
+        "prompt": "A bolt-action rifle with a tan desert-camo main body, gold-tipped bipod, sand-colored buttstock, and a brown rubber buttpad",
+        "groups": {
+          "tan desert-camo main body": {
+            "match": true,
+            "answer": "yes",
+            "noun": "body"
+          },
+          "gold-tipped bipod": {
+            "match": false,
+            "answer": "no",
+            "noun": "gold-tipped bipod"
+          },
+          "sand-colored buttstock": {
+            "match": true,
+            "answer": "yes",
+            "noun": "sand-colored buttstock"
+          },
+          "brown rubber buttpad": {
+            "match": false,
+            "answer": "no",
+            "noun": "brown rubber buttpad"
+          }
+        }
+      },
+      {
+        "shape_id": "rifle_faa1fb485ddd6c9c8bfbe54b5d01550",
+        "prompt_idx": 2,
+        "prompt": "A bolt-action rifle with a forest green main body, black bipod, olive drab buttstock, and a dark green buttpad",
+        "groups": {
+          "forest green metal main body": {
+            "match": true,
+            "answer": "yes",
+            "noun": "body"
+          },
+          "black metal bipod stand": {
+            "match": true,
+            "answer": "yes",
+            "noun": "black metal bipod stand"
+          },
+          "olive drab composite buttstock": {
+            "match": true,
+            "answer": "yes",
+            "noun": "olive drab composite buttstock"
+          },
+          "dark green rubber buttpad": {
+            "match": true,
+            "answer": "yes",
+            "noun": "dark green rubber buttpad"
+          }
+        }
+      },
+      {
+        "shape_id": "rifle_faa1fb485ddd6c9c8bfbe54b5d01550",
+        "prompt_idx": 3,
+        "prompt": "A bolt-action rifle with a grey carbon-fiber textured main body, chrome bipod, black synthetic buttstock, and a red rubber buttpad",
+        "groups": {
+          "grey carbon-fiber textured main body": {
+            "match": true,
+            "answer": "yes",
+            "noun": "body"
+          },
+          "chrome bipod stand": {
+            "match": false,
+            "answer": "no",
+            "noun": "chrome bipod stand"
+          },
+          "black synthetic buttstock": {
+            "match": false,
+            "answer": "no",
+            "noun": "black synthetic buttstock"
+          },
+          "red rubber buttpad": {
+            "match": true,
+            "answer": "yes",
+            "noun": "red rubber buttpad"
+          }
+        }
+      },
+      {
+        "shape_id": "rifle_faa1fb485ddd6c9c8bfbe54b5d01550",
+        "prompt_idx": 4,
+        "prompt": "A bolt-action rifle with a white arctic-camo main body, white bipod, white buttstock, and a grey buttpad",
+        "groups": {
+          "white arctic-camo main body": {
+            "match": true,
+            "answer": "yes",
+            "noun": "body"
+          },
+          "white bipod stand": {
+            "match": true,
+            "answer": "yes",
+            "noun": "white bipod stand"
+          },
+          "white buttstock": {
+            "match": false,
+            "answer": "no",
+            "noun": "white buttstock"
+          },
+          "grey buttpad": {
+            "match": true,
+            "answer": "yes",
+            "noun": "grey buttpad"
+          }
+        }
+      },
+      {
+        "shape_id": "sofa_d9ae4cecb8203838f652f706160dc96d",
+        "prompt_idx": 0,
+        "prompt": "A sofa with navy blue velvet armrests, gold metal legs, a white front panel, a grey flannel seat cushion, and a navy blue backrest",
+        "groups": {
+          "navy blue velvet": {
+            "match": true,
+            "answer": "yes",
+            "noun": "armrest"
+          },
+          "gold metal": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "white panel": {
+            "match": false,
+            "answer": "no",
+            "noun": "panel"
+          },
+          "neutral panel": {
+            "match": false,
+            "answer": "no",
+            "noun": "panel"
+          },
+          "grey flannel": {
+            "match": false,
+            "answer": "no",
+            "noun": "seat"
+          },
+          "navy blue": {
+            "match": true,
+            "answer": "yes",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "sofa_d9ae4cecb8203838f652f706160dc96d",
+        "prompt_idx": 1,
+        "prompt": "A sofa with cream leather armrests, dark walnut legs, a beige fabric front panel, a terracotta seat cushion, and a cream backrest",
+        "groups": {
+          "cream leather": {
+            "match": false,
+            "answer": "no",
+            "noun": "armrest"
+          },
+          "dark walnut": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "beige fabric panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          },
+          "terracotta": {
+            "match": false,
+            "answer": "no",
+            "noun": "seat"
+          },
+          "cream": {
+            "match": true,
+            "answer": "yes",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "sofa_d9ae4cecb8203838f652f706160dc96d",
+        "prompt_idx": 2,
+        "prompt": "A sofa with forest green linen armrests, black iron legs, a charcoal front panel, a mustard yellow seat cushion, and a dark green backrest",
+        "groups": {
+          "forest green linen": {
+            "match": true,
+            "answer": "yes",
+            "noun": "armrest"
+          },
+          "black iron": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "charcoal panel": {
+            "match": false,
+            "answer": "no",
+            "noun": "panel"
+          },
+          "mustard yellow": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          },
+          "dark green": {
+            "match": true,
+            "answer": "yes",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "sofa_d9ae4cecb8203838f652f706160dc96d",
+        "prompt_idx": 3,
+        "prompt": "A sofa with dusty pink velvet armrests, brass legs, a light grey front panel, a white boucle seat cushion, and a pale pink backrest",
+        "groups": {
+          "dusty pink velvet": {
+            "match": true,
+            "answer": "yes",
+            "noun": "armrest"
+          },
+          "brass": {
+            "match": false,
+            "answer": "no",
+            "noun": "leg"
+          },
+          "light grey panel": {
+            "match": false,
+            "answer": "no",
+            "noun": "panel"
+          },
+          "neutral panel": {
+            "match": false,
+            "answer": "no",
+            "noun": "panel"
+          },
+          "white boucle": {
+            "match": false,
+            "answer": "no",
+            "noun": "seat"
+          },
+          "pale pink": {
+            "match": true,
+            "answer": "yes",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "sofa_d9ae4cecb8203838f652f706160dc96d",
+        "prompt_idx": 4,
+        "prompt": "A sofa with burnt orange fabric armrests, silver metal legs, a tan front panel, a deep brown leather seat cushion, and an orange backrest",
+        "groups": {
+          "burnt orange fabric": {
+            "match": true,
+            "answer": "yes",
+            "noun": "armrest"
+          },
+          "silver metal": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "tan panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          },
+          "orange": {
+            "match": true,
+            "answer": "yes",
+            "noun": "backrest"
+          },
+          "deep brown leather": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          }
+        }
+      },
+      {
+        "shape_id": "sofa_ed394e35b999f69edb039d8689a74349",
+        "prompt_idx": 0,
+        "prompt": "An L-shaped sectional sofa with a light grey chaise cushion, white leather armrests, a charcoal main seat cushion, and a dark grey backrest",
+        "groups": {
+          "light grey chaise": {
+            "match": true,
+            "answer": "yes",
+            "noun": "cushion"
+          },
+          "white leather": {
+            "match": false,
+            "answer": "no",
+            "noun": "armrest"
+          },
+          "charcoal main": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          },
+          "dark grey": {
+            "match": true,
+            "answer": "yes",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "sofa_ed394e35b999f69edb039d8689a74349",
+        "prompt_idx": 1,
+        "prompt": "An L-shaped sectional sofa with a mustard yellow chaise cushion, navy blue armrests, a cream main seat cushion, and a navy blue backrest",
+        "groups": {
+          "mustard yellow chaise": {
+            "match": true,
+            "answer": "yes",
+            "noun": "cushion"
+          },
+          "navy blue": {
+            "match": false,
+            "answer": "no",
+            "noun": "armrest"
+          },
+          "cream main": {
+            "match": false,
+            "answer": "no",
+            "noun": "seat"
+          }
+        }
+      },
+      {
+        "shape_id": "sofa_ed394e35b999f69edb039d8689a74349",
+        "prompt_idx": 2,
+        "prompt": "An L-shaped sectional sofa with a blush pink chaise cushion, white boucle armrests, a rose velvet main seat, and a light pink backrest",
+        "groups": {
+          "blush pink chaise": {
+            "match": true,
+            "answer": "yes",
+            "noun": "cushion"
+          },
+          "white boucle": {
+            "match": false,
+            "answer": "no",
+            "noun": "armrest"
+          },
+          "rose velvet main": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          },
+          "light pink": {
+            "match": true,
+            "answer": "yes",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "sofa_ed394e35b999f69edb039d8689a74349",
+        "prompt_idx": 3,
+        "prompt": "An L-shaped sectional sofa with a forest green chaise cushion, dark walnut armrests, an olive main seat cushion, and a deep green backrest",
+        "groups": {
+          "forest green chaise": {
+            "match": true,
+            "answer": "yes",
+            "noun": "cushion"
+          },
+          "dark walnut": {
+            "match": false,
+            "answer": "no",
+            "noun": "armrest"
+          },
+          "olive main": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          },
+          "deep green": {
+            "match": true,
+            "answer": "yes",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "sofa_ed394e35b999f69edb039d8689a74349",
+        "prompt_idx": 4,
+        "prompt": "An L-shaped sectional sofa with a burnt sienna chaise cushion, tan leather armrests, a rust orange main seat, and a brown backrest",
+        "groups": {
+          "burnt sienna chaise": {
+            "match": true,
+            "answer": "yes",
+            "noun": "cushion"
+          },
+          "tan leather": {
+            "match": true,
+            "answer": "yes",
+            "noun": "armrest"
+          },
+          "rust orange main": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          },
+          "brown": {
+            "match": true,
+            "answer": "yes",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "table_d3a55d20bb9c93985a7746683ad193f0",
+        "prompt_idx": 0,
+        "prompt": "A ping-pong table with black metal legs, a white net, and a regulation blue playing surface",
+        "groups": {
+          "black metal supporting": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "white net": {
+            "match": true,
+            "answer": "yes",
+            "noun": "white net"
+          },
+          "blue playing surface": {
+            "match": false,
+            "answer": "no",
+            "noun": "blue playing surface"
+          }
+        }
+      },
+      {
+        "shape_id": "table_d3a55d20bb9c93985a7746683ad193f0",
+        "prompt_idx": 1,
+        "prompt": "A ping-pong table with red metal legs, a black net, and a green playing surface",
+        "groups": {
+          "red metal supporting": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "black net": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a black net"
+          },
+          "green playing surface": {
+            "match": false,
+            "answer": "no",
+            "noun": "a green playing surface"
+          }
+        }
+      },
+      {
+        "shape_id": "table_d3a55d20bb9c93985a7746683ad193f0",
+        "prompt_idx": 2,
+        "prompt": "A ping-pong table with silver aluminum legs, a yellow net, and a dark grey playing surface",
+        "groups": {
+          "silver aluminum supporting": {
+            "match": false,
+            "answer": "no",
+            "noun": "leg"
+          },
+          "yellow central net": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a yellow central net"
+          },
+          "dark grey playing surface": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a dark grey playing surface"
+          }
+        }
+      },
+      {
+        "shape_id": "table_d3a55d20bb9c93985a7746683ad193f0",
+        "prompt_idx": 3,
+        "prompt": "A ping-pong table with white painted legs, a red net, and a forest green playing surface with white boundary lines",
+        "groups": {
+          "white painted": {
+            "match": false,
+            "answer": "no",
+            "noun": "leg"
+          },
+          "red net": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a red net"
+          },
+          "forest green tabletop": {
+            "match": false,
+            "answer": "no",
+            "noun": "a forest green tabletop"
+          }
+        }
+      },
+      {
+        "shape_id": "table_d3a55d20bb9c93985a7746683ad193f0",
+        "prompt_idx": 4,
+        "prompt": "A ping-pong table with wooden legs, a black net, and a sky blue playing surface",
+        "groups": {
+          "wooden supporting": {
+            "match": false,
+            "answer": "no",
+            "noun": "leg"
+          },
+          "black net": {
+            "match": false,
+            "answer": "no",
+            "noun": "a black net"
+          },
+          "sky blue playing surface": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a sky blue playing surface"
+          }
+        }
+      },
+      {
+        "shape_id": "table_f3b8c91c5dd1cb6b8722573b29f0d6d8",
+        "prompt_idx": 0,
+        "prompt": "A rectangular table with black metal legs, white painted crossbars, grey aprons, and a natural oak tabletop",
+        "groups": {
+          "white painted crossbar": {
+            "match": false,
+            "answer": "no",
+            "noun": "a white painted crossbar"
+          },
+          "black metal corner": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "grey apron beneath tabletop": {
+            "match": false,
+            "answer": "no",
+            "noun": "a grey apron beneath tabletop"
+          },
+          "natural oak tabletop": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a natural oak tabletop"
+          }
+        }
+      },
+      {
+        "shape_id": "table_f3b8c91c5dd1cb6b8722573b29f0d6d8",
+        "prompt_idx": 1,
+        "prompt": "A rectangular table with dark walnut legs, matching walnut crossbars, cream aprons, and a white marble tabletop",
+        "groups": {
+          "dark walnut crossbar": {
+            "match": true,
+            "answer": "yes",
+            "noun": "dark walnut lower crossbar"
+          },
+          "dark walnut corner": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "cream apron beneath tabletop": {
+            "match": true,
+            "answer": "yes",
+            "noun": "cream apron beneath tabletop"
+          },
+          "white marble tabletop": {
+            "match": true,
+            "answer": "yes",
+            "noun": "white marble tabletop"
+          }
+        }
+      },
+      {
+        "shape_id": "table_f3b8c91c5dd1cb6b8722573b29f0d6d8",
+        "prompt_idx": 2,
+        "prompt": "A rectangular table with brass-finished legs, gold crossbars, black aprons, and a dark glass tabletop",
+        "groups": {
+          "gold crossbar": {
+            "match": false,
+            "answer": "no",
+            "noun": "gold lower crossbar"
+          },
+          "brass-finished corner": {
+            "match": false,
+            "answer": "no",
+            "noun": "leg"
+          },
+          "black apron beneath tabletop": {
+            "match": true,
+            "answer": "yes",
+            "noun": "black apron beneath tabletop"
+          },
+          "dark glass tabletop": {
+            "match": false,
+            "answer": "no",
+            "noun": "dark glass tabletop"
+          }
+        }
+      },
+      {
+        "shape_id": "table_f3b8c91c5dd1cb6b8722573b29f0d6d8",
+        "prompt_idx": 3,
+        "prompt": "A rectangular table with white painted legs, light oak crossbars, white aprons, and a pale birch tabletop",
+        "groups": {
+          "light oak crossbar": {
+            "match": false,
+            "answer": "no",
+            "noun": "light oak lower crossbar"
+          },
+          "white painted corner": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "white painted apron": {
+            "match": false,
+            "answer": "no",
+            "noun": "white painted apron"
+          },
+          "pale birch tabletop": {
+            "match": true,
+            "answer": "yes",
+            "noun": "pale birch tabletop"
+          }
+        }
+      },
+      {
+        "shape_id": "table_f3b8c91c5dd1cb6b8722573b29f0d6d8",
+        "prompt_idx": 4,
+        "prompt": "A rectangular table with industrial grey iron legs, black crossbars, dark grey aprons, and a reclaimed wood tabletop",
+        "groups": {
+          "black iron crossbar": {
+            "match": true,
+            "answer": "yes",
+            "noun": "black iron lower crossbar"
+          },
+          "industrial grey iron": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "dark grey apron": {
+            "match": true,
+            "answer": "yes",
+            "noun": "dark grey apron"
+          },
+          "reclaimed wood tabletop": {
+            "match": true,
+            "answer": "yes",
+            "noun": "reclaimed wood tabletop"
+          }
+        }
+      },
+      {
+        "shape_id": "watercraft_d3043fff20dad5c41dc762869682f4f",
+        "prompt_idx": 0,
+        "prompt": "A motorboat with a white fiberglass cabin and a navy blue hull",
+        "groups": {
+          "white fiberglass cabin": {
+            "match": true,
+            "answer": "yes",
+            "noun": "white fiberglass cabin"
+          },
+          "navy blue hull": {
+            "match": true,
+            "answer": "yes",
+            "noun": "navy blue hull"
+          }
+        }
+      },
+      {
+        "shape_id": "watercraft_d3043fff20dad5c41dc762869682f4f",
+        "prompt_idx": 1,
+        "prompt": "A motorboat with a grey metal cabin and a bright red hull",
+        "groups": {
+          "grey metal cabin": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a grey metal cabin"
+          },
+          "bright red hull": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a bright red hull"
+          }
+        }
+      },
+      {
+        "shape_id": "watercraft_d3043fff20dad5c41dc762869682f4f",
+        "prompt_idx": 2,
+        "prompt": "A motorboat with a cream-colored cabin and a dark green hull with gold trim",
+        "groups": {
+          "cream-colored cabin": {
+            "match": true,
+            "answer": "yes",
+            "noun": "cream-colored cabin"
+          },
+          "dark green hull with gold trim": {
+            "match": true,
+            "answer": "yes",
+            "noun": "dark green hull with gold trim"
+          }
+        }
+      },
+      {
+        "shape_id": "watercraft_d3043fff20dad5c41dc762869682f4f",
+        "prompt_idx": 3,
+        "prompt": "A motorboat with a black cabin and a bright yellow hull",
+        "groups": {
+          "black cabin": {
+            "match": false,
+            "answer": "no",
+            "noun": "a black cabin"
+          },
+          "bright yellow hull": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a bright yellow hull"
+          }
+        }
+      },
+      {
+        "shape_id": "watercraft_d3043fff20dad5c41dc762869682f4f",
+        "prompt_idx": 4,
+        "prompt": "A motorboat with a wood-paneled cabin and a white hull with blue racing stripes",
+        "groups": {
+          "wood-paneled cabin": {
+            "match": false,
+            "answer": "no",
+            "noun": "wood-paneled cabin"
+          },
+          "white hull with blue stripes": {
+            "match": true,
+            "answer": "yes",
+            "noun": "white hull with blue stripes"
+          }
+        }
+      },
+      {
+        "shape_id": "watercraft_d95c49195e51912056f316a86bec8b19",
+        "prompt_idx": 0,
+        "prompt": "A sailboat with a white hull, a red jib sail, and a white mainsail with blue stripes",
+        "groups": {
+          "white hull": {
+            "match": false,
+            "answer": "no",
+            "noun": "a white hull"
+          },
+          "red jib sail": {
+            "match": false,
+            "answer": "no",
+            "noun": "a red jib sail"
+          },
+          "white mainsail with blue stripes": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a white mainsail with blue stripes"
+          }
+        }
+      },
+      {
+        "shape_id": "watercraft_d95c49195e51912056f316a86bec8b19",
+        "prompt_idx": 1,
+        "prompt": "A sailboat with a navy blue hull, a cream-colored jib, and a yellow mainsail",
+        "groups": {
+          "navy blue hull": {
+            "match": true,
+            "answer": "yes",
+            "noun": "navy blue hull"
+          },
+          "cream-colored jib": {
+            "match": true,
+            "answer": "yes",
+            "noun": "cream-colored jib"
+          },
+          "yellow mainsail": {
+            "match": true,
+            "answer": "yes",
+            "noun": "yellow mainsail"
+          }
+        }
+      },
+      {
+        "shape_id": "watercraft_d95c49195e51912056f316a86bec8b19",
+        "prompt_idx": 2,
+        "prompt": "A sailboat with a dark teak wooden hull, a white jib, and a red mainsail",
+        "groups": {
+          "dark teak wooden hull": {
+            "match": true,
+            "answer": "yes",
+            "noun": "dark teak wooden hull"
+          },
+          "white jib": {
+            "match": false,
+            "answer": "no",
+            "noun": "white jib"
+          },
+          "red mainsail": {
+            "match": true,
+            "answer": "yes",
+            "noun": "red mainsail"
+          }
+        }
+      },
+      {
+        "shape_id": "watercraft_d95c49195e51912056f316a86bec8b19",
+        "prompt_idx": 3,
+        "prompt": "A sailboat with a black hull, a bright orange jib, and a white mainsail",
+        "groups": {
+          "black hull": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a black hull"
+          },
+          "bright orange jib": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a bright orange jib"
+          },
+          "white mainsail": {
+            "match": false,
+            "answer": "no",
+            "noun": "a white mainsail"
+          }
+        }
+      },
+      {
+        "shape_id": "watercraft_d95c49195e51912056f316a86bec8b19",
+        "prompt_idx": 4,
+        "prompt": "A sailboat with a sky blue hull, a white jib, and a green mainsail",
+        "groups": {
+          "sky blue hull": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a sky blue hull"
+          },
+          "white jib": {
+            "match": false,
+            "answer": "no",
+            "noun": "a white jib"
+          },
+          "green mainsail": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a green mainsail"
+          }
+        }
+      }
+    ],
+    "multigen": [
+      {
+        "shape_id": "airplane_d18592d9615b01bbbc0909d98a1ff2b4",
+        "prompt_idx": 0,
+        "prompt": "A commercial airliner with a white fuselage, red-tipped wings, and a blue tail section",
+        "groups": {
+          "red-tipped metal wing": {
+            "match": true,
+            "answer": "yes",
+            "noun": "wing"
+          },
+          "blue painted metal tail section": {
+            "match": true,
+            "answer": "yes",
+            "noun": "tail"
+          },
+          "white painted metal fuselage": {
+            "match": true,
+            "answer": "yes",
+            "noun": "fuselage"
+          }
+        }
+      },
+      {
+        "shape_id": "airplane_d18592d9615b01bbbc0909d98a1ff2b4",
+        "prompt_idx": 1,
+        "prompt": "A commercial airliner with a matte grey fuselage, yellow wings, and a black empennage",
+        "groups": {
+          "yellow painted metal wing": {
+            "match": true,
+            "answer": "yes",
+            "noun": "wing"
+          },
+          "black painted metal empennage": {
+            "match": true,
+            "answer": "yes",
+            "noun": "empennage"
+          },
+          "matte grey painted fuselage": {
+            "match": true,
+            "answer": "yes",
+            "noun": "fuselage"
+          }
+        }
+      },
+      {
+        "shape_id": "airplane_d18592d9615b01bbbc0909d98a1ff2b4",
+        "prompt_idx": 2,
+        "prompt": "A commercial airliner with a silver metallic fuselage, orange striped wings, and a dark navy tail",
+        "groups": {
+          "orange striped wing": {
+            "match": true,
+            "answer": "yes",
+            "noun": "wing"
+          },
+          "dark navy tail": {
+            "match": false,
+            "answer": "no",
+            "noun": "tail"
+          },
+          "silver metallic fuselage": {
+            "match": true,
+            "answer": "yes",
+            "noun": "fuselage"
+          }
+        }
+      },
+      {
+        "shape_id": "airplane_d18592d9615b01bbbc0909d98a1ff2b4",
+        "prompt_idx": 3,
+        "prompt": "A commercial airliner with a white fuselage, green wings, and a red tail section with gold accents",
+        "groups": {
+          "green painted metal wing": {
+            "match": true,
+            "answer": "yes",
+            "noun": "wing"
+          },
+          "red tail section with gold accents": {
+            "match": false,
+            "answer": "no",
+            "noun": "tail"
+          },
+          "white painted metal fuselage": {
+            "match": true,
+            "answer": "yes",
+            "noun": "fuselage"
+          }
+        }
+      },
+      {
+        "shape_id": "airplane_d18592d9615b01bbbc0909d98a1ff2b4",
+        "prompt_idx": 4,
+        "prompt": "A commercial airliner with a glossy cream fuselage, sky-blue wings, and a burgundy tail section",
+        "groups": {
+          "sky-blue painted wing": {
+            "match": true,
+            "answer": "yes",
+            "noun": "wing"
+          },
+          "burgundy painted tail section": {
+            "match": true,
+            "answer": "yes",
+            "noun": "tail"
+          },
+          "glossy cream fuselage": {
+            "match": true,
+            "answer": "yes",
+            "noun": "fuselage"
+          }
+        }
+      },
+      {
+        "shape_id": "airplane_f44c0e1e55a3469494f3355d9c061b5a",
+        "prompt_idx": 0,
+        "prompt": "A fighter jet with a matte black fuselage and camouflage green wings",
+        "groups": {
+          "matte black fuselage tail": {
+            "match": false,
+            "answer": "no",
+            "noun": "fuselage"
+          },
+          "camouflage green wings": {
+            "match": true,
+            "answer": "yes",
+            "noun": "wing"
+          }
+        }
+      },
+      {
+        "shape_id": "airplane_f44c0e1e55a3469494f3355d9c061b5a",
+        "prompt_idx": 1,
+        "prompt": "A fighter jet with a glossy dark grey fuselage and bright orange wings",
+        "groups": {
+          "glossy dark grey fuselage": {
+            "match": false,
+            "answer": "no",
+            "noun": "fuselage"
+          },
+          "bright orange wings": {
+            "match": false,
+            "answer": "no",
+            "noun": "wing"
+          }
+        }
+      },
+      {
+        "shape_id": "airplane_f44c0e1e55a3469494f3355d9c061b5a",
+        "prompt_idx": 2,
+        "prompt": "A fighter jet with a sand-colored desert camo fuselage and dark brown wings",
+        "groups": {
+          "sand-colored desert camo fuselage": {
+            "match": true,
+            "answer": "yes",
+            "noun": "fuselage"
+          },
+          "dark brown wings": {
+            "match": false,
+            "answer": "no",
+            "noun": "wing"
+          }
+        }
+      },
+      {
+        "shape_id": "airplane_f44c0e1e55a3469494f3355d9c061b5a",
+        "prompt_idx": 3,
+        "prompt": "A fighter jet with a blue and white fuselage and silver metallic wings",
+        "groups": {
+          "blue white fuselage": {
+            "match": true,
+            "answer": "yes",
+            "noun": "fuselage"
+          },
+          "silver metallic wings": {
+            "match": true,
+            "answer": "yes",
+            "noun": "wing"
+          }
+        }
+      },
+      {
+        "shape_id": "airplane_f44c0e1e55a3469494f3355d9c061b5a",
+        "prompt_idx": 4,
+        "prompt": "A fighter jet with a red fuselage and white wings with black trim",
+        "groups": {
+          "red fuselage": {
+            "match": false,
+            "answer": "no",
+            "noun": "fuselage"
+          },
+          "white wings with black trim": {
+            "match": false,
+            "answer": "no",
+            "noun": "wing"
+          }
+        }
+      },
+      {
+        "shape_id": "bench_dd97603ce7538c15be5bbc844e6db7e",
+        "prompt_idx": 0,
+        "prompt": "A park bench with black cast iron legs and rims and a natural oak wooden seat",
+        "groups": {
+          "black cast iron": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "natural oak wooden": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          }
+        }
+      },
+      {
+        "shape_id": "bench_dd97603ce7538c15be5bbc844e6db7e",
+        "prompt_idx": 1,
+        "prompt": "A park bench with white painted metal legs and rims and a dark walnut wooden seat",
+        "groups": {
+          "white painted metal": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "dark walnut wooden": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          }
+        }
+      },
+      {
+        "shape_id": "bench_dd97603ce7538c15be5bbc844e6db7e",
+        "prompt_idx": 2,
+        "prompt": "A park bench with rusty brown iron legs and rims and a teak wooden seat with green moss",
+        "groups": {
+          "rusty brown iron": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "teak wooden with moss": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          }
+        }
+      },
+      {
+        "shape_id": "bench_dd97603ce7538c15be5bbc844e6db7e",
+        "prompt_idx": 3,
+        "prompt": "A park bench with gold metal legs and rims and a polished mahogany seat",
+        "groups": {
+          "gold metal": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "polished mahogany": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          }
+        }
+      },
+      {
+        "shape_id": "bench_dd97603ce7538c15be5bbc844e6db7e",
+        "prompt_idx": 4,
+        "prompt": "A park bench with concrete grey legs and rims and a bright white painted wooden seat",
+        "groups": {
+          "concrete grey": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "bright white wooden": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          }
+        }
+      },
+      {
+        "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+        "prompt_idx": 0,
+        "prompt": "A garden bench with black wrought iron legs, green painted armrests, a natural pine seat, and a white backrest",
+        "groups": {
+          "black wrought iron": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "green painted": {
+            "match": false,
+            "answer": "no",
+            "noun": "armrest"
+          },
+          "natural pine": {
+            "match": false,
+            "answer": "no",
+            "noun": "seat"
+          },
+          "white": {
+            "match": true,
+            "answer": "yes",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+        "prompt_idx": 1,
+        "prompt": "A garden bench with brown wooden legs, cream-colored armrests, a red-painted seat, and a dark brown backrest",
+        "groups": {
+          "brown wooden": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "cream-colored": {
+            "match": false,
+            "answer": "no",
+            "noun": "armrest"
+          },
+          "red-painted": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          },
+          "dark brown": {
+            "match": true,
+            "answer": "yes",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+        "prompt_idx": 2,
+        "prompt": "A garden bench with brass-finished legs, walnut armrests, a forest green seat, and a matching green backrest",
+        "groups": {
+          "brass-finished": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "walnut": {
+            "match": true,
+            "answer": "yes",
+            "noun": "armrest"
+          },
+          "forest green": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          }
+        }
+      },
+      {
+        "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+        "prompt_idx": 3,
+        "prompt": "A garden bench with grey stone-textured legs, light oak armrests, a navy blue cushioned seat, and a white backrest",
+        "groups": {
+          "grey stone-textured": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "light oak": {
+            "match": false,
+            "answer": "no",
+            "noun": "armrest"
+          },
+          "navy blue": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          },
+          "white": {
+            "match": true,
+            "answer": "yes",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "bench_f8aa82e7e4c58ce29d31c5ce17cce95d",
+        "prompt_idx": 4,
+        "prompt": "A garden bench with copper-patina legs, teak armrests, a charcoal grey seat, and a beige backrest",
+        "groups": {
+          "copper-patina": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "teak": {
+            "match": false,
+            "answer": "no",
+            "noun": "armrest"
+          },
+          "charcoal grey": {
+            "match": false,
+            "answer": "no",
+            "noun": "seat"
+          },
+          "beige": {
+            "match": true,
+            "answer": "yes",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "cabinet_bbbd4de3e7ab25ad80d6227ff9b21190",
+        "prompt_idx": 0,
+        "prompt": "A tall cabinet with white painted side panels, a glossy red front door, and a light oak top panel",
+        "groups": {
+          "white painted side panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          },
+          "glossy red door": {
+            "match": false,
+            "answer": "no",
+            "noun": "door"
+          },
+          "light oak panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          },
+          "neutral panel": {
+            "match": false,
+            "answer": "no",
+            "noun": "panel"
+          }
+        }
+      },
+      {
+        "shape_id": "cabinet_bbbd4de3e7ab25ad80d6227ff9b21190",
+        "prompt_idx": 1,
+        "prompt": "A tall cabinet with dark walnut side panels, a glass-fronted door, and a black top panel",
+        "groups": {
+          "dark walnut side panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          },
+          "glass-fronted door": {
+            "match": true,
+            "answer": "yes",
+            "noun": "door"
+          },
+          "black panel": {
+            "match": false,
+            "answer": "no",
+            "noun": "panel"
+          },
+          "neutral panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          }
+        }
+      },
+      {
+        "shape_id": "cabinet_bbbd4de3e7ab25ad80d6227ff9b21190",
+        "prompt_idx": 2,
+        "prompt": "A tall cabinet with grey metal side panels, a navy blue front door, and a silver top panel",
+        "groups": {
+          "grey metal side panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          },
+          "navy blue door": {
+            "match": true,
+            "answer": "yes",
+            "noun": "door"
+          },
+          "silver panel": {
+            "match": false,
+            "answer": "no",
+            "noun": "panel"
+          },
+          "grey metal panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          }
+        }
+      },
+      {
+        "shape_id": "cabinet_bbbd4de3e7ab25ad80d6227ff9b21190",
+        "prompt_idx": 3,
+        "prompt": "A tall cabinet with pine wood side panels, a bright yellow front door, and a matching pine top",
+        "groups": {
+          "pine wood side panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          },
+          "bright yellow panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          },
+          "pine wood panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          },
+          "neutral panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          }
+        }
+      },
+      {
+        "shape_id": "cabinet_bbbd4de3e7ab25ad80d6227ff9b21190",
+        "prompt_idx": 4,
+        "prompt": "A tall cabinet with matte black side panels, a mirrored front door, and a white marble top panel",
+        "groups": {
+          "matte black side panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          },
+          "mirrored door": {
+            "match": false,
+            "answer": "no",
+            "noun": "door"
+          },
+          "white marble panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          },
+          "neutral panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          }
+        }
+      },
+      {
+        "shape_id": "cabinet_df55c6665781293cbe53b3b9f1274310",
+        "prompt_idx": 0,
+        "prompt": "A rectangular storage cabinet with a white painted main body and a dark walnut wood top panel",
+        "groups": {
+          "white painted main body": {
+            "match": true,
+            "answer": "yes",
+            "noun": "body"
+          },
+          "dark walnut wood panel": {
+            "match": false,
+            "answer": "no",
+            "noun": "panel"
+          }
+        }
+      },
+      {
+        "shape_id": "cabinet_df55c6665781293cbe53b3b9f1274310",
+        "prompt_idx": 1,
+        "prompt": "A rectangular storage cabinet with a brushed steel main body and a black granite top panel",
+        "groups": {
+          "brushed steel main body": {
+            "match": false,
+            "answer": "no",
+            "noun": "body"
+          },
+          "black granite panel": {
+            "match": false,
+            "answer": "no",
+            "noun": "panel"
+          }
+        }
+      },
+      {
+        "shape_id": "cabinet_df55c6665781293cbe53b3b9f1274310",
+        "prompt_idx": 2,
+        "prompt": "A rectangular storage cabinet with a navy blue main body and a light oak top panel",
+        "groups": {
+          "navy blue main body": {
+            "match": true,
+            "answer": "yes",
+            "noun": "body"
+          },
+          "light oak panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          }
+        }
+      },
+      {
+        "shape_id": "cabinet_df55c6665781293cbe53b3b9f1274310",
+        "prompt_idx": 3,
+        "prompt": "A rectangular storage cabinet with a terracotta red main body and a white marble top panel",
+        "groups": {
+          "terracotta red storage compartment": {
+            "match": true,
+            "answer": "yes",
+            "noun": "terracotta red storage compartment"
+          },
+          "white marble panel": {
+            "match": false,
+            "answer": "no",
+            "noun": "panel"
+          }
+        }
+      },
+      {
+        "shape_id": "cabinet_df55c6665781293cbe53b3b9f1274310",
+        "prompt_idx": 4,
+        "prompt": "A rectangular storage cabinet with a forest green main body and a brass-finished top panel",
+        "groups": {
+          "forest green storage compartment": {
+            "match": true,
+            "answer": "yes",
+            "noun": "forest green storage compartment"
+          },
+          "brass-finished panel": {
+            "match": false,
+            "answer": "no",
+            "noun": "panel"
+          }
+        }
+      },
+      {
+        "shape_id": "car_d287b02b4679c70ab7902335d9dd94a2",
+        "prompt_idx": 0,
+        "prompt": "A pickup truck with a red cabin, black fenders on the truck bed, silver wheels, a white hood, and a grey tailgate and floor",
+        "groups": {
+          "red painted metal cabin": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a red painted metal cabin"
+          },
+          "black painted metal fender": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a black painted metal fender"
+          },
+          "silver metal wheel": {
+            "match": false,
+            "answer": "no",
+            "noun": "a silver metal wheel"
+          },
+          "white painted metal hood": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a white painted metal hood"
+          },
+          "grey painted metal tailgate": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a grey painted metal tailgate"
+          },
+          "grey painted metal floor panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          }
+        }
+      },
+      {
+        "shape_id": "car_d287b02b4679c70ab7902335d9dd94a2",
+        "prompt_idx": 1,
+        "prompt": "A pickup truck with a navy blue cabin, rust-orange fenders, black wheels, a matching blue hood, and a silver tailgate",
+        "groups": {
+          "navy blue cabin": {
+            "match": true,
+            "answer": "yes",
+            "noun": "navy blue cabin"
+          },
+          "rust-orange fender": {
+            "match": true,
+            "answer": "yes",
+            "noun": "rust-orange fender"
+          },
+          "black wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "black wheel"
+          },
+          "matching blue hood": {
+            "match": true,
+            "answer": "yes",
+            "noun": "matching blue hood"
+          },
+          "silver tailgate": {
+            "match": true,
+            "answer": "yes",
+            "noun": "silver tailgate"
+          },
+          "neutral metal floor panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          }
+        }
+      },
+      {
+        "shape_id": "car_d287b02b4679c70ab7902335d9dd94a2",
+        "prompt_idx": 2,
+        "prompt": "A pickup truck with a sandy beige cabin, dark green fenders, chrome wheels, a cream hood, and a brown wooden truck bed floor",
+        "groups": {
+          "sandy beige cabin": {
+            "match": true,
+            "answer": "yes",
+            "noun": "sandy beige cabin"
+          },
+          "dark green fender": {
+            "match": false,
+            "answer": "no",
+            "noun": "dark green left fender"
+          },
+          "chrome front-left wheel": {
+            "match": false,
+            "answer": "no",
+            "noun": "chrome front-left wheel"
+          },
+          "cream hood engine compartment": {
+            "match": true,
+            "answer": "yes",
+            "noun": "engine"
+          },
+          "chrome front-right wheel": {
+            "match": false,
+            "answer": "no",
+            "noun": "chrome front-right wheel"
+          },
+          "brown wooden tailgate": {
+            "match": true,
+            "answer": "yes",
+            "noun": "brown wooden tailgate"
+          },
+          "chrome rear-right wheel": {
+            "match": false,
+            "answer": "no",
+            "noun": "chrome rear-right wheel"
+          },
+          "chrome rear-left wheel": {
+            "match": false,
+            "answer": "no",
+            "noun": "chrome rear-left wheel"
+          },
+          "brown wooden floor panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          }
+        }
+      },
+      {
+        "shape_id": "car_d287b02b4679c70ab7902335d9dd94a2",
+        "prompt_idx": 3,
+        "prompt": "A pickup truck with a matte black cabin, gunmetal grey fenders, red wheels, a black hood, and a silver tailgate",
+        "groups": {
+          "matte black cabin": {
+            "match": true,
+            "answer": "yes",
+            "noun": "matte black cabin"
+          },
+          "gunmetal grey fender": {
+            "match": true,
+            "answer": "yes",
+            "noun": "gunmetal grey left fender"
+          },
+          "red front-left wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "red front-left wheel"
+          },
+          "black hood": {
+            "match": true,
+            "answer": "yes",
+            "noun": "black hood"
+          },
+          "red front-right wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "red front-right wheel"
+          },
+          "silver tailgate": {
+            "match": true,
+            "answer": "yes",
+            "noun": "silver tailgate"
+          },
+          "red rear-right wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "red rear-right wheel"
+          },
+          "red rear-left wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "red rear-left wheel"
+          },
+          "neutral metal floor panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          }
+        }
+      },
+      {
+        "shape_id": "car_d287b02b4679c70ab7902335d9dd94a2",
+        "prompt_idx": 4,
+        "prompt": "A pickup truck with a forest green cabin, olive drab fenders, white wheels, a green hood, and a black steel truck bed floor",
+        "groups": {
+          "forest green cabin": {
+            "match": true,
+            "answer": "yes",
+            "noun": "forest green cabin"
+          },
+          "olive drab fender": {
+            "match": true,
+            "answer": "yes",
+            "noun": "olive drab fender"
+          },
+          "white wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "white wheel"
+          },
+          "green hood": {
+            "match": true,
+            "answer": "yes",
+            "noun": "green hood"
+          },
+          "black steel tailgate": {
+            "match": true,
+            "answer": "yes",
+            "noun": "black steel tailgate"
+          },
+          "black steel floor panel": {
+            "match": false,
+            "answer": "no",
+            "noun": "panel"
+          }
+        }
+      },
+      {
+        "shape_id": "car_f9cad36ae25540a0bb20fd1bc4860856",
+        "prompt_idx": 0,
+        "prompt": "A four-door sedan with a white cabin, black hood, and bright red wheels",
+        "groups": {
+          "bright red wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a bright red wheel"
+          },
+          "black hood": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a black hood"
+          },
+          "white cabin": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a white cabin"
+          }
+        }
+      },
+      {
+        "shape_id": "car_f9cad36ae25540a0bb20fd1bc4860856",
+        "prompt_idx": 1,
+        "prompt": "A four-door sedan with a silver metallic cabin, dark blue hood, and gold chrome wheels",
+        "groups": {
+          "gold chrome rear-left wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a gold chrome rear-left wheel"
+          },
+          "gold chrome front-left wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a gold chrome front-left wheel"
+          },
+          "dark blue hood": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a dark blue hood"
+          },
+          "gold chrome front-right wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a gold chrome front-right wheel"
+          },
+          "gold chrome rear-right wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a gold chrome rear-right wheel"
+          },
+          "silver metallic cabin": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a silver metallic cabin"
+          }
+        }
+      },
+      {
+        "shape_id": "car_f9cad36ae25540a0bb20fd1bc4860856",
+        "prompt_idx": 2,
+        "prompt": "A four-door sedan with a jet black cabin, red hood, and chrome silver wheels",
+        "groups": {
+          "chrome silver rear-left wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "chrome silver rear-left wheel"
+          },
+          "chrome silver front-left wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "chrome silver front-left wheel"
+          },
+          "red hood engine compartment": {
+            "match": true,
+            "answer": "yes",
+            "noun": "engine"
+          },
+          "chrome silver front-right wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "chrome silver front-right wheel"
+          },
+          "chrome silver rear-right wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "chrome silver rear-right wheel"
+          },
+          "jet black cabin": {
+            "match": true,
+            "answer": "yes",
+            "noun": "jet black cabin"
+          }
+        }
+      },
+      {
+        "shape_id": "car_f9cad36ae25540a0bb20fd1bc4860856",
+        "prompt_idx": 3,
+        "prompt": "A four-door sedan with a pearl white cabin, yellow hood, and matte black wheels",
+        "groups": {
+          "matte black rear-left wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "matte black rear-left wheel"
+          },
+          "matte black front-left wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "matte black front-left wheel"
+          },
+          "yellow hood": {
+            "match": true,
+            "answer": "yes",
+            "noun": "yellow hood"
+          },
+          "matte black front-right wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "matte black front-right wheel"
+          },
+          "matte black rear-right wheel": {
+            "match": false,
+            "answer": "no",
+            "noun": "matte black rear-right wheel"
+          },
+          "pearl white cabin": {
+            "match": true,
+            "answer": "yes",
+            "noun": "pearl white cabin"
+          }
+        }
+      },
+      {
+        "shape_id": "car_f9cad36ae25540a0bb20fd1bc4860856",
+        "prompt_idx": 4,
+        "prompt": "A four-door sedan with a deep burgundy cabin, charcoal grey hood, and rose gold wheels",
+        "groups": {
+          "rose gold rear-left wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "rose gold rear-left wheel"
+          },
+          "rose gold front-left wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "rose gold front-left wheel"
+          },
+          "charcoal grey hood": {
+            "match": false,
+            "answer": "no",
+            "noun": "charcoal grey hood"
+          },
+          "rose gold front-right wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "rose gold front-right wheel"
+          },
+          "rose gold rear-right wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "rose gold rear-right wheel"
+          },
+          "deep burgundy cabin": {
+            "match": true,
+            "answer": "yes",
+            "noun": "deep burgundy cabin"
+          }
+        }
+      },
+      {
+        "shape_id": "chair_dfeb8d914d8b28ab5bb58f1e92d30bf7",
+        "prompt_idx": 0,
+        "prompt": "A rounded chair with blue painted metal legs, red velvet seat cushion, white plastic armrests, and a dark walnut wooden backrest",
+        "groups": {
+          "blue painted metal rear-left": {
+            "match": false,
+            "answer": "no",
+            "noun": "leg"
+          },
+          "blue painted metal front-left": {
+            "match": false,
+            "answer": "no",
+            "noun": "leg"
+          },
+          "white plastic": {
+            "match": true,
+            "answer": "yes",
+            "noun": "armrest"
+          },
+          "blue painted metal front-right": {
+            "match": false,
+            "answer": "no",
+            "noun": "leg"
+          },
+          "blue painted metal rear-right": {
+            "match": false,
+            "answer": "no",
+            "noun": "leg"
+          },
+          "red velvet": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          },
+          "dark walnut wooden": {
+            "match": true,
+            "answer": "yes",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "chair_dfeb8d914d8b28ab5bb58f1e92d30bf7",
+        "prompt_idx": 1,
+        "prompt": "A rounded chair with natural oak legs, a grey wool seat, black rubber armrests, and a woven rattan backrest",
+        "groups": {
+          "natural oak rear-left": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "natural oak front-left": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "black rubber": {
+            "match": true,
+            "answer": "yes",
+            "noun": "armrest"
+          },
+          "natural oak front-right": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "natural oak rear-right": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "grey wool": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          },
+          "woven rattan": {
+            "match": true,
+            "answer": "yes",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "chair_dfeb8d914d8b28ab5bb58f1e92d30bf7",
+        "prompt_idx": 2,
+        "prompt": "A rounded chair with gold-finished legs, a pink linen seat, transparent acrylic armrests, and a padded cream backrest",
+        "groups": {
+          "gold-finished rear-left": {
+            "match": false,
+            "answer": "no",
+            "noun": "leg"
+          },
+          "gold-finished front-left": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "transparent acrylic": {
+            "match": false,
+            "answer": "no",
+            "noun": "armrest"
+          },
+          "gold-finished front-right": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "gold-finished rear-right": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "pink linen": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          },
+          "padded cream": {
+            "match": true,
+            "answer": "yes",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "chair_dfeb8d914d8b28ab5bb58f1e92d30bf7",
+        "prompt_idx": 3,
+        "prompt": "A rounded chair with black steel legs, a green leather seat, brass armrests, and a light beige upholstered backrest",
+        "groups": {
+          "black steel rear-left": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "black steel front-left": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "brass": {
+            "match": false,
+            "answer": "no",
+            "noun": "armrest"
+          },
+          "black steel front-right": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "black steel rear-right": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "green leather": {
+            "match": false,
+            "answer": "no",
+            "noun": "seat"
+          },
+          "light beige upholstered": {
+            "match": true,
+            "answer": "yes",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "chair_dfeb8d914d8b28ab5bb58f1e92d30bf7",
+        "prompt_idx": 4,
+        "prompt": "A rounded chair with white lacquered legs, a navy blue canvas seat, birch wood armrests, and a mesh backrest",
+        "groups": {
+          "white lacquered rear-left": {
+            "match": false,
+            "answer": "no",
+            "noun": "leg"
+          },
+          "white lacquered front-left": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "birch wood": {
+            "match": true,
+            "answer": "yes",
+            "noun": "armrest"
+          },
+          "white lacquered front-right": {
+            "match": false,
+            "answer": "no",
+            "noun": "leg"
+          },
+          "white lacquered rear-right": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "navy blue canvas": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          },
+          "mesh": {
+            "match": false,
+            "answer": "no",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "chair_f1f670ac53799c18492d9da2668ec34c",
+        "prompt_idx": 0,
+        "prompt": "An office chair with a chrome pedestal, black rubber wheels, black leather seat and backrest, and grey plastic armrests",
+        "groups": {
+          "chrome pedestal gas-lift column": {
+            "match": true,
+            "answer": "yes",
+            "noun": "chrome pedestal gas-lift column"
+          },
+          "black rubber caster wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "black rubber caster wheel"
+          },
+          "grey plastic": {
+            "match": true,
+            "answer": "yes",
+            "noun": "armrest"
+          },
+          "black leather": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          }
+        }
+      },
+      {
+        "shape_id": "chair_f1f670ac53799c18492d9da2668ec34c",
+        "prompt_idx": 1,
+        "prompt": "An office chair with a matte black pedestal, red wheels, a teal blue fabric seat, a matching blue backrest, and white armrests",
+        "groups": {
+          "matte black metal pedestal": {
+            "match": true,
+            "answer": "yes",
+            "noun": "matte black metal pedestal"
+          },
+          "red plastic caster wheel": {
+            "match": false,
+            "answer": "no",
+            "noun": "red plastic caster wheel"
+          },
+          "white plastic": {
+            "match": true,
+            "answer": "yes",
+            "noun": "armrest"
+          },
+          "teal blue fabric": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          }
+        }
+      },
+      {
+        "shape_id": "chair_f1f670ac53799c18492d9da2668ec34c",
+        "prompt_idx": 2,
+        "prompt": "An office chair with a gold metallic pedestal, clear acrylic wheels, a pink velvet seat, a white backrest, and gold armrests",
+        "groups": {
+          "gold metallic pedestal": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a gold metallic pedestal"
+          },
+          "clear acrylic caster wheel": {
+            "match": false,
+            "answer": "no",
+            "noun": "a clear acrylic caster wheel"
+          },
+          "gold metallic": {
+            "match": true,
+            "answer": "yes",
+            "noun": "armrest"
+          },
+          "pink velvet": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          },
+          "white": {
+            "match": false,
+            "answer": "no",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "chair_f1f670ac53799c18492d9da2668ec34c",
+        "prompt_idx": 3,
+        "prompt": "An office chair with a silver pedestal, dark grey wheels, a tan leather seat and backrest, and wooden armrests",
+        "groups": {
+          "silver pedestal column": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a silver pedestal column"
+          },
+          "dark grey caster wheel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a dark grey caster wheel"
+          },
+          "wooden": {
+            "match": false,
+            "answer": "no",
+            "noun": "armrest"
+          },
+          "tan leather": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          }
+        }
+      },
+      {
+        "shape_id": "chair_f1f670ac53799c18492d9da2668ec34c",
+        "prompt_idx": 4,
+        "prompt": "An office chair with a white pedestal, pastel pink wheels, a mint green seat, a white mesh backrest, and light grey armrests",
+        "groups": {
+          "white pedestal column": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a white pedestal column"
+          },
+          "pastel pink wheel": {
+            "match": false,
+            "answer": "no",
+            "noun": "a pastel pink wheel"
+          },
+          "light grey": {
+            "match": true,
+            "answer": "yes",
+            "noun": "armrest"
+          },
+          "mint green": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          },
+          "white mesh": {
+            "match": true,
+            "answer": "yes",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "lamp_dc6c499e71d04971d22730b0728b2fc9",
+        "prompt_idx": 0,
+        "prompt": "A swing-arm desk lamp with a black marble base, a bright red metal shade, a chrome upper arm, a brass middle arm, and a black lower arm",
+        "groups": {
+          "black marble": {
+            "match": true,
+            "answer": "yes",
+            "noun": "base"
+          },
+          "bright red metal": {
+            "match": false,
+            "answer": "no",
+            "noun": "shade"
+          },
+          "chrome arm": {
+            "match": false,
+            "answer": "no",
+            "noun": "a chrome upper arm"
+          },
+          "brass arm": {
+            "match": false,
+            "answer": "no",
+            "noun": "a brass middle arm"
+          },
+          "black arm": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a black lower arm"
+          }
+        }
+      },
+      {
+        "shape_id": "lamp_dc6c499e71d04971d22730b0728b2fc9",
+        "prompt_idx": 1,
+        "prompt": "A swing-arm desk lamp with a white ceramic base, a lime green shade, and silver metallic arm segments throughout",
+        "groups": {
+          "white ceramic": {
+            "match": true,
+            "answer": "yes",
+            "noun": "base"
+          },
+          "lime green": {
+            "match": false,
+            "answer": "no",
+            "noun": "shade"
+          },
+          "silver metallic arm": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a silver metallic upper arm"
+          }
+        }
+      },
+      {
+        "shape_id": "lamp_dc6c499e71d04971d22730b0728b2fc9",
+        "prompt_idx": 2,
+        "prompt": "A swing-arm desk lamp with a wooden base, a matte black cone shade, and copper-finished arm segments",
+        "groups": {
+          "wooden": {
+            "match": false,
+            "answer": "no",
+            "noun": "base"
+          },
+          "matte black cone": {
+            "match": false,
+            "answer": "no",
+            "noun": "shade"
+          },
+          "copper-finished arm": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a copper-finished upper arm"
+          }
+        }
+      },
+      {
+        "shape_id": "lamp_dc6c499e71d04971d22730b0728b2fc9",
+        "prompt_idx": 3,
+        "prompt": "A swing-arm desk lamp with a grey concrete base, a yellow enamel shade, a white upper arm, a grey middle arm, and a dark lower arm",
+        "groups": {
+          "grey concrete": {
+            "match": true,
+            "answer": "yes",
+            "noun": "base"
+          },
+          "yellow enamel": {
+            "match": false,
+            "answer": "no",
+            "noun": "shade"
+          },
+          "white arm": {
+            "match": false,
+            "answer": "no",
+            "noun": "a white upper arm"
+          },
+          "grey arm": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a grey middle arm"
+          },
+          "dark arm": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a dark lower arm"
+          }
+        }
+      },
+      {
+        "shape_id": "lamp_dc6c499e71d04971d22730b0728b2fc9",
+        "prompt_idx": 4,
+        "prompt": "A swing-arm desk lamp with a gold-plated base, a navy blue shade, and rose gold arm segments",
+        "groups": {
+          "gold-plated": {
+            "match": true,
+            "answer": "yes",
+            "noun": "base"
+          },
+          "navy blue": {
+            "match": true,
+            "answer": "yes",
+            "noun": "shade"
+          },
+          "rose gold arm": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a rose gold upper arm"
+          }
+        }
+      },
+      {
+        "shape_id": "lamp_f228f6cd86162beb659dda512294c744",
+        "prompt_idx": 0,
+        "prompt": "A classic desk lamp with a black marble base, a green enamel cone shade, brass stand legs, and a gold central socket housing",
+        "groups": {
+          "black marble": {
+            "match": true,
+            "answer": "yes",
+            "noun": "base"
+          },
+          "green enamel segment": {
+            "match": true,
+            "answer": "yes",
+            "noun": "shade"
+          },
+          "brass stand": {
+            "match": false,
+            "answer": "no",
+            "noun": "leg"
+          },
+          "gold central housing": {
+            "match": false,
+            "answer": "no",
+            "noun": "a gold central housing"
+          }
+        }
+      },
+      {
+        "shape_id": "lamp_f228f6cd86162beb659dda512294c744",
+        "prompt_idx": 1,
+        "prompt": "A classic desk lamp with a white ceramic base, a red-and-white striped cone shade, chrome stand legs, and a silver central housing",
+        "groups": {
+          "white ceramic": {
+            "match": true,
+            "answer": "yes",
+            "noun": "base"
+          },
+          "red-and-white striped": {
+            "match": true,
+            "answer": "yes",
+            "noun": "shade"
+          },
+          "chrome stand": {
+            "match": false,
+            "answer": "no",
+            "noun": "leg"
+          },
+          "silver central housing": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a silver central housing"
+          }
+        }
+      },
+      {
+        "shape_id": "lamp_f228f6cd86162beb659dda512294c744",
+        "prompt_idx": 2,
+        "prompt": "A classic desk lamp with a walnut wood base, a cream linen cone shade, dark bronze stand legs, and a bronze central housing",
+        "groups": {
+          "walnut wood": {
+            "match": true,
+            "answer": "yes",
+            "noun": "base"
+          },
+          "cream linen segment": {
+            "match": true,
+            "answer": "yes",
+            "noun": "shade"
+          },
+          "dark bronze stand": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "bronze central housing": {
+            "match": true,
+            "answer": "yes",
+            "noun": "bronze central housing"
+          }
+        }
+      },
+      {
+        "shape_id": "lamp_f228f6cd86162beb659dda512294c744",
+        "prompt_idx": 3,
+        "prompt": "A classic desk lamp with a grey concrete base, a cobalt blue cone shade, matte black stand legs, and a gunmetal central housing",
+        "groups": {
+          "grey concrete": {
+            "match": true,
+            "answer": "yes",
+            "noun": "base"
+          },
+          "cobalt blue cone": {
+            "match": false,
+            "answer": "no",
+            "noun": "shade"
+          },
+          "matte black stand": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "gunmetal central housing": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a gunmetal central housing"
+          }
+        }
+      },
+      {
+        "shape_id": "lamp_f228f6cd86162beb659dda512294c744",
+        "prompt_idx": 4,
+        "prompt": "A classic desk lamp with a pink acrylic base, a pastel yellow cone shade, rose gold stand legs, and a white central housing",
+        "groups": {
+          "pink acrylic": {
+            "match": true,
+            "answer": "yes",
+            "noun": "base"
+          },
+          "pastel yellow segment": {
+            "match": true,
+            "answer": "yes",
+            "noun": "shade"
+          },
+          "rose gold stand": {
+            "match": false,
+            "answer": "no",
+            "noun": "leg"
+          },
+          "white central housing": {
+            "match": false,
+            "answer": "no",
+            "noun": "a white central housing"
+          }
+        }
+      },
+      {
+        "shape_id": "rifle_d88c106c00384130fb5c1b0f759e2bc1",
+        "prompt_idx": 0,
+        "prompt": "A pistol with a black polymer trigger guard, a brown wooden grip, and a stainless steel slide and barrel",
+        "groups": {
+          "black polymer trigger guard": {
+            "match": true,
+            "answer": "yes",
+            "noun": "black polymer trigger guard"
+          },
+          "brown wooden grip": {
+            "match": true,
+            "answer": "yes",
+            "noun": "brown wooden grip"
+          },
+          "stainless steel slide barrel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "stainless steel slide and barrel"
+          }
+        }
+      },
+      {
+        "shape_id": "rifle_d88c106c00384130fb5c1b0f759e2bc1",
+        "prompt_idx": 1,
+        "prompt": "A pistol with a tan desert-camo lower frame, a black rubber grip, and a matte black slide and barrel",
+        "groups": {
+          "tan desert-camo": {
+            "match": false,
+            "answer": "no",
+            "noun": "frame"
+          },
+          "black rubber grip": {
+            "match": true,
+            "answer": "yes",
+            "noun": "black rubber grip"
+          },
+          "matte black slide barrel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "matte black slide and barrel"
+          }
+        }
+      },
+      {
+        "shape_id": "rifle_d88c106c00384130fb5c1b0f759e2bc1",
+        "prompt_idx": 2,
+        "prompt": "A pistol with a red anodized trigger guard, a white pearl grip, and a chrome slide and barrel",
+        "groups": {
+          "red anodized trigger guard": {
+            "match": false,
+            "answer": "no",
+            "noun": "red anodized trigger guard"
+          },
+          "white pearl grip": {
+            "match": true,
+            "answer": "yes",
+            "noun": "white pearl grip"
+          },
+          "chrome slide barrel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "chrome slide and barrel"
+          }
+        }
+      },
+      {
+        "shape_id": "rifle_d88c106c00384130fb5c1b0f759e2bc1",
+        "prompt_idx": 3,
+        "prompt": "A pistol with a grey composite lower frame, a dark grey textured grip, and a brushed steel slide and barrel",
+        "groups": {
+          "grey composite": {
+            "match": true,
+            "answer": "yes",
+            "noun": "frame"
+          },
+          "dark grey textured grip": {
+            "match": true,
+            "answer": "yes",
+            "noun": "dark grey textured grip"
+          },
+          "brushed steel slide barrel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "brushed steel slide and barrel"
+          }
+        }
+      },
+      {
+        "shape_id": "rifle_d88c106c00384130fb5c1b0f759e2bc1",
+        "prompt_idx": 4,
+        "prompt": "A pistol with an olive green trigger guard, a walnut wood grip, and a gold-titanium coated slide and barrel",
+        "groups": {
+          "olive green trigger guard": {
+            "match": false,
+            "answer": "no",
+            "noun": "olive green trigger guard"
+          },
+          "walnut wood grip": {
+            "match": true,
+            "answer": "yes",
+            "noun": "walnut wood grip"
+          },
+          "gold-titanium coated slide barrel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "gold-titanium coated slide and barrel"
+          }
+        }
+      },
+      {
+        "shape_id": "rifle_faa1fb485ddd6c9c8bfbe54b5d01550",
+        "prompt_idx": 0,
+        "prompt": "A bolt-action rifle with a black polymer main body, silver metal bipod, dark walnut buttstock, and a black rubber buttpad",
+        "groups": {
+          "black polymer main body": {
+            "match": false,
+            "answer": "no",
+            "noun": "body"
+          },
+          "silver metal bipod": {
+            "match": false,
+            "answer": "no",
+            "noun": "silver metal bipod"
+          },
+          "dark walnut buttstock": {
+            "match": true,
+            "answer": "yes",
+            "noun": "dark walnut buttstock"
+          },
+          "black rubber buttpad": {
+            "match": true,
+            "answer": "yes",
+            "noun": "black rubber buttpad"
+          }
+        }
+      },
+      {
+        "shape_id": "rifle_faa1fb485ddd6c9c8bfbe54b5d01550",
+        "prompt_idx": 1,
+        "prompt": "A bolt-action rifle with a tan desert-camo main body, gold-tipped bipod, sand-colored buttstock, and a brown rubber buttpad",
+        "groups": {
+          "tan desert-camo main body": {
+            "match": true,
+            "answer": "yes",
+            "noun": "body"
+          },
+          "gold-tipped bipod": {
+            "match": true,
+            "answer": "yes",
+            "noun": "gold-tipped bipod"
+          },
+          "sand-colored buttstock": {
+            "match": true,
+            "answer": "yes",
+            "noun": "sand-colored buttstock"
+          },
+          "brown rubber buttpad": {
+            "match": false,
+            "answer": "no",
+            "noun": "brown rubber buttpad"
+          }
+        }
+      },
+      {
+        "shape_id": "rifle_faa1fb485ddd6c9c8bfbe54b5d01550",
+        "prompt_idx": 2,
+        "prompt": "A bolt-action rifle with a forest green main body, black bipod, olive drab buttstock, and a dark green buttpad",
+        "groups": {
+          "forest green metal main body": {
+            "match": true,
+            "answer": "yes",
+            "noun": "body"
+          },
+          "black metal bipod stand": {
+            "match": true,
+            "answer": "yes",
+            "noun": "black metal bipod stand"
+          },
+          "olive drab composite buttstock": {
+            "match": true,
+            "answer": "yes",
+            "noun": "olive drab composite buttstock"
+          },
+          "dark green rubber buttpad": {
+            "match": true,
+            "answer": "yes",
+            "noun": "dark green rubber buttpad"
+          }
+        }
+      },
+      {
+        "shape_id": "rifle_faa1fb485ddd6c9c8bfbe54b5d01550",
+        "prompt_idx": 3,
+        "prompt": "A bolt-action rifle with a grey carbon-fiber textured main body, chrome bipod, black synthetic buttstock, and a red rubber buttpad",
+        "groups": {
+          "grey carbon-fiber textured main body": {
+            "match": true,
+            "answer": "yes",
+            "noun": "body"
+          },
+          "chrome bipod stand": {
+            "match": false,
+            "answer": "no",
+            "noun": "chrome bipod stand"
+          },
+          "black synthetic buttstock": {
+            "match": true,
+            "answer": "yes",
+            "noun": "black synthetic buttstock"
+          },
+          "red rubber buttpad": {
+            "match": false,
+            "answer": "no",
+            "noun": "red rubber buttpad"
+          }
+        }
+      },
+      {
+        "shape_id": "rifle_faa1fb485ddd6c9c8bfbe54b5d01550",
+        "prompt_idx": 4,
+        "prompt": "A bolt-action rifle with a white arctic-camo main body, white bipod, white buttstock, and a grey buttpad",
+        "groups": {
+          "white arctic-camo main body": {
+            "match": true,
+            "answer": "yes",
+            "noun": "body"
+          },
+          "white bipod stand": {
+            "match": true,
+            "answer": "yes",
+            "noun": "white bipod stand"
+          },
+          "white buttstock": {
+            "match": false,
+            "answer": "no",
+            "noun": "white buttstock"
+          },
+          "grey buttpad": {
+            "match": true,
+            "answer": "yes",
+            "noun": "grey buttpad"
+          }
+        }
+      },
+      {
+        "shape_id": "sofa_d9ae4cecb8203838f652f706160dc96d",
+        "prompt_idx": 0,
+        "prompt": "A sofa with navy blue velvet armrests, gold metal legs, a white front panel, a grey flannel seat cushion, and a navy blue backrest",
+        "groups": {
+          "navy blue velvet": {
+            "match": true,
+            "answer": "yes",
+            "noun": "armrest"
+          },
+          "gold metal": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "white panel": {
+            "match": false,
+            "answer": "no",
+            "noun": "panel"
+          },
+          "neutral panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          },
+          "grey flannel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          },
+          "navy blue": {
+            "match": true,
+            "answer": "yes",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "sofa_d9ae4cecb8203838f652f706160dc96d",
+        "prompt_idx": 1,
+        "prompt": "A sofa with cream leather armrests, dark walnut legs, a beige fabric front panel, a terracotta seat cushion, and a cream backrest",
+        "groups": {
+          "cream leather": {
+            "match": true,
+            "answer": "yes",
+            "noun": "armrest"
+          },
+          "dark walnut": {
+            "match": false,
+            "answer": "no",
+            "noun": "leg"
+          },
+          "beige fabric panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          },
+          "terracotta": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          },
+          "cream": {
+            "match": true,
+            "answer": "yes",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "sofa_d9ae4cecb8203838f652f706160dc96d",
+        "prompt_idx": 2,
+        "prompt": "A sofa with forest green linen armrests, black iron legs, a charcoal front panel, a mustard yellow seat cushion, and a dark green backrest",
+        "groups": {
+          "forest green linen": {
+            "match": false,
+            "answer": "no",
+            "noun": "armrest"
+          },
+          "black iron": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "charcoal panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          },
+          "mustard yellow": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          },
+          "dark green": {
+            "match": true,
+            "answer": "yes",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "sofa_d9ae4cecb8203838f652f706160dc96d",
+        "prompt_idx": 3,
+        "prompt": "A sofa with dusty pink velvet armrests, brass legs, a light grey front panel, a white boucle seat cushion, and a pale pink backrest",
+        "groups": {
+          "dusty pink velvet": {
+            "match": true,
+            "answer": "yes",
+            "noun": "armrest"
+          },
+          "brass": {
+            "match": false,
+            "answer": "no",
+            "noun": "leg"
+          },
+          "light grey panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          },
+          "neutral panel": {
+            "match": false,
+            "answer": "no",
+            "noun": "panel"
+          },
+          "white boucle": {
+            "match": false,
+            "answer": "no",
+            "noun": "seat"
+          },
+          "pale pink": {
+            "match": true,
+            "answer": "yes",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "sofa_d9ae4cecb8203838f652f706160dc96d",
+        "prompt_idx": 4,
+        "prompt": "A sofa with burnt orange fabric armrests, silver metal legs, a tan front panel, a deep brown leather seat cushion, and an orange backrest",
+        "groups": {
+          "burnt orange fabric": {
+            "match": true,
+            "answer": "yes",
+            "noun": "armrest"
+          },
+          "silver metal": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "tan panel": {
+            "match": true,
+            "answer": "yes",
+            "noun": "panel"
+          },
+          "orange": {
+            "match": true,
+            "answer": "yes",
+            "noun": "backrest"
+          },
+          "deep brown leather": {
+            "match": false,
+            "answer": "no",
+            "noun": "seat"
+          }
+        }
+      },
+      {
+        "shape_id": "sofa_ed394e35b999f69edb039d8689a74349",
+        "prompt_idx": 0,
+        "prompt": "An L-shaped sectional sofa with a light grey chaise cushion, white leather armrests, a charcoal main seat cushion, and a dark grey backrest",
+        "groups": {
+          "light grey chaise": {
+            "match": true,
+            "answer": "yes",
+            "noun": "cushion"
+          },
+          "white leather": {
+            "match": true,
+            "answer": "yes",
+            "noun": "armrest"
+          },
+          "charcoal main": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          },
+          "dark grey": {
+            "match": true,
+            "answer": "yes",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "sofa_ed394e35b999f69edb039d8689a74349",
+        "prompt_idx": 1,
+        "prompt": "An L-shaped sectional sofa with a mustard yellow chaise cushion, navy blue armrests, a cream main seat cushion, and a navy blue backrest",
+        "groups": {
+          "mustard yellow chaise": {
+            "match": true,
+            "answer": "yes",
+            "noun": "cushion"
+          },
+          "navy blue": {
+            "match": true,
+            "answer": "yes",
+            "noun": "armrest"
+          },
+          "cream main": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          }
+        }
+      },
+      {
+        "shape_id": "sofa_ed394e35b999f69edb039d8689a74349",
+        "prompt_idx": 2,
+        "prompt": "An L-shaped sectional sofa with a blush pink chaise cushion, white boucle armrests, a rose velvet main seat, and a light pink backrest",
+        "groups": {
+          "blush pink chaise": {
+            "match": true,
+            "answer": "yes",
+            "noun": "cushion"
+          },
+          "white boucle": {
+            "match": false,
+            "answer": "no",
+            "noun": "armrest"
+          },
+          "rose velvet main": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          },
+          "light pink": {
+            "match": true,
+            "answer": "yes",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "sofa_ed394e35b999f69edb039d8689a74349",
+        "prompt_idx": 3,
+        "prompt": "An L-shaped sectional sofa with a forest green chaise cushion, dark walnut armrests, an olive main seat cushion, and a deep green backrest",
+        "groups": {
+          "forest green chaise": {
+            "match": true,
+            "answer": "yes",
+            "noun": "cushion"
+          },
+          "dark walnut": {
+            "match": false,
+            "answer": "no",
+            "noun": "armrest"
+          },
+          "olive main": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          },
+          "deep green": {
+            "match": true,
+            "answer": "yes",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "sofa_ed394e35b999f69edb039d8689a74349",
+        "prompt_idx": 4,
+        "prompt": "An L-shaped sectional sofa with a burnt sienna chaise cushion, tan leather armrests, a rust orange main seat, and a brown backrest",
+        "groups": {
+          "burnt sienna chaise": {
+            "match": true,
+            "answer": "yes",
+            "noun": "cushion"
+          },
+          "tan leather": {
+            "match": true,
+            "answer": "yes",
+            "noun": "armrest"
+          },
+          "rust orange main": {
+            "match": true,
+            "answer": "yes",
+            "noun": "seat"
+          },
+          "brown": {
+            "match": true,
+            "answer": "yes",
+            "noun": "backrest"
+          }
+        }
+      },
+      {
+        "shape_id": "table_d3a55d20bb9c93985a7746683ad193f0",
+        "prompt_idx": 0,
+        "prompt": "A ping-pong table with black metal legs, a white net, and a regulation blue playing surface",
+        "groups": {
+          "black metal supporting": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "white net": {
+            "match": true,
+            "answer": "yes",
+            "noun": "white net"
+          },
+          "blue playing surface": {
+            "match": true,
+            "answer": "yes",
+            "noun": "blue playing surface"
+          }
+        }
+      },
+      {
+        "shape_id": "table_d3a55d20bb9c93985a7746683ad193f0",
+        "prompt_idx": 1,
+        "prompt": "A ping-pong table with red metal legs, a black net, and a green playing surface",
+        "groups": {
+          "red metal supporting": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "black net": {
+            "match": false,
+            "answer": "no",
+            "noun": "a black net"
+          },
+          "green playing surface": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a green playing surface"
+          }
+        }
+      },
+      {
+        "shape_id": "table_d3a55d20bb9c93985a7746683ad193f0",
+        "prompt_idx": 2,
+        "prompt": "A ping-pong table with silver aluminum legs, a yellow net, and a dark grey playing surface",
+        "groups": {
+          "silver aluminum supporting": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "yellow central net": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a yellow central net"
+          },
+          "dark grey playing surface": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a dark grey playing surface"
+          }
+        }
+      },
+      {
+        "shape_id": "table_d3a55d20bb9c93985a7746683ad193f0",
+        "prompt_idx": 3,
+        "prompt": "A ping-pong table with white painted legs, a red net, and a forest green playing surface with white boundary lines",
+        "groups": {
+          "white painted": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "red net": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a red net"
+          },
+          "forest green tabletop": {
+            "match": false,
+            "answer": "no",
+            "noun": "a forest green tabletop"
+          }
+        }
+      },
+      {
+        "shape_id": "table_d3a55d20bb9c93985a7746683ad193f0",
+        "prompt_idx": 4,
+        "prompt": "A ping-pong table with wooden legs, a black net, and a sky blue playing surface",
+        "groups": {
+          "wooden supporting": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "black net": {
+            "match": false,
+            "answer": "no",
+            "noun": "a black net"
+          },
+          "sky blue playing surface": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a sky blue playing surface"
+          }
+        }
+      },
+      {
+        "shape_id": "table_f3b8c91c5dd1cb6b8722573b29f0d6d8",
+        "prompt_idx": 0,
+        "prompt": "A rectangular table with black metal legs, white painted crossbars, grey aprons, and a natural oak tabletop",
+        "groups": {
+          "white painted crossbar": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a white painted crossbar"
+          },
+          "black metal corner": {
+            "match": false,
+            "answer": "no",
+            "noun": "leg"
+          },
+          "grey apron beneath tabletop": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a grey apron beneath tabletop"
+          },
+          "natural oak tabletop": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a natural oak tabletop"
+          }
+        }
+      },
+      {
+        "shape_id": "table_f3b8c91c5dd1cb6b8722573b29f0d6d8",
+        "prompt_idx": 1,
+        "prompt": "A rectangular table with dark walnut legs, matching walnut crossbars, cream aprons, and a white marble tabletop",
+        "groups": {
+          "dark walnut crossbar": {
+            "match": true,
+            "answer": "yes",
+            "noun": "dark walnut lower crossbar"
+          },
+          "dark walnut corner": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "cream apron beneath tabletop": {
+            "match": false,
+            "answer": "no",
+            "noun": "cream apron beneath tabletop"
+          },
+          "white marble tabletop": {
+            "match": true,
+            "answer": "yes",
+            "noun": "white marble tabletop"
+          }
+        }
+      },
+      {
+        "shape_id": "table_f3b8c91c5dd1cb6b8722573b29f0d6d8",
+        "prompt_idx": 2,
+        "prompt": "A rectangular table with brass-finished legs, gold crossbars, black aprons, and a dark glass tabletop",
+        "groups": {
+          "gold crossbar": {
+            "match": false,
+            "answer": "no",
+            "noun": "gold lower crossbar"
+          },
+          "brass-finished corner": {
+            "match": false,
+            "answer": "no",
+            "noun": "leg"
+          },
+          "black apron beneath tabletop": {
+            "match": true,
+            "answer": "yes",
+            "noun": "black apron beneath tabletop"
+          },
+          "dark glass tabletop": {
+            "match": false,
+            "answer": "no",
+            "noun": "dark glass tabletop"
+          }
+        }
+      },
+      {
+        "shape_id": "table_f3b8c91c5dd1cb6b8722573b29f0d6d8",
+        "prompt_idx": 3,
+        "prompt": "A rectangular table with white painted legs, light oak crossbars, white aprons, and a pale birch tabletop",
+        "groups": {
+          "light oak crossbar": {
+            "match": false,
+            "answer": "no",
+            "noun": "light oak lower crossbar"
+          },
+          "white painted corner": {
+            "match": false,
+            "answer": "no",
+            "noun": "leg"
+          },
+          "white painted apron": {
+            "match": false,
+            "answer": "no",
+            "noun": "white painted apron"
+          },
+          "pale birch tabletop": {
+            "match": true,
+            "answer": "yes",
+            "noun": "pale birch tabletop"
+          }
+        }
+      },
+      {
+        "shape_id": "table_f3b8c91c5dd1cb6b8722573b29f0d6d8",
+        "prompt_idx": 4,
+        "prompt": "A rectangular table with industrial grey iron legs, black crossbars, dark grey aprons, and a reclaimed wood tabletop",
+        "groups": {
+          "black iron crossbar": {
+            "match": true,
+            "answer": "yes",
+            "noun": "black iron lower crossbar"
+          },
+          "industrial grey iron": {
+            "match": true,
+            "answer": "yes",
+            "noun": "leg"
+          },
+          "dark grey apron": {
+            "match": true,
+            "answer": "yes",
+            "noun": "dark grey apron"
+          },
+          "reclaimed wood tabletop": {
+            "match": true,
+            "answer": "yes",
+            "noun": "reclaimed wood tabletop"
+          }
+        }
+      },
+      {
+        "shape_id": "watercraft_d3043fff20dad5c41dc762869682f4f",
+        "prompt_idx": 0,
+        "prompt": "A motorboat with a white fiberglass cabin and a navy blue hull",
+        "groups": {
+          "white fiberglass cabin": {
+            "match": true,
+            "answer": "yes",
+            "noun": "white fiberglass cabin"
+          },
+          "navy blue hull": {
+            "match": true,
+            "answer": "yes",
+            "noun": "navy blue hull"
+          }
+        }
+      },
+      {
+        "shape_id": "watercraft_d3043fff20dad5c41dc762869682f4f",
+        "prompt_idx": 1,
+        "prompt": "A motorboat with a grey metal cabin and a bright red hull",
+        "groups": {
+          "grey metal cabin": {
+            "match": false,
+            "answer": "no",
+            "noun": "a grey metal cabin"
+          },
+          "bright red hull": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a bright red hull"
+          }
+        }
+      },
+      {
+        "shape_id": "watercraft_d3043fff20dad5c41dc762869682f4f",
+        "prompt_idx": 2,
+        "prompt": "A motorboat with a cream-colored cabin and a dark green hull with gold trim",
+        "groups": {
+          "cream-colored cabin": {
+            "match": true,
+            "answer": "yes",
+            "noun": "cream-colored cabin"
+          },
+          "dark green hull with gold trim": {
+            "match": true,
+            "answer": "yes",
+            "noun": "dark green hull with gold trim"
+          }
+        }
+      },
+      {
+        "shape_id": "watercraft_d3043fff20dad5c41dc762869682f4f",
+        "prompt_idx": 3,
+        "prompt": "A motorboat with a black cabin and a bright yellow hull",
+        "groups": {
+          "black cabin": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a black cabin"
+          },
+          "bright yellow hull": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a bright yellow hull"
+          }
+        }
+      },
+      {
+        "shape_id": "watercraft_d3043fff20dad5c41dc762869682f4f",
+        "prompt_idx": 4,
+        "prompt": "A motorboat with a wood-paneled cabin and a white hull with blue racing stripes",
+        "groups": {
+          "wood-paneled cabin": {
+            "match": true,
+            "answer": "yes",
+            "noun": "wood-paneled cabin"
+          },
+          "white hull with blue stripes": {
+            "match": true,
+            "answer": "yes",
+            "noun": "white hull with blue stripes"
+          }
+        }
+      },
+      {
+        "shape_id": "watercraft_d95c49195e51912056f316a86bec8b19",
+        "prompt_idx": 0,
+        "prompt": "A sailboat with a white hull, a red jib sail, and a white mainsail with blue stripes",
+        "groups": {
+          "white hull": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a white hull"
+          },
+          "red jib sail": {
+            "match": false,
+            "answer": "no",
+            "noun": "a red jib sail"
+          },
+          "white mainsail with blue stripes": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a white mainsail with blue stripes"
+          }
+        }
+      },
+      {
+        "shape_id": "watercraft_d95c49195e51912056f316a86bec8b19",
+        "prompt_idx": 1,
+        "prompt": "A sailboat with a navy blue hull, a cream-colored jib, and a yellow mainsail",
+        "groups": {
+          "navy blue hull": {
+            "match": true,
+            "answer": "yes",
+            "noun": "navy blue hull"
+          },
+          "cream-colored jib": {
+            "match": true,
+            "answer": "yes",
+            "noun": "cream-colored jib"
+          },
+          "yellow mainsail": {
+            "match": true,
+            "answer": "yes",
+            "noun": "yellow mainsail"
+          }
+        }
+      },
+      {
+        "shape_id": "watercraft_d95c49195e51912056f316a86bec8b19",
+        "prompt_idx": 2,
+        "prompt": "A sailboat with a dark teak wooden hull, a white jib, and a red mainsail",
+        "groups": {
+          "dark teak wooden hull": {
+            "match": true,
+            "answer": "yes",
+            "noun": "dark teak wooden hull"
+          },
+          "white jib": {
+            "match": false,
+            "answer": "no",
+            "noun": "white jib"
+          },
+          "red mainsail": {
+            "match": true,
+            "answer": "yes",
+            "noun": "red mainsail"
+          }
+        }
+      },
+      {
+        "shape_id": "watercraft_d95c49195e51912056f316a86bec8b19",
+        "prompt_idx": 3,
+        "prompt": "A sailboat with a black hull, a bright orange jib, and a white mainsail",
+        "groups": {
+          "black hull": {
+            "match": false,
+            "answer": "no",
+            "noun": "a black hull"
+          },
+          "bright orange jib": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a bright orange jib"
+          },
+          "white mainsail": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a white mainsail"
+          }
+        }
+      },
+      {
+        "shape_id": "watercraft_d95c49195e51912056f316a86bec8b19",
+        "prompt_idx": 4,
+        "prompt": "A sailboat with a sky blue hull, a white jib, and a green mainsail",
+        "groups": {
+          "sky blue hull": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a sky blue hull"
+          },
+          "white jib": {
+            "match": false,
+            "answer": "no",
+            "noun": "a white jib"
+          },
+          "green mainsail": {
+            "match": true,
+            "answer": "yes",
+            "noun": "a green mainsail"
+          }
+        }
+      }
+    ]
+  }
+}
