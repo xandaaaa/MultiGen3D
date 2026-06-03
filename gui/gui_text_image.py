@@ -35,7 +35,7 @@ scene_elements = {}
 gui_elements = {}
 superquadrics = {}
 active_superquadric = -1
-active_template_id = 1
+active_template_id = 0
 
 server = viser.ViserServer(up_axis=2)
 server.scene.set_up_direction([0.0, 0.0, 1.0])
@@ -148,6 +148,7 @@ def generate_local_sq(superquadrics, text_prompt_handle, t0_idx, local_cfg=15.0,
   print('generate_local_sq')
   gui_elements['generate_button'].disabled = True
   gui_elements['generate_button_with_image'].disabled = True
+  gui_elements['generate_button_local_sq'].disabled = True
   gui_elements['generate_button_local_sq'].label = "Generating MultiGen..."
   gui_elements['generate_button_local_sq'].icon = viser.Icon.LOADER
   gui_elements['generate_button_local_sq'].color = 'orange'
@@ -215,11 +216,11 @@ def generate_local_sq(superquadrics, text_prompt_handle, t0_idx, local_cfg=15.0,
 
   global generated_mesh
   generated_mesh = server.scene.add_mesh_trimesh("generated_mesh", mesh=glb, visible=True)
-  toggle_sq_mesh()
-  toggle_sq_mesh()
+  _show_generated_mesh()
 
   gui_elements['generate_button'].disabled = False
   gui_elements['generate_button_with_image'].disabled = False
+  gui_elements['generate_button_local_sq'].disabled = False
   gui_elements['generate_button_local_sq'].label = "Generate MultiGen"
   gui_elements['generate_button_local_sq'].icon = viser.Icon.PLAYER_PLAY
   gui_elements['generate_button_local_sq'].color = 'teal'
@@ -231,6 +232,8 @@ def generate(superquadrics, text_prompt_handle, t0_idx, image_control=False) -> 
   suffix_other = '' if image_control else '_with_image'
   old_disabled = gui_elements[f'generate_button{suffix_other}'].disabled
   gui_elements[f'generate_button{suffix_other}'].disabled = True
+  gui_elements[f'generate_button{suffix_cur}'].disabled = True
+  gui_elements['generate_button_local_sq'].disabled = True
   gui_elements[f'generate_button{suffix_cur}'].label = f"Generating{suffix_cur.replace('_', ' ')}..."
   gui_elements[f'generate_button{suffix_cur}'].icon = viser.Icon.LOADER
   gui_elements[f'generate_button{suffix_cur}'].color = 'orange'
@@ -264,7 +267,7 @@ def generate(superquadrics, text_prompt_handle, t0_idx, image_control=False) -> 
   image_prompt = None
   if image_control and len(image_prompt_handle.value.name) > 0:
     image_prompt = Image.open(BytesIO(image_prompt_handle.value.content))
-  
+
   outputs = pipeline.run(text_prompt, image_prompt, seed=1, sparse_structure_sampler_params={
         "steps": steps,
         "cfg_strength": cfg_strength,
@@ -291,10 +294,11 @@ def generate(superquadrics, text_prompt_handle, t0_idx, image_control=False) -> 
 
   global generated_mesh
   generated_mesh = server.scene.add_mesh_trimesh("generated_mesh", mesh=glb, visible=True)
-  toggle_sq_mesh()
-  toggle_sq_mesh()
+  _show_generated_mesh()
 
   gui_elements[f'generate_button{suffix_other}'].disabled = old_disabled
+  gui_elements[f'generate_button{suffix_cur}'].disabled = False
+  gui_elements['generate_button_local_sq'].disabled = False
   gui_elements[f'generate_button{suffix_cur}'].label = f"Generate{suffix_cur.replace('_', ' ')}"
   gui_elements[f'generate_button{suffix_cur}'].icon = viser.Icon.PLAYER_PLAY
   gui_elements[f'generate_button{suffix_cur}'].color = 'green'
@@ -351,7 +355,7 @@ def setup_gui(server, superquadrics: dict) -> None:
       gui_elements_per_sq['folder'] = server.gui.add_folder(
           f'Superquadric {id}', order=3, expand_by_default=True, visible=False)
       with gui_elements_per_sq['folder']:
-        gui_elements_per_sq['prompt'] = server.gui.add_text("Region prompt (MultiGen only)", initial_value=superquadric.get('prompt', ''))
+        gui_elements_per_sq['prompt'] = server.gui.add_text("Region Prompt (MultiGen)", initial_value=superquadric.get('prompt', ''))
         gui_elements_per_sq['shape_1'] = server.gui.add_slider("Shape 1", min=0, max=2, step=0.01, initial_value=superquadric['shape'][0], marks=((0, "0"), (1, "1"), (2, "2")))
         gui_elements_per_sq['shape_2'] = server.gui.add_slider("Shape 2", min=0, max=2, step=0.01, initial_value=superquadric['shape'][1], marks=((0, "0"), (1, "1"), (2, "2")))
         gui_elements_per_sq['scale_x'] = server.gui.add_slider("Scale X", min=0, max=1, step=0.002, initial_value=superquadric['scale'][0], marks=((0, "0"), (0.5, "0.5"), (1, "1")))
@@ -388,6 +392,10 @@ def setup_gui(server, superquadrics: dict) -> None:
   # --- Mode 2: MultiGen (compositional SQ) ---
   multigen_folder = server.gui.add_folder("MultiGen — Spatial Prompts", order=5, expand_by_default=True)
   with multigen_folder:
+    server.gui.add_markdown(
+        "Generates each region using its own **region prompt**. "
+        "Click a shape to assign its prompt, then generate here."
+    )
     gui_elements['generate_button_local_sq'] = server.gui.add_button(
         "Generate MultiGen", color='teal', icon=viser.Icon.PLAYER_PLAY)
     gui_elements['generate_button_local_sq'].on_click(
@@ -395,9 +403,18 @@ def setup_gui(server, superquadrics: dict) -> None:
 
   # --- Utilities ---
   gui_elements['save_sq_button'] = server.gui.add_button(
-      "Save as Template", color='gray', icon=viser.Icon.WRITING, order=6)
+      "Save as Template", color='gray', icon=viser.Icon.WRITING, order=7)
   gui_elements['save_sq_button'].on_click(
       lambda _: save_superquadric_to_file(superquadrics, f'gui/superquadrics/{text_prompt.value}_sq.npz'))
+
+  show_labels_checkbox = server.gui.add_checkbox("Show region labels", initial_value=True, order=6)
+  gui_elements['show_labels_checkbox'] = show_labels_checkbox
+
+  def _on_show_labels_toggle(_=None):
+    for sq_id in list(superquadrics.keys()):
+      update_sq(superquadrics, sq_id, resolution=RESOLUTION)
+
+  show_labels_checkbox.on_update(_on_show_labels_toggle)
 
   toggle_button = server.gui.add_button("Toggle SQ / Mesh", color='gray', order=100)
   toggle_button.on_click(lambda _: toggle_sq_mesh())
@@ -409,7 +426,7 @@ def duplicate_active_superquadric() -> None:
   global superquadrics
   global scene_elements
   global gui_elements
-  global active_superquadric  
+  global active_superquadric
   print('Duplicating SQ', active_superquadric)
   new_superquadric_id = max(superquadrics.keys()) + 1
   superquadrics[new_superquadric_id] = copy.deepcopy(superquadrics[active_superquadric])
@@ -434,24 +451,48 @@ def delete_active_superquadric() -> None:
   superquadrics.pop(active_superquadric)
   scene_elements[f'sq_{active_superquadric}'].remove()
   scene_elements[f'sqc_{active_superquadric}'].remove()
+  if f'label_{active_superquadric}' in scene_elements:
+    scene_elements[f'label_{active_superquadric}'].remove()
+    del scene_elements[f'label_{active_superquadric}']
   gui_elements[f'sq_{active_superquadric}']['folder'].visible = False
   del scene_elements[f'sq_{active_superquadric}']
   del scene_elements[f'sqc_{active_superquadric}']
   active_superquadric = -1
 
 
+def _show_generated_mesh() -> None:
+  if generated_mesh is None:
+    return
+  generated_mesh.visible = True
+  server.scene.set_environment_map('studio', background=False, environment_intensity=2.0)
+  for key in list(scene_elements.keys()):
+    if key.startswith('sq_') or key.startswith('label_'):
+      scene_elements[key].visible = False
+  if active_superquadric != -1:
+    scene_elements[f'sqc_{active_superquadric}'].visible = False
+
+
 def toggle_sq_mesh() -> None:
+  if generated_mesh is None:
+    return
   generated_mesh.visible = not generated_mesh.visible
+  show_sq = not generated_mesh.visible
   if generated_mesh.visible:
     server.scene.set_environment_map('studio', background=False, environment_intensity=2.0)
   else:
     server.scene.set_environment_map('studio', background=False, environment_intensity=0.5)
 
-  for key in scene_elements.keys():
+  show_labels = gui_elements.get('show_labels_checkbox')
+  labels_on = show_labels.value if show_labels else True
+  for key in list(scene_elements.keys()):
     if key.startswith('sq_'):
-      scene_elements[key].visible = not generated_mesh.visible
+      scene_elements[key].visible = show_sq
+    elif key.startswith('label_'):
+      sq_id = int(key.split('_')[1])
+      has_prompt = bool(superquadrics.get(sq_id, {}).get('prompt', '').strip())
+      scene_elements[key].visible = show_sq and labels_on and has_prompt
   if active_superquadric != -1:
-    scene_elements[f'sqc_{active_superquadric}'].visible = not generated_mesh.visible
+    scene_elements[f'sqc_{active_superquadric}'].visible = show_sq
 
 
 def update_sq(superquadrics, superquadric_id, resolution) -> None:
@@ -460,6 +501,7 @@ def update_sq(superquadrics, superquadric_id, resolution) -> None:
   superquadrics[superquadric_id]['scale'][0] = gui_elements[f'sq_{superquadric_id}']['scale_x'].value
   superquadrics[superquadric_id]['scale'][1] = gui_elements[f'sq_{superquadric_id}']['scale_y'].value
   superquadrics[superquadric_id]['scale'][2] = gui_elements[f'sq_{superquadric_id}']['scale_z'].value
+  superquadrics[superquadric_id]['prompt'] = gui_elements[f'sq_{superquadric_id}']['prompt'].value
   add_superquadric(superquadrics, superquadric_id, gui_elements, resolution)
 
 
@@ -485,13 +527,30 @@ def add_superquadric(superquadrics: dict, superquadric_id: int, gui_elements: di
          active_axes=[True, True, True], depth_test=False,
          position=superquadrics[superquadric_id]['translation'],
          wxyz=tf.SO3.from_matrix(superquadrics[superquadric_id]['rotation']).wxyz)
-      
+
       @scene_elements[f'sqc_{superquadric_id}'].on_update
       def _(_) -> None:
           superquadrics[superquadric_id]['translation'] = scene_elements[f'sqc_{superquadric_id}'].position
           superquadrics[superquadric_id]['rotation'] = tf.SO3.as_matrix(scene_elements[f'sqc_{superquadric_id}'])
           update_sq(superquadrics, superquadric_id, resolution=RESOLUTION)
 
+      # 3D viewport label — only created when there is a prompt and labels are toggled on
+      prompt = superquadrics[superquadric_id].get('prompt', '').strip()
+      show_labels = gui_elements.get('show_labels_checkbox')
+      labels_on = show_labels.value if show_labels else True
+      if f'label_{superquadric_id}' in scene_elements:
+        scene_elements[f'label_{superquadric_id}'].remove()
+        del scene_elements[f'label_{superquadric_id}']
+      if prompt and labels_on:
+        sq = superquadrics[superquadric_id]
+        is_active = superquadric_id == active_superquadric
+        label_text = ("► " + prompt) if is_active else prompt
+        label_pos = tuple(sq['translation'] + np.array([0, 0, sq['scale'].max() + 0.02]))
+        scene_elements[f'label_{superquadric_id}'] = server.scene.add_label(
+            f'/sq_label/{superquadric_id}',
+            text=label_text,
+            position=label_pos,
+        )
 
       if active_superquadric != superquadric_id:
         ha = scene_elements[f'sq_{superquadric_id}'].on_click(lambda _: sq_on_click(superquadric_id))
@@ -515,6 +574,8 @@ def sq_on_click(superquadric_id):
   for i in superquadrics.keys():
       gui_elements[f'sq_{i}']['folder'].visible = i == active_superquadric
       scene_elements[f'sqc_{i}'].visible = i == active_superquadric
+      is_active = i == active_superquadric
+      gui_elements[f'sq_{i}']['prompt'].label = "▶ Region Prompt (MultiGen)" if is_active else "Region Prompt (MultiGen)"
   for i in superquadrics.keys():
       update_sq(superquadrics, i, resolution=RESOLUTION)
 
@@ -556,8 +617,8 @@ def save_superquadric_to_file(superquadrics: dict, file_path: str) -> None:
            shapes=np.array(shapes),
            translations=np.array(translations))
   server.add_notification(
-            title="Persistent notification",
-            body="This can be closed manually and does not disappear on its own!",
+            title="Template saved",
+            body=f"Saved to {file_path}",
             with_close_button=True,
         )
 
