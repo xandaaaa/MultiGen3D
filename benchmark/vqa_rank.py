@@ -1,7 +1,7 @@
 """Comparative VLM ranking benchmark for MultiGen3D.
 
 For each (shape, prompt) pair we show a single rendered view from each of two methods
-to a VLM and ask it to rank them across 6 criteria, adapted from the SuperDec paper.
+to a VLM and ask it to rank them across 5 criteria, adapted from the SuperDec paper.
 
 Per method we report:
   - avg_rank       : mean rank across all criteria and shape/prompt pairs (lower = better)
@@ -39,7 +39,6 @@ DEFAULT_MODEL = "gpt-5-mini"
 CRITERIA = [
     "Prompt Fidelity",
     "Structure Clarity",
-    "Texture Integration",
     "Detail Quality",
     "Part Assignment",
     "Overall Quality",
@@ -67,22 +66,17 @@ Key parts (legs, wings, fuselage, backrest, etc.) should remain distinguishable.
 should enhance, not obscure. Imagine rotating the object: would the structure remain clear? \
 Preservation of 3D form and part boundaries is critical.
 
-3. Texture Integration: How smoothly and coherently are textures applied across parts? \
-Evaluate transitions at part boundaries, seam visibility, and alignment with geometry. \
-Semantically aware integration maps the right texture to the right region. Bad integration \
-looks pasted on or mismatched between adjacent parts.
-
-4. Detail Quality: Are local textures (grain, surface finish, patterns) clean, sharp, and \
+3. Detail Quality: Are local textures (grain, surface finish, patterns) clean, sharp, and \
 artifact-free? Look for noise, blur, or visual inconsistencies. Even with simple flat colors, \
 the surface should look intentional and uniformly high quality across the mesh.
 
-5. Part Assignment: Does each part of the object carry the correct color or material as \
+4. Part Assignment: Does each part of the object carry the correct color or material as \
 specified in the prompt? Check that the right appearance is on the right part — e.g., if \
 the prompt says "red-tipped wings and blue tail", are the wings red and the tail blue? \
 Swapped, merged, or misattributed colors count as failures here even if the overall image \
 looks plausible.
 
-6. Overall Quality: Considering all of the above, which output delivers the better result \
+5. Overall Quality: Considering all of the above, which output delivers the better result \
 overall? Weigh visual appeal, prompt adherence, and technical execution together.
 
 # Output Format
@@ -90,13 +84,13 @@ overall? Weigh visual appeal, prompt adherence, and technical execution together
 For each criterion, rank the two outputs from best (1) to worst (2). Ties are allowed (1 1). \
 Output exactly one line in this format:
 
-Final answer: rankA / rankB / rankC / rankD / rankE / rankF
-(Prompt Fidelity / Structure Clarity / Texture Integration / Detail Quality / Part Assignment / Overall)
+Final answer: rankA / rankB / rankC / rankD / rankE
+(Prompt Fidelity / Structure Clarity / Detail Quality / Part Assignment / Overall)
 
 Each rankX contains two numbers: the rank of Image A followed by the rank of Image B.
 
 Example (Image A wins most criteria, tie on Detail Quality):
-Final answer: 1 2 / 1 2 / 2 1 / 1 1 / 1 2 / 1 2\
+Final answer: 1 2 / 1 2 / 1 1 / 1 2 / 1 2\
 """
 
 
@@ -144,7 +138,7 @@ def ask_ranking(client, model: str, views_a: List[Image.Image], views_b: List[Im
                                             "detail": "high"}})
 
     user_content.append({"type": "text",
-                         "text": "Evaluate and rank the two methods across all six criteria."})
+                         "text": "Evaluate and rank the two methods across all five criteria."})
 
     resp = client.chat.completions.create(
         model=model,
@@ -165,14 +159,14 @@ def parse_ranking(answer: str) -> Optional[List[Tuple[int, int]]]:
                 continue
             after = parts_colon[1].strip()
             parts = after.split("/")
-            if len(parts) != 6:
+            if len(parts) != 5:
                 continue
             ranks = []
             for part in parts:
                 nums = re.findall(r"\d", part)
                 if len(nums) == 2:
                     ranks.append((int(nums[0]), int(nums[1])))
-            if len(ranks) == 6:
+            if len(ranks) == 5:
                 return ranks
     return None
 
@@ -260,23 +254,40 @@ def run(args):
               f"{s['overall_win_rate']:>12.0%}")
 
     # Per-criterion breakdown
-    print(f"\n  Per-criterion win rates ({method_a} / {method_b}):")
-    print(f"  {'-'*52}")
+    print(f"\n  Per-criterion breakdown ({method_a} / {method_b}):")
+    print(f"  {'-'*72}")
+    print(f"  {'Criterion':<22}  {'wins':>5}  {'wins':>5}  {'ties':>5}  {'avg_rank':>9}  {'avg_rank':>9}")
+    print(f"  {'':<22}  {method_a:>5}  {method_b:>5}  {'':>5}  {method_a:>9}  {method_b:>9}")
+    print(f"  {'-'*72}")
     for crit in CRITERIA:
         wins_a = sum(1 for r in records if r["ranks"][crit]["A"] < r["ranks"][crit]["B"])
         wins_b = sum(1 for r in records if r["ranks"][crit]["B"] < r["ranks"][crit]["A"])
         ties   = sum(1 for r in records if r["ranks"][crit]["A"] == r["ranks"][crit]["B"])
         n = len(records)
-        print(f"  {crit:<22}  {method_a}: {wins_a}/{n}  {method_b}: {wins_b}/{n}  ties: {ties}")
+        avg_a = sum(r["ranks"][crit]["A"] for r in records) / n
+        avg_b = sum(r["ranks"][crit]["B"] for r in records) / n
+        print(f"  {crit:<22}  {wins_a:>5}  {wins_b:>5}  {ties:>5}  {avg_a:>9.2f}  {avg_b:>9.2f}")
 
     print(f"\n  Skipped: {skipped}  Valid comparisons: {len(records)}")
 
     if args.output:
+        n = len(records)
+        per_criterion = {
+            crit: {
+                "avg_rank": {method_a: sum(r["ranks"][crit]["A"] for r in records) / n,
+                             method_b: sum(r["ranks"][crit]["B"] for r in records) / n},
+                "wins": {method_a: sum(1 for r in records if r["ranks"][crit]["A"] < r["ranks"][crit]["B"]),
+                         method_b: sum(1 for r in records if r["ranks"][crit]["B"] < r["ranks"][crit]["A"])},
+                "ties": sum(1 for r in records if r["ranks"][crit]["A"] == r["ranks"][crit]["B"]),
+            }
+            for crit in CRITERIA
+        }
         out = {
             "model": model,
             "methods": {"A": method_a, "B": method_b},
             "criteria": CRITERIA,
             "summary": stats,
+            "per_criterion": per_criterion,
             "records": records,
         }
         with open(args.output, "w") as f:
