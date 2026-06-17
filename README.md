@@ -1,199 +1,175 @@
-<h1 align="center">Superquadric-Guided TRELLIS Generation</h1>
+<h1 align="center">MultiGen: Superquadric-Aware Latent Control for 3D Object Generation </h1>
 
-We explore how to inject **superquadric (SQ) primitive identity directly into the voxel / structured-latent (SLAT) features** of [TRELLIS](https://github.com/microsoft/TRELLIS). A user authors a coarse layout as a small set of superquadrics; the goal is to generate a textured 3D asset whose voxel latents respect that primitive structure — i.e., voxels that fall inside the same superquadric share coherent appearance and geometry features.
+**MultiGen** is a training-free, test-time method that gives [TRELLIS](https://github.com/microsoft/TRELLIS) **part-level appearance control**. A user authors a coarse layout as a small set of superquadric (SQ) primitives, attaches one text prompt to each part, and MultiGen generates a textured 3D asset whose appearance is *part-local* — each region carries the color and material of its own prompt — while geometry stays globally coherent.
 
-This codebase is built on top of TRELLIS and the [SpaceControl](https://spacecontrol3d.github.io) reference implementation. SpaceControl also conditions TRELLIS on superquadrics, but it does so by biasing the **sparse-structure** stage with a rendered control mesh. We go one step further: we modify the **SLAT denoising** stage so the voxels themselves carry superquadric information — whether by projection, reinitialization, velocity consistency, or per-primitive text conditioning. The six experiments in [experiments/](experiments/) are different answers to the question *"how should SQ identity enter the voxel latents?"*
+TRELLIS conditions every voxel on one global prompt, so compositional descriptions smear attributes across the whole object. MultiGen moves control into the SLAT denoising stage, where this attribute binding is decided.
 
-See [commands.md](commands.md) for the directory layout, install steps, and run commands.
+## Installation
 
-## Common setup: SQ → voxel mapping
+Tested on **CUDA 12.8**, NVIDIA 4090, `torch 2.8.0+cu128`.
 
-All experiments share the utilities defined in [experiments/approach1_experiment.py](experiments/approach1_experiment.py):
+```sh
+# Check your CUDA toolkit
+nvcc --version
 
-- `load_sq_params(npz)` — loads P superquadrics (`scale`, `shape`, `rotation`, `translation`).
-- `compute_mesh_normalization(sq_params)` — AABB-normalizes the SQ cloud into TRELLIS's `[-0.5, 0.5]` voxel space.
-- `coords_to_world_positions(coords)` — maps sparse voxel grid coords to world positions.
-- `superquadric_radial_distance(x_local, semi_axes, eps)` — standard SQ radial distance.
-- A weight matrix `W ∈ R^{N×P}` that assigns each of the N sparse voxels to the P superquadrics. Approaches 1–2 use a **soft** kernel `exp(-d_r / τ)`; approaches 3–4 use a **hard** one-hot argmin over radial distance.
-- `project_onto_sq_subspace(z, W)` — the key operation: a ridge-regularized least-squares projection `s* = (WᵀW)⁻¹ Wᵀ z`, with `z̄ = W s*`. Applying this to voxel latents forces voxels belonging to the same SQ to share features.
+# Create the environment
+conda create -n multigen python=3.10 -y
+conda activate multigen
 
-Given this shared scaffold, each experiment differs in **where** and **how** SQ structure is enforced during the TRELLIS SLAT flow.
+# PyTorch (see https://pytorch.org/get-started/locally/ for your setup)
+pip install torch==2.8.0 torchvision==0.23.0 torchaudio==2.8.0 \
+    --index-url https://download.pytorch.org/whl/cu128
 
-## Experiments
+# Core Python dependencies
+pip install pillow imageio imageio-ffmpeg tqdm easydict opencv-python-headless \
+    scipy ninja rembg onnxruntime trimesh open3d xatlas pyvista pymeshfix igraph \
+    transformers psutil viser tensorboard pandas lpips
+pip install git+https://github.com/EasternJournalist/utils3d.git@9a4eb15e4021b67b12c460c7057d642626897ec8
 
-### Approach 1 (original) — Constrained denoising via projection
-Original formulation — `sample_slat_with_projection`.
+# Attention + sparse kernels
+pip install xformers==0.0.32.post1 --index-url https://download.pytorch.org/whl/cu128
+pip install flash-attn --no-build-isolation
+pip install kaolin -f https://nvidia-kaolin.s3.us-east-2.amazonaws.com/torch-2.8.0_cu128.html
+pip install spconv-cu120
 
-Runs the pretrained TRELLIS SLAT flow unchanged, but **interleaves a projection onto the superquadric subspace between Euler steps**. Tunables: `blend_alpha` (0 = vanilla TRELLIS, 1 = hard project), `project_every` k steps, `project_after_frac` (only start projecting after a fraction of steps has elapsed), and an optional final hard projection. Configs compared include baseline, α ∈ {0.1, 0.3, 0.5}, α=1 on the last 50% only, and final-projection-only.
+# Rendering extensions
+mkdir -p /tmp/extensions
 
-### Approach 1 (revised) — Part-level appearance transplant via hard SQ assignment
-[experiments/approach1_experiment.py](experiments/approach1_experiment.py) — `hard_assign_voxels` + `transplant_features`
+git clone https://github.com/NVlabs/nvdiffrast.git /tmp/extensions/nvdiffrast
+pip install /tmp/extensions/nvdiffrast --no-build-isolation
 
-The revised Approach 1 takes a different route to the same question: instead of projecting voxel latents during denoising, it **tests whether SLAT features are already spatially decomposable along superquadric boundaries**. The recipe:
+git clone --recurse-submodules https://github.com/JeffreyXiang/diffoctreerast.git /tmp/extensions/diffoctreerast
+pip install /tmp/extensions/diffoctreerast --no-build-isolation
 
-1. Sample one sparse structure under SpaceControl spatial control (voxel coords are shared across styles).
-2. Sample two full SLATs on those coords with two different prompts — `prompt_a` (style A, e.g. "a wooden chair") and `prompt_b` (style B, e.g. "a blue metal chair").
-3. **Hard-assign** every active voxel to the superquadric it is "most inside" — `argmin` of the superquadric inside-outside function `F(x)` across all P superquadrics (see `sq_inside_outside` and `hard_assign_voxels`). Unlike the soft/exponential weight matrix `W` used elsewhere, this gives a single integer SQ label per voxel.
-4. For each superquadric `i`, build a mixed SLAT via `transplant_features(slat_a, slat_b, assignment, sq_idx=i)` — voxels assigned to SQ `i` carry style-B features, all other voxels keep style-A features.
-5. Decode all variants (A baseline, B baseline, and every per-SQ transplant) into Gaussians, render, and compare in a single grid.
+git clone https://github.com/autonomousvision/mip-splatting.git /tmp/extensions/mip-splatting
+pip install /tmp/extensions/mip-splatting/submodules/diff-gaussian-rasterization/ --no-build-isolation
 
-The diagnostic: if the SQ-`i` transplant shows style B localized to the spatial region of SQ `i` while the rest of the chair retains style A, the SLAT is spatially decomposable and part-level appearance editing is feasible — a strong signal that voxel latents *already* carry enough primitive-localized information for SQ-aware editing without any flow-level intervention.
+cp -r extensions/vox2seq /tmp/extensions/vox2seq
+pip install /tmp/extensions/vox2seq --no-build-isolation
+```
 
-### Approach 2 — P-noise initialization
-[experiments/approach2_experiment.py](experiments/approach2_experiment.py) — `sample_slat_p_noise`
+Sanity check the CUDA + sparse-conv install:
 
-Instead of sampling N independent voxel noise vectors, sample only **P noise vectors** (one per superquadric) and broadcast them to voxels via `z = W s`, optionally rescaling to unit variance. The pretrained flow then denoises this low-rank initialization, with projection back onto the P-dim subspace at each step. This bakes SQ identity into the latents *by construction*, rather than projecting a posteriori.
+```sh
+python -c "import torch; print(torch.cuda.is_available()); import spconv; print('spconv OK')"
+```
 
-### Approach 3 — Velocity consistency (Schemes A / B / C)
-[experiments/approach3_experiment.py](experiments/approach3_experiment.py) — `sample_slat_optimized`
+## Method
 
-Uses hard W and projects the **velocity** rather than the state. At each step, the per-voxel velocity is averaged within each SQ (`v_consistent = W @ ((Wᵀ v) / counts)`) and blended back. Three schemes:
-- **A — `blend_alpha`**: mix consistent vs. original velocity.
-- **B — `project_after_frac`**: only enforce consistency in later denoising stages.
-- **C — `rescale_noise`**: normalize the broadcast initial latent to unit variance to suppress over-saturated ("neon") color artifacts.
+MultiGen runs the pretrained TRELLIS SLAT flow unchanged, but replaces the global guidance signal with **compositional classifier-free guidance** routed through superquadric masks (implementation: [multigen.py](multigen.py), `sample_multigen_slat` / `multigen_generate`).
 
-Compared configs: `baseline`, `hard_consist` (α=1), `blend_alpha_03` (soft), `late_consist` (α=1 on the second half).
+Each active voxel is assigned to the superquadric it is "most inside" (argmin radial distance), giving a per-prompt voxel mask. All regions then share **one noise tensor and one sampling trajectory** — no slicing or seam stitching. At each denoising step the shared latent is denoised once per unique region prompt plus one shared negative pass (`#unique prompts + 1` passes), and the per-region CFG velocities are blended in voxel space through the masks, so each voxel follows only its own prompt while geometry stays globally coherent. `spacecontrol` (same geometry, single global prompt, no routing) is the apples-to-apples reference.
 
-### Approach 4 — Soft residual guidance
-[experiments/approach4_experiment.py](experiments/approach4_experiment.py) — `sample_slat_refined`
+## Running MultiGen
 
-A refinement of Approach 3 that addresses observed failure modes (geometry collapse, neon coloring). Keeps **independent per-voxel noise** to preserve TRELLIS's geometric detail, and only applies a soft velocity lerp `torch.lerp(v_model, v_avg, guidance_strength)` after `start_frac` of steps — enough to align color within a primitive without forcing per-voxel geometry to collapse onto the SQ subspace. Default run compares baseline vs. strength=0.15.
+There are two ways to run MultiGen: an **interactive GUI** for authoring a single asset, and a **batch runner** for reproducing the benchmark. Both load the TRELLIS weights from `gui/` and expect a GPU. Run every command from the repository root (the scripts use paths relative to it).
 
-### Approach 5 — Local semantic guidance via spatial masks
-[experiments/approach5_experiment.py](experiments/approach5_experiment.py) — `sample_slat_compositional`
+### Interactive GUI
 
-Addresses **attribute bleeding**: a single global prompt like *"a wooden chair with a red seat and black legs"* often smears colors across the whole object because TRELLIS text conditioning is global. Approach 5 routes different prompts to different spatial regions by:
+The [viser](https://viser.studio)-based editor lets you author a superquadric layout, type one prompt per region, and generate the asset with MultiGen in the loop.
 
-1. Grouping the P superquadrics into a small number of **semantic groups** via `group_sqs_by_height(sq_params, mesh_center)` — Bottom (legs), Middle (seat), Top (backrest) — using the vertical extent of the SQ cloud.
-2. Collapsing the hard SQ assignment `W ∈ R^{N×P}` into a per-group mask `W_semantic ∈ R^{N×G}`.
-3. At each denoising step, running the flow model **once per group** with that group's local prompt, then **spatially fusing** the per-group velocities using the group masks — each voxel's update is taken from the prompt associated with its region.
+```sh
+# From the repo root (the GUI loads weights via from_pretrained("gui")
+# and reads templates from gui/superquadrics/, both relative paths)
+python gui/gui_text_image.py
+# then open http://localhost:8080
+```
 
-This localizes color/material conditioning to the correct spatial part without touching geometry. Default run compares a single-global-prompt baseline against the 3-prompt compositional variant (legs / seat / backrest).
+On a remote/cluster machine, forward the viser port first:
 
-### Approach 6 — Extreme composition (per-superquadric semantic routing)
-[experiments/approach6_experiment.py](experiments/approach6_experiment.py) — `sample_slat_extreme`
+```sh
+ssh -L 8080:localhost:8080 $USER@<host>     # on your laptop
+python gui/gui_text_image.py                # on the host (needs a GPU)
+```
 
-A stress test of Approach 5: instead of G=3 semantic groups, assign **a unique text prompt to every single superquadric** (G = P). At each step the flow model is evaluated once per SQ, and the resulting velocities are fused via the hard W mask so that each voxel follows only the prompt attached to its own SQ. Missing SQ prompts fall back to a neutral default. This probes how far per-primitive conditioning can be pushed before the decoder can no longer reconcile the fragmented guidance into a coherent object — i.e., the limit of localized geometry/material generation.
+In the browser: pick a template from the dropdown (loaded from `gui/superquadrics/*_sq.npz`), edit the superquadrics, type a **Region Prompt (MultiGen)** per part, set the control slider, and click **Generate MultiGen**.
+
+### Programmatic
+
+`multigen.py` exposes the method directly — `sample_multigen_slat(...)` returns the SLAT and `multigen_generate(...)` returns a decoded `(gaussian, mesh)`. Both take a TRELLIS pipeline, the sparse `coords`, a `{sq_idx: cond}` map of per-region text conditionings, the global conditioning, and the SQ params with their `(mesh_center, mesh_scale)` normalization (see [benchmark/run_benchmark.py](benchmark/run_benchmark.py) `run_multigen` for a complete call site).
 
 ## Benchmark dataset: 20 superquadric shapes
 
-To evaluate the six approaches under a consistent input distribution, we built a small **20-shape superquadric benchmark** under [superdec/data/dataset_20/](superdec/data/dataset_20/). Each shape is a per-object `.npz` in the 4-field SuperDec format (`scales`, `shapes`, `rotations`, `translations`) consumed directly by the experiments.
+To evaluate MultiGen under a consistent input distribution, we built a **20-shape superquadric benchmark** under [superdec/data/dataset_20/](superdec/data/dataset_20/). Each shape is a per-object `.npz` in the 4-field SuperDec format (`scales`, `shapes`, `rotations`, `translations`) consumed directly by the generation pipeline.
 
-### How it was curated
+**Curation.** From the ShapeNet subset SuperDec was trained on, we take 10 categories (airplane, bench, cabinet, car, chair, lamp, rifle, sofa, table, watercraft) × 8 candidates, run SuperDec to fit superquadrics, and hand-pick the 2 most distinct shapes per category. Scripts and setup notes are in [superdec/SETUP.md](superdec/SETUP.md).
 
-1. **Source.** We reuse the ShapeNet subset that [SuperDec](https://super-dec.github.io) was trained on — `dataset_small_v1.1.zip` from the Occupancy Networks AWS bucket. The full zip is 73 GB, so we stream it with `remotezip` (S3 range requests) and pull only the files we need.
-2. **Categories — 10 picked.** airplane, bench, cabinet, car, chair, lamp, rifle, sofa, table, watercraft (synset IDs in [superdec/SETUP.md](superdec/SETUP.md)).
-3. **Candidates — 8 per category.** Evenly-spaced indices into each category's `test.lst` give 80 candidate point clouds (~92 MB total).
-4. **SuperDec decomposition.** [superdec/scripts/run_candidates.py](superdec/scripts/run_candidates.py) runs the `shapenet` checkpoint on all 80 candidates (batched, ~5 min on one GPU), saves per-object `.npz` + a 4×2 `contact_sheet.png` per category.
-5. **Final pick — 2 per category.** We inspect each category's contact sheet and pick two model IDs whose shapes are visually most different. Picks are hard-coded in [superdec/scripts/finalize_dataset.py](superdec/scripts/finalize_dataset.py), which materializes the final 20 shapes into [superdec/data/dataset_20/](superdec/data/dataset_20/).
+**Editing & annotation.** SuperDec fits are imperfect, so [superdec/scripts/sq_editor.py](superdec/scripts/sq_editor.py) is a standalone [viser](https://viser.studio) editor (no GPU) for hand-correcting the `.npz`. Each shape then gets a per-SQ prompt file under [superdec/data/dataset_20/previews/](superdec/data/dataset_20/previews/) (`<category>_<model_id>_annotation.txt`), with a global description plus one line per superquadric (`SQ0: Left wing`, …) — the SQ indices match the editor labels.
 
-Full pipeline, environment setup, and quota notes: [superdec/SETUP.md](superdec/SETUP.md).
+## Evaluation: comparative VLM ranking
 
-### Editing the superquadrics: `sq_editor.py`
+We evaluate MultiGen against the geometry-matched `spacecontrol` baseline with a **comparative VLM ranking** in [benchmark/vqa_rank.py](benchmark/vqa_rank.py). For each `(shape, prompt)` pair, the four rendered views (front / right / back / left) of each method are shown side by side to a VLM, which ranks the two outputs across **five criteria** adapted from the SuperDec protocol:
 
-SuperDec's output is often close but not perfect — a backrest may be split into two primitives, a leg may be missing, etc. [superdec/scripts/sq_editor.py](superdec/scripts/sq_editor.py) is a standalone [viser](https://viser.studio)-based web editor for hand-correcting the 20-shape dataset. No TRELLIS, no GPU — it only edits the 4-field `.npz`.
+- **Prompt Fidelity** — do colors/materials match the prompt's specification?
+- **Structure Clarity** — does the texturing preserve recognizable part geometry?
+- **Detail Quality** — are local textures clean, sharp, and artifact-free?
+- **Part Assignment** — is the right appearance on the right part (no swapped/merged colors)?
+- **Overall Quality** — the holistic preference.
 
-Features:
-- Floating 3D labels (`SQ 0`, `SQ 1`, …) pinned to each primitive's centroid, so the color ↔ index mapping is always visible in-scene.
-- Click a SQ in the 3D view to select it; its gizmo and sliders appear in the **"Selected SQ"** panel at the top of the sidebar.
-- Duplicate / Delete / Add new SQ; drag the gizmo to rotate and translate; sliders for the two shape exponents and three scale axes.
-- Save writes `<stem>_edited.npz` next to the original (or tick **Overwrite** to replace it).
+Why a *comparative* VLM ranking rather than global CLIP: our prompts bind a distinct material/color to each part, and global CLIP collapses image and text into single vectors — it scores a render with the right colors present *anywhere* as well as one with the colors on the *correct* parts, so it is blind to exactly the attribute binding we care about. Showing both methods to a VLM and asking it to rank them directly targets per-part correctness.
 
-**Running the editor:**
+### Results
 
-```sh
-# 1. On your laptop — open an SSH tunnel (forward port 8080)
-ssh -L 8080:localhost:8080 $USER@student-cluster.inf.ethz.ch
+Across the 100 `(shape, prompt)` comparisons (`gpt-5-mini` grader, recorded in [results/vqa_ranking.json](results/vqa_ranking.json)):
 
-# 2. On the cluster (login node is fine; no GPU needed)
-eval "$(/work/courses/3dv/team4/env_root/miniconda3/bin/conda shell.bash hook)"
-conda activate spacecontrol
-cd /work/courses/3dv/team4/MultiGen3D
-python superdec/scripts/sq_editor.py
-
-# 3. In your browser
-# open http://localhost:8080
-```
-
-### Per-shape annotations
-
-With the edited superquadrics in hand, we author per-SQ prompts in the format used by [experiments/approach6_experiment.py](experiments/approach6_experiment.py). Each shape has an annotation file under [superdec/data/dataset_20/previews/](superdec/data/dataset_20/previews/) named `<category>_<model_id>_annotation.txt`:
-
-```
-Global description: A passenger plane
-SQ0: Left wing of the plane
-SQ1: Empennage of the plane
-SQ2: Right wing of the plane
-SQ3: Fuselage of the plane
-```
-
-See [superdec/data/dataset_20/previews/airplane_d18592d9615b01bbbc0909d98a1ff2b4_annotation.txt](superdec/data/dataset_20/previews/airplane_d18592d9615b01bbbc0909d98a1ff2b4_annotation.txt) for the canonical example. The SQ indices match the labels rendered by `sq_editor.py` and `preview_sqs.py`, so what you see in the editor is what you write in the annotation.
-
-## Benchmark: CLIP-based evaluation
-
-We evaluate each approach with CLIP cosine similarity between rendered views and the benchmark prompts. Our prompts are **compositional** — they bind a distinct material/color to each part ("white backrest, brass legs") — and plain global CLIP is known to be weak at exactly this *attribute binding*: it collapses image and text into single vectors and matches them as a bag of concepts, so a render with the right colors present *anywhere* scores as well as one with the colors on the *correct* parts. In practice global CLIP disagreed with human evaluation: approaches that placed each color correctly often lost on global CLIP.
-
-The headline metric is therefore a **per-attribute CLIP win-rate**, not a single global score. Three changes make CLIP track human judgment:
-
-1. **Per-attribute scoring** — instead of one prompt vs. the whole image, each part phrase is scored separately (from `local_prompts` in `benchmark/prompts_augmented.json`), forcing CLIP to evaluate each part's color/material binding.
-2. **Attribute grouping** — phrases are grouped by their color/material descriptor (part-noun and position words are stripped), so a shape's four legs count as *one* "brass-finished" attribute rather than outvoting a single seat or backrest.
-3. **Background neutralization** (`--mask-bg`) — the renderer paints the background pure black or pure white depending on the prompt, which is itself a strong CLIP color cue; pixels matching the background are composited to neutral grey before scoring.
-
-Default backbone is **ViT-L/14** (`--clip-model`); the coarse ViT-B/32 misses fine attributes.
-
-### Metric definition
-
-For each `(shape, prompt, attribute-group)`:
-
-1. Render 4 views, mask the background to grey.
-2. CLIP-encode the views and the attribute phrase, L2-normalize, take cosine similarity averaged over views (and over phrases sharing the descriptor).
-
-The method with the higher score **wins** that attribute group. The **headline number is the fraction of attribute groups each method wins.** A secondary *grouped mean* (mean of attribute-group scores) is also reported, but it is biased by CLIP's blind spot for hard material words (e.g. metallic finishes on thin legs score low for *every* method), so it is not the headline.
-
-### Worked example — `bench_f8aa82e7e4c58ce29d31c5ce17cce95d`, prompt 3
-
-Prompt: *"A garden bench with grey stone-textured legs, light oak armrests, a navy blue cushioned seat, and a white backrest."* The 9 superquadrics reduce to 4 attribute groups (4 legs + 3 armrests collapse), scored under ViT-L/14 + `--mask-bg`:
-
-| Attribute group | SpaceControl | MultiGen | Winner |
+| Method | avg_rank ↓ | win_rate ↑ | overall_win ↑ |
 |---|---|---|---|
-| grey stone-textured (legs) | 0.189 | 0.185 | SpaceControl |
-| light oak (armrests) | 0.208 | 0.184 | SpaceControl |
-| navy blue (seat) | 0.271 | 0.269 | SpaceControl |
-| **white (backrest)** | **0.182** | **0.223** | **MultiGen** |
+| **MultiGen** | **1.45** | **0.55** | **0.59** |
+| SpaceControl | 1.49 | 0.51 | 0.41 |
 
-CLIP correctly credits MultiGen on the white backrest (SpaceControl renders it blue) — the exact part flagged in human eval. Tallied across all 5 prompts (19 attribute groups), **MultiGen wins 11 vs. SpaceControl 8**, matching human judgment, even though the grouped means are near-tied.
+Per-criterion wins (ties not shown) tell the sharper story:
 
-### Prompt suite — `benchmark/prompts.json` / `prompts_augmented.json`
+| Criterion | MultiGen wins | SpaceControl wins |
+|---|---|---|
+| **Prompt Fidelity** | **65** | 33 |
+| **Part Assignment** | **62** | 26 |
+| **Overall Quality** | **59** | 41 |
+| Structure Clarity | 36 | 54 |
+| Detail Quality | 24 | 71 |
 
-[benchmark/prompts.json](benchmark/prompts.json) holds **5 holistic appearance prompts per shape**, e.g.:
+MultiGen wins **decisively on the binding-aware criteria** (Prompt Fidelity, Part Assignment) and on the **Overall** preference, exactly where global text conditioning fails. SpaceControl edges ahead on Structure Clarity and Detail Quality — it texturizes a single global prompt very cleanly — but at the cost of putting attributes on the wrong parts. This trade is the central claim: for part-aware 3D texturing, *where* guidance is applied in the latent matters more than how cleanly a single global prompt is rendered.
 
-> *"A rounded chair with blue painted metal legs, red velvet seat cushion, white plastic armrests, and a dark walnut wooden backrest"*
+### Running the benchmark
 
-[benchmark/prompts_augmented.json](benchmark/prompts_augmented.json) adds `local_prompts`: the same prompts decomposed into a per-superquadric phrase, which the per-attribute metric consumes. Use the augmented file for the win-rate metric.
+The full pipeline is two stages — **render**, then **score**. Run everything from the repository root.
 
-### Scoring script — `benchmark/clip_score.py`
+**1. Generate renders.** `benchmark/run_benchmark.py` runs one approach over one or all shapes and writes views to `<results_root>/<approach>_results/renders/<shape_id>/prompt_<i>/view_<j>.png`. The three approaches are `baseline` (text-driven structure, global prompt), `spacecontrol` (SQ-controlled structure, single global prompt — the geometry-matched reference), and `multigen` (SQ-controlled structure + per-region compositional CFG):
 
-**Score one renders directory against a single holistic prompt** (quick check, global CLIP only):
 ```bash
-python benchmark/clip_score.py \
-    --renders approach1_results/renders/chair_dfeb8d914d8b28ab5bb58f1e92d30bf7/prompt_0/ \
-    --prompt "A rounded chair with blue painted metal legs, red velvet seat cushion, ..." \
-    --clip-model ViT-L/14 --mask-bg
+python benchmark/run_benchmark.py --approach multigen     --shape-idx all
+python benchmark/run_benchmark.py --approach spacecontrol --shape-idx all
+python benchmark/run_benchmark.py --approach baseline     --shape-idx all   # optional
 ```
 
-**Run the full per-attribute benchmark (headline win-rate)** — pass exactly two approaches to get the pairwise win-rate:
+Useful flags: `--shape-idx <n>` to render a single shape; `--steps` (default 15); `--force` to re-render existing views; `--resolution 256` if 16 GB GPUs OOM; multigen-only `--local-cfg` (per-region strength, default 15.0), `--soft-tau` (soft masks; omit for hard one-hot), and `--t0-idx` (spatial-control strength). Default prompts file is `benchmark/prompts_augmented.json`.
+
+**2a. VLM ranking (primary metric).** `benchmark/vqa_rank.py` shows both methods' four views to a VLM and ranks them across the five criteria. Set `OPENAI_API_KEY` (or pass `--api-key`):
+
+```bash
+python benchmark/vqa_rank.py \
+    --benchmark benchmark/prompts_augmented.json \
+    --results-root results \
+    --approaches multigen spacecontrol \
+    --output results/vqa_ranking.json
+```
+
+Useful flags: `--shape-id <id>` to rank a single shape; `--vlm-model <name>` to change grader (default `gpt-5-mini`). It prints a per-criterion breakdown and writes the full per-comparison records to `--output`.
+
+**2b. CLIP win-rate (optional, secondary).** `benchmark/clip_score.py` reports a per-attribute CLIP win-rate. Pass `--benchmark` (the augmented prompts carry the per-part `local_prompts` the win-rate needs) for the full pairwise comparison:
+
 ```bash
 python benchmark/clip_score.py \
     --benchmark benchmark/prompts_augmented.json \
     --results-root results \
-    --approaches spacecontrol multigen \
+    --approaches multigen spacecontrol \
     --clip-model ViT-L/14 --mask-bg \
     --output results/clip_scores.json
 ```
-Useful flags: `--shape-id <id>` to score a single shape; omit `--clip-model`/`--mask-bg` to fall back to ViT-B/32 with raw backgrounds.
 
-**Expected renders layout.** Each approach's experiment script should save individual view PNGs under:
+To score a single renders directory against one prompt instead, pass `--renders <dir> --prompt "..."`. The `--clip-model ViT-L/14` and `--mask-bg` flags give the strongest attribute signal.
+
+**Diagnostics (optional).** `benchmark/gen_sq_assignment.py` dumps the per-shape voxel→superquadric assignment visualization used to sanity-check the routing masks:
+
+```bash
+python benchmark/gen_sq_assignment.py --out-dir results/sq_diagnostics
 ```
-<results_root>/<approach>_results/renders/<shape_id>/prompt_<i>/view_<j>.png
-```
-where `shape_id` matches the `id` field in the prompts file and `prompt_i` indexes into the shape's 5-prompt list.

@@ -10,7 +10,7 @@ Usage — score all approaches against the full benchmark:
     python benchmark/clip_score.py \
         --benchmark benchmark/prompts.json \
         --results-root results \
-        --approaches baseline local_sq
+        --approaches multigen spacecontrol
 
 Expected renders directory layout (created by the experiment scripts):
     <results_root>/<approach>_results/renders/<shape_id>/prompt_<i>/view_<j>.png
@@ -376,7 +376,7 @@ def main():
     bench.add_argument("--benchmark",    default="benchmark/prompts.json")
     bench.add_argument("--results-root", default="results")
     bench.add_argument("--approaches",   nargs="+",
-                       default=["baseline", "local_sq"])
+                       default=["multigen", "spacecontrol"])
     bench.add_argument("--output", default="results/clip_scores.json")
 
     # Flat mode (no subcommand)
@@ -385,7 +385,7 @@ def main():
     parser.add_argument("--benchmark",    help="Path to prompts.json (benchmark mode)")
     parser.add_argument("--results-root", default="results")
     parser.add_argument("--approaches",   nargs="+",
-                        default=["baseline", "local_sq"])
+                        default=["multigen", "spacecontrol"])
     parser.add_argument("--output", default=None)
     parser.add_argument("--clip-model", default="ViT-B/32",
                         help="CLIP backbone, e.g. ViT-B/32 or ViT-L/14 (default ViT-B/32)")

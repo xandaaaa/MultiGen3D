@@ -215,3 +215,9 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
+
+# Overleaf/GitHub git-synced paper checkout (has its own .git)
+3DV-Report/
+scripts/cluster
+.claude/
+.vscode/

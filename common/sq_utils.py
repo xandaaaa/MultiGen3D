@@ -34,6 +34,56 @@ def load_sq_params(npz_path: str) -> List[Dict]:
             for k in range(data['scales'].shape[0])]
 
 
+def superquadric_radial_distance(x_local, semi_axes, eps):
+    e1, e2 = eps[0].clamp(min=0.01), eps[1].clamp(min=0.01)
+    ax, ay, az = semi_axes[0].clamp(min=1e-6), semi_axes[1].clamp(min=1e-6), semi_axes[2].clamp(min=1e-6)
+    x, y, z = x_local[:, 0], x_local[:, 1], x_local[:, 2]
+    f = (torch.abs(x/ax)**(2/e2) + torch.abs(y/ay)**(2/e2))**(e2/e1) + torch.abs(z/az)**(2/e1)
+    f = f.clamp(min=1e-12)
+    return torch.norm(x_local, dim=-1) * torch.abs(1.0 - f**(-e1/2.0))
+
+
+_SHAPENET_TO_TRELLIS_R = np.array([[-1, 0, 0], [0, 0, 1], [0, 1, 0]], dtype=np.float64)
+
+
+def convert_shapenet_yup_to_trellis_zup(sq_params):
+    """ShapeNet (and superdec output) is Y-up; TRELLIS renders with Z-up.
+    Empirically TRELLIS-generated shapes also tend to face -X (ShapeNet nose at +X
+    maps to TRELLIS rendered nose at -X), so we negate X as well.
+
+    Known limitation: TRELLIS has no explicit orientation constraint — its
+    output frame is consistent within a prompt seed but can differ across
+    shapes/categories. So this fixed rotation matches most cases but a few
+    (e.g. L-shaped sofas) may end up mirrored along one axis vs. the rendered
+    geometry. The voxel routing is still spatially coherent within each shape,
+    just potentially flipped relative to the ShapeNet part labels."""
+    R = _SHAPENET_TO_TRELLIS_R
+    return [{
+        'scale': sq['scale'],
+        'shape': sq['shape'],
+        'rotation': R @ np.asarray(sq['rotation'], dtype=np.float64),
+        'translation': R @ np.asarray(sq['translation'], dtype=np.float64),
+    } for sq in sq_params]
+
+
+def compute_hard_W(voxel_pos, sq_params, mesh_center, mesh_scale):
+    """One-hot voxel→SQ assignment (N, P): each voxel to the SQ it is most inside."""
+    device = voxel_pos.device
+    N, P = voxel_pos.shape[0], len(sq_params)
+    dist = torch.zeros(N, P, device=device)
+    m_center = torch.tensor(mesh_center, device=device).float()
+    for i, sq in enumerate(sq_params):
+        c = (torch.tensor(sq['translation'], device=device).float() - m_center) * mesh_scale
+        rot = torch.tensor(sq['rotation'], device=device).float()
+        s = torch.tensor(sq['scale'], device=device).float() * mesh_scale
+        e = torch.tensor(sq['shape'], device=device).float()
+        x_loc = (voxel_pos - c.unsqueeze(0)) @ rot
+        dist[:, i] = superquadric_radial_distance(x_loc, s, e)
+    W = torch.zeros((N, P), device=device)
+    W.scatter_(1, (dist + torch.randn_like(dist)*1e-8).argmin(1).unsqueeze(1), 1.0)
+    return W
+
+
 def save_sq_assignment_viz(coords: torch.Tensor,
                            assignment: torch.Tensor,
                            n_sqs: int,

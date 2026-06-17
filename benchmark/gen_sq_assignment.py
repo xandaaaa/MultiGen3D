@@ -32,9 +32,14 @@ os.environ["SPCONV_ALGO"] = "native"
 
 from trellis.pipelines import TrellisTextTo3DPipeline
 
-from sq_utils import coords_to_world, load_sq_params, save_sq_assignment_viz
+from common.sq_utils import (
+    coords_to_world,
+    load_sq_params,
+    save_sq_assignment_viz,
+    compute_hard_W,
+    convert_shapenet_yup_to_trellis_zup,
+)
 from multigen import compute_mesh_normalization
-from local_sq import compute_hard_W, convert_shapenet_yup_to_trellis_zup
 
 
 MASK_THRESHOLD = 0.02

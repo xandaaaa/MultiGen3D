@@ -14,12 +14,8 @@ Approaches:
     baseline     — standard TRELLIS, global prompt only, text-driven structure (no SQ control)
     spacecontrol — SQ-mesh spatial control on the structure + single global-prompt SLAT
                    (the apples-to-apples reference for multigen: same geometry, no SQ routing)
-    approach5 — height-grouped semantic routing (3 groups: bottom / mid / top)
-    approach6 — legacy per-SQ hard routing (one distinct prompt per SQ)
-    local_sq  — migrated local_sq.py implementation, saved under local_sq_results
-    approach7 — coupled diffusion (soft W + global coupling branch)
-    multigen  — compositional CFG via SQ region masks, with the sparse structure
-                conditioned on the merged SQ mesh via spatial control (matches the GUI)
+    multigen     — compositional CFG via SQ region masks, with the sparse structure
+                   conditioned on the merged SQ mesh via spatial control (matches the GUI)
 
 Usage:
     python benchmark/run_benchmark.py --approach baseline --shape-idx 3
@@ -47,17 +43,13 @@ os.environ["SPCONV_ALGO"] = "native"
 from trellis.pipelines import TrellisTextTo3DPipeline
 from trellis.utils import render_utils
 
-from sq_utils import coords_to_world, load_sq_params, save_sq_assignment_viz
-from approach5_experiment import group_sqs_by_height, compute_hard_W, sample_slat_compositional
-from approach6_experiment import compute_hard_W as compute_hard_W_6, sample_slat_regional_refine
-from local_sq import (
-    compute_hard_W as compute_hard_W_local_sq,
+from common.sq_utils import (
+    coords_to_world,
+    load_sq_params,
+    save_sq_assignment_viz,
+    compute_hard_W as compute_hard_W_sq,
     convert_shapenet_yup_to_trellis_zup,
-    make_contextual_local_prompts,
-    sample_slat_extreme_v1 as sample_slat_local_sq_extreme_v1,
-    sample_slat_regional_refine as sample_slat_local_sq_regional,
 )
-from approach7_experiment import compute_soft_W as compute_soft_W_7, sample_slat_coupled
 from multigen import (
     compute_mesh_normalization,
     multigen_generate,
@@ -138,72 +130,6 @@ def run_baseline(pipeline, coords, global_prompt, steps, seed, cfg_strength):
     return pipeline.sample_slat(cond, coords, sampler_params={"steps": steps})
 
 
-def run_approach5(pipeline, coords, sq_params, mesh_center, mesh_scale,
-                  global_prompt, local_prompts, steps, seed, cfg_strength):
-    W = compute_hard_W(coords_to_world(coords), sq_params, mesh_center, mesh_scale)
-    group_map = group_sqs_by_height(sq_params, mesh_center)
-
-    # One prompt per height group — take the first SQ assigned to each group
-    group_prompts = {}
-    for sq_idx, grp in group_map.items():
-        if grp not in group_prompts:
-            group_prompts[grp] = local_prompts.get(sq_idx, global_prompt)
-    for g in range(3):
-        if g not in group_prompts:
-            group_prompts[g] = global_prompt
-
-    conds_local = {g: pipeline.get_cond_text([p]) for g, p in group_prompts.items()}
-    torch.manual_seed(seed)
-    return sample_slat_compositional(
-        pipeline, coords, W, group_map, conds_local,
-        steps=steps, cfg_strength=cfg_strength,
-    )
-
-
-def run_approach6(pipeline, coords, sq_params, mesh_center, mesh_scale,
-                  global_prompt, local_prompts, steps, seed, cfg_strength):
-    W = compute_hard_W_6(coords_to_world(coords), sq_params, mesh_center, mesh_scale)
-    cond_global = pipeline.get_cond_text([global_prompt])
-    conds_local = {k: pipeline.get_cond_text([v]) for k, v in local_prompts.items()}
-    torch.manual_seed(seed)
-    return sample_slat_regional_refine(
-        pipeline, coords, W, conds_local, cond_global,
-        global_steps=steps, cfg_strength=cfg_strength,
-    )
-
-
-def run_local_sq(pipeline, coords, sq_params, mesh_center, mesh_scale,
-                 global_prompt, local_prompts, steps, seed, cfg_strength,
-                 debug_dir=None, structural_global_prompt=None,
-                 sampler_variant="extreme_v1"):
-    W = compute_hard_W_local_sq(coords_to_world(coords), sq_params, mesh_center, mesh_scale)
-    contextual_prompts = make_contextual_local_prompts(global_prompt, local_prompts)
-    conds_local = {k: pipeline.get_cond_text([v]) for k, v in contextual_prompts.items()}
-    torch.manual_seed(seed)
-
-    if sampler_variant == "extreme_v1":
-        # Pre-91da279 multi-prompt fusion: the variant that empirically achieves
-        # distinct per-SQ colors on the chair test. No global cond, CFG always on.
-        return sample_slat_local_sq_extreme_v1(
-            pipeline, coords, W, conds_local,
-            steps=steps, cfg_strength=cfg_strength,
-            debug_dir=debug_dir,
-        )
-
-    if sampler_variant == "regional_refine":
-        # Two-stage variant: global denoising + per-SQ partial refinement.
-        # Empirically doesn't move colors much beyond x0_global's defaults.
-        stage1_prompt = structural_global_prompt or global_prompt
-        cond_global = pipeline.get_cond_text([stage1_prompt])
-        return sample_slat_local_sq_regional(
-            pipeline, coords, W, conds_local, cond_global,
-            global_steps=steps, cfg_strength=cfg_strength,
-            debug_dir=debug_dir,
-        )
-
-    raise ValueError(f"Unknown sampler_variant: {sampler_variant!r}")
-
-
 def run_multigen(pipeline, coords, sq_params, mesh_center, mesh_scale,
               global_prompt, local_prompts, steps, seed, cfg_strength,
               local_cfg=15.0, soft_tau=None, debug_dir=None):
@@ -247,19 +173,6 @@ def run_multigen(pipeline, coords, sq_params, mesh_center, mesh_scale,
     return gs
 
 
-def run_approach7(pipeline, coords, sq_params, mesh_center, mesh_scale,
-                  global_prompt, local_prompts, steps, seed, cfg_strength,
-                  lam=0.3, tau=0.02):
-    W = compute_soft_W_7(coords_to_world(coords), sq_params, mesh_center, mesh_scale, tau=tau)
-    cond_global = pipeline.get_cond_text([global_prompt])
-    conds_local = {k: pipeline.get_cond_text([v]) for k, v in local_prompts.items()}
-    torch.manual_seed(seed)
-    return sample_slat_coupled(
-        pipeline, coords, W, conds_local, cond_global,
-        steps=steps, cfg_strength=cfg_strength, lam=lam,
-    )
-
-
 # ---------------------------------------------------------------------------
 # Per-shape runner
 # ---------------------------------------------------------------------------
@@ -282,13 +195,13 @@ def run_shape(shape, approach, pipeline, extr, intr, results_root, steps, seed, 
     # are Z-up. Approaches that route voxels to SQs by radial distance are
     # frame-sensitive — convert here so the routing math operates in the same
     # frame as the voxels. Other approaches retain prior behavior.
-    if approach in ("local_sq", "multigen", "spacecontrol"):
+    if approach in ("multigen", "spacecontrol"):
         sq_params = convert_shapenet_yup_to_trellis_zup(sq_params)
     mesh_center, mesh_scale = compute_mesh_normalization(sq_params)
 
     shape_debug_dir = None
     sq_viz_written = False
-    if args.debug_dir and approach in ("local_sq", "decode_composite"):
+    if args.debug_dir and approach == "multigen":
         shape_debug_dir = Path(args.debug_dir) / shape_id
         shape_debug_dir.mkdir(parents=True, exist_ok=True)
 
@@ -339,7 +252,7 @@ def run_shape(shape, approach, pipeline, extr, intr, results_root, steps, seed, 
         prompt_debug_dir = None
         if shape_debug_dir is not None:
             if not sq_viz_written:
-                W_dbg = compute_hard_W_local_sq(
+                W_dbg = compute_hard_W_sq(
                     coords_to_world(coords), sq_params, mesh_center, mesh_scale
                 )
                 P_dbg = W_dbg.shape[1]
@@ -370,22 +283,6 @@ def run_shape(shape, approach, pipeline, extr, intr, results_root, steps, seed, 
             # Same single-global-prompt SLAT for both; they differ only in whether
             # `coords` came from SQ spatial control (spacecontrol) or text (baseline).
             slat = run_baseline(pipeline, coords, global_prompt, steps, current_seed, cfg_strength)
-        elif approach == "approach5":
-            slat = run_approach5(pipeline, coords, sq_params, mesh_center, mesh_scale,
-                                 global_prompt, local_prompts, steps, current_seed, cfg_strength)
-        elif approach == "approach6":
-            slat = run_approach6(pipeline, coords, sq_params, mesh_center, mesh_scale,
-                                 global_prompt, local_prompts, steps, current_seed, cfg_strength)
-        elif approach == "local_sq":
-            slat = run_local_sq(pipeline, coords, sq_params, mesh_center, mesh_scale,
-                                global_prompt, local_prompts, steps, current_seed, cfg_strength,
-                                debug_dir=prompt_debug_dir,
-                                structural_global_prompt=shape.get("global_description"),
-                                sampler_variant=args.sampler_variant)
-        elif approach == "approach7":
-            slat = run_approach7(pipeline, coords, sq_params, mesh_center, mesh_scale,
-                                 global_prompt, local_prompts, steps, current_seed, cfg_strength,
-                                 lam=args.lam, tau=args.tau)
         elif approach == "multigen":
             gs_direct = run_multigen(
                 pipeline, coords, sq_params, mesh_center, mesh_scale,
@@ -405,7 +302,7 @@ def run_shape(shape, approach, pipeline, extr, intr, results_root, steps, seed, 
             del coords, cond_struct
             print(f"    [debug] skipped final render (diagnostic mode)")
         else:
-            if approach in ("local_sq", "multigen"):
+            if approach == "multigen":
                 # Multi-prompt-per-step samplers accumulate per-step GPU state;
                 # clear before the rasterizer needs ~50MiB.
                 gc.collect()
@@ -438,8 +335,7 @@ def run_shape(shape, approach, pipeline, extr, intr, results_root, steps, seed, 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--approach", required=True,
-                        choices=["baseline", "spacecontrol", "approach5", "approach6",
-                                 "local_sq", "approach7", "multigen"])
+                        choices=["baseline", "spacecontrol", "multigen"])
     parser.add_argument("--shape-idx", default="all",
                         help="Index into prompts JSON (0-based), or 'all' to run every shape")
     parser.add_argument("--prompts-file", default="benchmark/prompts_augmented.json")
@@ -447,18 +343,11 @@ def main():
     parser.add_argument("--steps", type=int, default=15)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--cfg-strength", type=float, default=7.5)
-    parser.add_argument("--lam", type=float, default=0.3)
-    parser.add_argument("--tau", type=float, default=0.02)
     parser.add_argument("--force", action="store_true",
                         help="Regenerate renders even when view PNGs already exist")
     parser.add_argument("--debug-dir", default=None,
-                        help="If set (and approach=local_sq or multigen), dump per-shape "
-                             "SQ assignment viz and per-prompt decoded sampler snapshots.")
-    parser.add_argument("--sampler-variant", default="extreme_v1",
-                        choices=["extreme_v1", "regional_refine"],
-                        help="local_sq sampler. 'extreme_v1' (default): pre-91da279 multi-prompt "
-                             "fusion (achieves visible per-SQ coloring). 'regional_refine': "
-                             "two-stage global+refinement (weak color control, kept for ablation).")
+                        help="If set (and approach=multigen), dump per-shape SQ assignment "
+                             "viz and per-prompt decoded sampler snapshots.")
     parser.add_argument("--local-cfg", type=float, default=15.0,
                         help="multigen: per-region local-prompt CFG strength (default 15.0).")
     parser.add_argument("--soft-tau", type=float, default=None,
