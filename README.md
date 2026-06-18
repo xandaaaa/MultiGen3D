@@ -62,23 +62,16 @@ Sanity check the CUDA + sparse-conv install:
 python -c "import torch; print(torch.cuda.is_available()); import spconv; print('spconv OK')"
 ```
 
-## Method
-
-MultiGen runs the pretrained TRELLIS SLAT flow unchanged, but replaces the global guidance signal with **compositional classifier-free guidance** routed through superquadric masks (implementation: [multigen.py](multigen.py), `sample_multigen_slat` / `multigen_generate`).
-
-Each active voxel is assigned to the superquadric it is "most inside" (argmin radial distance), giving a per-prompt voxel mask. All regions then share **one noise tensor and one sampling trajectory** — no slicing or seam stitching. At each denoising step the shared latent is denoised once per unique region prompt plus one shared negative pass (`#unique prompts + 1` passes), and the per-region CFG velocities are blended in voxel space through the masks, so each voxel follows only its own prompt while geometry stays globally coherent. `spacecontrol` (same geometry, single global prompt, no routing) is the apples-to-apples reference.
-
 ## Running MultiGen
 
-There are two ways to run MultiGen: an **interactive GUI** for authoring a single asset, and a **batch runner** for reproducing the benchmark. Both load the TRELLIS weights from `gui/` and expect a GPU. Run every command from the repository root (the scripts use paths relative to it).
+There are two ways to run MultiGen: an **interactive GUI** for authoring a single asset, and a **batch runner** for reproducing the benchmark. Both load the TRELLIS weights from `gui/` and expect a GPU. Run every command from the repository root.
 
 ### Interactive GUI
 
-The [viser](https://viser.studio)-based editor lets you author a superquadric layout, type one prompt per region, and generate the asset with MultiGen in the loop.
+The [viser](https://viser.studio)-based editor lets you author a superquadric layout, type one prompt for any superquadric, and generate the asset with MultiGen in the loop.
 
 ```sh
-# From the repo root (the GUI loads weights via from_pretrained("gui")
-# and reads templates from gui/superquadrics/, both relative paths)
+# From the repo root
 python gui/gui_text_image.py
 # then open http://localhost:8080
 ```
@@ -87,7 +80,7 @@ On a remote/cluster machine, forward the viser port first:
 
 ```sh
 ssh -L 8080:localhost:8080 $USER@<host>     # on your laptop
-python gui/gui_text_image.py                # on the host (needs a GPU)
+python gui/gui_text_image.py                # on the host
 ```
 
 In the browser: pick a template from the dropdown (loaded from `gui/superquadrics/*_sq.npz`), edit the superquadrics, type a **Region Prompt (MultiGen)** per part, set the control slider, and click **Generate MultiGen**.
