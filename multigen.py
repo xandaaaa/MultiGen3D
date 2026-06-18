@@ -217,9 +217,9 @@ def sample_multigen_slat(
         snapshot = None
 
     print(
-        f"[multigen] compositional CFG: {len(cond_for_prompt)} unique prompts, "
+        f"[multigen] {len(cond_for_prompt)} unique prompts, "
         f"{steps} steps, cfg(global)={cfg_strength}, cfg(local)={local_cfg_strength}, "
-        f"cfg_interval={cfg_interval}, soft_tau={soft_tau}"
+        f"cfg_interval={cfg_interval}"
     )
 
     for step_idx, (t, t_prev) in enumerate(zip(t_seq[:-1], t_seq[1:])):

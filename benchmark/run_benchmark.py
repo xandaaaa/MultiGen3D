@@ -161,7 +161,7 @@ def run_multigen(pipeline, coords, sq_params, mesh_center, mesh_scale,
         pipeline, coords, conds_local, cond_global,
         sq_params, mesh_center, mesh_scale,
         steps=steps, cfg_strength=cfg_strength,
-        local_cfg_strength=local_cfg, soft_tau=soft_tau,
+        local_cfg_strength=local_cfg,
     )
     return gs
 

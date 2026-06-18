@@ -396,10 +396,14 @@ def setup_gui(server, superquadrics: dict) -> None:
         "Generates each region using its own **region prompt**. "
         "Click a shape to assign its prompt, then generate here."
     )
+    gui_elements['local_cfg_slider'] = server.gui.add_slider(
+        "Region Prompt Strength", min=1.0, max=30.0, step=0.5, initial_value=15.0,
+        marks=((1, "weak"), (15, "med"), (30, "strong")))
     gui_elements['generate_button_local_sq'] = server.gui.add_button(
         "Generate MultiGen", color='teal', icon=viser.Icon.PLAYER_PLAY)
     gui_elements['generate_button_local_sq'].on_click(
-        lambda _: generate_local_sq(superquadrics, text_prompt, t0_idx))
+        lambda _: generate_local_sq(superquadrics, text_prompt, t0_idx,
+                                    local_cfg=gui_elements['local_cfg_slider'].value))
 
   # --- Utilities ---
   gui_elements['save_sq_button'] = server.gui.add_button(
