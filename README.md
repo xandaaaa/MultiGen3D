@@ -8,11 +8,15 @@ TRELLIS conditions every voxel on one global prompt, so compositional descriptio
 
 Tested on **CUDA 12.8**, NVIDIA 4090, `torch 2.8.0+cu128`.
 
+1. Clone this repository
 ```sh
 # Clone this repository
 git clone https://github.com/xandaaaa/MultiGen.git
 cd Multigen
+```
 
+2. Install the dependencies
+```sh
 # Check your CUDA toolkit
 nvcc --version
 
