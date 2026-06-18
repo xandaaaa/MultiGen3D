@@ -11,15 +11,14 @@ Also saves a row image per prompt for quick visual inspection:
     <results_root>/<approach>_results/renders/<shape_id>/prompt_<i>/grid.png
 
 Approaches:
-    baseline     — standard TRELLIS, global prompt only, text-driven structure (no SQ control)
     spacecontrol — SQ-mesh spatial control on the structure + single global-prompt SLAT
                    (the apples-to-apples reference for multigen: same geometry, no SQ routing)
     multigen     — compositional CFG via SQ region masks, with the sparse structure
                    conditioned on the merged SQ mesh via spatial control (matches the GUI)
 
 Usage:
-    python benchmark/run_benchmark.py --approach baseline --shape-idx 3
-    python benchmark/run_benchmark.py --approach baseline --shape-idx all
+    python benchmark/run_benchmark.py --approach spacecontrol --shape-idx 3
+    python benchmark/run_benchmark.py --approach multigen --shape-idx all
 """
 
 import argparse
@@ -124,15 +123,9 @@ def all_views_exist(out_dir: Path, n_views: int = 4) -> bool:
 # Per-approach runners  (all return a raw slat tensor)
 # ---------------------------------------------------------------------------
 
-def run_baseline(pipeline, coords, global_prompt, steps, seed, cfg_strength):
-    cond = pipeline.get_cond_text([global_prompt])
-    torch.manual_seed(seed)
-    return pipeline.sample_slat(cond, coords, sampler_params={"steps": steps})
-
-
 def run_multigen(pipeline, coords, sq_params, mesh_center, mesh_scale,
               global_prompt, local_prompts, steps, seed, cfg_strength,
-              local_cfg=15.0, soft_tau=None, debug_dir=None):
+              local_cfg=15.0, debug_dir=None):
     """Compositional CFG: per-region CFG with shared noise trajectory.
     Returns a Gaussian directly unless debug_dir is set, in which case sampler
     snapshots are written and the final decode/render path is skipped.
@@ -158,7 +151,7 @@ def run_multigen(pipeline, coords, sq_params, mesh_center, mesh_scale,
             pipeline, coords, conds_local, cond_global,
             sq_params, mesh_center, mesh_scale,
             steps=steps, cfg_strength=cfg_strength,
-            local_cfg_strength=local_cfg, soft_tau=soft_tau,
+            local_cfg_strength=local_cfg,
             debug_dir=debug_dir,
         )
         del slat
@@ -279,19 +272,19 @@ def run_shape(shape, approach, pipeline, extr, intr, results_root, steps, seed, 
 
         slat = None
         gs_direct = None
-        if approach in ("baseline", "spacecontrol"):
-            # Same single-global-prompt SLAT for both; they differ only in whether
-            # `coords` came from SQ spatial control (spacecontrol) or text (baseline).
-            slat = run_baseline(pipeline, coords, global_prompt, steps, current_seed, cfg_strength)
+        if approach == "spacecontrol":
+            cond = pipeline.get_cond_text([global_prompt])
+            torch.manual_seed(current_seed)
+            slat = pipeline.sample_slat(cond, coords, sampler_params={"steps": steps})
         elif approach == "multigen":
             gs_direct = run_multigen(
                 pipeline, coords, sq_params, mesh_center, mesh_scale,
                 global_prompt, local_prompts, steps, current_seed, cfg_strength,
-                local_cfg=args.local_cfg, soft_tau=args.soft_tau,
+                local_cfg=args.local_cfg,
                 debug_dir=prompt_debug_dir,
             )
         else:
-            sys.exit(f"Unknown approach: {approach!r}")
+            sys.exit(f"Unknown approach: {approach!r}")  # unreachable; argparse enforces choices
 
         if prompt_debug_dir is not None:
             # Diagnostic run: standard view renders already exist from prior
@@ -335,12 +328,12 @@ def run_shape(shape, approach, pipeline, extr, intr, results_root, steps, seed, 
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--approach", required=True,
-                        choices=["baseline", "spacecontrol", "multigen"])
+                        choices=["spacecontrol", "multigen"])
     parser.add_argument("--shape-idx", default="all",
                         help="Index into prompts JSON (0-based), or 'all' to run every shape")
     parser.add_argument("--prompts-file", default="benchmark/prompts_augmented.json")
     parser.add_argument("--results-root", default="results")
-    parser.add_argument("--steps", type=int, default=15)
+    parser.add_argument("--steps", type=int, default=25)
     parser.add_argument("--seed", type=int, default=42)
     parser.add_argument("--cfg-strength", type=float, default=7.5)
     parser.add_argument("--force", action="store_true",
@@ -350,9 +343,6 @@ def main():
                              "viz and per-prompt decoded sampler snapshots.")
     parser.add_argument("--local-cfg", type=float, default=15.0,
                         help="multigen: per-region local-prompt CFG strength (default 15.0).")
-    parser.add_argument("--soft-tau", type=float, default=None,
-                        help="multigen: optional softmax temperature for soft SQ masks. "
-                             "Omit for hard (one-hot) masks.")
     parser.add_argument("--t0-idx", type=int, default=None,
                         help="multigen: spatial-control strength as an index into the "
                              "sparse-structure t-schedule (higher = stronger adherence to "

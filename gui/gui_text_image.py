@@ -466,7 +466,10 @@ def _show_generated_mesh() -> None:
   generated_mesh.visible = True
   server.scene.set_environment_map('studio', background=False, environment_intensity=2.0)
   for key in list(scene_elements.keys()):
-    if key.startswith('sq_') or key.startswith('label_'):
+    if key.startswith('label_'):
+      scene_elements[key].remove()
+      del scene_elements[key]
+    elif key.startswith('sq_'):
       scene_elements[key].visible = False
   if active_superquadric != -1:
     scene_elements[f'sqc_{active_superquadric}'].visible = False
@@ -482,17 +485,15 @@ def toggle_sq_mesh() -> None:
   else:
     server.scene.set_environment_map('studio', background=False, environment_intensity=0.5)
 
-  show_labels = gui_elements.get('show_labels_checkbox')
-  labels_on = show_labels.value if show_labels else True
   for key in list(scene_elements.keys()):
     if key.startswith('sq_'):
       scene_elements[key].visible = show_sq
-    elif key.startswith('label_'):
-      sq_id = int(key.split('_')[1])
-      has_prompt = bool(superquadrics.get(sq_id, {}).get('prompt', '').strip())
-      scene_elements[key].visible = show_sq and labels_on and has_prompt
   if active_superquadric != -1:
     scene_elements[f'sqc_{active_superquadric}'].visible = show_sq
+
+  if show_sq:
+    for sq_id in list(superquadrics.keys()):
+      update_sq(superquadrics, sq_id, resolution=RESOLUTION)
 
 
 def update_sq(superquadrics, superquadric_id, resolution) -> None:
