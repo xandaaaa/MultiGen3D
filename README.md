@@ -1,5 +1,9 @@
 <h1 align="center">MultiGen: Superquadric-Aware Latent Control for 3D Object Generation </h1>
 
+<p align="center">
+  <img src="assets/teaser.png" alt="MultiGen teaser" width="100%">
+</p>
+
 **MultiGen** is a training-free, test-time method that gives [TRELLIS](https://github.com/microsoft/TRELLIS) **part-level appearance control**. A user authors a coarse layout as a small set of superquadric (SQ) primitives, attaches one text prompt to each part, and MultiGen generates a textured 3D asset whose appearance is *part-local* — each region carries the color and material of its own prompt — while geometry stays globally coherent.
 
 TRELLIS conditions every voxel on one global prompt, so compositional descriptions smear attributes across the whole object. MultiGen moves control into the SLAT denoising stage, where this attribute binding is decided.
@@ -85,7 +89,7 @@ python gui/gui_text_image.py                # on the host
 
 In the browser: pick a template from the dropdown (loaded from `gui/superquadrics/*_sq.npz`), edit the superquadrics, type a **Region Prompt (MultiGen)** per part, set the control slider, and click **Generate MultiGen**.
 
-## Benchmark dataset: 20 superquadric shapes
+## Benchmark dataset
 
 To evaluate MultiGen under a consistent input distribution, we built a **20-shape superquadric benchmark** under [superdec/data/dataset_20/](superdec/data/dataset_20/). Each shape is a per-object `.npz`.
 
@@ -108,10 +112,10 @@ We evaluate MultiGen against the geometry-matched `spacecontrol` baseline across
 <summary>Evaluation results</summary>
 <br>
 
-| Method | avg_rank ↓ | win_rate ↑ | overall_win ↑ |
-|---|---|---|---|
-| **MultiGen** | **1.45** | **0.55** | **0.59** |
-| SpaceControl | 1.49 | 0.51 | 0.41 |
+| Method | avg_rank ↓ | overall_win ↑ |
+|---|---|---|
+| **MultiGen** | **1.45** | **0.59** |
+| SpaceControl | 1.49 | 0.41 |
 
 Per-criterion wins (ties not shown) tell the sharper story:
 
@@ -128,9 +132,11 @@ MultiGen wins **decisively on the binding-aware criteria** (Prompt Fidelity, Par
 
 ### Running the benchmark
 
+We provide our renders and results in `results/` however feel free to rerun the benchmark as below:
+
 The full pipeline is two stages: **render**, then **score**.  
 
-**1. Generate renders.** `benchmark/run_benchmark.py` runs one approach over one or all shapes and writes views to `<results_root>/<approach>_results/renders/<shape_id>/prompt_<i>/view_<j>.png`. We compare MultiGen with Spacecontrol:
+**1. Generate renders.**  `benchmark/run_benchmark.py` runs one approach over one or all shapes and writes views to `<results_root>/<approach>_results/renders/<shape_id>/prompt_<i>/view_<j>.png`. We compare MultiGen with Spacecontrol:
 
 ```bash
 python benchmark/run_benchmark.py --approach multigen     --shape-idx all
@@ -150,3 +156,13 @@ python benchmark/vqa_rank.py \
 ```
 
 Useful flags: `--shape-id <id>` to rank a single shape; `--vlm-model <name>` to change grader (default `gpt-5-mini`). It prints a per criterion breakdown and writes the full per-comparison records to `--output`.
+
+## Contributors
+
+- **Xander Yap** — [xanyap@student.ethz.ch](mailto:xanyap@student.ethz.ch)
+- **Allison Tsz Kwan Lau** — [alllau@student.ethz.ch](mailto:alllau@student.ethz.ch)
+- **Zhijing Liu** — [liuzhij@student.ethz.ch](mailto:liuzhij@student.ethz.ch)
+
+## Acknowledgements
+
+We are grateful to our supervisors **Elisabetta Fedele**, **Sayan Deb Sarkar**, and **Ata Çelen** for their guidance and support throughout the project. We also build on [TRELLIS](https://github.com/microsoft/TRELLIS), [SpaceControl](https://github.com/spacecontrol3d/spacecontrol) and [SuperDec](https://github.com/elisabettafedele/superdec), whose work made this project possible.
