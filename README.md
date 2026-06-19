@@ -4,7 +4,7 @@
   <img src="assets/teaser.png" alt="MultiGen teaser" width="100%">
 </p>
 
-**MultiGen** is a training-free, test-time method that gives [TRELLIS](https://github.com/microsoft/TRELLIS) **part-level appearance control**. A user authors a coarse layout as a small set of superquadric (SQ) primitives, attaches one text prompt to each part, and MultiGen generates a textured 3D asset whose appearance is *part-local* each region carries the color and material of its own prompt while geometry stays globally coherent.
+**MultiGen3D** is a training-free, test-time method that gives [TRELLIS](https://github.com/microsoft/TRELLIS) **part-level appearance control**. A user authors a coarse layout as a small set of superquadric (SQ) primitives, attaches one text prompt to each part, and MultiGen generates a textured 3D asset whose appearance is *part-local* each region carries the color and material of its own prompt while geometry stays globally coherent.
 
 ## Installation
 
