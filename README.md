@@ -103,9 +103,9 @@ Per-criterion wins (ties not shown):
 |---|---|---|
 | **Prompt Fidelity** | **65** | 33 |
 | **Part Assignment** | **62** | 26 |
-| **Overall Quality** | **59** | 41 |
 | Structure Clarity | 36 | 54 |
 | Detail Quality | 24 | 71 |
+| **Overall Quality** | **59** | 41 |
 
 MultiGen wins decisively on the binding-aware criteria (Prompt Fidelity, Part
 Assignment), exactly where global text conditioning fails. Our renders and results
