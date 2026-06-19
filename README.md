@@ -155,6 +155,10 @@ python benchmark/vqa_rank.py \
 
 Useful flags: `--shape-id <id>` to rank a single shape; `--vlm-model <name>` to change grader (default `gpt-5-mini`). It prints a per criterion breakdown and writes the full per-comparison records to `--output`.
 
+## Experiments
+
+We also tried several other approaches to achieve part-aware appearance control. However the results were subpar and each approach had its own issues. We provide these experiments in this repository as well see `docs/experiments.md` for more information.
+
 ## Contributors
 
 - **Xander Yap** — [xanyap@student.ethz.ch](mailto:xanyap@student.ethz.ch)
