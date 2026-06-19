@@ -87,35 +87,17 @@ python gui/gui_text_image.py                # on the host
 
 In the browser: pick a template from the dropdown (loaded from `gui/superquadrics/*_sq.npz`), edit the superquadrics, type a **Region Prompt (MultiGen)** per part, set the control slider, and click **Generate MultiGen**.
 
-## Benchmark dataset
+## Benchmark
 
-To evaluate MultiGen under a consistent input distribution, we built a **20-shape superquadric benchmark** under [superdec/data/dataset_20/](superdec/data/dataset_20/). Each shape is a per-object `.npz`.
-
-**Curation.** From the ShapeNet subset SuperDec was trained on, we take 10 categories (airplane, bench, cabinet, car, chair, lamp, rifle, sofa, table, watercraft) × 8 candidates, run SuperDec to fit superquadrics, and hand-pick the 2 most distinct shapes per category. Scripts and setup notes are in [superdec/SETUP.md](superdec/SETUP.md).
-
-**Editing & annotation.** SuperDec fits are imperfect, so [superdec/scripts/sq_editor.py](superdec/scripts/sq_editor.py) is a standalone [viser](https://viser.studio) editor (no GPU) for hand-correcting the `.npz`. Each shape then gets a per-SQ prompt file under [superdec/data/dataset_20/previews/](superdec/data/dataset_20/previews/) (`<category>_<model_id>_annotation.txt`), with a global description plus one line per superquadric (`SQ0: Left wing`, …).
-
-## Evaluation: comparative VLM ranking
-
-We evaluate MultiGen against the geometry-matched `spacecontrol` baseline across 100 comparisons with a **comparative VLM ranking** in [benchmark/vqa_rank.py](benchmark/vqa_rank.py). For each `(shape, prompt)` pair, the four rendered views (front / right / back / left) of each method are shown side by side to a VLM, which ranks the two outputs across **five criteria**:
-
-- **Prompt Fidelity** — do colors/materials match the prompt's specification?
-- **Structure Clarity** — does the texturing preserve recognizable part geometry?
-- **Detail Quality** — are local textures clean, sharp, and artifact-free?
-- **Part Assignment** — is the right appearance on the right part (no swapped/merged colors)?
-- **Overall Quality** — the holistic preference.
-
-### Results
-<details>
-<summary>Evaluation results</summary>
-<br>
+MultiGen vs. the geometry-matched `spacecontrol` baseline on a **20-shape
+superquadric benchmark** (100 comparisons, comparative VLM ranking):
 
 | Method | avg_rank ↓ | overall_win ↑ |
 |---|---|---|
 | **MultiGen** | **1.45** | **0.59** |
 | SpaceControl | 1.49 | 0.41 |
 
-Per-criterion wins (ties not shown) tell the sharper story:
+Per-criterion wins (ties not shown):
 
 | Criterion | MultiGen wins | SpaceControl wins |
 |---|---|---|
@@ -125,35 +107,10 @@ Per-criterion wins (ties not shown) tell the sharper story:
 | Structure Clarity | 36 | 54 |
 | Detail Quality | 24 | 71 |
 
-MultiGen wins **decisively on the binding-aware criteria** (Prompt Fidelity, Part Assignment) and on the **Overall** preference, exactly where global text conditioning fails. 
-</details>
-
-### Running the benchmark
-
-We provide our renders and results in `results/` however feel free to rerun the benchmark as below:
-
-The full pipeline is two stages: **render**, then **score**.  
-
-**1. Generate renders.**  `benchmark/run_benchmark.py` runs one approach over one or all shapes and writes views to `<results_root>/<approach>_results/renders/<shape_id>/prompt_<i>/view_<j>.png`. We compare MultiGen with Spacecontrol:
-
-```bash
-python benchmark/run_benchmark.py --approach multigen     --shape-idx all
-python benchmark/run_benchmark.py --approach spacecontrol --shape-idx all
-```
-
-Useful flags: `--shape-idx <n>` to render a single shape; `--steps` (default 25) and `--force` to re-render existing views. Default prompts file is `benchmark/prompts_augmented.json`.
-
-**2. VLM ranking.** Set `OPENAI_API_KEY="YOUR_API_KEY"` in terminal (or pass `--api-key`) and run:
-
-```bash
-python benchmark/vqa_rank.py \
-    --benchmark benchmark/prompts_augmented.json \
-    --results-root results \
-    --approaches multigen spacecontrol \
-    --output results/vqa_ranking.json
-```
-
-Useful flags: `--shape-id <id>` to rank a single shape; `--vlm-model <name>` to change grader (default `gpt-5-mini`). It prints a per criterion breakdown and writes the full per-comparison records to `--output`.
+MultiGen wins decisively on the binding-aware criteria (Prompt Fidelity, Part
+Assignment), exactly where global text conditioning fails. Our renders and results
+are provided in `results/`. The dataset, prompt files, evaluation protocol, and
+commands to re-run the pipeline are in [docs/benchmark.md](docs/benchmark.md).
 
 ## Experiments
 

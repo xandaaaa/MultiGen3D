@@ -8,7 +8,7 @@ Usage — score a single directory of renders against a prompt:
 
 Usage — score all approaches against the full benchmark:
     python benchmark/clip_score.py \
-        --benchmark benchmark/prompts.json \
+        --benchmark benchmark/prompts_augmented.json \
         --results-root results \
         --approaches multigen spacecontrol
 
@@ -373,7 +373,7 @@ def main():
     single.add_argument("--prompt",  required=True)
 
     bench = sub.add_parser("benchmark", help="Score all approaches across the full benchmark")
-    bench.add_argument("--benchmark",    default="benchmark/prompts.json")
+    bench.add_argument("--benchmark",    default="benchmark/prompts_augmented.json")
     bench.add_argument("--results-root", default="results")
     bench.add_argument("--approaches",   nargs="+",
                        default=["multigen", "spacecontrol"])
