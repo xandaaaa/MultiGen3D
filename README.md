@@ -107,7 +107,7 @@ Per-criterion wins (ties not shown):
 | Detail Quality | 24 | 71 |
 | **Overall Quality** | **59** | 41 |
 
-MultiGen wins decisively on the binding-aware criteria (Prompt Fidelity, Part
+MultiGen wins on the part-aware criteria (Prompt Fidelity, Part
 Assignment), exactly where global text conditioning fails. Our renders and results
 are provided in `results/`. The dataset, prompt files, evaluation protocol, and
 commands to re-run the pipeline are in [docs/benchmark.md](docs/benchmark.md).
